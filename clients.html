@@ -694,127 +694,7 @@
                     <h2 class="section-title">Creative Partnerships</h2>
                 </div>
 
-                <div class="mosaic-grid">
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Comedy & Content</div>
-                            <div class="mosaic-title">Abel Mutua</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-laugh"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Entertainment</div>
-                            <div class="mosaic-title">Njugush</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Lifestyle</div>
-                            <div class="mosaic-title">Kabi WaJesus</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Technology</div>
-                            <div class="mosaic-title">PhonePlace</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-dumbbell"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Fitness</div>
-                            <div class="mosaic-title">Phil It</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Talent</div>
-                            <div class="mosaic-title">Celestine</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Lifestyle</div>
-                            <div class="mosaic-title">Juniper</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Real Estate</div>
-                            <div class="mosaic-title">Tenacity</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Entertainment</div>
-                            <div class="mosaic-title">Funcity</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-palette"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Creative</div>
-                            <div class="mosaic-title">Crafty</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-globe-africa"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Tourism</div>
-                            <div class="mosaic-title">Zunguka Africa</div>
-                        </div>
-                    </div>
-
-                    <div class="mosaic-item">
-                        <div class="mosaic-image">
-                            <i class="fas fa-utensils"></i>
-                        </div>
-                        <div class="mosaic-content">
-                            <div class="mosaic-tag">Food & Beverage</div>
-                            <div class="mosaic-title">Kwa Ndego</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="mosaic-grid" id="brandsGrid"></div>
             </section>
 
             <!-- Mindmap Style Section -->
@@ -1012,6 +892,78 @@
                 document.body.appendChild(div);
             })
             .catch(err => console.log('Floating buttons not loaded'));
+    </script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlL7EGT8sYKLR-BQLAt0BbjNpw2jCynaA",
+            authDomain: "sirnewson-6f757.firebaseapp.com",
+            projectId: "sirnewson-6f757",
+            storageBucket: "sirnewson-6f757.appspot.com",
+            messagingSenderId: "745333727245",
+            appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Load brands/clients
+        async function loadBrands() {
+            const brandsGrid = document.getElementById('brandsGrid');
+
+            try {
+                const brandsQuery = query(collection(db, 'brands'), orderBy('name', 'asc'));
+                const snapshot = await getDocs(brandsQuery);
+
+                if (snapshot.empty) {
+                    brandsGrid.innerHTML = `
+                        <div class="empty-state" style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary); grid-column: 1 / -1;">
+                            <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <p style="font-size: 1.2rem;">No clients yet. Add from CMS!</p>
+                            <a href="cms.html" style="color: var(--primary); text-decoration: none; margin-top: 1rem; display: inline-block;">Go to Dashboard →</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const brand = doc.data();
+                    const mosaicItem = document.createElement('div');
+                    mosaicItem.className = 'mosaic-item';
+
+                    const imageUrl = brand.imageUrl || brand.logoUrl || '';
+                    const hasImage = imageUrl && imageUrl.trim() !== '';
+
+                    mosaicItem.innerHTML = `
+                        <div class="mosaic-image" ${hasImage ? `style="background: url('${imageUrl}') center/cover no-repeat;"` : ''}>
+                            ${!hasImage ? '<i class="fas fa-building"></i>' : ''}
+                        </div>
+                        <div class="mosaic-content">
+                            <div class="mosaic-tag">${brand.category || 'Client'}</div>
+                            <div class="mosaic-title">${brand.name || 'Unnamed Client'}</div>
+                        </div>
+                    `;
+
+                    brandsGrid.appendChild(mosaicItem);
+                });
+
+            } catch (error) {
+                console.error('Error loading brands:', error);
+                brandsGrid.innerHTML = `
+                    <div class="empty-state" style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary); grid-column: 1 / -1;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p style="font-size: 1.2rem;">Error loading clients. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load brands when page loads
+        loadBrands();
     </script>
 
     <!-- Ocean Magic Script -->

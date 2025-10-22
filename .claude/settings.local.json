@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git commit:*)"
+      "Read(//f/CODING/TAK NETWORK/web/public/**)",
+      "Bash(del admin.html dashboard.html dashboard-new.html footer-template.html drift-notes-section.html floating-buttons.html index-complex-backup.html)",
+      "Bash(awk '{print $9, \"\"\"\"(\"\"\"\" $5 \"\"\"\")\"\"\"\"}')"
     ],
     "deny": [],
     "ask": []

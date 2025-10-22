@@ -738,125 +738,10 @@
     <!-- Blog Section -->
     <div class="blog-section">
         <!-- Featured Post -->
-        <div class="featured-post">
-            <span class="featured-badge">Featured</span>
-            <div class="blog-date">December 15, 2024</div>
-            <h2>The Future of Design is Human-Centered AI</h2>
-            <p class="blog-excerpt">As AI continues to reshape the creative industry, the most successful designers will be those who can harness technology while maintaining the human touch. Here's why the future belongs to those who blend empathy with innovation.</p>
-            <div class="blog-tags">
-                <span class="blog-tag">AI</span>
-                <span class="blog-tag">Design</span>
-                <span class="blog-tag">Future</span>
-            </div>
-            <a href="#" class="read-more">
-                Read Full Article <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
+        <div class="featured-post" id="featuredPost"></div>
 
         <!-- Blog Grid -->
-        <div class="blog-grid">
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">December 10, 2024</div>
-                    <h3>Building a Personal Brand in the Digital Age</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">Your personal brand is your most valuable asset. In a world where everyone has a voice, authenticity and consistency are what make you stand out. Here's how I built mine from scratch.</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Branding</span>
-                        <span class="blog-tag">Strategy</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">December 5, 2024</div>
-                    <h3>Why Every Designer Should Learn to Code</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">Understanding code doesn't mean you need to be a developer. But knowing how your designs translate to code makes you a more effective designer and opens up new possibilities for innovation.</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Design</span>
-                        <span class="blog-tag">Development</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">November 28, 2024</div>
-                    <h3>The Art of Saying No</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">As creatives, we want to say yes to everything. But learning to say no to the wrong opportunities is how you make space for the right ones. Here's what I've learned about selective focus.</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Productivity</span>
-                        <span class="blog-tag">Focus</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">November 20, 2024</div>
-                    <h3>Designing for Africa: A New Paradigm</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">African design is not just about aesthetics—it's about solving real problems with local context. How can we create digital experiences that truly serve African users?</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Design</span>
-                        <span class="blog-tag">Africa</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">November 15, 2024</div>
-                    <h3>From Side Project to Startup</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">Every great business started as someone's side project. Learn how I turned passion projects into sustainable businesses and the lessons I learned along the way.</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Entrepreneurship</span>
-                        <span class="blog-tag">Business</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="blog-card">
-                <div class="blog-header">
-                    <div class="blog-date">November 10, 2024</div>
-                    <h3>The Power of Constraints in Creativity</h3>
-                </div>
-                <div class="blog-content">
-                    <p class="blog-excerpt">Unlimited freedom can be paralyzing. Sometimes the best creative work comes from working within constraints. Here's how limitations can fuel innovation.</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Creativity</span>
-                        <span class="blog-tag">Process</span>
-                    </div>
-                    <a href="#" class="read-more">
-                        Read More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div class="blog-grid" id="blogGrid"></div>
     </div>
 
     <!-- CTA Section -->
@@ -1111,6 +996,121 @@
                 }
             }
         });
+    </script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlL7EGT8sYKLR-BQLAt0BbjNpw2jCynaA",
+            authDomain: "sirnewson-6f757.firebaseapp.com",
+            projectId: "sirnewson-6f757",
+            storageBucket: "sirnewson-6f757.appspot.com",
+            messagingSenderId: "745333727245",
+            appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Load articles and drift notes
+        async function loadContent() {
+            const featuredPost = document.getElementById('featuredPost');
+            const blogGrid = document.getElementById('blogGrid');
+
+            try {
+                // Fetch articles
+                const articlesQuery = query(collection(db, 'articles'), orderBy('date', 'desc'));
+                const articlesSnapshot = await getDocs(articlesQuery);
+
+                // Fetch drift notes
+                const driftNotesQuery = query(collection(db, 'driftNotes'), orderBy('date', 'desc'));
+                const driftNotesSnapshot = await getDocs(driftNotesQuery);
+
+                // Combine both collections
+                const allPosts = [];
+                articlesSnapshot.forEach(doc => {
+                    allPosts.push({ id: doc.id, type: 'article', ...doc.data() });
+                });
+                driftNotesSnapshot.forEach(doc => {
+                    allPosts.push({ id: doc.id, type: 'driftNote', ...doc.data() });
+                });
+
+                // Sort by date
+                allPosts.sort((a, b) => {
+                    const dateA = a.date?.toDate?.() || new Date(a.date);
+                    const dateB = b.date?.toDate?.() || new Date(b.date);
+                    return dateB - dateA;
+                });
+
+                if (allPosts.length === 0) {
+                    // Show empty state
+                    featuredPost.innerHTML = `
+                        <div class="empty-state" style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
+                            <i class="fas fa-inbox" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <p style="font-size: 1.2rem;">No articles yet. Add some from the CMS!</p>
+                            <a href="cms.html" style="color: var(--primary); text-decoration: none; margin-top: 1rem; display: inline-block;">Go to Dashboard →</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Display featured post (first item)
+                const featured = allPosts[0];
+                const featuredDate = featured.date?.toDate?.() || new Date(featured.date);
+                featuredPost.innerHTML = `
+                    <span class="featured-badge">Featured</span>
+                    <div class="blog-date">${featuredDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                    <h2>${featured.title}</h2>
+                    <p class="blog-excerpt">${featured.excerpt || featured.content?.substring(0, 200) || 'No excerpt available.'}</p>
+                    <div class="blog-tags">
+                        ${featured.tags?.map(tag => `<span class="blog-tag">${tag}</span>`).join('') || ''}
+                    </div>
+                    <a href="${featured.type === 'article' ? 'article.html' : 'drift-note.html'}?id=${featured.id}" class="read-more">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                    </a>
+                `;
+
+                // Display remaining posts in grid
+                for (let i = 1; i < allPosts.length; i++) {
+                    const post = allPosts[i];
+                    const postDate = post.date?.toDate?.() || new Date(post.date);
+
+                    const blogCard = document.createElement('div');
+                    blogCard.className = 'blog-card';
+                    blogCard.innerHTML = `
+                        <div class="blog-header">
+                            <div class="blog-date">${postDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</div>
+                            <h3>${post.title}</h3>
+                        </div>
+                        <div class="blog-content">
+                            <p class="blog-excerpt">${post.excerpt || post.content?.substring(0, 150) || 'No excerpt available.'}</p>
+                            <div class="blog-tags">
+                                ${post.tags?.map(tag => `<span class="blog-tag">${tag}</span>`).join('') || ''}
+                            </div>
+                            <a href="${post.type === 'article' ? 'article.html' : 'drift-note.html'}?id=${post.id}" class="read-more">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    `;
+                    blogGrid.appendChild(blogCard);
+                }
+
+            } catch (error) {
+                console.error('Error loading content:', error);
+                featuredPost.innerHTML = `
+                    <div class="empty-state" style="text-align: center; padding: 4rem 2rem; color: var(--text-secondary);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <p style="font-size: 1.2rem;">Error loading content. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Load content when page loads
+        loadContent();
     </script>
 
     <!-- Ocean Magic Script -->

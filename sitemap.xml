@@ -1,70 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-    <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://sirnewson.com/</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-01-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
-
-    <!-- Work/Portfolio -->
     <url>
         <loc>https://sirnewson.com/work.html</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-01-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-
-    <!-- Clients -->
-    <url>
-        <loc>https://sirnewson.com/clients.html</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Thoughts/Blog -->
     <url>
         <loc>https://sirnewson.com/thoughts.html</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>weekly</changefreq>
+        <lastmod>2025-01-22</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://sirnewson.com/clients.html</loc>
+        <lastmod>2025-01-22</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-
-    <!-- Journey/About -->
     <url>
         <loc>https://sirnewson.com/journey.html</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-01-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    <!-- Web Apps -->
     <url>
         <loc>https://sirnewson.com/webapps.html</loc>
-        <lastmod>2025-01-15</lastmod>
+        <lastmod>2025-01-22</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    <!-- Admin/Dashboard (may want to exclude from public sitemap) -->
-    <url>
-        <loc>https://sirnewson.com/admin.html</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
-    <url>
-        <loc>https://sirnewson.com/dashboard.html</loc>
-        <lastmod>2025-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
 </urlset>

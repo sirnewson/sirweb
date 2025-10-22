@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Disallow admin/dashboard pages
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /dashboard-new.html
+Disallow: /cms.html
+
+# Disallow template files
+Disallow: /footer-template.html
+Disallow: /drift-notes-section.html
+Disallow: /floating-buttons.html
+Disallow: /index-complex-backup.html
+
+# Sitemap
+Sitemap: https://sirnewson.com/sitemap.xml

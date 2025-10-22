@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir Newson CMS - Full Website Management</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        'teal': '#0F766E',
+                        'orange': '#FF7A1A',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0C1E1F 0%, #0D1415 100%);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #0F766E 0%, #FF7A1A 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans antialiased">
+
+    <!-- Modal for Alerts -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-gray-900 border border-teal/30 rounded-2xl max-w-sm w-full p-6 text-center shadow-xl">
+            <p id="modal-message" class="text-white mb-6"></p>
+            <div class="flex justify-center gap-4">
+                <button id="modal-ok-btn" class="bg-teal text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-72 bg-gray-900/50 backdrop-blur border-r border-white/10 p-6 flex flex-col">
+            <div class="mb-8">
+                <h1 class="font-display font-bold text-2xl bg-gradient-to-r from-teal to-orange bg-clip-text text-transparent">
+                    Sir Newson CMS
+                </h1>
+                <p class="text-gray-400 text-sm mt-2">Full Website Management</p>
+            </div>
+
+            <nav class="flex-1 space-y-2">
+                <a href="index.html" target="_blank" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition">
+                    <i class="fas fa-home w-5"></i> View Website
+                </a>
+                <button id="logout-btn" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-white/5 hover:text-white transition">
+                    <i class="fas fa-sign-out-alt w-5"></i> Logout
+                </button>
+            </nav>
+
+            <p id="user-email" class="text-gray-500 text-sm text-center"></p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <!-- Login View -->
+            <div id="login-view" class="flex items-center justify-center min-h-screen gradient-bg p-4">
+                <div class="bg-gray-900/80 backdrop-blur border border-white/10 rounded-2xl p-8 w-full max-w-md">
+                    <h2 class="font-display text-3xl font-bold text-center mb-2">Dashboard Access</h2>
+                    <p class="text-gray-400 text-center mb-8">Manage your entire website</p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Username</label>
+                            <input type="text" id="username-input" placeholder="admin" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">PIN</label>
+                            <input type="password" id="pin-input" placeholder="Enter 4-digit PIN" maxlength="4" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                        </div>
+                    </div>
+
+                    <button id="login-btn" class="w-full bg-gradient-to-r from-teal to-orange text-white font-bold py-3 rounded-full hover:opacity-90 transition mt-8">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Log In
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="hidden gradient-bg p-8">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-5xl font-bold font-display bg-gradient-to-r from-teal to-orange bg-clip-text text-transparent">
+                            Website Content Manager
+                        </h1>
+                        <p class="text-gray-400 text-lg mt-2">Everything you need to update your entire website</p>
+                    </div>
+
+                    <!-- Tab Navigation -->
+                    <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                        <button class="tab-btn active px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="hero">
+                            <i class="fas fa-home mr-2"></i>Hero Section
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="services">
+                            <i class="fas fa-briefcase mr-2"></i>Services
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="gallery">
+                            <i class="fas fa-images mr-2"></i>Gallery
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="projects">
+                            <i class="fas fa-rocket mr-2"></i>Projects
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="articles">
+                            <i class="fas fa-newspaper mr-2"></i>Articles
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="drift">
+                            <i class="fas fa-pen-fancy mr-2"></i>Drift Notes
+                        </button>
+                        <button class="tab-btn px-6 py-3 rounded-full font-semibold transition bg-gray-800 text-gray-300" data-tab="brands">
+                            <i class="fas fa-star mr-2"></i>Brands
+                        </button>
+                    </div>
+
+                    <!-- Content Sections -->
+                    <div class="content-container">
+                        <!-- Hero Section Tab -->
+                        <div id="hero-section" class="content-section">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Hero Section Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Main Title</label>
+                                            <input type="text" id="hero-title" placeholder="Building Brands That Stand Out..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Subtitle</label>
+                                            <textarea id="hero-subtitle" placeholder="Creative Director at..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[100px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">CTA Button Text</label>
+                                            <input type="text" id="hero-cta" placeholder="Get Started" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">CTA Button Link</label>
+                                            <input type="text" id="hero-cta-link" placeholder="#contact" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Hero Image/Video URL (Optional)</label>
+                                            <input type="url" id="hero-media-url" placeholder="https://example.com/hero.jpg" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                            <p class="text-gray-500 text-xs mt-1">Supports images (.jpg, .png) and videos (.mp4, .webm)</p>
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-hero-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Hero</button>
+                                            <button id="reset-hero-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Current Hero</h3>
+                                    <div id="hero-preview" class="text-gray-400 text-sm">
+                                        <p>Loading...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services Tab -->
+                        <div id="services-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Service Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Service Title</label>
+                                            <input type="text" id="service-title" placeholder="Brand Strategy" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Icon (emoji or Font Awesome class)</label>
+                                            <input type="text" id="service-icon" placeholder="⚡ or fas fa-bolt" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                                            <textarea id="service-description" placeholder="Strategic creative systems..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[100px]"></textarea>
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-service-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Service</button>
+                                            <button id="new-service-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Service</button>
+                                            <button id="delete-service-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Your Services</h3>
+                                    <div id="service-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading services...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Tab -->
+                        <div id="gallery-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Gallery Item Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Work Title</label>
+                                            <input type="text" id="gallery-title" placeholder="Project Name" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Category</label>
+                                            <select id="gallery-category" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                                <option value="branding">Branding</option>
+                                                <option value="web">Web Design</option>
+                                                <option value="ai">AI Solutions</option>
+                                                <option value="3d">3D Design</option>
+                                                <option value="youtube">YouTube Design</option>
+                                                <option value="billboard">Billboard</option>
+                                                <option value="events">Events</option>
+                                                <option value="strategy">Strategy</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                                            <textarea id="gallery-description" placeholder="Project description..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[100px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Client Name</label>
+                                            <input type="text" id="gallery-client" placeholder="Client name" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Media URLs (comma-separated for multiple)</label>
+                                            <input type="text" id="gallery-urls" placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                            <p class="text-gray-500 text-xs mt-1">Supports images and videos</p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Tags (comma-separated)</label>
+                                            <input type="text" id="gallery-tags" placeholder="Design, AI, 3D" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-gallery-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Item</button>
+                                            <button id="new-gallery-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Item</button>
+                                            <button id="delete-gallery-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Gallery Items</h3>
+                                    <div id="gallery-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading gallery...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Projects Tab -->
+                        <div id="projects-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Project Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Project Name</label>
+                                            <input type="text" id="project-title" placeholder="TAK Network" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                                            <textarea id="project-description" placeholder="Platform description..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[100px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Project Link URL</label>
+                                            <input type="url" id="project-link" placeholder="https://taknetwork.com" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Image URL</label>
+                                            <input type="url" id="project-image" placeholder="https://example.com/project.jpg" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-project-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Project</button>
+                                            <button id="new-project-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Project</button>
+                                            <button id="delete-project-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Your Projects</h3>
+                                    <div id="project-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading projects...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Articles Tab -->
+                        <div id="articles-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Article Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Title</label>
+                                            <input type="text" id="article-title" placeholder="Article title" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Excerpt</label>
+                                            <textarea id="article-excerpt" placeholder="Short summary..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[80px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Content</label>
+                                            <textarea id="article-content" placeholder="Article content..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[200px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Featured Image URL</label>
+                                            <input type="url" id="article-image" placeholder="https://example.com/article.jpg" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Tags (comma-separated)</label>
+                                            <input type="text" id="article-tags" placeholder="Design, AI, Strategy" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-article-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Article</button>
+                                            <button id="new-article-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Article</button>
+                                            <button id="delete-article-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Your Articles</h3>
+                                    <div id="article-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading articles...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Drift Notes Tab -->
+                        <div id="drift-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Drift Note Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Title</label>
+                                            <input type="text" id="drift-title" placeholder="Drift note title" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Excerpt</label>
+                                            <textarea id="drift-excerpt" placeholder="Short summary..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[80px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Content</label>
+                                            <textarea id="drift-content" placeholder="Write your drift note..." class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white min-h-[200px]"></textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Featured Image URL (Optional)</label>
+                                            <input type="url" id="drift-image" placeholder="https://example.com/drift.jpg" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Tags (comma-separated)</label>
+                                            <input type="text" id="drift-tags" placeholder="Thoughts, Design, Life" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-drift-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Drift</button>
+                                            <button id="new-drift-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Drift</button>
+                                            <button id="delete-drift-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Your Drift Notes</h3>
+                                    <div id="drift-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading drift notes...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brands Tab -->
+                        <div id="brands-section" class="content-section hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Editor -->
+                                <div class="lg:col-span-2 bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Brand/Client Editor</h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Brand Name</label>
+                                            <input type="text" id="brand-name" placeholder="Company Name" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Logo URL</label>
+                                            <input type="url" id="brand-logo" placeholder="https://example.com/logo.png" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                            <p class="text-gray-500 text-xs mt-1">Recommended: Transparent PNG or SVG</p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-300 mb-1">Website URL (Optional)</label>
+                                            <input type="url" id="brand-url" placeholder="https://example.com" class="w-full p-3 bg-black/50 border border-white/20 rounded-lg focus:ring-2 focus:ring-teal focus:outline-none text-white">
+                                        </div>
+                                        <div class="flex gap-4 pt-4 border-t border-white/10">
+                                            <button id="save-brand-btn" class="bg-gradient-to-r from-teal to-orange text-white font-bold py-2 px-6 rounded-full hover:opacity-90 transition">Save Brand</button>
+                                            <button id="new-brand-btn" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-full hover:bg-gray-600 transition">New Brand</button>
+                                            <button id="delete-brand-btn" class="bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition hidden">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List -->
+                                <div class="bg-gray-900/50 backdrop-blur border border-white/10 rounded-2xl p-6">
+                                    <h3 class="text-2xl font-bold mb-6">Your Brands</h3>
+                                    <div id="brand-list" class="space-y-2">
+                                        <p class="text-gray-500">Loading brands...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot, collection, serverTimestamp, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlL7EGT8sYKLR-BQLAt0BbjNpw2jCynaA",
+            authDomain: "sirnewson-6f757.firebaseapp.com",
+            projectId: "sirnewson-6f757",
+            storageBucket: "sirnewson-6f757.appspot.com",
+            messagingSenderId: "745333727245",
+            appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // PIN Authentication
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PIN = '7410';
+        let isAuthenticated = false;
+
+        // State
+        let selectedIds = {
+            service: null,
+            gallery: null,
+            project: null,
+            article: null,
+            drift: null,
+            brand: null
+        };
+
+        let data = {
+            services: [],
+            gallery: [],
+            projects: [],
+            articles: [],
+            driftNotes: [],
+            brands: []
+        };
+
+        // DOM Elements
+        const loginView = document.getElementById('login-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const usernameInput = document.getElementById('username-input');
+        const pinInput = document.getElementById('pin-input');
+        const modal = document.getElementById('modal');
+        const modalMessage = document.getElementById('modal-message');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+
+                // Update tabs
+                tabBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('bg-gray-800', 'text-gray-300');
+                });
+                btn.classList.add('active');
+                btn.classList.remove('bg-gray-800', 'text-gray-300');
+
+                // Update sections
+                contentSections.forEach(s => s.classList.add('hidden'));
+                document.getElementById(tab + '-section').classList.remove('hidden');
+            });
+        });
+
+        // Auth
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value.trim();
+            const pin = pinInput.value.trim();
+
+            if (username === ADMIN_USERNAME && pin === ADMIN_PIN) {
+                isAuthenticated = true;
+                localStorage.setItem('cms_authenticated', 'true');
+                showDashboard();
+            } else {
+                showModal('Invalid username or PIN!');
+                pinInput.value = '';
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            isAuthenticated = false;
+            localStorage.removeItem('cms_authenticated');
+            loginView.classList.remove('hidden');
+            dashboardView.classList.add('hidden');
+            usernameInput.value = '';
+            pinInput.value = '';
+        });
+
+        // Allow Enter key to login
+        pinInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+
+        // Check if already authenticated
+        function checkAuth() {
+            if (localStorage.getItem('cms_authenticated') === 'true') {
+                isAuthenticated = true;
+                showDashboard();
+            }
+        }
+
+        function showDashboard() {
+            loginView.classList.add('hidden');
+            dashboardView.classList.remove('hidden');
+            document.getElementById('user-email').textContent = 'Admin';
+            loadAllData();
+        }
+
+        // Check auth on page load
+        checkAuth();
+
+        // Modal
+        function showModal(message) {
+            modalMessage.textContent = message;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        modalOkBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+
+        // Load All Data
+        function loadAllData() {
+            // Load hero
+            loadHero();
+
+            // Load collections
+            onSnapshot(collection(db, 'services'), (snapshot) => {
+                data.services = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('service');
+            });
+
+            onSnapshot(collection(db, 'gallery'), (snapshot) => {
+                data.gallery = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('gallery');
+            });
+
+            onSnapshot(collection(db, 'projects'), (snapshot) => {
+                data.projects = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('project');
+            });
+
+            onSnapshot(collection(db, 'articles'), (snapshot) => {
+                data.articles = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('article');
+            });
+
+            onSnapshot(collection(db, 'driftNotes'), (snapshot) => {
+                data.driftNotes = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('drift');
+            });
+
+            onSnapshot(collection(db, 'brands'), (snapshot) => {
+                data.brands = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                renderList('brand');
+            });
+        }
+
+        // HERO SECTION
+        async function loadHero() {
+            try {
+                const docSnap = await getDoc(doc(db, 'settings', 'hero'));
+                if (docSnap.exists()) {
+                    const heroData = docSnap.data();
+                    document.getElementById('hero-title').value = heroData.title || '';
+                    document.getElementById('hero-subtitle').value = heroData.subtitle || '';
+                    document.getElementById('hero-cta').value = heroData.ctaText || '';
+                    document.getElementById('hero-cta-link').value = heroData.ctaLink || '';
+                    document.getElementById('hero-media-url').value = heroData.mediaUrl || '';
+                    updateHeroPreview(heroData);
+                }
+            } catch (error) {
+                console.error('Error loading hero:', error);
+            }
+        }
+
+        function updateHeroPreview(data) {
+            const preview = document.getElementById('hero-preview');
+            preview.innerHTML = `
+                <p class="mb-2"><strong>Title:</strong> ${data.title || 'Not set'}</p>
+                <p class="mb-2"><strong>Subtitle:</strong> ${data.subtitle || 'Not set'}</p>
+                <p class="mb-2"><strong>CTA:</strong> ${data.ctaText || 'Not set'}</p>
+                ${data.mediaUrl ? `<p class="mb-2"><strong>Media:</strong> <a href="${data.mediaUrl}" target="_blank" class="text-teal hover:underline">View</a></p>` : ''}
+            `;
+        }
+
+        document.getElementById('save-hero-btn').addEventListener('click', async () => {
+            const heroData = {
+                title: document.getElementById('hero-title').value,
+                subtitle: document.getElementById('hero-subtitle').value,
+                ctaText: document.getElementById('hero-cta').value,
+                ctaLink: document.getElementById('hero-cta-link').value,
+                mediaUrl: document.getElementById('hero-media-url').value,
+                updatedAt: serverTimestamp()
+            };
+
+            try {
+                await setDoc(doc(db, 'settings', 'hero'), heroData);
+                showModal('Hero section saved successfully!');
+                updateHeroPreview(heroData);
+            } catch (error) {
+                showModal('Error saving hero: ' + error.message);
+            }
+        });
+
+        // GENERIC CRUD FUNCTIONS
+        function renderList(type) {
+            const container = document.getElementById(type + '-list');
+            const items = data[type + 's'] || data[type];
+
+            if (!items || items.length === 0) {
+                container.innerHTML = `<p class="text-gray-500">No ${type}s found.</p>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="p-3 rounded-lg cursor-pointer transition ${selectedIds[type] === item.id ? 'bg-teal/20' : 'bg-white/5 hover:bg-white/10'}"
+                     data-id="${item.id}" data-type="${type}">
+                    <p class="font-medium truncate">${item.title || item.name || 'Untitled'}</p>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('[data-id]').forEach(el => {
+                el.addEventListener('click', () => selectItem(type, el.dataset.id));
+            });
+        }
+
+        function selectItem(type, id) {
+            selectedIds[type] = id;
+            const items = data[type + 's'] || data[type];
+            const item = items.find(i => i.id === id);
+
+            if (!item) return;
+
+            // Populate form fields based on type
+            switch(type) {
+                case 'service':
+                    document.getElementById('service-title').value = item.title || '';
+                    document.getElementById('service-icon').value = item.icon || '';
+                    document.getElementById('service-description').value = item.description || '';
+                    document.getElementById('delete-service-btn').classList.remove('hidden');
+                    break;
+                case 'gallery':
+                    document.getElementById('gallery-title').value = item.title || '';
+                    document.getElementById('gallery-category').value = item.category || '';
+                    document.getElementById('gallery-description').value = item.description || '';
+                    document.getElementById('gallery-client').value = item.client || '';
+                    document.getElementById('gallery-urls').value = (item.urls || []).join(', ');
+                    document.getElementById('gallery-tags').value = (item.tags || []).join(', ');
+                    document.getElementById('delete-gallery-btn').classList.remove('hidden');
+                    break;
+                case 'project':
+                    document.getElementById('project-title').value = item.title || '';
+                    document.getElementById('project-description').value = item.description || '';
+                    document.getElementById('project-link').value = item.link || '';
+                    document.getElementById('project-image').value = item.imageUrl || '';
+                    document.getElementById('delete-project-btn').classList.remove('hidden');
+                    break;
+                case 'article':
+                    document.getElementById('article-title').value = item.title || '';
+                    document.getElementById('article-excerpt').value = item.excerpt || '';
+                    document.getElementById('article-content').value = item.content || '';
+                    document.getElementById('article-image').value = item.imageUrl || '';
+                    document.getElementById('article-tags').value = (item.tags || []).join(', ');
+                    document.getElementById('delete-article-btn').classList.remove('hidden');
+                    break;
+                case 'drift':
+                    document.getElementById('drift-title').value = item.title || '';
+                    document.getElementById('drift-excerpt').value = item.excerpt || '';
+                    document.getElementById('drift-content').value = item.content || '';
+                    document.getElementById('drift-image').value = item.imageUrl || '';
+                    document.getElementById('drift-tags').value = (item.tags || []).join(', ');
+                    document.getElementById('delete-drift-btn').classList.remove('hidden');
+                    break;
+                case 'brand':
+                    document.getElementById('brand-name').value = item.name || '';
+                    document.getElementById('brand-logo').value = item.logoUrl || '';
+                    document.getElementById('brand-url').value = item.url || '';
+                    document.getElementById('delete-brand-btn').classList.remove('hidden');
+                    break;
+            }
+
+            renderList(type);
+        }
+
+        async function saveItem(type) {
+            let itemData = {};
+            const collectionName = type === 'drift' ? 'driftNotes' : type === 'brand' ? 'brands' : type + 's';
+
+            switch(type) {
+                case 'service':
+                    itemData = {
+                        title: document.getElementById('service-title').value,
+                        icon: document.getElementById('service-icon').value,
+                        description: document.getElementById('service-description').value,
+                    };
+                    break;
+                case 'gallery':
+                    const urls = document.getElementById('gallery-urls').value.split(',').map(u => u.trim()).filter(u => u);
+                    itemData = {
+                        title: document.getElementById('gallery-title').value,
+                        category: document.getElementById('gallery-category').value,
+                        description: document.getElementById('gallery-description').value,
+                        client: document.getElementById('gallery-client').value,
+                        urls: urls,
+                        url: urls[0] || '',
+                        tags: document.getElementById('gallery-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                        type: urls[0] && (urls[0].includes('.mp4') || urls[0].includes('.webm')) ? 'video' : 'image'
+                    };
+                    break;
+                case 'project':
+                    itemData = {
+                        title: document.getElementById('project-title').value,
+                        description: document.getElementById('project-description').value,
+                        link: document.getElementById('project-link').value,
+                        imageUrl: document.getElementById('project-image').value,
+                    };
+                    break;
+                case 'article':
+                    itemData = {
+                        title: document.getElementById('article-title').value,
+                        excerpt: document.getElementById('article-excerpt').value,
+                        content: document.getElementById('article-content').value,
+                        imageUrl: document.getElementById('article-image').value,
+                        tags: document.getElementById('article-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                        type: 'article',
+                        published: true
+                    };
+                    break;
+                case 'drift':
+                    itemData = {
+                        title: document.getElementById('drift-title').value,
+                        excerpt: document.getElementById('drift-excerpt').value,
+                        content: document.getElementById('drift-content').value,
+                        imageUrl: document.getElementById('drift-image').value,
+                        tags: document.getElementById('drift-tags').value.split(',').map(t => t.trim()).filter(t => t),
+                        type: 'drift',
+                        published: true
+                    };
+                    break;
+                case 'brand':
+                    itemData = {
+                        name: document.getElementById('brand-name').value,
+                        logoUrl: document.getElementById('brand-logo').value,
+                        url: document.getElementById('brand-url').value,
+                    };
+                    break;
+            }
+
+            if (!itemData.title && !itemData.name) {
+                showModal('Title/Name is required!');
+                return;
+            }
+
+            itemData.updatedAt = serverTimestamp();
+
+            try {
+                if (selectedIds[type]) {
+                    await updateDoc(doc(db, collectionName, selectedIds[type]), itemData);
+                    showModal(`${type.charAt(0).toUpperCase() + type.slice(1)} updated!`);
+                } else {
+                    itemData.createdAt = serverTimestamp();
+                    await addDoc(collection(db, collectionName), itemData);
+                    showModal(`${type.charAt(0).toUpperCase() + type.slice(1)} created!`);
+                }
+            } catch (error) {
+                showModal('Error saving: ' + error.message);
+            }
+        }
+
+        async function deleteItem(type) {
+            if (!selectedIds[type]) return;
+
+            if (!confirm(`Delete this ${type}?`)) return;
+
+            const collectionName = type === 'drift' ? 'driftNotes' : type === 'brand' ? 'brands' : type + 's';
+
+            try {
+                await deleteDoc(doc(db, collectionName, selectedIds[type]));
+                resetForm(type);
+                showModal(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted!`);
+            } catch (error) {
+                showModal('Error deleting: ' + error.message);
+            }
+        }
+
+        function resetForm(type) {
+            selectedIds[type] = null;
+
+            switch(type) {
+                case 'service':
+                    document.getElementById('service-title').value = '';
+                    document.getElementById('service-icon').value = '';
+                    document.getElementById('service-description').value = '';
+                    document.getElementById('delete-service-btn').classList.add('hidden');
+                    break;
+                case 'gallery':
+                    document.getElementById('gallery-title').value = '';
+                    document.getElementById('gallery-category').value = 'branding';
+                    document.getElementById('gallery-description').value = '';
+                    document.getElementById('gallery-client').value = '';
+                    document.getElementById('gallery-urls').value = '';
+                    document.getElementById('gallery-tags').value = '';
+                    document.getElementById('delete-gallery-btn').classList.add('hidden');
+                    break;
+                case 'project':
+                    document.getElementById('project-title').value = '';
+                    document.getElementById('project-description').value = '';
+                    document.getElementById('project-link').value = '';
+                    document.getElementById('project-image').value = '';
+                    document.getElementById('delete-project-btn').classList.add('hidden');
+                    break;
+                case 'article':
+                    document.getElementById('article-title').value = '';
+                    document.getElementById('article-excerpt').value = '';
+                    document.getElementById('article-content').value = '';
+                    document.getElementById('article-image').value = '';
+                    document.getElementById('article-tags').value = '';
+                    document.getElementById('delete-article-btn').classList.add('hidden');
+                    break;
+                case 'drift':
+                    document.getElementById('drift-title').value = '';
+                    document.getElementById('drift-excerpt').value = '';
+                    document.getElementById('drift-content').value = '';
+                    document.getElementById('drift-image').value = '';
+                    document.getElementById('drift-tags').value = '';
+                    document.getElementById('delete-drift-btn').classList.add('hidden');
+                    break;
+                case 'brand':
+                    document.getElementById('brand-name').value = '';
+                    document.getElementById('brand-logo').value = '';
+                    document.getElementById('brand-url').value = '';
+                    document.getElementById('delete-brand-btn').classList.add('hidden');
+                    break;
+            }
+
+            renderList(type);
+        }
+
+        // Event Listeners for all CRUD operations
+        ['service', 'gallery', 'project', 'article', 'drift', 'brand'].forEach(type => {
+            document.getElementById(`save-${type}-btn`).addEventListener('click', () => saveItem(type));
+            document.getElementById(`new-${type}-btn`).addEventListener('click', () => resetForm(type));
+            document.getElementById(`delete-${type}-btn`).addEventListener('click', () => deleteItem(type));
+        });
+    </script>
+</body>
+</html>
