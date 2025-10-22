@@ -1,0 +1,3281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir Newson — Creative Director</title>
+    <meta name="description" content="Creative Director at Bring It On Studios. Building systems, designing experiences, creating impact through minimal, modern design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        :root {
+            --deep-teal: #0F2B2E;
+            --sunset-orange: #E26A2C;
+            --aqua-mint: #2EE6D9;
+            --orchid-purple: #A259FF;
+            --electric-lime: #C9F227;
+            --coral-pink: #FF6F61;
+
+            /* SWAP THESE - Orange is now primary */
+            --primary: #E26A2C;              /* Sunset Orange - HAPPY & JOVIAL */
+            --primary-light: #FF6F61;        /* Coral Pink */
+            --primary-dark: #D65A1C;         /* Darker Orange */
+            --accent-teal: #2EE6D9;          /* Aqua Mint - now accent */
+            --accent-purple: #A259FF;        /* Orchid Purple */
+            --accent-playful: #C9F227;       /* Electric Lime */
+
+            /* Keep these */
+            --neutral-black: #0A0F0F;
+            --neutral-dark: #0D1415;
+            --neutral-medium: #121A1B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0B0B0;
+            --text-tertiary: #6B7B7B;
+            --border-subtle: #1A2F2F;
+            --border-medium: #2A4040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--neutral-black);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Elegant visual separators */
+        .section-divider {
+            width: 100%;
+            max-width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #E26A2C, #FF6F61, #2EE6D9, transparent);
+            margin: 6rem auto;
+            border-radius: 2px;
+        }
+
+        /* Cinema Container */
+        .cinema-container {
+            padding: 100px;
+            min-height: 100vh;
+            background: var(--neutral-black);
+        }
+
+        .cinema-frame {
+            background: var(--neutral-black);
+            border-radius: 30px;
+            box-shadow:
+                0 50px 100px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(46, 230, 217, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media (max-width: 1200px) {
+            .cinema-container {
+                padding: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cinema-container {
+                padding: 20px;
+            }
+
+            .cinema-frame {
+                border-radius: 20px;
+            }
+        }
+
+        /* Advanced Custom Cursor */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            opacity: 0.9;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.5;
+            transition: transform 0.15s ease-out;
+        }
+
+        .cursor.hover {
+            transform: scale(1.5);
+            background: var(--primary-light);
+            opacity: 1;
+        }
+
+        .cursor-follower.hover {
+            transform: scale(1.8);
+            border-color: var(--primary-light);
+            opacity: 0.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Floating Navigation Box */
+        .nav-box {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 1.5rem;
+            z-index: 10002;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-box:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 50px rgba(46, 230, 217, 0.2);
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.4s ease-in-out;
+            position: relative;
+        }
+
+        .hamburger:hover span {
+            background: var(--primary);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 380px;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-subtle);
+            padding: 8rem 3rem 3rem;
+            z-index: 10001;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .nav-menu-links li {
+            border-bottom: 1px solid var(--border-subtle);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.active .nav-menu-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-menu.active .nav-menu-links li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu.active .nav-menu-links li:nth-child(2) { transition-delay: 0.15s; }
+        .nav-menu.active .nav-menu-links li:nth-child(3) { transition-delay: 0.2s; }
+        .nav-menu.active .nav-menu-links li:nth-child(4) { transition-delay: 0.25s; }
+        .nav-menu.active .nav-menu-links li:nth-child(5) { transition-delay: 0.3s; }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+
+        .nav-menu-links a:hover::before {
+            width: 1rem;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo-text .studio {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05));
+            padding: 2rem;
+        }
+
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.3;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(46, 230, 217, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(46, 230, 217, 0.05) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        /* Grid Lines */
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(42, 42, 42, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(42, 42, 42, 0.3) 1px, transparent 1px);
+            background-size: 80px 80px;
+            z-index: 2;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: left;
+            max-width: 1200px;
+            padding: 4rem;
+            position: relative;
+            z-index: 4;
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            border-radius: 30px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            border-radius: 30px;
+            opacity: 0.3;
+            z-index: -1;
+            animation: gradientPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientPulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--primary);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+                .hero-title .highlight {
+            background: linear-gradient(135deg,
+                #00FFF5 0%,    /* Electric Cyan */
+                #7B2FFF 25%,   /* Deep Violet */
+                #FF00E5 50%,   /* Hot Magenta */
+                #00FFB3 75%,   /* Neon Mint */
+                #FFD700 100%   /* Gold */
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradientFlow 8s ease-in-out infinite;
+            display: inline-block;
+            position: relative;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 245, 0.6))
+                    drop-shadow(0 0 40px rgba(255, 0, 229, 0.4));
+        }
+
+        @keyframes gradientFlow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.6;
+            border-left: 1px solid var(--border-subtle);
+            padding-left: 2rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hero-meta-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-tertiary);
+        }
+
+        .hero-meta-item .value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            color: white;
+            border: 2px solid transparent;
+            box-shadow:
+                0 0 20px rgba(226, 106, 44, 0.4),
+                0 0 40px rgba(46, 230, 217, 0.2);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow:
+                0 0 30px rgba(226, 106, 44, 0.6),
+                0 0 60px rgba(46, 230, 217, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-secondary {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(46, 230, 217, 0.3);
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover::before {
+            width: 100%;
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(46, 230, 217, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Section Spacing & Alignment */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            background: linear-gradient(135deg, rgba(46, 230, 217, 0.02), rgba(46, 230, 217, 0.02));
+        }
+
+        section#about,
+        section#services {
+            max-width: 1400px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(120deg, #E26A2C 0%, #FF6F61 45%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        /* Day/Night Contrast Sections */
+                .section-bright {
+            background: var(--neutral-black);
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(46, 230, 217, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(162, 89, 255, 0.02) 0%, transparent 50%);
+            color: var(--text-primary);
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+                .section-bright .section-title {
+            color: var(--text-primary);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-bright .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+        }
+
+        .section-blend {
+            background: linear-gradient(135deg,
+                rgba(250, 250, 250, 0.1) 0%,
+                rgba(46, 230, 217, 0.05) 25%,
+                rgba(162, 89, 255, 0.08) 50%,
+                rgba(15, 43, 46, 0.9) 100%
+            );
+            padding: 6rem 2rem;
+        }
+
+        /* About Section */
+                .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .about-text {
+            position: relative;
+        }
+
+        .about-text::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #E26A2C, #FF6F61, #2EE6D9);
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        /* Magical Word Reveal Effect */
+        .magical-text .word {
+            display: inline-block;
+            opacity: 0.15;
+            color: var(--text-tertiary);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            margin: 0 0.15em;
+            position: relative;
+        }
+
+        .magical-text .word.revealed {
+            opacity: 1;
+            color: var(--primary);
+            text-shadow:
+                0 0 10px rgba(46, 230, 217, 0.8),
+                0 0 20px rgba(46, 230, 217, 0.5),
+                0 0 30px rgba(46, 230, 217, 0.3);
+            transform: scale(1.05);
+        }
+
+        .magical-text .word.lit {
+            animation: candleFlicker 0.6s ease-in-out;
+        }
+
+        @keyframes candleFlicker {
+            0%, 100% {
+                opacity: 1;
+                text-shadow:
+                    0 0 10px rgba(46, 230, 217, 0.8),
+                    0 0 20px rgba(46, 230, 217, 0.5),
+                    0 0 30px rgba(46, 230, 217, 0.3);
+            }
+            25% {
+                opacity: 0.9;
+                text-shadow:
+                    0 0 15px rgba(46, 230, 217, 0.9),
+                    0 0 25px rgba(46, 230, 217, 0.6),
+                    0 0 35px rgba(46, 230, 217, 0.4);
+            }
+            50% {
+                opacity: 1;
+                text-shadow:
+                    0 0 12px rgba(46, 230, 217, 0.85),
+                    0 0 22px rgba(46, 230, 217, 0.55),
+                    0 0 32px rgba(46, 230, 217, 0.35);
+            }
+            75% {
+                opacity: 0.95;
+                text-shadow:
+                    0 0 14px rgba(46, 230, 217, 0.9),
+                    0 0 24px rgba(46, 230, 217, 0.6),
+                    0 0 34px rgba(46, 230, 217, 0.4);
+            }
+        }
+
+        .magical-text .word::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.4s ease;
+            box-shadow: 0 0 10px rgba(46, 230, 217, 0.6);
+        }
+
+        .magical-text .word.revealed::after {
+            width: 100%;
+        }
+
+        /* 3D Sphere Text Effect */
+        .sphere-text-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .sphere-text {
+            width: 350px;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            animation: sphereRotate 20s linear infinite;
+        }
+
+        .sphere-text.interactive {
+            animation: none;
+        }
+
+        .sphere-word {
+            position: absolute;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-shadow:
+                0 0 20px rgba(226, 106, 44, 0.8),
+                0 0 40px rgba(46, 230, 217, 0.4),
+                0 2px 10px rgba(0, 0, 0, 0.3);
+            backface-visibility: visible;
+            transform-style: preserve-3d;
+            white-space: nowrap;
+            cursor: default;
+            transition: all 0.3s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .sphere-word:hover {
+            color: var(--accent-teal);
+            text-shadow:
+                0 0 30px rgba(46, 230, 217, 1),
+                0 0 60px rgba(226, 106, 44, 0.6),
+                0 2px 15px rgba(0, 0, 0, 0.4);
+            transform: scale(1.2) !important;
+        }
+
+        @keyframes sphereRotate {
+            0% {
+                transform: rotateY(0deg) rotateX(10deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(10deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+                    .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+            .about-text::before {
+                left: 0;
+                height: 4px;
+                width: 60px;
+                top: -1.5rem;
+            }
+
+            .sphere-text-container {
+                height: 300px;
+            }
+
+            .sphere-text {
+                width: 280px;
+                height: 280px;
+            }
+
+            .sphere-word {
+                font-size: 1.1rem;
+            }
+
+            .hero-content {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sphere-text-container {
+                height: 250px;
+            }
+
+            .sphere-text {
+                width: 220px;
+                height: 220px;
+            }
+
+            .sphere-word {
+                font-size: 0.95rem;
+            }
+
+            .hero-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+
+        /* Services Grid - Puzzle Bento Layout */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .service-card:nth-child(1) { grid-column: span 4; grid-row: span 2; }
+        .service-card:nth-child(2) { grid-column: span 5; grid-row: span 2; }
+        .service-card:nth-child(3) { grid-column: span 3; grid-row: span 2; }
+        .service-card:nth-child(4) { grid-column: span 6; grid-row: span 2; }
+        .service-card:nth-child(5) { grid-column: span 6; grid-row: span 2; }
+        .service-card:nth-child(6) { grid-column: span 12; grid-row: span 1; }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            .service-card:nth-child(1) { grid-column: span 3; grid-row: span 2; }
+            .service-card:nth-child(2) { grid-column: span 3; grid-row: span 2; }
+            .service-card:nth-child(3) { grid-column: span 6; grid-row: span 1; }
+            .service-card:nth-child(4) { grid-column: span 3; grid-row: span 2; }
+            .service-card:nth-child(5) { grid-column: span 3; grid-row: span 2; }
+            .service-card:nth-child(6) { grid-column: span 6; grid-row: span 1; }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .service-card:nth-child(1),
+            .service-card:nth-child(2),
+            .service-card:nth-child(3),
+            .service-card:nth-child(4),
+            .service-card:nth-child(5),
+            .service-card:nth-child(6) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        .service-card {
+            background: transparent;
+            min-height: 320px;
+            height: 100%;
+            perspective: 1500px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUpStagger 0.8s ease-out forwards;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card-inner::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .service-card-inner.flipped::before {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                min-height: 380px;
+            }
+        }
+
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .service-card-front,
+        .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card-front {
+            background: rgba(18, 18, 18, 0.6);
+        }
+
+        .service-card-back {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(25px);
+            border: 2px solid rgba(46, 230, 217, 0.25);
+            transform: rotateY(180deg);
+        }
+
+        .service-card:hover .service-card-front,
+        .service-card:hover .service-card-back {
+            box-shadow:
+                0 30px 60px rgba(46, 230, 217, 0.4),
+                0 15px 25px rgba(46, 230, 217, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUpStagger {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card:hover {
+            transform: translateY(-20px) scale(1.05);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(12deg) translateY(-8px);
+            filter: drop-shadow(0 8px 20px rgba(46, 230, 217, 0.6));
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.4s ease;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .service-card-back h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card-back ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-card-back li {
+            color: var(--text-primary);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(46, 230, 217, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .service-card-back li:before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Animated Maze Lines Background */
+        .maze-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+            overflow: hidden;
+        }
+
+        .maze-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .maze-line.horizontal {
+            height: 2px;
+            width: 100%;
+            left: -100%;
+            animation-name: slideRight;
+        }
+
+        .maze-line.vertical {
+            width: 2px;
+            height: 100%;
+            top: -100%;
+            animation-name: slideDown;
+        }
+
+        .maze-line.diagonal {
+            width: 2px;
+            height: 150%;
+            transform: rotate(45deg);
+            left: -20%;
+            top: -20%;
+            animation-name: slideDiagonal;
+        }
+
+        @keyframes slideRight {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideDown {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        @keyframes slideDiagonal {
+            0% {
+                left: -30%;
+                top: -30%;
+            }
+            100% {
+                left: 130%;
+                top: 130%;
+            }
+        }
+
+        /* Floating Characters */
+        .floating-chars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-char {
+            position: absolute;
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.15;
+            }
+            50% {
+                transform: translateY(-100vh) translateX(50px) rotate(180deg);
+                opacity: 0.15;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-200vh) translateX(-30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced glow effects */
+        @keyframes glow {
+            0%, 100% {
+                box-shadow:
+                    0 0 20px rgba(46, 230, 217, 0.3),
+                    0 0 40px rgba(46, 230, 217, 0.2),
+                    0 0 60px rgba(46, 230, 217, 0.1);
+            }
+            50% {
+                box-shadow:
+                    0 0 30px rgba(46, 230, 217, 0.5),
+                    0 0 60px rgba(46, 230, 217, 0.3),
+                    0 0 90px rgba(46, 230, 217, 0.2);
+            }
+        }
+
+        .glow-effect {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        /* Philosophy Section - Puzzle Visual Design */
+        .philosophy-section {
+            background: linear-gradient(135deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05));
+            border-radius: 30px;
+            padding: 6rem 4rem;
+            margin: 6rem auto;
+            max-width: 1400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .philosophy-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46, 230, 217, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .philosophy-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(46, 230, 217, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .philosophy-item {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .philosophy-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .philosophy-item:hover::before {
+            opacity: 1;
+        }
+
+        .philosophy-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--neutral-black);
+            border-radius: 23px;
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        .philosophy-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: transparent;
+            box-shadow:
+                0 25px 50px rgba(46, 230, 217, 0.3),
+                0 10px 25px rgba(162, 89, 255, 0.2);
+        }
+
+        .philosophy-item:hover .philosophy-number {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .philosophy-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1;
+        }
+
+        .philosophy-item h4 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .philosophy-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Connecting lines between puzzle pieces */
+        .philosophy-connector {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(46, 230, 217, 0.3), transparent);
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .philosophy-grid:hover .philosophy-connector {
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .philosophy-section {
+                padding: 4rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .philosophy-section {
+                padding: 3rem 1.5rem;
+                margin: 4rem 1rem;
+            }
+
+            .philosophy-item {
+                padding: 2.5rem 2rem;
+            }
+
+            .philosophy-number {
+                font-size: 4rem;
+            }
+
+            .philosophy-item h4 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.95), rgba(26, 26, 26, 1));
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 217, 217, 0.15);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 217, 217, 0.15), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) rotateX(3deg) scale(1.03);
+            box-shadow:
+                0 30px 60px rgba(0, 217, 217, 0.4),
+                0 15px 25px rgba(0, 255, 255, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: var(--teal-light);
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.15) translateZ(20px);
+        }
+
+        .project-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: rgba(46, 230, 217, 0.2);
+            color: var(--teal-light);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-link {
+            color: var(--teal-primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Brands Section */
+        .brands-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .brand-logo {
+            padding: 2rem;
+            background: var(--neutral-medium);
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-logo:hover {
+            border-color: var(--teal-primary);
+            color: var(--teal-primary);
+            transform: scale(1.05);
+        }
+
+        /* Drift Notes Section */
+        .drift-section {
+            background: var(--neutral-medium);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .drift-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Vision Section */
+        .vision-section {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .vision-quote {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--teal-primary), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .vision-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal-primary));
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.2);
+            color: var(--accent-gold);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--teal-primary);
+        }
+
+        /* AI Video Gallery - Pinterest Mosaic Layout */
+        .ai-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 180px;
+            gap: 20px;
+            grid-auto-flow: dense;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 1200px) {
+            .ai-gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 150px;
+            }
+            .ai-gallery-grid .ai-video-item:nth-child(1),
+            .ai-gallery-grid .ai-video-item:nth-child(2) {
+                grid-column: span 2 !important;
+                grid-row: span 2 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ai-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 200px;
+                gap: 0.75rem;
+            }
+            .ai-gallery-grid .ai-video-item {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 250px;
+            }
+        }
+
+        /* Video Size Variation Classes */
+        .video-medium {
+            grid-row: span 1;
+        }
+
+        .video-tall {
+            grid-row: span 2;
+        }
+
+        .video-huge {
+            grid-row: span 3;
+        }
+
+        /* AI Video Gallery Hover Effects */
+        .ai-video-item {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            will-change: transform, box-shadow;
+        }
+
+        .ai-video-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            z-index: 10;
+            box-shadow:
+                0 25px 50px rgba(46, 230, 217, 0.4),
+                0 15px 30px rgba(162, 89, 255, 0.3),
+                0 5px 15px rgba(226, 106, 44, 0.2);
+        }
+
+        .ai-video-item video {
+            transition: transform 0.6s ease;
+        }
+
+        .ai-video-item:hover video {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .ai-video-item:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+        }
+
+        .ai-video-item:hover > div:last-child {
+            opacity: 1;
+        }
+
+        /* Drift Library Resource Card Hover Effects */
+        .drift-resource-card {
+            position: relative;
+            will-change: transform, box-shadow;
+        }
+
+        .drift-resource-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow:
+                0 30px 60px rgba(46, 230, 217, 0.4),
+                0 15px 30px rgba(46, 230, 217, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(46, 230, 217, 0.6) !important;
+        }
+
+        .drift-resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(46, 230, 217, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .drift-resource-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-links.active li:nth-child(6) { transition-delay: 0.6s; }
+
+            .nav-links a {
+                font-size: 1.5rem;
+            }
+
+                    .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .philosophy-section,
+            .drift-section,
+            .contact-section {
+                padding: 2rem;
+            }
+
+            .service-card {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Maze Lines Background -->
+    <div class="maze-lines" id="maze-lines"></div>
+
+    <!-- Floating Characters -->
+    <div class="floating-chars" id="floating-chars"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Navigation Box -->
+    <div class="nav-box">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="logo-text">
+            <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson Logo" style="height: 40px; margin-bottom: 1rem;">
+            <span class="studio">Bring It On Studios</span>
+        </div>
+        <ul class="nav-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="journey.html">Journey</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cinema Container -->
+    <div class="cinema-container">
+        <div class="cinema-frame">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Ocean Video Background -->
+        <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 1.0; z-index: 0;">
+            <source src="https://cdn.pixabay.com/video/2024/06/06/215484_large.mp4" type="video/mp4">
+        </video>
+
+        <!-- Dark overlay for text readability -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(226, 106, 44, 0.1) 0%, rgba(15, 43, 46, 0.3) 100%); z-index: 1;"></div>
+        <div class="grid-lines"></div>
+        <canvas id="three-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-label">Creative Director</div>
+            <h1 class="hero-title"><span style="background: linear-gradient(135deg, #00FFF5, #7B2FFF, #FF00E5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; animation: gradientFlow 6s ease infinite; filter: drop-shadow(0 0 15px rgba(0, 255, 245, 0.5));">Building</span><br><span class="highlight">Systems</span> &<br><span style="background: linear-gradient(135deg, #FFD700, #FF00E5, #00FFB3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; animation: gradientFlow 7s ease infinite; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));">Experiences</span></h1>
+            <p class="hero-subtitle">Designing minimal, modern digital products with purpose and precision at Bring It On Studios.</p>
+            <div class="hero-meta">
+                <div class="hero-meta-item">
+                    <span class="label">Based In</span>
+                    <span class="value">Nairobi, Kenya</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Studio</span>
+                    <span class="value">Bring It On Studios</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="label">Focus</span>
+                    <span class="value">Systems & Design</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#work" class="btn btn-primary">View Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-bright">
+        <h2 class="section-title">Bringing Imagination to Life</h2>
+        <div class="about-content">
+            <!-- 3D Sphere Text Container -->
+            <div class="sphere-text-container">
+                <div class="sphere-text" id="sphere-text">
+                    <!-- Text will be dynamically added here -->
+                </div>
+            </div>
+
+            <div class="about-text magical-text">
+                <p class="reveal-text">I'm Sir Newson, a Creative Futurist and Visual Transmuter at Bring It On Studios, blending art, technology, and purpose to create meaningful visual worlds.</p>
+                <p class="reveal-text">From brand identities to AI visuals, interior spaces, and even automotive concepts, I see design as the bridge between dreams and reality. My creative journey is deeply inspired by the African spirit — raw, powerful, and full of story — and I'm driven to showcase that essence to the world.</p>
+                <p class="reveal-text">I'm especially passionate about the car design era — where creativity meets engineering — and my goal is to leave a mark that celebrates African heritage, innovation, and timeless design.</p>
+                <p class="reveal-text">To me, design isn't just a skill — it's a language that speaks of identity, legacy, and possibility.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-subtitle">Strategic creative services that drive real business results</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-robot"></i></div>
+                        <h3>AI-Powered Creative Solutions</h3>
+                        <p>Leveraging cutting-edge AI to automate design workflows, generate intelligent content, and unlock unprecedented creative possibilities.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>AI Solutions Include:</h3>
+                        <ul>
+                            <li>AI Content Generation</li>
+                            <li>Automated Design Workflows</li>
+                            <li>Smart Image Processing</li>
+                            <li>Predictive Analytics</li>
+                            <li>Custom AI Integrations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-cube"></i></div>
+                        <h3>3D Design & Visualization</h3>
+                        <p>Creating stunning 3D renders, product visualizations, and immersive experiences that bring your ideas to life with photorealistic detail.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>3D Services Include:</h3>
+                        <ul>
+                            <li>Product Visualization</li>
+                            <li>Architectural Renders</li>
+                            <li>Character Design</li>
+                            <li>Motion Graphics</li>
+                            <li>VR/AR Experiences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Brand Architecture & Strategy</h3>
+                        <p>Building future-proof brand identities that resonate across all touchpoints. From logos to comprehensive brand systems and guidelines.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>Branding Services:</h3>
+                        <ul>
+                            <li>Logo & Identity Design</li>
+                            <li>Brand Strategy</li>
+                            <li>Style Guides</li>
+                            <li>Marketing Collateral</li>
+                            <li>Brand Evolution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Digital Experience Design</h3>
+                        <p>Designing intuitive, beautiful websites and apps that users love. UI/UX that converts visitors into customers and drives engagement.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>Digital Design:</h3>
+                        <ul>
+                            <li>UI/UX Design</li>
+                            <li>Web Development</li>
+                            <li>Mobile App Design</li>
+                            <li>Prototyping</li>
+                            <li>User Testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Creative Direction</h3>
+                        <p>Leading your creative vision from concept to execution. Campaign strategy, content creation, and visual storytelling that captivates.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>Creative Services:</h3>
+                        <ul>
+                            <li>Campaign Strategy</li>
+                            <li>Art Direction</li>
+                            <li>Content Creation</li>
+                            <li>Visual Storytelling</li>
+                            <li>Creative Consulting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-inner">
+                    <div class="service-card-front">
+                        <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Digital Transformation</h3>
+                        <p>Strategic guidance for businesses embracing the future. AI integration, process automation, and innovative digital solutions.</p>
+                    </div>
+                    <div class="service-card-back">
+                        <h3>Transformation:</h3>
+                        <ul>
+                            <li>AI Integration</li>
+                            <li>Process Automation</li>
+                            <li>Digital Strategy</li>
+                            <li>Tech Consulting</li>
+                            <li>Innovation Workshops</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <div class="philosophy-section">
+        <h2 class="section-title">The Art of Thoughtful Design</h2>
+        <p class="section-subtitle">Three principles that guide every project</p>
+
+        <div class="philosophy-grid">
+            <div class="philosophy-item">
+                <div class="philosophy-number">01</div>
+                <h4>Purpose-Driven</h4>
+                <p>Every design decision serves a strategic purpose. Beauty with meaning, not just aesthetics.</p>
+            </div>
+
+            <div class="philosophy-item">
+                <div class="philosophy-number">02</div>
+                <h4>Human-Centered</h4>
+                <p>Technology serves people, not the other way around. Empathy and intuition guide the experience.</p>
+            </div>
+
+            <div class="philosophy-item">
+                <div class="philosophy-number">03</div>
+                <h4>Future-Focused</h4>
+                <p>Building for today while anticipating tomorrow. Innovation balanced with timeless principles.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat with Sir AI Section -->
+    <section id="sir-ai" style="background: linear-gradient(135deg, rgba(46, 230, 217, 0.1), rgba(162, 89, 255, 0.1)); border-radius: 30px; padding: 4rem 2rem; margin: 4rem 2rem; border: 1px solid rgba(46, 230, 217, 0.3);">
+        <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+            <div style="font-size: 5rem; margin-bottom: 2rem;">🤖💬</div>
+            <h2 class="section-title" style="background: linear-gradient(120deg, #E26A2C 0%, #FF6F61 45%, #2EE6D9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Chat with Sir AI</h2>
+            <p class="section-subtitle">Your AI Assistant for Creative Guidance</p>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                Meet Sir AI - an intelligent assistant trained to guide you through creative challenges, answer questions about design and AI,
+                and help you unlock your creative potential. Whether you need advice on branding, technical guidance, or creative direction,
+                Sir AI is here to help you navigate the intersection of creativity and technology.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <div style="background: rgba(46, 230, 217, 0.1); padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--primary);">
+                    <i class="fas fa-comments" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    24/7 Creative Support
+                </div>
+                <div style="background: rgba(46, 230, 217, 0.1); padding: 1rem 2rem; border-radius: 50px; border: 1px solid #2EE6D9;">
+                    <i class="fas fa-lightbulb" style="color: #2EE6D9; margin-right: 0.5rem;"></i>
+                    Instant Guidance
+                </div>
+                <div style="background: rgba(46, 230, 217, 0.1); padding: 1rem 2rem; border-radius: 50px; border: 1px solid var(--primary);">
+                    <i class="fas fa-robot" style="color: var(--primary); margin-right: 0.5rem;"></i>
+                    AI-Powered Insights
+                </div>
+            </div>
+            <a href="https://rates.sirnewson.com/" target="_blank" class="btn btn-primary" style="margin-top: 2rem; box-shadow: 0 0 30px rgba(46, 230, 217, 0.5), 0 0 60px rgba(46, 230, 217, 0.3);">
+                <i class="fas fa-comment-dots" style="margin-right: 0.5rem;"></i> Start Chatting with Sir AI
+            </a>
+            <p style="color: var(--text-tertiary); font-size: 0.9rem; margin-top: 1.5rem;">
+                <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> Email: sirnewson@gmail.com &nbsp;|&nbsp;
+                <i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i> WhatsApp: +254 702 480 771
+            </p>
+        </div>
+    </section>
+
+    <!-- Magical Mosaic AI Gallery -->
+    <section id="ai-gallery" style="background: var(--neutral-black); padding: 8rem 2rem;">
+        <div style="max-width: 1600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="font-size: 5rem; margin-bottom: 2rem;">🎨✨🤖</div>
+                <h2 class="section-title" style="background: linear-gradient(120deg, #E26A2C 0%, #FF6F61 45%, #2EE6D9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: clamp(2.5rem, 5vw, 4rem);">
+                    The Power of Human + AI Creativity
+                </h2>
+                <p class="section-subtitle" style="font-size: 1.4rem; max-width: 900px; margin: 1rem auto 2rem;">
+                    Where imagination meets artificial intelligence for storytelling and creative expression
+                </p>
+                <p style="color: var(--text-secondary); max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                    The tools have changed over time, but the power of imagination remains constant.
+                    Witness what's possible when creative vision combines with AI technology — a showcase of human creativity amplified by artificial intelligence for the good of expression and storytelling.
+                </p>
+            </div>
+
+            <div class="ai-gallery-grid">
+                <!-- Video 1 - Huge -->
+                <div class="ai-video-item video-huge" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/1a049816-3ebc-424e-a21d-4d0240f77653/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 2 - Tall -->
+                <div class="ai-video-item video-tall" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/0a797d7d-2efb-467f-b76f-d139e4b72488/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 3 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/5fd8b5c3-93f1-49f7-aef8-7566e62403f7/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 4 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/415e299a-b01b-4360-8943-3039142cb17d/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 5 - Huge -->
+                <div class="ai-video-item video-huge" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/e06374f0-188d-44a2-8a65-5f69b5691e7f/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 6 - Tall -->
+                <div class="ai-video-item video-tall" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.3);">
+                    <video src="https://cdn.midjourney.com/video/d34fe487-17b5-4a88-aa89-1e26cfde83a0/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 7 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/fb291dad-39ac-4d04-afc1-375b9dcb8227/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 8 - Huge -->
+                <div class="ai-video-item video-huge" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/0169f73c-0651-4bcd-a276-199c2c18bc33/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 9 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/5a5824ef-7360-497e-be9a-4e2091b46606/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 10 - Tall -->
+                <div class="ai-video-item video-tall" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/2c4b30df-fa20-42d8-a1be-e59827373efc/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 11 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/913b56b9-c5ae-4c5c-8a66-2f33d7cc5ee4/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 12 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/d533d28a-27a6-4524-a1e0-940fa3105516/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 13 - Tall -->
+                <div class="ai-video-item video-tall" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/c93a6208-a30c-4141-bdb0-0d1edadf04fa/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 14 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/f309f128-3240-434a-af8e-ef004e4d420d/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 15 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/5de050e5-7f21-45d1-a8b0-88df6e0fcaf3/3.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 16 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/5de050e5-7f21-45d1-a8b0-88df6e0fcaf3/2.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 17 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/5e31eb48-5c2e-46fc-879f-5b6f87c1c028/2.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+
+                <!-- Video 18 - Medium -->
+                <div class="ai-video-item video-medium" style="position: relative; overflow: hidden; border-radius: 20px; background: var(--neutral-dark); border: 1px solid rgba(46, 230, 217, 0.2);">
+                    <video src="https://cdn.midjourney.com/video/cd6e31d0-8dc4-43f9-adfc-0fd80aee91c8/0.mp4" style="width: 100%; height: 100%; object-fit: contain; opacity: 1.0;" autoplay loop muted playsinline loading="lazy"></video>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 5rem; background: linear-gradient(135deg, rgba(46, 230, 217, 0.1), rgba(162, 89, 255, 0.1)); border-radius: 30px; padding: 4rem 2rem; border: 1px solid rgba(46, 230, 217, 0.3);">
+                <h3 style="font-size: 2.5rem; margin-bottom: 1.5rem; background: linear-gradient(120deg, #2EE6D9 0%, #A259FF 45%, #E26A2C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Learn How to Generate with AI Today</h3>
+                <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Ready to unlock the power of AI for your creative projects? Book a personalized session and discover how to bring your imagination to life with cutting-edge AI tools.
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="mailto:sirnewson@gmail.com?subject=AI%20Generation%20Session%20Booking" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem; box-shadow: 0 0 30px rgba(46, 230, 217, 0.5), 0 0 60px rgba(162, 89, 255, 0.3);">
+                        <i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> Book via Email
+                    </a>
+                    <a href="https://wa.me/254702480771?text=Hi%2C%20I'd%20like%20to%20book%20an%20AI%20generation%20session" target="_blank" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
+                        <i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i> WhatsApp: +254 702 480 771
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="work" style="background: var(--neutral-black); padding: 8rem 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 4rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border-subtle);">
+                <div style="flex: 1;">
+                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); font-weight: 600; margin-bottom: 1rem;">Selected Work</div>
+                    <h2 style="font-size: clamp(2.5rem, 5vw, 4rem); margin: 0; color: var(--text-primary); font-family: 'Space Grotesk', sans-serif;">Systems & Design</h2>
+                </div>
+                <div style="color: var(--text-secondary); max-width: 400px;">Real projects, real systems. From AI applications to networking platforms.</div>
+            </div>
+
+            <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 2rem;">
+                <!-- TAK Network -->
+                <div class="project-card" style="background: var(--neutral-dark); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--neutral-medium) 0%, var(--neutral-dark) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle); position: relative;">
+                        <i class="fas fa-network-wired" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                        <div style="position: absolute; top: 1rem; right: 1rem; background: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">LIVE</div>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: rgba(46, 230, 217, 0.1); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">NETWORKING</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">2024</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--text-primary); font-family: 'Space Grotesk', sans-serif;">TAK Network</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">Professional networking platform connecting people and opportunities. Built with modern web technologies and scalable architecture.</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">React</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">Node.js</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">System Design</span>
+                        </div>
+                        <a href="https://taknetwork.online" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quote It -->
+                <div class="project-card" style="background: var(--neutral-dark); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--neutral-medium) 0%, var(--neutral-dark) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle);">
+                        <i class="fas fa-quote-right" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: rgba(46, 230, 217, 0.1); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">PRODUCTIVITY</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">2024</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--text-primary); font-family: 'Space Grotesk', sans-serif;">Quote It</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">Modern quote management application for businesses. Streamlined workflow for creating, managing, and tracking quotes with clients.</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">Web App</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">UI/UX</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">Business Tools</span>
+                        </div>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AI Chat App -->
+                <div class="project-card" style="background: var(--neutral-dark); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--neutral-medium) 0%, var(--neutral-dark) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle);">
+                        <i class="fas fa-robot" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: rgba(46, 230, 217, 0.1); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">AI</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">2024</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--text-primary); font-family: 'Space Grotesk', sans-serif;">AI Chat Application</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">Next.js powered AI chatbot with intelligent conversations. Built with modern AI APIs and elegant user interface design.</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">Next.js</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">AI/ML</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">TypeScript</span>
+                        </div>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Retro Chat -->
+                <div class="project-card" style="background: var(--neutral-dark); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--neutral-medium) 0%, var(--neutral-dark) 100%); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--border-subtle);">
+                        <i class="fas fa-comments" style="font-size: 4rem; color: var(--primary); opacity: 0.3;"></i>
+                    </div>
+                    <div style="padding: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: rgba(46, 230, 217, 0.1); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">CHAT</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">2024</span>
+                        </div>
+                        <h3 style="font-size: 1.8rem; margin-bottom: 0.75rem; color: var(--text-primary); font-family: 'Space Grotesk', sans-serif;">Retro Chat App</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">Real-time messaging application with retro aesthetics. Modern technology meets classic design for a unique user experience.</p>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">Real-time</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">WebSocket</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">•</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.85rem;">UI Design</span>
+                        </div>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            View Project <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="brands-section">
+        <h2 class="section-title">Trusted By Forward-Thinking Brands</h2>
+        <div class="brands-grid">
+            <div class="brand-logo">YXM Digital</div>
+            <div class="brand-logo">TAK Network</div>
+            <div class="brand-logo">PataKazi</div>
+            <div class="brand-logo">Various Startups</div>
+        </div>
+    </section>
+
+    <!-- Drift Library Section -->
+    <section id="drift-library" style="background: var(--neutral-black); padding: 8rem 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <div style="font-size: 5rem; margin-bottom: 2rem;">📚✨</div>
+                <h2 class="section-title" style="background: linear-gradient(120deg, #E26A2C 0%, #FF6F61 45%, #2EE6D9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Drift Library
+                </h2>
+                <p class="section-subtitle" style="font-size: 1.3rem; max-width: 800px; margin: 0 auto;">
+                    A curated collection of creative resources, design systems, and tools built to empower creators
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <!-- Resource 1: Design Systems -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎨</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">Design Systems</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        Comprehensive design tokens, component libraries, and pattern guides for building consistent, scalable interfaces.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Figma</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">React</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Tokens</span>
+                    </div>
+                </div>
+
+                <!-- Resource 2: AI Prompts -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🤖</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">AI Prompt Library</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        Battle-tested prompts for Midjourney, ChatGPT, and other AI tools to accelerate your creative workflow.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Midjourney</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">GPT-4</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">DALL-E</span>
+                    </div>
+                </div>
+
+                <!-- Resource 3: Code Snippets -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">💻</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">Code Snippets</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        Production-ready code snippets, hooks, and utilities for modern web development and creative coding.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">JavaScript</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">CSS</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Three.js</span>
+                    </div>
+                </div>
+
+                <!-- Resource 4: Brand Templates -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">📐</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">Brand Templates</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        Professional templates for brand guidelines, style guides, and visual identity systems that scale.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Templates</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Guidelines</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Identity</span>
+                    </div>
+                </div>
+
+                <!-- Resource 5: 3D Assets -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🎭</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">3D Assets</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        High-quality 3D models, materials, and scenes for web experiences, AR, and creative visualization.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Blender</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">glTF</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Materials</span>
+                    </div>
+                </div>
+
+                <!-- Resource 6: Workflow Tools -->
+                <div class="drift-resource-card" style="background: linear-gradient(145deg, rgba(46, 230, 217, 0.05), rgba(46, 230, 217, 0.05)); border: 1px solid rgba(46, 230, 217, 0.2); border-radius: 20px; padding: 3rem; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer;">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">⚡</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-primary);">Workflow Tools</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                        Productivity tools, automation scripts, and plugins to streamline your creative process.
+                    </p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Automation</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: #2EE6D9; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Plugins</span>
+                        <span style="background: rgba(46, 230, 217, 0.2); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem;">Scripts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
+                    🚧 Currently building and curating resources. Check back soon for early access!
+                </p>
+                <a href="mailto:sirnewson@gmail.com?subject=Drift%20Library%20Early%20Access" class="btn btn-secondary" style="box-shadow: 0 0 20px rgba(46, 230, 217, 0.3);">
+                    <i class="fas fa-bell" style="margin-right: 0.5rem;"></i> Get Notified
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drift Notes Teaser -->
+    <div class="drift-section">
+        <div class="drift-icon">📝</div>
+        <h2 class="section-title">Drift Notes</h2>
+        <p class="section-subtitle">Thoughts on design, technology, creativity, and building things that matter</p>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">A collection of essays, insights, and reflections from my journey as a creative director. Raw, unfiltered perspectives on the intersection of art, business, and technology.</p>
+        <a href="thoughts.html" class="btn btn-primary">Read My Thoughts</a>
+    </div>
+
+    <!-- Vision Section -->
+    <section class="vision-section">
+        <h2 class="section-title">Vision & Mission</h2>
+        <div class="vision-quote">
+            "To create work that transcends trends and builds generational impact."
+        </div>
+        <p class="vision-text">
+            I believe in the power of thoughtful design to change lives, transform businesses, and shape culture.
+            My work isn't just about projects — it's about building legacy, fostering innovation, and empowering
+            the next generation of African creatives and entrepreneurs to dream bigger and build better.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 style="font-size: 3rem; margin-bottom: 1rem;">Let's Build Something Amazing</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Whether you need a brand refresh, a digital product, or strategic guidance — I'm here to help.</p>
+        <a href="mailto:hello@sirnewson.com" class="btn" style="background: white; color: var(--teal-dark);">Get In Touch</a>
+
+        <div class="contact-links">
+            <a href="https://twitter.com/sirnewson" target="_blank" class="contact-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://linkedin.com/in/sirnewson" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com/sirnewson" target="_blank" class="contact-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://dribbble.com/sirnewson" target="_blank" class="contact-link"><i class="fab fa-dribbble"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Modern Ocean Footer -->
+<footer style="position: relative; background: var(--neutral-black); border-top: 1px solid rgba(46, 230, 217, 0.2); overflow: hidden; margin-top: 4rem;">
+    <!-- Ocean Video Background -->
+    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.3;">
+        <source src="https://cdn.pixabay.com/video/2024/06/06/215484_large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Dark Overlay -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(15, 43, 46, 0.9) 0%, rgba(10, 15, 15, 0.95) 100%); z-index: 1;"></div>
+
+    <!-- Footer Content -->
+    <div style="position: relative; z-index: 2; padding: 4rem 2rem 2rem; max-width: 1400px; margin: 0 auto;">
+        <!-- Footer Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+            <!-- Brand Column -->
+            <div>
+                <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson" style="height: 50px; margin-bottom: 1.5rem; filter: brightness(1.2);">
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    Building digital experiences that matter. Creative direction, design systems, and AI-powered solutions from Nairobi.
+                </p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.75rem;"><a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Home</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="work.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Work</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="clients.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Clients</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="thoughts.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Thoughts</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="index.html#about" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Services</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Brand Design</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Web Development</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">AI Solutions</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Creative Direction</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Design Systems</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Get In Touch</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-envelope" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <a href="mailto:hello@sirnewson.com" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-secondary)';">hello@sirnewson.com</a>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.95rem;">Nairobi, Kenya</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-clock" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.95rem;">Mon - Fri: 9AM - 6PM EAT</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div style="border-top: 1px solid rgba(46, 230, 217, 0.15); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+            <p style="color: var(--text-tertiary); font-size: 0.9rem; margin: 0;">
+                &copy; 2025 Sir Newson / Bring It On Studios. All rights reserved.
+            </p>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <a href="#" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Privacy Policy</a>
+                <a href="#" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Terms of Service</a>
+                <a href="admin.html" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Admin</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+        </div><!-- Close cinema-frame -->
+    </div><!-- Close cinema-container -->
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, .btn, .service-card, .project-card, .brand-logo, .hamburger, .nav-box, .ai-video-item, .drift-resource-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Nav box scroll effect
+        const navBox = document.querySelector('.nav-box');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navBox.style.transform = 'scale(0.95)';
+            } else {
+                navBox.style.transform = 'scale(1)';
+            }
+        });
+
+        // Three.js 3D Scene
+        const canvas = document.getElementById('three-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        camera.position.z = 50;
+
+        // Create floating particles with geometry
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 1500;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.12,
+            color: 0xFF6B35,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Create floating geometric shapes
+        const torusGeometry = new THREE.TorusGeometry(10, 2, 16, 100);
+        const torusMaterial = new THREE.MeshPhongMaterial({
+            color: 0xFF6B35,
+            transparent: true,
+            opacity: 0.12,
+            wireframe: true
+        });
+        const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+        torus.position.set(-20, 10, -30);
+        scene.add(torus);
+
+        // Add icosahedron
+        const icoGeometry = new THREE.IcosahedronGeometry(8, 0);
+        const icoMaterial = new THREE.MeshPhongMaterial({
+            color: 0xFF8C61,
+            transparent: true,
+            opacity: 0.15,
+            wireframe: true
+        });
+        const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
+        icosahedron.position.set(25, -15, -25);
+        scene.add(icosahedron);
+
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        // Add point lights
+        const pointLight = new THREE.PointLight(0xFF6B35, 0.8);
+        pointLight.position.set(20, 20, 20);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0xFF8C61, 0.6);
+        pointLight2.position.set(-20, -20, 20);
+        scene.add(pointLight2);
+
+        // Mouse movement effect
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation loop
+        function animateThree() {
+            requestAnimationFrame(animateThree);
+
+            // Rotate particles
+            particlesMesh.rotation.x += 0.0003;
+            particlesMesh.rotation.y += 0.0005;
+
+            // Rotate geometric shapes
+            torus.rotation.x += 0.01;
+            torus.rotation.y += 0.005;
+            torus.rotation.z += 0.003;
+
+            icosahedron.rotation.x -= 0.008;
+            icosahedron.rotation.y += 0.01;
+
+            // Camera follows mouse subtly
+            camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 5 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+
+        animateThree();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Enhanced scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(section);
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
+                heroContent.style.opacity = 1 - scrolled / 600;
+            }
+        });
+
+        // Enhanced magnetic button effect
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Advanced 3D card hover effect with mouse tracking
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-15px)
+                    scale(1.02)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+
+        // Project cards 3D tracking
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                // Update CSS custom properties for gradient effect
+                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-15px)
+                    scale(1.03)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scroll reveal animations with stagger
+        const revealElements = document.querySelectorAll('.service-card, .project-card, .philosophy-item');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Add subtle parallax to sections
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+
+            // Parallax for hero content
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
+                heroContent.style.opacity = Math.max(1 - scrolled / 600, 0);
+            }
+
+            // Parallax for section backgrounds
+            document.querySelectorAll('.philosophy-section, .drift-section, .contact-section').forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+                if (scrollPercent > 0 && scrollPercent < 1) {
+                    section.style.transform = `translateY(${scrollPercent * 20}px)`;
+                }
+            });
+        });
+
+        // Smooth link transitions
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Generate Animated Maze Lines
+        function createMazeLines() {
+            const mazeContainer = document.getElementById('maze-lines');
+            const lineCount = 20;
+
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'maze-line';
+
+                // Random type: horizontal, vertical, or diagonal
+                const types = ['horizontal', 'vertical', 'diagonal'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                line.classList.add(type);
+
+                // Random positioning
+                if (type === 'horizontal') {
+                    line.style.top = Math.random() * 100 + '%';
+                    line.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                    line.style.animationDelay = Math.random() * 5 + 's';
+                } else if (type === 'vertical') {
+                    line.style.left = Math.random() * 100 + '%';
+                    line.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                    line.style.animationDelay = Math.random() * 5 + 's';
+                } else {
+                    line.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                    line.style.animationDelay = Math.random() * 8 + 's';
+                }
+
+                // Random opacity variation
+                line.style.opacity = Math.random() * 0.3 + 0.1;
+
+                mazeContainer.appendChild(line);
+            }
+        }
+
+        // Generate Floating Characters
+        function createFloatingChars() {
+            const charsContainer = document.getElementById('floating-chars');
+            const characters = ['<', '>', '{', '}', '[', ']', '/', '*', '+', '-', '=', '&', '#', '@', '$', '0', '1', 'A', 'B', 'C', 'D', 'E', 'F'];
+            const charCount = 40;
+
+            for (let i = 0; i < charCount; i++) {
+                const char = document.createElement('div');
+                char.className = 'floating-char';
+                char.textContent = characters[Math.floor(Math.random() * characters.length)];
+
+                // Random horizontal position
+                char.style.left = Math.random() * 100 + '%';
+
+                // Random starting vertical position
+                char.style.top = Math.random() * 150 + 50 + '%';
+
+                // Random size variation
+                const size = Math.random() * 2 + 1;
+                char.style.fontSize = size + 'rem';
+
+                // Random animation duration
+                char.style.animationDuration = (Math.random() * 15 + 15) + 's';
+
+                // Random delay
+                char.style.animationDelay = Math.random() * 10 + 's';
+
+                // Random opacity
+                char.style.opacity = Math.random() * 0.2 + 0.05;
+
+                charsContainer.appendChild(char);
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            createMazeLines();
+            createFloatingChars();
+        });
+
+        // Add glow effect to buttons
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.classList.add('glow-effect');
+        });
+
+        // Enhanced hover effect for nav-box
+        const navBoxElement = document.querySelector('.nav-box');
+        navBoxElement.addEventListener('mouseenter', () => {
+            navBoxElement.classList.add('glow-effect');
+        });
+        navBoxElement.addEventListener('mouseleave', () => {
+            navBoxElement.classList.remove('glow-effect');
+        });
+
+        // Add pulsing animation to service icons
+        setInterval(() => {
+            document.querySelectorAll('.service-icon').forEach((icon, index) => {
+                setTimeout(() => {
+                    icon.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        icon.style.transform = 'scale(1)';
+                    }, 300);
+                }, index * 100);
+            });
+        }, 5000);
+
+        // MAGICAL WORD REVEAL EFFECT
+        function initMagicalText() {
+            const revealParagraphs = document.querySelectorAll('.reveal-text');
+
+            revealParagraphs.forEach(paragraph => {
+                // Get the text content
+                const text = paragraph.textContent;
+
+                // Split into words and wrap each in a span
+                const words = text.split(/\s+/);
+                paragraph.innerHTML = '';
+
+                words.forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.className = 'word';
+                    wordSpan.textContent = word;
+                    wordSpan.dataset.index = index;
+
+                    // Add space after word (except last word)
+                    paragraph.appendChild(wordSpan);
+                    if (index < words.length - 1) {
+                        paragraph.appendChild(document.createTextNode(' '));
+                    }
+                });
+            });
+
+            // Add hover effect to reveal words
+            const allWords = document.querySelectorAll('.magical-text .word');
+            const revealedWords = new Set();
+
+            allWords.forEach((word, index) => {
+                // Mouse enter - light up the word like a candle
+                word.addEventListener('mouseenter', function() {
+                    this.classList.add('revealed', 'lit');
+                    revealedWords.add(index);
+
+                    // Remove 'lit' animation class after it completes
+                    setTimeout(() => {
+                        this.classList.remove('lit');
+                    }, 600);
+                });
+
+                // Mouse leave - fade out the word
+                word.addEventListener('mouseleave', function() {
+                    setTimeout(() => {
+                        this.classList.remove('revealed');
+                        revealedWords.delete(index);
+                    }, 300);
+                });
+            });
+
+            // Track mouse movement for smooth hover effects
+            const magicalContainer = document.querySelector('.magical-text');
+            if (magicalContainer) {
+                let mouseX = 0;
+                let mouseY = 0;
+
+                magicalContainer.addEventListener('mousemove', function(e) {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+
+                    // Find nearby words and slightly light them up
+                    allWords.forEach(word => {
+                        const rect = word.getBoundingClientRect();
+                        const wordCenterX = rect.left + rect.width / 2;
+                        const wordCenterY = rect.top + rect.height / 2;
+
+                        const distance = Math.sqrt(
+                            Math.pow(mouseX - wordCenterX, 2) +
+                            Math.pow(mouseY - wordCenterY, 2)
+                        );
+
+                        // If mouse is within 100px, slightly increase opacity
+                        if (distance < 100 && !word.classList.contains('revealed')) {
+                            const proximityOpacity = 0.15 + (1 - distance / 100) * 0.25;
+                            word.style.opacity = proximityOpacity;
+                        } else if (!word.classList.contains('revealed')) {
+                            word.style.opacity = 0.15;
+                        }
+                    });
+                });
+
+                // Reset opacity when mouse leaves container
+                magicalContainer.addEventListener('mouseleave', function() {
+                    allWords.forEach(word => {
+                        if (!word.classList.contains('revealed')) {
+                            word.style.opacity = 0.15;
+                        }
+                    });
+                });
+            }
+        }
+
+        // 3D SPHERE TEXT EFFECT
+        function initSphereText() {
+            const sphereContainer = document.getElementById('sphere-text');
+            if (!sphereContainer) return;
+
+            const text = "I don't just design — I bring imagination to life";
+            const words = text.split(' ');
+
+            // Create sphere with words positioned around it
+            const radius = 150;
+            const total = words.length;
+
+            words.forEach((word, index) => {
+                const wordElement = document.createElement('span');
+                wordElement.className = 'sphere-word';
+                wordElement.textContent = word;
+
+                // Calculate position on sphere using fibonacci spiral
+                const phi = Math.acos(-1 + (2 * index) / total);
+                const theta = Math.sqrt(total * Math.PI) * phi;
+
+                const x = radius * Math.cos(theta) * Math.sin(phi);
+                const y = radius * Math.sin(theta) * Math.sin(phi);
+                const z = radius * Math.cos(phi);
+
+                // Apply 3D transform
+                wordElement.style.transform = `
+                    translate3d(${x}px, ${y}px, ${z}px)
+                    rotateY(${Math.atan2(x, z) * (180 / Math.PI)}deg)
+                    rotateX(${-Math.asin(y / radius) * (180 / Math.PI)}deg)
+                `;
+
+                sphereContainer.appendChild(wordElement);
+            });
+
+            // Mouse movement tracking for interactive rotation
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetRotationX = 0;
+            let targetRotationY = 0;
+            let currentRotationX = 10;
+            let currentRotationY = 0;
+            let isInteracting = false;
+
+            const sphereTextContainer = document.querySelector('.sphere-text-container');
+
+            sphereTextContainer.addEventListener('mouseenter', () => {
+                isInteracting = true;
+                sphereContainer.classList.add('interactive');
+            });
+
+            sphereTextContainer.addEventListener('mouseleave', () => {
+                isInteracting = false;
+                sphereContainer.classList.remove('interactive');
+            });
+
+            sphereTextContainer.addEventListener('mousemove', (e) => {
+                if (!isInteracting) return;
+
+                const rect = sphereTextContainer.getBoundingClientRect();
+                mouseX = (e.clientX - rect.left) / rect.width;
+                mouseY = (e.clientY - rect.top) / rect.height;
+
+                // Convert to rotation angles
+                targetRotationY = (mouseX - 0.5) * 180;
+                targetRotationX = (mouseY - 0.5) * -90 + 10;
+            });
+
+            // Smooth animation loop
+            function animate() {
+                // Lerp to target rotation
+                currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+                currentRotationY += (targetRotationY - currentRotationY) * 0.05;
+
+                if (isInteracting) {
+                    sphereContainer.style.transform = `rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`;
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Initialize magical text effect when page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initMagicalText();
+                initSphereText();
+            });
+        } else {
+            initMagicalText();
+            initSphereText();
+        }
+
+        // Make service cards flip on click instead of hover
+        document.querySelectorAll('.service-card').forEach(card => {
+            let isFlipped = false;
+            card.addEventListener('click', function() {
+                const inner = this.querySelector('.service-card-inner');
+                if (isFlipped) {
+                    inner.style.transform = 'rotateY(0deg)';
+                } else {
+                    inner.style.transform = 'rotateY(180deg)';
+                }
+                isFlipped = !isFlipped;
+            });
+        });
+    </script>
+
+    <!-- Ocean Magic - Water Ripple & Marine Effects -->
+    <script src="ocean-magic.js"></script>
+    <script src="hero-3d-effects.js"></script>
+</body>
+</html>

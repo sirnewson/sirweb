@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Apps — Sir Newson</title>
+    <meta name="description" content="Explore our collection of powerful web applications built for creativity, productivity, and innovation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #E26A2C;
+            --primary-light: #FF6F61;
+            --primary-dark: #D65A1C;
+            --accent-teal: #2EE6D9;
+            --accent-purple: #A259FF;
+            --accent-playful: #C9F227;
+            --neutral-black: #0A0F0F;
+            --neutral-dark: #0D1415;
+            --neutral-medium: #121A1B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0B0B0;
+            --text-tertiary: #6B7B7B;
+            --border-subtle: #1A2F2F;
+            --border-medium: #2A4040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--neutral-black);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Cinema Container */
+        .cinema-container {
+            padding: 100px;
+            min-height: 100vh;
+            background: var(--neutral-black);
+        }
+
+        .cinema-frame {
+            background: var(--neutral-black);
+            border-radius: 30px;
+            box-shadow:
+                0 50px 100px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(0, 139, 139, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Navigation Box */
+        .nav-box {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 1.5rem;
+            z-index: 10002;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-box:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 50px rgba(46, 230, 217, 0.2);
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .hamburger:hover span {
+            background: var(--primary);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 380px;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-subtle);
+            padding: 8rem 3rem 3rem;
+            z-index: 10001;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu-links {
+            list-style: none;
+        }
+
+        .nav-menu-links li {
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+
+        .nav-menu-links a:hover::before {
+            width: 1rem;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo-text .studio {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 6rem 4rem 4rem;
+            text-align: center;
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at 50% 20%, rgba(46, 230, 217, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Apps Grid */
+        .apps-section {
+            padding: 6rem 4rem;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .app-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-teal);
+            box-shadow:
+                0 20px 40px rgba(46, 230, 217, 0.3),
+                0 10px 20px rgba(46, 230, 217, 0.2);
+        }
+
+        .app-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.8), rgba(46, 230, 217, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(46, 230, 217, 0.2), transparent 70%);
+        }
+
+        .app-content {
+            padding: 2rem;
+        }
+
+        .app-category {
+            display: inline-block;
+            background: rgba(46, 230, 217, 0.2);
+            color: var(--accent-teal);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .app-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .app-purpose {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .launch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(46, 230, 217, 0.3);
+        }
+
+        .launch-btn:hover {
+            box-shadow: 0 0 30px rgba(46, 230, 217, 0.5);
+            transform: translateX(5px);
+        }
+
+        .launch-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .launch-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #E26A2C, #2EE6D9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .status-badge.coming-soon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .cinema-container {
+                padding: 60px;
+            }
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cinema-container {
+                padding: 20px;
+            }
+            .cinema-frame {
+                border-radius: 20px;
+            }
+            .header-section {
+                padding: 4rem 2rem 3rem;
+            }
+            .apps-section {
+                padding: 4rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Navigation Box -->
+    <div class="nav-box">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="logo-text">
+            <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson Logo" style="height: 40px; margin-bottom: 1rem;">
+            <span class="studio">Bring It On Studios</span>
+        </div>
+        <ul class="nav-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="journey.html">Journey</a></li>
+            <li><a href="webapps.html">Web Apps</a></li>
+            <li><a href="dashboard-new.html">Dashboard</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cinema Container -->
+    <div class="cinema-container">
+        <div class="cinema-frame">
+
+            <!-- Header Section -->
+            <section class="header-section">
+                <div class="header-content">
+                    <div style="font-size: 5rem; margin-bottom: 2rem;">🚀💻✨</div>
+                    <h1 class="page-title">Web Applications</h1>
+                    <p class="page-subtitle">
+                        Powerful web apps built for creativity, productivity, and innovation.
+                        Launch directly from your browser — no installation required.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Apps Grid Section -->
+            <section class="apps-section">
+                <div class="apps-grid">
+
+                    <!-- App 1: TAK Network -->
+                    <div class="app-card">
+                        <div class="status-badge">LIVE</div>
+                        <div class="app-thumbnail">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">Networking</span>
+                            <h3 class="app-title">TAK Network</h3>
+                            <p class="app-purpose">
+                                Professional networking platform connecting people and opportunities.
+                                Build meaningful connections, discover career opportunities, and grow your professional network.
+                            </p>
+                            <a href="https://taknetwork.online" target="_blank" class="launch-btn">
+                                <i class="fas fa-rocket"></i> Launch App
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- App 2: Chat with Sir AI -->
+                    <div class="app-card">
+                        <div class="status-badge">LIVE</div>
+                        <div class="app-thumbnail">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">AI Assistant</span>
+                            <h3 class="app-title">Chat with Sir AI</h3>
+                            <p class="app-purpose">
+                                Your intelligent AI assistant for creative guidance and problem-solving.
+                                Get instant help with design, branding, AI tools, and creative direction.
+                            </p>
+                            <a href="https://rates.sirnewson.com/" target="_blank" class="launch-btn">
+                                <i class="fas fa-rocket"></i> Launch App
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- App 3: Quote It -->
+                    <div class="app-card">
+                        <div class="app-thumbnail">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">Productivity</span>
+                            <h3 class="app-title">Quote It</h3>
+                            <p class="app-purpose">
+                                Modern quote management application for businesses.
+                                Create professional quotes, track client communications, and manage your sales pipeline efficiently.
+                            </p>
+                            <a href="#" class="launch-btn">
+                                <i class="fas fa-rocket"></i> Launch App
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- App 4: Retro Chat -->
+                    <div class="app-card">
+                        <div class="app-thumbnail">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">Communication</span>
+                            <h3 class="app-title">Retro Chat</h3>
+                            <p class="app-purpose">
+                                Real-time messaging with retro aesthetics.
+                                Connect with your team in style with modern technology wrapped in nostalgic design.
+                            </p>
+                            <a href="#" class="launch-btn">
+                                <i class="fas fa-rocket"></i> Launch App
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- App 5: Admin Dashboard -->
+                    <div class="app-card">
+                        <div class="status-badge">LIVE</div>
+                        <div class="app-thumbnail">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">CMS</span>
+                            <h3 class="app-title">Content Admin</h3>
+                            <p class="app-purpose">
+                                Comprehensive content management system for your website.
+                                Manage blog posts, clients, projects, and media all from one powerful dashboard.
+                            </p>
+                            <a href="admin.html" class="launch-btn">
+                                <i class="fas fa-rocket"></i> Launch App
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- App 6: Portfolio Generator (Coming Soon) -->
+                    <div class="app-card">
+                        <div class="status-badge coming-soon">Coming Soon</div>
+                        <div class="app-thumbnail">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="app-content">
+                            <span class="app-category">Design Tool</span>
+                            <h3 class="app-title">Portfolio Generator</h3>
+                            <p class="app-purpose">
+                                AI-powered portfolio builder for creatives.
+                                Generate stunning portfolio websites in minutes with smart layouts and responsive design.
+                            </p>
+                            <a href="mailto:sirnewson@gmail.com?subject=Portfolio%20Generator%20Early%20Access" class="launch-btn">
+                                <i class="fas fa-bell"></i> Get Notified
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div><!-- Close cinema-frame -->
+    </div><!-- Close cinema-container -->
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.parentElement.contains(e.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- Ocean Magic Script -->
+    <script src="ocean-magic.js"></script>
+    <script src="hero-3d-effects.js"></script>
+</body>
+</html>

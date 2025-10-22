@@ -1,0 +1,305 @@
+/*
+ * MINIMAL ABSTRACT - Extreme Creative Color System
+ * Ultra-modern, artistic, abstract design
+ */
+
+:root {
+    /* Abstract Creative Palette */
+    --void: #0A0A0F;           /* Deep void black */
+    --ghost: #F8F9FB;          /* Ethereal white */
+    --electric: #00F5FF;       /* Electric cyan */
+    --plasma: #FF0080;         /* Hot plasma pink */
+    --acid: #C9FF00;           /* Acid lime */
+    --violet: #8B5CF6;         /* Deep violet */
+    --amber: #FFA500;          /* Warm amber */
+
+    /* Abstract Neutrals */
+    --mist: rgba(255, 255, 255, 0.05);
+    --fog: rgba(255, 255, 255, 0.1);
+    --smoke: rgba(255, 255, 255, 0.15);
+
+    /* Text */
+    --text-1: #FFFFFF;
+    --text-2: rgba(255, 255, 255, 0.7);
+    --text-3: rgba(255, 255, 255, 0.4);
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--void);
+    color: var(--text-1);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Abstract Layout Container */
+.abstract-container {
+    position: relative;
+    min-height: 100vh;
+    background: var(--void);
+}
+
+/* Minimal Navigation */
+.minimal-nav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    gap: 2rem;
+    background: var(--mist);
+    backdrop-filter: blur(20px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 1px solid var(--fog);
+}
+
+.minimal-nav a {
+    color: var(--text-2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.minimal-nav a:hover {
+    color: var(--electric);
+    transform: translateY(-2px);
+}
+
+/* Abstract Hero */
+.abstract-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+/* Floating Abstract Shapes */
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--electric), var(--violet));
+    border-radius: 50%;
+    top: 10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, var(--plasma), var(--amber));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    bottom: 20%;
+    right: -5%;
+    animation-delay: 3s;
+}
+
+.shape-3 {
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(90deg, var(--acid), var(--electric));
+    border-radius: 50%;
+    top: 50%;
+    right: 10%;
+    animation-delay: 6s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-30px, 30px) rotate(240deg); }
+}
+
+/* Minimal Title */
+.minimal-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.minimal-title .word {
+    display: block;
+    opacity: 0;
+    animation: revealWord 1s ease-out forwards;
+}
+
+.minimal-title .word:nth-child(1) {
+    background: linear-gradient(135deg, var(--electric), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation-delay: 0.2s;
+}
+
+.minimal-title .word:nth-child(2) {
+    background: linear-gradient(135deg, var(--plasma), var(--amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation-delay: 0.4s;
+}
+
+.minimal-title .word:nth-child(3) {
+    background: linear-gradient(135deg, var(--acid), var(--electric));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation-delay: 0.6s;
+}
+
+@keyframes revealWord {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Abstract Grid Section */
+.abstract-grid {
+    padding: 8rem 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.grid-minimal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Minimal Card */
+.minimal-card {
+    background: var(--mist);
+    border: 1px solid var(--fog);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.minimal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--electric), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.minimal-card:hover::before {
+    transform: translateX(100%);
+}
+
+.minimal-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--electric);
+    box-shadow: 0 20px 60px rgba(0, 245, 255, 0.2);
+}
+
+/* Abstract Text */
+.abstract-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-2);
+}
+
+.abstract-text strong {
+    color: var(--electric);
+    font-weight: 600;
+}
+
+/* Minimal Button */
+.minimal-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 1px solid var(--electric);
+    color: var(--electric);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.minimal-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--electric);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.minimal-btn:hover::before {
+    width: 100%;
+}
+
+.minimal-btn:hover {
+    color: var(--void);
+}
+
+/* Abstract Footer */
+.abstract-footer {
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--fog);
+    margin-top: 8rem;
+}
+
+.abstract-footer p {
+    color: var(--text-3);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .minimal-nav {
+        top: 1rem;
+        right: 1rem;
+        padding: 0.75rem 1.5rem;
+        gap: 1rem;
+    }
+
+    .minimal-nav a {
+        font-size: 0.8rem;
+    }
+
+    .grid-minimal {
+        grid-template-columns: 1fr;
+    }
+}

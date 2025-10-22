@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drift Notes — Sir Newson</title>
+    <meta name="description" content="Thoughts on design, technology, creativity, and building things that matter.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #E26A2C;
+            --primary-light: #FF6F61;
+            --primary-dark: #D65A1C;
+            --accent-teal: #2EE6D9;
+            --accent-purple: #A259FF;
+            --accent-playful: #C9F227;
+            --neutral-black: #0A0F0F;
+            --neutral-dark: #0D1415;
+            --neutral-medium: #121A1B;
+            --neutral-light: #FAFAFA;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0B0B0;
+            --text-tertiary: #6B7B7B;
+            --border-subtle: #1A2F2F;
+            --border-medium: #2A4040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--neutral-black);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Cinema Container */
+        .cinema-container {
+            padding: 100px;
+            min-height: 100vh;
+            background: var(--neutral-black);
+        }
+
+        .cinema-frame {
+            background: var(--neutral-black);
+            border-radius: 30px;
+            box-shadow:
+                0 50px 100px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(0, 206, 209, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            opacity: 0.9;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.5;
+            transition: transform 0.15s ease-out;
+        }
+
+        .cursor.hover {
+            transform: scale(1.5);
+            background: var(--primary-light);
+            opacity: 1;
+        }
+
+        .cursor-follower.hover {
+            transform: scale(1.8);
+            border-color: var(--primary-light);
+            opacity: 0.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Floating Navigation Box */
+        .nav-box {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 1.5rem;
+            z-index: 10002;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-box:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 50px rgba(0, 206, 209, 0.2);
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            position: relative;
+            z-index: 10003;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.4s ease-in-out;
+            position: relative;
+        }
+
+        .hamburger:hover span {
+            background: var(--primary);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 380px;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-subtle);
+            padding: 8rem 3rem 3rem;
+            z-index: 10001;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .nav-menu-links li {
+            border-bottom: 1px solid var(--border-subtle);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.active .nav-menu-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-menu.active .nav-menu-links li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu.active .nav-menu-links li:nth-child(2) { transition-delay: 0.15s; }
+        .nav-menu.active .nav-menu-links li:nth-child(3) { transition-delay: 0.2s; }
+        .nav-menu.active .nav-menu-links li:nth-child(4) { transition-delay: 0.25s; }
+        .nav-menu.active .nav-menu-links li:nth-child(5) { transition-delay: 0.3s; }
+        .nav-menu.active .nav-menu-links li:nth-child(6) { transition-delay: 0.35s; }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+
+        .nav-menu-links a:hover::before {
+            width: 1rem;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo-text .studio {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 20% 25%, rgba(0, 206, 209, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 75%, rgba(32, 178, 170, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 206, 209, 0.12) 0%, transparent 70%),
+                linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 40%, #0D0D0D 100%);
+            padding: 10rem 2rem 6rem;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            50% { filter: hue-rotate(5deg) brightness(1.1); }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(0, 206, 209, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(32, 178, 170, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0, 206, 209, 0.25) 0%, rgba(0, 206, 209, 0.08) 40%, transparent 70%);
+            animation: float 20s ease-in-out infinite, rotate 30s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -55%) scale(1.15); }
+        }
+
+        @keyframes rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .blog-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: revealCard 0.8s ease-out forwards;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 206, 209, 0.15), transparent);
+            transition: left 0.6s ease;
+            z-index: 1;
+        }
+
+        .blog-card:hover::before {
+            left: 100%;
+        }
+
+        .blog-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 206, 209, 0.2), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .blog-card:hover::after {
+            opacity: 1;
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes revealCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card:hover {
+            transform: translateY(-15px) rotateX(3deg) scale(1.03);
+            box-shadow:
+                0 30px 60px rgba(0, 206, 209, 0.5),
+                0 15px 30px rgba(32, 178, 170, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-light);
+        }
+
+        .blog-header {
+            padding: 2rem;
+            background:
+                radial-gradient(circle at 70% 30%, rgba(0, 206, 209, 0.15), transparent 60%),
+                linear-gradient(145deg, rgba(0, 206, 209, 0.12), rgba(32, 178, 170, 0.05));
+            border-bottom: 1px solid rgba(0, 206, 209, 0.2);
+            position: relative;
+            z-index: 2;
+            transition: background 0.6s ease;
+        }
+
+        .blog-card:hover .blog-header {
+            background:
+                radial-gradient(circle at 70% 30%, rgba(0, 206, 209, 0.25), transparent 60%),
+                linear-gradient(145deg, rgba(0, 206, 209, 0.2), rgba(32, 178, 170, 0.1));
+        }
+
+        .blog-date {
+            color: var(--primary-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-card h3:hover {
+            color: var(--primary);
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            background: rgba(0, 206, 209, 0.2);
+            color: var(--primary-light);
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .read-more:hover {
+            gap: 1rem;
+        }
+
+        /* Featured Post */
+        .featured-post {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 206, 209, 0.1), transparent);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-post h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .featured-post .blog-excerpt {
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+        }
+
+        .featured-post .blog-date {
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            text-align: center;
+            margin: 4rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-block;
+            background: white;
+            color: #E26A2C;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--neutral-medium);
+        }
+
+        .footer-quote {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .cinema-container {
+                padding: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower {
+                display: none;
+            }
+
+            .cinema-container {
+                padding: 20px;
+            }
+
+            .cinema-frame {
+                border-radius: 20px;
+            }
+
+            .nav-menu {
+                width: 100%;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .featured-post,
+            .cta-section {
+                padding: 2rem;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Navigation Box -->
+    <div class="nav-box">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <div class="logo-text">
+            <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson Logo" style="height: 40px; margin-bottom: 1rem;">
+            <span class="studio">Bring It On Studios</span>
+        </div>
+        <ul class="nav-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="journey.html">Journey</a></li>
+            <li><a href="webapps.html">Web Apps</a></li>
+            <li><a href="dashboard-new.html">Dashboard</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cinema Container -->
+    <div class="cinema-container">
+        <div class="cinema-frame">
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Ocean Video Background -->
+        <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.4;">
+            <source src="https://cdn.pixabay.com/video/2024/06/06/215484_large.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-content">
+            <div class="hero-icon">📝</div>
+            <h1 class="hero-title">Drift Notes</h1>
+            <p class="hero-subtitle">Raw, unfiltered thoughts on design, technology, creativity, and building things that matter. A collection of essays and insights from my journey as a creative director.</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <div class="blog-section">
+        <!-- Featured Post -->
+        <div class="featured-post">
+            <span class="featured-badge">Featured</span>
+            <div class="blog-date">December 15, 2024</div>
+            <h2>The Future of Design is Human-Centered AI</h2>
+            <p class="blog-excerpt">As AI continues to reshape the creative industry, the most successful designers will be those who can harness technology while maintaining the human touch. Here's why the future belongs to those who blend empathy with innovation.</p>
+            <div class="blog-tags">
+                <span class="blog-tag">AI</span>
+                <span class="blog-tag">Design</span>
+                <span class="blog-tag">Future</span>
+            </div>
+            <a href="#" class="read-more">
+                Read Full Article <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">December 10, 2024</div>
+                    <h3>Building a Personal Brand in the Digital Age</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">Your personal brand is your most valuable asset. In a world where everyone has a voice, authenticity and consistency are what make you stand out. Here's how I built mine from scratch.</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Branding</span>
+                        <span class="blog-tag">Strategy</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">December 5, 2024</div>
+                    <h3>Why Every Designer Should Learn to Code</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">Understanding code doesn't mean you need to be a developer. But knowing how your designs translate to code makes you a more effective designer and opens up new possibilities for innovation.</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Design</span>
+                        <span class="blog-tag">Development</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">November 28, 2024</div>
+                    <h3>The Art of Saying No</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">As creatives, we want to say yes to everything. But learning to say no to the wrong opportunities is how you make space for the right ones. Here's what I've learned about selective focus.</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Productivity</span>
+                        <span class="blog-tag">Focus</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">November 20, 2024</div>
+                    <h3>Designing for Africa: A New Paradigm</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">African design is not just about aesthetics—it's about solving real problems with local context. How can we create digital experiences that truly serve African users?</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Design</span>
+                        <span class="blog-tag">Africa</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">November 15, 2024</div>
+                    <h3>From Side Project to Startup</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">Every great business started as someone's side project. Learn how I turned passion projects into sustainable businesses and the lessons I learned along the way.</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Entrepreneurship</span>
+                        <span class="blog-tag">Business</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-header">
+                    <div class="blog-date">November 10, 2024</div>
+                    <h3>The Power of Constraints in Creativity</h3>
+                </div>
+                <div class="blog-content">
+                    <p class="blog-excerpt">Unlimited freedom can be paralyzing. Sometimes the best creative work comes from working within constraints. Here's how limitations can fuel innovation.</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">Creativity</span>
+                        <span class="blog-tag">Process</span>
+                    </div>
+                    <a href="#" class="read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <h2>Want to collaborate?</h2>
+        <p>Let's create something remarkable together</p>
+        <a href="index.html#contact" class="btn">Get In Touch</a>
+    </div>
+
+    <!-- Footer -->
+    <!-- Modern Ocean Footer -->
+<footer style="position: relative; background: var(--neutral-black); border-top: 1px solid rgba(46, 230, 217, 0.2); overflow: hidden; margin-top: 4rem;">
+    <!-- Ocean Video Background -->
+    <video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.3;">
+        <source src="https://cdn.pixabay.com/video/2024/06/06/215484_large.mp4" type="video/mp4">
+    </video>
+
+    <!-- Dark Overlay -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(15, 43, 46, 0.9) 0%, rgba(10, 15, 15, 0.95) 100%); z-index: 1;"></div>
+
+    <!-- Footer Content -->
+    <div style="position: relative; z-index: 2; padding: 4rem 2rem 2rem; max-width: 1400px; margin: 0 auto;">
+        <!-- Footer Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+            <!-- Brand Column -->
+            <div>
+                <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson" style="height: 50px; margin-bottom: 1.5rem; filter: brightness(1.2);">
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    Building digital experiences that matter. Creative direction, design systems, and AI-powered solutions from Nairobi.
+                </p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(46, 230, 217, 0.1); border: 1px solid rgba(46, 230, 217, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(46, 230, 217, 0.2)'; this.style.borderColor='var(--accent-teal)';" onmouseout="this.style.background='rgba(46, 230, 217, 0.1)'; this.style.borderColor='rgba(46, 230, 217, 0.3)';">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Quick Links</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.75rem;"><a href="index.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Home</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="work.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Work</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="clients.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Clients</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="thoughts.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Thoughts</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="index.html#about" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">About</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Services</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Brand Design</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Web Development</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">AI Solutions</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Creative Direction</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)'; this.style.paddingLeft='8px';" onmouseout="this.style.color='var(--text-secondary)'; this.style.paddingLeft='0';">Design Systems</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600;">Get In Touch</h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-envelope" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <a href="mailto:hello@sirnewson.com" style="color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-secondary)';">hello@sirnewson.com</a>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.95rem;">Nairobi, Kenya</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+                        <i class="fas fa-clock" style="color: var(--accent-teal); margin-top: 3px;"></i>
+                        <span style="color: var(--text-secondary); font-size: 0.95rem;">Mon - Fri: 9AM - 6PM EAT</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div style="border-top: 1px solid rgba(46, 230, 217, 0.15); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+            <p style="color: var(--text-tertiary); font-size: 0.9rem; margin: 0;">
+                &copy; 2025 Sir Newson / Bring It On Studios. All rights reserved.
+            </p>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <a href="#" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Privacy Policy</a>
+                <a href="#" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Terms of Service</a>
+                <a href="admin.html" style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;" onmouseover="this.style.color='var(--accent-teal)';" onmouseout="this.style.color='var(--text-tertiary)';">Admin</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+        </div><!-- Close cinema-frame -->
+    </div><!-- Close cinema-container -->
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        });
+
+        // Cursor hover effects
+        const hoverElements = document.querySelectorAll('a, .btn, .blog-card, .hamburger, .nav-box');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorFollower.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorFollower.classList.remove('hover');
+            });
+        });
+
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Advanced 3D card hover effect with mouse tracking for blog cards
+        const blogCards = document.querySelectorAll('.blog-card');
+        blogCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+
+                // Update CSS custom properties for gradient effect
+                card.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+                card.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+
+                card.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-15px)
+                    scale(1.03)
+                `;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+
+        // Enhanced magnetic button effect
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0) scale(1)';
+            });
+        });
+
+        // Featured post 3D effect
+        const featuredPost = document.querySelector('.featured-post');
+        if (featuredPost) {
+            featuredPost.addEventListener('mousemove', (e) => {
+                const rect = featuredPost.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                featuredPost.style.transform = `
+                    perspective(1000px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    scale(1.01)
+                `;
+            });
+
+            featuredPost.addEventListener('mouseleave', () => {
+                featuredPost.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        }
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+
+            // Parallax for hero content
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+                heroContent.style.opacity = Math.max(1 - scrolled / 500, 0.5);
+            }
+
+            // Parallax for CTA section
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) {
+                const rect = ctaSection.getBoundingClientRect();
+                const scrollPercent = (window.innerHeight - rect.top) / window.innerHeight;
+                if (scrollPercent > 0 && scrollPercent < 1) {
+                    ctaSection.style.transform = `translateY(${scrollPercent * 15}px)`;
+                }
+            }
+        });
+    </script>
+
+    <!-- Ocean Magic Script -->
+    <script src="ocean-magic.js"></script>
+    <script src="hero-3d-effects.js"></script>
+</body>
+</html>

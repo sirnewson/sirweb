@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Sir Newson - Content Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* New Color System from React Sample */
+            --bg: #0C1E1F;
+            --teal: #0F766E;
+            --teal-soft: #134E4A;
+            --orange: #FF7A1A;
+            --orange-soft: #FFB169;
+            --text: #E6F0EF;
+            --mute: #B7C7C4;
+            --bg-dark: #0D1415;
+            --bg-medium: #121A1B;
+            --border-subtle: #1A2F2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-box {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: rgba(18, 26, 27, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--teal);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10002;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(15, 118, 110, 0.3);
+        }
+
+        .nav-box:hover {
+            background: rgba(15, 118, 110, 0.1);
+            box-shadow: 0 0 40px rgba(15, 118, 110, 0.5);
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .hamburger span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--teal);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger span:nth-child(3) { bottom: 0; }
+
+        .nav-box.active .hamburger span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .nav-box.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-box.active .hamburger span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 350px;
+            height: 100vh;
+            background: rgba(10, 15, 15, 0.98);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--teal);
+            z-index: 10001;
+            padding: 100px 40px;
+            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 0 50px rgba(15, 118, 110, 0.2);
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin: 30px 0;
+        }
+
+        .nav-menu a {
+            color: var(--mute);
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-menu a:hover {
+            color: var(--teal);
+            transform: translateX(10px);
+        }
+
+        /* Container */
+        .cinema-container {
+            min-height: 100vh;
+            padding: 100px;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+        }
+
+        /* Header */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .dashboard-header p {
+            font-size: 1.3rem;
+            color: var(--mute);
+            font-weight: 300;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: rgba(18, 26, 27, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--orange) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--teal);
+            box-shadow: 0 20px 40px rgba(15, 118, 110, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--mute);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Content Section */
+        .content-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--teal);
+            position: relative;
+            padding-bottom: 15px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--orange) 100%);
+        }
+
+        /* Form Styles */
+        .upload-form {
+            background: rgba(18, 26, 27, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(10, 15, 15, 0.8);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 20px rgba(15, 118, 110, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--border-subtle);
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: var(--teal);
+            background: rgba(15, 118, 110, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            color: var(--mute);
+            font-size: 1.1rem;
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-soft) 100%);
+            border: none;
+            border-radius: 10px;
+            color: var(--bg);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 122, 26, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(15, 118, 110, 0.2);
+            color: var(--teal);
+            border: 1px solid var(--teal);
+        }
+
+        .btn-secondary:hover {
+            background: var(--teal);
+            color: var(--text);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-subtle);
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: var(--mute);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .tab.active {
+            color: var(--teal);
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal) 0%, var(--orange) 100%);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .notification {
+            position: fixed;
+            top: 120px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--orange) 100%);
+            color: var(--text);
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            z-index: 10003;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 1024px) {
+            .cinema-container {
+                padding: 50px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cinema-container {
+                padding: 30px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-box">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="journey.html">Journey</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="dashboard-new.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Cinema Container -->
+    <div class="cinema-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Content Dashboard</h1>
+            <p>Manage articles, gallery uploads, and website content with Firebase</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Articles</div>
+                <div class="stat-value" id="articleCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Gallery Items</div>
+                <div class="stat-value" id="galleryCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Drift Notes</div>
+                <div class="stat-value" id="driftCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Projects</div>
+                <div class="stat-value" id="projectCount">3</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="gallery">Gallery Upload</button>
+            <button class="tab" data-tab="articles">Articles & Drift</button>
+            <button class="tab" data-tab="manage">Manage Content</button>
+        </div>
+
+        <!-- Gallery Tab -->
+        <div class="tab-content active" id="gallery">
+            <div class="content-section">
+                <h2 class="section-title">Upload New Work to Gallery</h2>
+
+                <form class="upload-form" id="galleryForm">
+                    <div class="form-group">
+                        <label for="workTitle">Work Title *</label>
+                        <input type="text" id="workTitle" placeholder="Project or design name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workCategory">Category *</label>
+                        <select id="workCategory" required>
+                            <option value="branding">Branding</option>
+                            <option value="web">Web Design</option>
+                            <option value="ai">AI Solutions</option>
+                            <option value="3d">3D Design</option>
+                            <option value="youtube">YouTube Design</option>
+                            <option value="billboard">Billboard</option>
+                            <option value="events">Events</option>
+                            <option value="strategy">Strategy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workDescription">Description</label>
+                        <textarea id="workDescription" placeholder="Describe this work"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workTags">Tags (comma-separated)</label>
+                        <input type="text" id="workTags" placeholder="Design, AI, 3D">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workClient">Client</label>
+                        <input type="text" id="workClient" placeholder="Client name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Media (Images or Video) *</label>
+                        <div class="file-upload" onclick="document.getElementById('workMedia').click()">
+                            <div class="file-upload-icon" style="font-size: 3rem; color: var(--teal); margin-bottom: 15px;">🖼️</div>
+                            <div class="file-upload-label">Click to upload images or video</div>
+                            <input type="file" id="workMedia" accept="image/*,video/*" multiple>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" id="gallerySubmitBtn">Add to Gallery</button>
+                    <div id="uploadProgress" style="margin-top: 1rem; display: none;">
+                        <div style="background: rgba(15, 118, 110, 0.2); height: 4px; border-radius: 2px; overflow: hidden;">
+                            <div id="progressBar" style="background: linear-gradient(90deg, #0F766E, #FF7A1A); height: 100%; width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                        <p id="uploadStatus" style="color: var(--mute); font-size: 0.9rem; margin-top: 0.5rem;"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Articles Tab -->
+        <div class="tab-content" id="articles">
+            <div class="content-section">
+                <h2 class="section-title">Upload New Article / Drift Note</h2>
+
+                <form class="upload-form" id="articleForm">
+                    <div class="form-group">
+                        <label for="articleType">Content Type *</label>
+                        <select id="articleType" required>
+                            <option value="article">Article</option>
+                            <option value="drift">Drift Note</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleTitle">Title *</label>
+                        <input type="text" id="articleTitle" placeholder="Enter article title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleExcerpt">Excerpt</label>
+                        <textarea id="articleExcerpt" placeholder="Short description or summary"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleContent">Content *</label>
+                        <textarea id="articleContent" placeholder="Write your article or drift note here..." style="min-height: 300px;" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleTags">Tags (comma-separated)</label>
+                        <input type="text" id="articleTags" placeholder="Design, AI, Strategy">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Featured Image (Optional)</label>
+                        <div class="file-upload" onclick="document.getElementById('articleImage').click()">
+                            <div class="file-upload-icon" style="font-size: 3rem; color: var(--teal); margin-bottom: 15px;">📷</div>
+                            <div class="file-upload-label">Click to upload image</div>
+                            <input type="file" id="articleImage" accept="image/*">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Publish Content</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 15px;" id="saveDraftBtn">Save as Draft</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Manage Content Tab -->
+        <div class="tab-content" id="manage">
+            <div class="content-section">
+                <h2 class="section-title">Manage Published Content</h2>
+                <div id="managementArea">
+                    <p style="color: var(--mute); text-align: center; padding: 3rem;">Loading content...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBlL7EGT8sYKLR-BQLAt0BbjNpw2jCynaA",
+            authDomain: "sirnewson-6f757.firebaseapp.com",
+            projectId: "sirnewson-6f757",
+            storageBucket: "sirnewson-6f757.firebasestorage.app",
+            messagingSenderId: "745333727245",
+            appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
+        };
+
+        // Initialize Firebase
+        try {
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const storage = firebase.storage();
+            const auth = firebase.auth();
+
+            // Set global flag for firebase loaded
+            window.firebaseLoaded = true;
+            window.db = db;
+
+            console.log('✅ Firebase initialized successfully');
+            console.log('📊 Firestore:', db ? 'Ready' : 'Not ready');
+            console.log('📦 Storage:', storage ? 'Ready' : 'Not ready');
+
+            // Test Firestore connection
+            db.collection('test').limit(1).get()
+                .then(() => {
+                    console.log('✅ Firestore connection successful');
+                })
+                .catch(err => {
+                    console.error('❌ Firestore connection failed:', err.message);
+                    if (err.code === 'permission-denied') {
+                        showNotification('⚠️ Please enable Firestore in Firebase Console', 5000);
+                    }
+                });
+
+            // Test Storage connection
+            storage.ref().child('test').getDownloadURL()
+                .catch(err => {
+                    if (err.code === 'storage/object-not-found') {
+                        console.log('✅ Storage connection successful');
+                    } else {
+                        console.error('❌ Storage error:', err.message);
+                        if (err.code === 'storage/unauthorized') {
+                            showNotification('⚠️ Please enable Storage in Firebase Console', 5000);
+                        }
+                    }
+                });
+
+        } catch (error) {
+            console.error('❌ Firebase initialization failed:', error);
+            showNotification('❌ Firebase setup error. Check console.', 5000);
+        }
+
+        // Navigation Toggle
+        const navBox = document.querySelector('.nav-box');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navBox.addEventListener('click', () => {
+            navBox.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !navBox.contains(e.target) && navMenu.classList.contains('active')) {
+                navBox.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Tabs Functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Notification System
+        function showNotification(message, duration = 3000) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, duration);
+        }
+
+        // Gallery Form Submission
+        document.getElementById('galleryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('workTitle').value;
+            const category = document.getElementById('workCategory').value;
+            const description = document.getElementById('workDescription').value;
+            const tags = document.getElementById('workTags').value.split(',').map(t => t.trim()).filter(t => t);
+            const client = document.getElementById('workClient').value;
+            const files = document.getElementById('workMedia').files;
+
+            if (files.length === 0) {
+                showNotification('⚠️ Please select at least one file');
+                return;
+            }
+
+            const submitBtn = document.getElementById('gallerySubmitBtn');
+            const progressDiv = document.getElementById('uploadProgress');
+            const progressBar = document.getElementById('progressBar');
+            const uploadStatus = document.getElementById('uploadStatus');
+
+            try {
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Uploading...';
+                progressDiv.style.display = 'block';
+                progressBar.style.width = '10%';
+                uploadStatus.textContent = 'Preparing upload...';
+
+                showNotification('📤 Uploading to Firebase...');
+                console.log('Starting upload...', { title, category, fileCount: files.length });
+
+                // Upload files to Firebase Storage
+                progressBar.style.width = '30%';
+                uploadStatus.textContent = `Uploading ${files.length} file(s)...`;
+
+                const uploadPromises = Array.from(files).map(async (file, index) => {
+                    console.log('Uploading file:', file.name);
+                    const storageRef = storage.ref(`gallery/${Date.now()}_${file.name}`);
+                    const snapshot = await storageRef.put(file);
+                    const url = await snapshot.ref.getDownloadURL();
+                    console.log('File uploaded:', url);
+                    progressBar.style.width = `${30 + (index + 1) * (40 / files.length)}%`;
+                    return url;
+                });
+
+                const urls = await Promise.all(uploadPromises);
+                console.log('All files uploaded:', urls);
+
+                // Save to Firestore
+                progressBar.style.width = '80%';
+                uploadStatus.textContent = 'Saving to database...';
+
+                const docRef = await db.collection('gallery').add({
+                    title,
+                    category,
+                    description,
+                    tags,
+                    client,
+                    url: urls[0],
+                    urls: urls,
+                    type: files[0].type.startsWith('video/') ? 'video' : 'image',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+
+                console.log('Document saved with ID:', docRef.id);
+                progressBar.style.width = '100%';
+                uploadStatus.textContent = 'Upload complete!';
+
+                setTimeout(() => {
+                    showNotification('✅ Gallery item uploaded successfully!');
+                    e.target.reset();
+                    document.querySelector('.file-upload-label').textContent = 'Click to upload images or video';
+                    updateStats();
+
+                    // Reset UI
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Add to Gallery';
+                    progressDiv.style.display = 'none';
+                    progressBar.style.width = '0%';
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error uploading to Firebase:', error);
+                showNotification('❌ Error: ' + error.message);
+                uploadStatus.textContent = 'Error: ' + error.message;
+                progressBar.style.width = '0%';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Add to Gallery';
+
+                setTimeout(() => {
+                    progressDiv.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Article Form Submission
+        document.getElementById('articleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const type = document.getElementById('articleType').value;
+            const title = document.getElementById('articleTitle').value;
+            const excerpt = document.getElementById('articleExcerpt').value;
+            const content = document.getElementById('articleContent').value;
+            const tags = document.getElementById('articleTags').value.split(',').map(t => t.trim()).filter(t => t);
+            const imageFile = document.getElementById('articleImage').files[0];
+
+            try {
+                showNotification('📝 Publishing content...');
+                console.log('Publishing article/drift note...', { type, title });
+
+                let imageUrl = '';
+                if (imageFile) {
+                    console.log('Uploading article image:', imageFile.name);
+                    const storageRef = storage.ref(`articles/${Date.now()}_${imageFile.name}`);
+                    const snapshot = await storageRef.put(imageFile);
+                    imageUrl = await snapshot.ref.getDownloadURL();
+                    console.log('Article image uploaded:', imageUrl);
+                }
+
+                const collectionName = type === 'drift' ? 'driftNotes' : 'articles';
+                const docRef = await db.collection(collectionName).add({
+                    title,
+                    excerpt,
+                    content,
+                    tags,
+                    imageUrl,
+                    type,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    published: true
+                });
+
+                console.log('Article/drift note saved with ID:', docRef.id);
+                showNotification(`✅ ${type === 'drift' ? 'Drift Note' : 'Article'} published successfully!`);
+                e.target.reset();
+                if (imageFile) {
+                    document.querySelectorAll('.file-upload-label')[1].textContent = 'Click to upload image';
+                }
+                updateStats();
+            } catch (error) {
+                console.error('Error publishing:', error);
+                showNotification('❌ Error: ' + error.message);
+            }
+        });
+
+        // Update Stats
+        async function updateStats() {
+            try {
+                console.log('Updating stats...');
+                const articlesSnap = await db.collection('articles').get();
+                const gallerySnap = await db.collection('gallery').get();
+                const driftSnap = await db.collection('driftNotes').get();
+
+                document.getElementById('articleCount').textContent = articlesSnap.size;
+                document.getElementById('galleryCount').textContent = gallerySnap.size;
+                document.getElementById('driftCount').textContent = driftSnap.size;
+
+                console.log('Stats updated:', {
+                    articles: articlesSnap.size,
+                    gallery: gallerySnap.size,
+                    driftNotes: driftSnap.size
+                });
+            } catch (error) {
+                console.error('Error updating stats:', error);
+            }
+        }
+
+        // Load stats on page load
+        updateStats();
+
+        // File upload preview
+        document.getElementById('workMedia').addEventListener('change', function(e) {
+            const fileCount = e.target.files.length;
+            if (fileCount > 0) {
+                this.parentElement.querySelector('.file-upload-label').textContent = `${fileCount} file(s) selected`;
+            }
+        });
+
+        document.getElementById('articleImage').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name;
+            if (fileName) {
+                this.parentElement.querySelector('.file-upload-label').textContent = fileName;
+            }
+        });
+    </script>
+</body>
+</html>

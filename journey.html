@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey | Sir Newson - Creative Director</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #E26A2C;
+            --primary-light: #FF6F61;
+            --primary-dark: #D65A1C;
+            --accent-teal: #2EE6D9;
+            --accent-purple: #A259FF;
+            --accent-playful: #C9F227;
+            --neutral-black: #0A0F0F;
+            --neutral-dark: #0D1415;
+            --neutral-medium: #121A1B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0B0B0;
+            --text-tertiary: #6B7B7B;
+            --border-subtle: #1A2F2F;
+            --border-medium: #2A4040;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--neutral-black);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            mix-blend-mode: difference;
+            opacity: 0.9;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            opacity: 0.5;
+            transition: transform 0.15s ease-out;
+        }
+
+        .cursor.hover {
+            transform: scale(1.5);
+            background: var(--primary-light);
+            opacity: 1;
+        }
+
+        .cursor-follower.hover {
+            transform: scale(1.8);
+            border-color: var(--primary-light);
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .nav-box {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 1.5rem;
+            z-index: 10002;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-box:hover {
+            border-color: var(--primary);
+            box-shadow: 0 15px 50px rgba(46, 230, 217, 0.2);
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            position: relative;
+            z-index: 10003;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.4s ease-in-out;
+            position: relative;
+        }
+
+        .hamburger:hover span {
+            background: var(--primary);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-135deg);
+            position: absolute;
+            top: 9px;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 380px;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-subtle);
+            padding: 8rem 3rem 3rem;
+            z-index: 10001;
+            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo-text .studio {
+            color: var(--primary);
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .nav-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .nav-menu-links li {
+            border-bottom: 1px solid var(--border-subtle);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu.active .nav-menu-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-menu.active .nav-menu-links li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu.active .nav-menu-links li:nth-child(2) { transition-delay: 0.15s; }
+        .nav-menu.active .nav-menu-links li:nth-child(3) { transition-delay: 0.2s; }
+        .nav-menu.active .nav-menu-links li:nth-child(4) { transition-delay: 0.25s; }
+        .nav-menu.active .nav-menu-links li:nth-child(5) { transition-delay: 0.3s; }
+        .nav-menu.active .nav-menu-links li:nth-child(6) { transition-delay: 0.35s; }
+        .nav-menu.active .nav-menu-links li:nth-child(7) { transition-delay: 0.4s; }
+        .nav-menu.active .nav-menu-links li:nth-child(8) { transition-delay: 0.45s; }
+        .nav-menu.active .nav-menu-links li:nth-child(9) { transition-delay: 0.5s; }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 500;
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+
+        .nav-menu-links a:hover::before {
+            width: 1rem;
+        }
+
+        /* Cinema Container */
+        .cinema-container {
+            padding: 100px;
+            min-height: 100vh;
+            background: var(--neutral-black);
+        }
+
+        .cinema-frame {
+            background: var(--neutral-black);
+            border-radius: 30px;
+            box-shadow:
+                0 50px 100px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(46, 230, 217, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+            padding: 4rem 2rem;
+        }
+
+        /* Header */
+        .journey-header {
+            text-align: center;
+            margin-bottom: 100px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .journey-header h1 {
+            font-size: 5rem;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .journey-header p {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 300;
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 0;
+        }
+
+        /* Timeline Line */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                #2EE6D9 10%,
+                #2EE6D9 90%,
+                transparent 100%
+            );
+            transform: translateX(-50%);
+            overflow: hidden;
+        }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(46, 230, 217, 0.8) 50%,
+                transparent 100%
+            );
+            animation: timelineGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes timelineGlow {
+            0%, 100% { top: -100%; }
+            50% { top: 100%; }
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+            position: relative;
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline Item Left */
+        .timeline-item.left .timeline-content {
+            margin-right: 55%;
+            text-align: right;
+        }
+
+        /* Timeline Item Right */
+        .timeline-item.right .timeline-content {
+            margin-left: 55%;
+            text-align: left;
+        }
+
+        /* Timeline Dot */
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #E26A2C, #2EE6D9);
+            border: 5px solid var(--neutral-black);
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(46, 230, 217, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 40px rgba(46, 230, 217, 0.9);
+        }
+
+        /* Timeline Content */
+        .timeline-content {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(46, 230, 217, 0.15);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            background: rgba(18, 18, 18, 0.8);
+            border-color: var(--accent-teal);
+            box-shadow: 0 20px 60px rgba(46, 230, 217, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .timeline-year {
+            display: inline-block;
+            background: linear-gradient(135deg, #E26A2C 0%, #FF6F61 50%, #2EE6D9 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timeline-content h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .timeline-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .timeline-item.left .timeline-tags {
+            justify-content: flex-end;
+        }
+
+        .timeline-tag {
+            background: rgba(46, 230, 217, 0.1);
+            border: 1px solid rgba(46, 230, 217, 0.3);
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-tag:hover {
+            background: rgba(46, 230, 217, 0.2);
+            border-color: var(--accent-teal);
+        }
+
+        /* Image Placeholder */
+        .timeline-image {
+            width: 100%;
+            height: 300px;
+            background: rgba(46, 230, 217, 0.05);
+            border: 2px dashed rgba(46, 230, 217, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .timeline-image:hover {
+            border-color: var(--accent-teal);
+            background: rgba(46, 230, 217, 0.1);
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .timeline-image.has-image img {
+            display: block;
+        }
+
+        .timeline-image.has-image::before {
+            display: none;
+        }
+
+        .timeline-image::before {
+            content: 'Image Placeholder';
+            color: rgba(46, 230, 217, 0.4);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cinema-container {
+                padding: 50px;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-item.left .timeline-content,
+            .timeline-item.right .timeline-content {
+                margin-left: 80px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item.left .timeline-tags {
+                justify-content: flex-start;
+            }
+
+            .journey-header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cinema-container {
+                padding: 30px;
+            }
+
+            .journey-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .journey-header p {
+                font-size: 1.2rem;
+            }
+
+            .timeline-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .timeline-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <div class="nav-box">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <nav class="nav-menu">
+        <div class="logo-text">
+            <img src="https://static.wixstatic.com/media/3fe310_c65407ca100d47cbbdd9c5226611b8ec~mv2.png/v1/crop/x_3,y_0,w_408,h_272/fill/w_106,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%204.png" alt="Sir Newson Logo" style="height: 40px; margin-bottom: 1rem;">
+            <span class="studio">Bring It On Studios</span>
+        </div>
+        <ul class="nav-menu-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="clients.html">Clients</a></li>
+            <li><a href="thoughts.html">Thoughts</a></li>
+            <li><a href="journey.html">Journey</a></li>
+            <li><a href="webapps.html">Web Apps</a></li>
+            <li><a href="dashboard-new.html">Dashboard</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Cinema Container -->
+    <div class="cinema-container">
+        <div class="cinema-frame">
+        <!-- Header -->
+        <div class="journey-header">
+            <h1>The Journey</h1>
+            <p>From social media manager to creative director</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <!-- 2020 -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2020</span>
+                    <h3>The Beginning</h3>
+                    <p>Started the creative journey working with Desagu and various social media brands, building a foundation in digital content creation and brand storytelling.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="2020"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Social Media</span>
+                        <span class="timeline-tag">Desagu</span>
+                        <span class="timeline-tag">Content Creation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2021 - Evonte Studios -->
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2021 January</span>
+                    <h3>Evonte Studios Launched</h3>
+                    <p>Founded Evonte Studios, marking a new chapter in professional branding and social media management. Transformed from freelancer to studio owner, offering comprehensive creative solutions.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Evonte Studios"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Evonte Studios</span>
+                        <span class="timeline-tag">Branding</span>
+                        <span class="timeline-tag">Social Media</span>
+                        <span class="timeline-tag">Studio Owner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022 - YouTube Thumbnails -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2022</span>
+                    <h3>YouTube Revolution</h3>
+                    <p>Ventured into YouTube thumbnail design, mastering the art of creating scroll-stopping visuals that drive clicks and views. This became a signature service.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="YouTube Thumbnails"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">YouTube</span>
+                        <span class="timeline-tag">Thumbnails</span>
+                        <span class="timeline-tag">Visual Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events & Big Brands -->
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2022-2023</span>
+                    <h3>Events & Major Brands</h3>
+                    <p>Designed and executed visuals for numerous high-profile events across Kenya. Collaborated with major brands, bringing creative visions to life through innovative design solutions.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Events"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Events</span>
+                        <span class="timeline-tag">Brand Collaborations</span>
+                        <span class="timeline-tag">Live Production</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Billboards -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2023</span>
+                    <h3>Billboards Across Town</h3>
+                    <p>Designed multiple billboards that now stand across Nairobi, taking creativity from digital screens to the streets. Large-scale design that reaches thousands daily.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Billboards"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Billboard Design</span>
+                        <span class="timeline-tag">Outdoor Advertising</span>
+                        <span class="timeline-tag">Large Format</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TTNT -->
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">2023-Present</span>
+                    <h3>The Trenches (TTNT)</h3>
+                    <p>Part of the visual team behind TTNT from Season 3 onwards. Contributing to one of Kenya's most popular web series with compelling visual storytelling.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="TTNT"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">TTNT</span>
+                        <span class="timeline-tag">Web Series</span>
+                        <span class="timeline-tag">Visual Design</span>
+                        <span class="timeline-tag">Production</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Abel Mutua -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">Present</span>
+                    <h3>Abel Mutua - Graphic Designer</h3>
+                    <p>Graphic designer for Abel Mutua, the biggest growing YouTube channel in Kenya. Crafting visuals that engage millions of viewers and contribute to rapid channel growth.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Abel Mutua"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Abel Mutua</span>
+                        <span class="timeline-tag">YouTube</span>
+                        <span class="timeline-tag">Graphic Design</span>
+                        <span class="timeline-tag">Content Creator</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phil It Production -->
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">Present</span>
+                    <h3>Phil It - Production Team</h3>
+                    <p>Key member of the Phil It production team, contributing creative direction and visual design to one of Kenya's leading content creation houses.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Phil It"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Phil It</span>
+                        <span class="timeline-tag">Production</span>
+                        <span class="timeline-tag">Team Collaboration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tenacity Locks -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">Present</span>
+                    <h3>Tenacity Locks - Social Media Manager</h3>
+                    <p>Managing social media strategy and content for Tenacity Locks, building brand presence and community engagement across digital platforms.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="Tenacity Locks"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Tenacity Locks</span>
+                        <span class="timeline-tag">Social Media Manager</span>
+                        <span class="timeline-tag">Brand Strategy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PhonePlace Kenya -->
+            <div class="timeline-item right">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">Present</span>
+                    <h3>PhonePlace Kenya - Creative Director</h3>
+                    <p>Leading creative direction for PhonePlace Kenya, one of the country's premier tech retailers. Developing comprehensive brand identity and marketing campaigns.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="PhonePlace"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">PhonePlace Kenya</span>
+                        <span class="timeline-tag">Creative Director</span>
+                        <span class="timeline-tag">Brand Identity</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YouTube Channels Creative Director -->
+            <div class="timeline-item left">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-year">Present</span>
+                    <h3>YouTube Creative Director</h3>
+                    <p>Creative director behind multiple successful YouTube channels including Celestine Ndinda, Judy Nyawira, and Phil It. Shaping visual identity and content strategy that drives millions of views.</p>
+                    <div class="timeline-image">
+                        <!-- Add image here: <img src="your-image.jpg" alt="YouTube Channels"> -->
+                    </div>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Celestine Ndinda</span>
+                        <span class="timeline-tag">Judy Nyawira</span>
+                        <span class="timeline-tag">Phil It</span>
+                        <span class="timeline-tag">Creative Direction</span>
+                        <span class="timeline-tag">YouTube</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div><!-- Close cinema-frame -->
+    </div><!-- Close cinema-container -->
+
+    <!-- Ocean Magic Script -->
+    <script src="ocean-magic.js"></script>
+    <script src="hero-3d-effects.js"></script>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+
+        // Hover effect on interactive elements
+        const interactives = document.querySelectorAll('a, .nav-box, .timeline-content, .timeline-tag');
+        interactives.forEach(item => {
+            item.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            item.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !hamburger.parentElement.contains(e.target) && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Scroll Animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+
+        // Prevent cursor on touch devices
+        if ('ontouchstart' in window) {
+            cursor.style.display = 'none';
+            follower.style.display = 'none';
+            document.body.style.cursor = 'auto';
+        }
+    </script>
+</body>
+</html>
