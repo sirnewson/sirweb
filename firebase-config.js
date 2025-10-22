@@ -15,7 +15,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBlL7EGT8sYKLR-BQLAt0BbjNpw2jCynaA",
   authDomain: "sirnewson-6f757.firebaseapp.com",
   projectId: "sirnewson-6f757",
-  storageBucket: "sirnewson-6f757.firebasestorage.app",
+  storageBucket: "sirnewson-6f757.appspot.com",
   messagingSenderId: "745333727245",
   appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
 };
