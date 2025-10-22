@@ -1008,84 +1008,88 @@
         }
 
         .service-card {
-            background: transparent;
-            min-height: 320px;
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+            min-height: 420px;
             height: 100%;
-            perspective: 1500px;
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUpStagger 0.8s ease-out forwards;
             position: relative;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
-        .service-card-inner::before {
+        .service-card::before {
             content: '';
             position: absolute;
             top: -2px;
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: transparent;
-            border-radius: 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 27px;
             opacity: 0;
             transition: opacity 0.5s ease;
             z-index: -1;
         }
 
-        .service-card-inner.flipped::before {
+        .service-card:hover::before {
             opacity: 1;
         }
 
-        @media (max-width: 768px) {
-            .service-card {
-                min-height: 380px;
-            }
-        }
-
-        .service-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-
-        .service-card-front,
-        .service-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 25px;
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: rgba(18, 18, 18, 0.6);
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .service-card-front {
-            background: rgba(18, 18, 18, 0.6);
-        }
-
-        .service-card-back {
-            background: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(25px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transform: rotateY(180deg);
-        }
-
-        .service-card:hover .service-card-front,
-        .service-card:hover .service-card-back {
+        .service-card:hover {
             box-shadow:
                 0 30px 60px rgba(255, 255, 255, 0.1),
                 0 15px 25px rgba(255, 255, 255, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                min-height: 450px;
+                padding: 2rem;
+            }
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .service-list li {
+            color: var(--text-secondary);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-list li:hover {
+            color: var(--text-primary);
+            padding-left: 0.5rem;
+        }
+
+        .service-list li:before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-list li:hover:before {
+            transform: translateX(3px);
         }
 
         .service-card:nth-child(1) { animation-delay: 0.1s; }
@@ -1121,148 +1125,17 @@
 
         .service-card h3 {
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
         }
 
         .service-card p {
             color: var(--text-secondary);
             line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
         }
 
-        .service-card-back h3 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-card-back ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .service-card-back li {
-            color: var(--text-primary);
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .service-card-back li:before {
-            content: '→';
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        /* Animated Maze Lines Background */
-        .maze-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.15;
-            overflow: hidden;
-        }
-
-        .maze-line {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-
-        .maze-line.horizontal {
-            height: 2px;
-            width: 100%;
-            left: -100%;
-            animation-name: slideRight;
-        }
-
-        .maze-line.vertical {
-            width: 2px;
-            height: 100%;
-            top: -100%;
-            animation-name: slideDown;
-        }
-
-        .maze-line.diagonal {
-            width: 2px;
-            height: 150%;
-            transform: rotate(45deg);
-            left: -20%;
-            top: -20%;
-            animation-name: slideDiagonal;
-        }
-
-        @keyframes slideRight {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        @keyframes slideDown {
-            0% { top: -100%; }
-            100% { top: 100%; }
-        }
-
-        @keyframes slideDiagonal {
-            0% {
-                left: -30%;
-                top: -30%;
-            }
-            100% {
-                left: 130%;
-                top: 130%;
-            }
-        }
-
-        /* Floating Characters */
-        .floating-chars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .floating-char {
-            position: absolute;
-            font-family: 'Space Grotesk', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.15;
-            }
-            50% {
-                transform: translateY(-100vh) translateX(50px) rotate(180deg);
-                opacity: 0.15;
-            }
-            90% {
-                opacity: 0.15;
-            }
-            100% {
-                transform: translateY(-200vh) translateX(-30px) rotate(360deg);
-                opacity: 0;
-            }
-        }
 
         /* Enhanced glow effects */
         @keyframes glow {
@@ -1915,12 +1788,6 @@
     </style>
 </head>
 <body>
-    <!-- Animated Maze Lines Background -->
-    <div class="maze-lines" id="maze-lines"></div>
-
-    <!-- Floating Characters -->
-    <div class="floating-chars" id="floating-chars"></div>
-
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -2062,124 +1929,81 @@
 
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-                        <div class="service-icon"><i class="fas fa-robot"></i></div>
-                        <h3>AI-Powered Creative Solutions</h3>
-                        <p>Harnessing the power of artificial intelligence to streamline creativity, automate workflows, and unlock new levels of innovation.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>AI Solutions Include:</h3>
-                        <ul>
-                            <li>AI Content Generation</li>
-                            <li>Automated Design Workflows</li>
-                            <li>Smart Image Processing</li>
-                            <li>Predictive Analytics</li>
-                            <li>Custom AI Integrations</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-robot"></i></div>
+                <h3>AI-Powered Creative Solutions</h3>
+                <p>Harnessing artificial intelligence to streamline creativity and unlock innovation.</p>
+                <ul class="service-list">
+                    <li>AI Content Generation</li>
+                    <li>Automated Design Workflows</li>
+                    <li>Smart Image Processing</li>
+                    <li>Predictive Analytics</li>
+                    <li>Custom AI Integrations</li>
+                </ul>
             </div>
 
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-                        <div class="service-icon"><i class="fas fa-cube"></i></div>
-                        <h3>3D Design & Visualization</h3>
-                        <p>Transforming imagination into photorealistic detail. From products to environments, I craft immersive 3D experiences that make ideas tangible.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>3D Services Include:</h3>
-                        <ul>
-                            <li>Product Visualization</li>
-                            <li>Architectural Renders</li>
-                            <li>Character Design</li>
-                            <li>Motion Graphics</li>
-                            <li>VR/AR Experiences</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-cube"></i></div>
+                <h3>3D Design & Visualization</h3>
+                <p>Transforming imagination into photorealistic detail with immersive 3D experiences.</p>
+                <ul class="service-list">
+                    <li>Product Visualization</li>
+                    <li>Architectural Renders</li>
+                    <li>Character Design</li>
+                    <li>Motion Graphics</li>
+                    <li>VR/AR Experiences</li>
+                </ul>
             </div>
 
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-                        <div class="service-icon"><i class="fas fa-palette"></i></div>
-                        <h3>Brand Architecture & Strategy</h3>
-                        <p>Designing future-ready brands that resonate. I build complete brand ecosystems — from visual identity to full-scale brand systems and guidelines.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>Branding Services Include:</h3>
-                        <ul>
-                            <li>Logo & Identity Design</li>
-                            <li>Brand Strategy</li>
-                            <li>Style Guides</li>
-                            <li>Marketing Collateral</li>
-                            <li>Brand Evolution & Identity Systems</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-palette"></i></div>
+                <h3>Brand Architecture & Strategy</h3>
+                <p>Building complete brand ecosystems from visual identity to full-scale systems.</p>
+                <ul class="service-list">
+                    <li>Logo & Identity Design</li>
+                    <li>Brand Strategy</li>
+                    <li>Style Guides</li>
+                    <li>Marketing Collateral</li>
+                    <li>Brand Evolution Systems</li>
+                </ul>
             </div>
 
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-                        <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-                        <h3>Digital Experience Design</h3>
-                        <p>Creating intuitive, beautiful digital interfaces that users remember. Websites and apps designed with intention — blending usability, emotion, and conversion.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>Digital Design Includes:</h3>
-                        <ul>
-                            <li>UI/UX Design</li>
-                            <li>Web Development</li>
-                            <li>Mobile App Design</li>
-                            <li>Prototyping</li>
-                            <li>User Testing</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Digital Experience Design</h3>
+                <p>Creating intuitive, beautiful interfaces that blend usability, emotion, and conversion.</p>
+                <ul class="service-list">
+                    <li>UI/UX Design</li>
+                    <li>Web Development</li>
+                    <li>Mobile App Design</li>
+                    <li>Prototyping</li>
+                    <li>User Testing</li>
+                </ul>
             </div>
 
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-                        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
-                        <h3>Creative Direction</h3>
-                        <p>Leading your creative vision from concept to execution. Campaign strategy, content creation, and visual storytelling that captivates.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>Creative Services:</h3>
-                        <ul>
-                            <li>Campaign Strategy</li>
-                            <li>Art Direction</li>
-                            <li>Content Creation</li>
-                            <li>Visual Storytelling</li>
-                            <li>Creative Consulting</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Creative Direction</h3>
+                <p>Leading creative vision from concept to execution with strategic storytelling.</p>
+                <ul class="service-list">
+                    <li>Campaign Strategy</li>
+                    <li>Art Direction</li>
+                    <li>Content Creation</li>
+                    <li>Visual Storytelling</li>
+                    <li>Creative Consulting</li>
+                </ul>
             </div>
 
             <div class="service-card">
-                <div class="service-card-inner">
-                    <div class="service-card-front">
-
-                        <div class="service-icon"><i class="fas fa-rocket"></i></div>
-                        <h3>Digital Transformation</h3>
-                        <p>Strategic guidance for businesses embracing the future. AI integration, process automation, and innovative digital solutions.</p>
-                    </div>
-                    <div class="service-card-back">
-                        <h3>Transformation:</h3>
-                        <ul>
-                            <li>AI Integration</li>
-                            <li>Process Automation</li>
-                            <li>Digital Strategy</li>
-                            <li>Tech Consulting</li>
-                            <li>Innovation Workshops</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Digital Transformation</h3>
+                <p>Strategic guidance for businesses embracing AI integration and digital innovation.</p>
+                <ul class="service-list">
+                    <li>AI Integration</li>
+                    <li>Process Automation</li>
+                    <li>Digital Strategy</li>
+                    <li>Tech Consulting</li>
+                    <li>Innovation Workshops</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -3299,80 +3123,6 @@
             });
         });
 
-        // Generate Animated Maze Lines
-        function createMazeLines() {
-            const mazeContainer = document.getElementById('maze-lines');
-            const lineCount = 20;
-
-            for (let i = 0; i < lineCount; i++) {
-                const line = document.createElement('div');
-                line.className = 'maze-line';
-
-                // Random type: horizontal, vertical, or diagonal
-                const types = ['horizontal', 'vertical', 'diagonal'];
-                const type = types[Math.floor(Math.random() * types.length)];
-                line.classList.add(type);
-
-                // Random positioning
-                if (type === 'horizontal') {
-                    line.style.top = Math.random() * 100 + '%';
-                    line.style.animationDuration = (Math.random() * 10 + 8) + 's';
-                    line.style.animationDelay = Math.random() * 5 + 's';
-                } else if (type === 'vertical') {
-                    line.style.left = Math.random() * 100 + '%';
-                    line.style.animationDuration = (Math.random() * 10 + 8) + 's';
-                    line.style.animationDelay = Math.random() * 5 + 's';
-                } else {
-                    line.style.animationDuration = (Math.random() * 15 + 15) + 's';
-                    line.style.animationDelay = Math.random() * 8 + 's';
-                }
-
-                // Random opacity variation
-                line.style.opacity = Math.random() * 0.3 + 0.1;
-
-                mazeContainer.appendChild(line);
-            }
-        }
-
-        // Generate Floating Characters
-        function createFloatingChars() {
-            const charsContainer = document.getElementById('floating-chars');
-            const characters = ['<', '>', '{', '}', '[', ']', '/', '*', '+', '-', '=', '&', '#', '@', '$', '0', '1', 'A', 'B', 'C', 'D', 'E', 'F'];
-            const charCount = 40;
-
-            for (let i = 0; i < charCount; i++) {
-                const char = document.createElement('div');
-                char.className = 'floating-char';
-                char.textContent = characters[Math.floor(Math.random() * characters.length)];
-
-                // Random horizontal position
-                char.style.left = Math.random() * 100 + '%';
-
-                // Random starting vertical position
-                char.style.top = Math.random() * 150 + 50 + '%';
-
-                // Random size variation
-                const size = Math.random() * 2 + 1;
-                char.style.fontSize = size + 'rem';
-
-                // Random animation duration
-                char.style.animationDuration = (Math.random() * 15 + 15) + 's';
-
-                // Random delay
-                char.style.animationDelay = Math.random() * 10 + 's';
-
-                // Random opacity
-                char.style.opacity = Math.random() * 0.2 + 0.05;
-
-                charsContainer.appendChild(char);
-            }
-        }
-
-        // Initialize on page load
-        window.addEventListener('load', () => {
-            createMazeLines();
-            createFloatingChars();
-        });
 
         // Add glow effect to buttons
         document.querySelectorAll('.btn-primary').forEach(btn => {
@@ -3587,19 +3337,6 @@
             initSphereText();
         }
 
-        // Make service cards flip on click instead of hover
-        document.querySelectorAll('.service-card').forEach(card => {
-            let isFlipped = false;
-            card.addEventListener('click', function() {
-                const inner = this.querySelector('.service-card-inner');
-                if (isFlipped) {
-                    inner.style.transform = 'rotateY(0deg)';
-                } else {
-                    inner.style.transform = 'rotateY(180deg)';
-                }
-                isFlipped = !isFlipped;
-            });
-        });
     </script>
 
     <!-- Include Floating Buttons -->
