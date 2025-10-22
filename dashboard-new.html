@@ -752,15 +752,46 @@
                 uploadStatus.textContent = `Uploading ${files.length} file(s)...`;
 
                 const uploadPromises = Array.from(files).map(async (file, index) => {
-                    console.log('Uploading file:', file.name);
-                    const storageRef = storage.ref(`gallery/${Date.now()}_${file.name}`);
-                    const snapshot = await storageRef.put(file);
-                    const url = await snapshot.ref.getDownloadURL();
-                    console.log('File uploaded:', url);
-                    progressBar.style.width = `${30 + (index + 1) * (40 / files.length)}%`;
-                    return url;
+                    try {
+                        console.log('Uploading file:', file.name, 'Size:', file.size, 'bytes');
+
+                        // Check if storage is initialized
+                        if (!storage) {
+                            throw new Error('Firebase Storage not initialized');
+                        }
+
+                        const storageRef = storage.ref(`gallery/${Date.now()}_${file.name}`);
+                        console.log('Storage ref created:', storageRef.fullPath);
+
+                        // Upload with progress monitoring
+                        const uploadTask = storageRef.put(file);
+
+                        uploadTask.on('state_changed',
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                console.log(`Upload ${index + 1} is ${progress.toFixed(1)}% done`);
+                            },
+                            (error) => {
+                                console.error('Upload error:', error);
+                                throw error;
+                            }
+                        );
+
+                        const snapshot = await uploadTask;
+                        console.log('Upload complete, getting URL...');
+
+                        const url = await snapshot.ref.getDownloadURL();
+                        console.log('File uploaded successfully:', url);
+
+                        progressBar.style.width = `${30 + (index + 1) * (40 / files.length)}%`;
+                        return url;
+                    } catch (error) {
+                        console.error('Error uploading file:', file.name, error);
+                        throw new Error(`Failed to upload ${file.name}: ${error.message}`);
+                    }
                 });
 
+                console.log('Waiting for all uploads...');
                 const urls = await Promise.all(uploadPromises);
                 console.log('All files uploaded:', urls);
 
