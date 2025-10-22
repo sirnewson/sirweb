@@ -628,12 +628,14 @@
             appId: "1:745333727245:web:f4a5f40b9ae4e05eb93544"
         };
 
-        // Initialize Firebase
+        // Initialize Firebase - Declare variables globally
+        let db, storage, auth;
+
         try {
             firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-            const storage = firebase.storage();
-            const auth = firebase.auth();
+            db = firebase.firestore();
+            storage = firebase.storage();
+            auth = firebase.auth();
 
             // Set global flag for firebase loaded
             window.firebaseLoaded = true;
