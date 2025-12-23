@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  /* Neon / LED Palette */
+  --color-primary: #BFFF00;
+  /* Lime Neon */
+  --color-secondary: #7000FF;
+  /* Purple Neon */
+  --color-accent: #FF0055;
+  /* Pink Neon */
+  --color-warning: #FFD600;
+  /* Yellow Neon */
+
+  --color-neutral-black: #050505;
+  --color-neutral-dark: #0A0A0A;
+  --color-neutral-medium: #151515;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+
+  --animate-gradient-x: gradient-x 3s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes gradient-x {
+
+    0%,
+    100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 20px var(--color-primary);
+    }
+
+    50% {
+      opacity: 0.5;
+      box-shadow: 0 0 10px var(--color-primary);
+    }
+  }
+}
+
+/* Custom base styles */
+body {
+  @apply bg-neutral-black text-white font-sans antialiased overflow-x-hidden;
+  background-image:
+    radial-gradient(circle at 15% 50%, #7000FF0D, transparent 25%),
+    radial-gradient(circle at 85% 30%, #BFFF000D, transparent 25%);
+}
+
+/* Fluid Card Utility */
+.fluid-card {
+  @apply relative overflow-hidden bg-neutral-medium/50 backdrop-blur-xl border border-white/10 transition-all duration-500;
+  border-radius: 20px;
+}
+
+.fluid-card:hover {
+  @apply border-primary/50 shadow-[0_0_30px_#BFFF0033];
+  transform: translateY(-5px);
+}
+
+/* Neon Text */
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-black;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-medium rounded-full hover:bg-primary/50 transition-colors;
+}
