@@ -70,15 +70,15 @@ const Projects = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         {[
-                            { title: 'Visuals Eta', url: 'https://visuals-eta.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Visuals+Eta' },
-                            { title: 'Web Gallery Game', url: 'https://webgallerygame.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Web+Gallery' },
-                            { title: 'UTube Player', url: 'https://utubeplayer-mu.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=UTube+Player' },
-                            { title: 'Solitaire Dark', url: 'https://solitaire-six-black.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Solitaire' },
-                            { title: 'Sphere Audio', url: 'https://sphereaudio.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Sphere+Audio' },
-                            { title: 'Particle Ad', url: 'https://particlead.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Particle+Ad' },
-                            { title: 'Dimensional Two', url: 'https://dimensional-two.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Dimensional' },
-                            { title: 'Wak Two', url: 'https://wak-two.vercel.app/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Wak+Two' },
-                            { title: 'Driftpad', url: 'https://driftpad.yxm.digital/', image: 'https://placehold.co/800x500/1c1c1c/ffffff?text=Driftpad' }
+                            { title: 'Visuals Eta', url: 'https://visuals-eta.vercel.app/', image: '/assets/images/screenshots/visuals_eta.webp' },
+                            { title: 'Web Gallery Game', url: 'https://webgallerygame.vercel.app/', image: '/assets/images/screenshots/web_gallery.webp' },
+                            { title: 'UTube Player', url: 'https://utubeplayer-mu.vercel.app/', image: '/assets/images/screenshots/utube_player.webp' },
+                            { title: 'Solitaire Dark', url: 'https://solitaire-six-black.vercel.app/', image: '/assets/images/screenshots/solitaire_dark.webp' },
+                            { title: 'Sphere Audio', url: 'https://sphereaudio.vercel.app/', image: '/assets/images/screenshots/sphere_audio.webp' },
+                            { title: 'Particle Ad', url: 'https://particlead.vercel.app/', image: '/assets/images/screenshots/particle_ad.webp' },
+                            { title: 'Dimensional Two', url: 'https://dimensional-two.vercel.app/', image: '/assets/images/screenshots/dimensional_two.webp' },
+                            { title: 'Wak Two', url: 'https://wak-two.vercel.app/', image: '/assets/images/screenshots/wak_two.webp' },
+                            { title: 'Driftpad', url: 'https://driftpad.yxm.digital/', image: '/assets/images/screenshots/driftpad.webp' }
                         ].map((site, index) => (
                             <motion.a
                                 href={site.url}

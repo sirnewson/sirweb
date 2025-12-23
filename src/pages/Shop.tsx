@@ -6,14 +6,7 @@ import Navbar from '../components/Navbar';
 
 const Shop = () => {
     const products = [
-        {
-            id: 1,
-            name: "Neon Horizon Hoodie",
-            category: "Merch",
-            price: "KES 4,500",
-            image: "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=Neon+Hoodie",
-            description: "Premium cotton blend with luminous print."
-        },
+
         {
             id: 2,
             name: "Adapt & Overcome",
@@ -46,38 +39,7 @@ const Shop = () => {
             image: "/assets/images/WHAT_46ee196c.webp",
             description: "Philosophical digital art piece."
         },
-        {
-            id: 3,
-            name: "Cyber Chair V1",
-            category: "Furniture",
-            price: "KES 45,000",
-            image: "https://via.placeholder.com/600x800/3a3a3a/ffffff?text=Cyber+Chair",
-            description: "Ergonomic design with LED accents."
-        },
-        {
-            id: 4,
-            name: "Digital Relic #04",
-            category: "Artifacts",
-            price: "KES 8,000",
-            image: "https://via.placeholder.com/600x800/4a4a4a/ffffff?text=Digital+Relic",
-            description: "3D printed sculpture in resin."
-        },
-        {
-            id: 5,
-            name: "Sir Newson Cap",
-            category: "Merch",
-            price: "KES 2,000",
-            image: "https://via.placeholder.com/600x800/5a5a5a/ffffff?text=Cap",
-            description: "Embroidered logo. Adjustable fit."
-        },
-        {
-            id: 6,
-            name: "Luxury Desk Mat",
-            category: "Accessories",
-            price: "KES 3,500",
-            image: "https://via.placeholder.com/600x800/6a6a6a/ffffff?text=Desk+Mat",
-            description: "Micro-textured surface for precision."
-        },
+
         {
             id: 10,
             name: "Abstract Form #01",
@@ -99,7 +61,7 @@ const Shop = () => {
             name: "Is Reality Real? - Font",
             category: "Asset",
             price: "Free",
-            image: "https://via.placeholder.com/600x800/1a1a1a/ffffff?text=Font+Pack",
+            image: "/assets/images/font_pack_cover.webp",
             description: "Exclusive font pack for designers.",
             link: "https://www.mediafire.com/file/0mlxujfzgvtacr7/SIR_FONTS_%25231.zip/file"
         },
@@ -108,7 +70,7 @@ const Shop = () => {
             name: "High Voltage Action",
             category: "Asset",
             price: "Free",
-            image: "https://via.placeholder.com/600x800/2a2a2a/ffffff?text=Action+Pack",
+            image: "/assets/images/action_pack_cover.webp",
             description: "Photoshop actions for high-impact editing.",
             link: "https://www.mediafire.com/file/qwox51omsb0n48m/ACTION.zip/file"
         },
@@ -117,7 +79,7 @@ const Shop = () => {
             name: "Luminous Light Pack",
             category: "Asset",
             price: "Free",
-            image: "https://via.placeholder.com/600x800/3a3a3a/ffffff?text=Light+Effects",
+            image: "/assets/images/light_pack_cover.webp",
             description: "Light leaks and overlays.",
             link: "https://www.mediafire.com/file/6rqehpa49180ux4/LIGHT.zip/file"
         },
@@ -126,7 +88,7 @@ const Shop = () => {
             name: "Essential Font Pack #1",
             category: "Asset",
             price: "Free",
-            image: "https://via.placeholder.com/600x800/4a4a4a/ffffff?text=Font+Pack+1",
+            image: "/assets/images/essential_font_pack_cover.webp",
             description: "Curated collection of essential fonts.",
             link: "https://www.mediafire.com/file/0s621gm8b1kwrwq/FONT_PACK_%25231.zip/file"
         },
@@ -135,7 +97,7 @@ const Shop = () => {
             name: "Sir Newson Gradients",
             category: "Asset",
             price: "Free",
-            image: "https://via.placeholder.com/600x800/5a5a5a/ffffff?text=Gradients",
+            image: "/assets/images/gradients_cover.webp",
             description: "Custom gradient maps for Photoshop.",
             link: "https://www.mediafire.com/file/vhy8n1kmkuu603z/Sir_Newson_Gradients.grd/file"
         },
@@ -178,6 +140,46 @@ const Shop = () => {
             price: "KES 15,000",
             image: "/assets/images/wallart_tiger.webp",
             description: "Surreal white tiger in meditation. Focusing energy and power.",
+        },
+        {
+            id: 22,
+            name: "Earth Unzipped: Sand",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/earth_zipper_sand.webp",
+            description: "A surreal display of earth unraveling into a sandstorm.",
+        },
+        {
+            id: 23,
+            name: "Earth Unzipped: Nature",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/earth_zipper_nature.webp",
+            description: "The planet unzipped to reveal lush greenery and life.",
+        },
+        {
+            id: 24,
+            name: "Earth Unzipped: Ice",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/earth_zipper_ice.webp",
+            description: "A chilling vision of a frozen core exposed.",
+        },
+        {
+            id: 25,
+            name: "Earth Unzipped: Fire",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/earth_zipper_fire.webp",
+            description: "Smoke and embers escaping from the planetary zipper.",
+        },
+        {
+            id: 26,
+            name: "Earth Unzipped: Magma",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/earth_zipper_volcano.webp",
+            description: "Volcanic fury unleashed from within the earth.",
         }
     ];
 
