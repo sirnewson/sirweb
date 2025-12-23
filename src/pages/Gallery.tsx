@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
@@ -42,6 +42,21 @@ const Gallery = () => {
         { src: '/assets/images/cleanshelf-concept-3_2f0bf9e3.webp', type: 'image' },
         { src: '/assets/images/1580-x-1080_cf412c7f.webp', type: 'image' },
         { src: '/assets/images/mockup_997028e3.webp', type: 'image' },
+        { src: '/assets/images/gallery_new_01.webp', type: 'image' },
+        { src: '/assets/images/gallery_new_02.webp', type: 'image' },
+        { src: '/assets/images/gallery_new_03.webp', type: 'image' },
+        { src: '/assets/images/gallery_new_04.webp', type: 'image' },
+        { src: '/assets/images/gallery_new_05.webp', type: 'image' },
+        { src: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
+        { src: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
+        { src: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
+        { src: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
+        { src: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
+        { src: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
+        { src: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
+        { src: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
+        { src: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
+        { src: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
     ];
 
     // Get 3 images from each client
@@ -53,7 +68,32 @@ const Gallery = () => {
     );
 
     // Combine media (Concepts + Client Work + Misc)
-    const mediaItems = [...conceptMedia, ...clientMedia, ...miscMedia];
+    // Combine media (Concepts + Client Work + Misc)
+    const initialMediaItems = [...conceptMedia, ...clientMedia, ...miscMedia];
+
+    const [mediaItems, setMediaItems] = useState(initialMediaItems);
+
+    // Shuffle function
+    const shuffleArray = (array: any[]) => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    };
+
+    // Shuffle on mount and every 1 minute
+    useEffect(() => {
+        // Initial shuffle on mount
+        setMediaItems(shuffleArray(initialMediaItems));
+
+        const interval = setInterval(() => {
+            setMediaItems(prevItems => shuffleArray(prevItems));
+        }, 60000); // 1 minute
+
+        return () => clearInterval(interval);
+    }, []);
 
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
 

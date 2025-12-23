@@ -15,15 +15,22 @@ const Home = () => {
     ];
 
     const recentWork = [
+        { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
+        { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
+        { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
+        { title: 'Motion Reel 01', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68c95f3b08cbbd8bb6bd69f786162eda/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
+        { title: 'Mkurugenzi Hoodies', image: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
+        { title: 'Motion Reel 02', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/a5a314e4a0dc189a3abcf9b61a1adddb/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
+        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
+        { title: 'Saturday Dosage Character', image: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
+        { title: 'Mkurugenzi Women', image: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
+        { title: 'DJ Dibul Portrait', image: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
         { title: 'KAB Project', image: '/assets/images/kab-1_61b51219.webp', type: 'image' },
-        { title: 'Motion Reel 01', image: 'https://cdn.midjourney.com/video/d1863d34-2080-4e5f-ab90-f86d66131995/0.mp4', type: 'video' },
         { title: 'Billboard Design', image: '/assets/images/billbaord_ea33edfb.webp', type: 'image' },
-        { title: 'Coming Soon', image: '/assets/images/coming-soon_8425b910.webp', type: 'image' },
-        { title: 'Motion Reel 02', image: 'https://cdn.midjourney.com/video/d0d9357e-3c4f-4c97-9092-3808023a06ff/0.mp4', type: 'video' },
-        { title: 'The Big 6', image: '/assets/images/the-big-6_8aa66782.webp', type: 'image' },
-        { title: 'CleanShelf Concept', image: '/assets/images/cleanshelf-concept-3_3b0dacbc.webp', type: 'image' },
-        { title: 'Time Poster', image: '/assets/images/time_d7674373.webp', type: 'image' },
-        { title: 'Motion Reel 03', image: 'https://cdn.midjourney.com/video/45b2b40c-7aa5-4195-b93f-2d87a66a6157/0.mp4', type: 'video' },
+        { title: 'Motion Reel 03', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68d09a1216c77a6fbff83ba6ba528c8b/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Cleaning Concept', image: '/assets/images/cleanshelf-concept-3_3b0dacbc.webp', type: 'image' },
     ];
 
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
@@ -82,15 +89,12 @@ const Home = () => {
                                 onClick={() => setSelectedMedia({ src: project.image, title: project.title, type: project.type as 'image' | 'video' })}
                             >
                                 {project.type === 'video' ? (
-                                    <video
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
-                                    >
-                                        <source src={project.image} type="video/mp4" />
-                                    </video>
+                                    <iframe
+                                        src={project.image}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none min-h-[400px]"
+                                        allow="autoplay; encrypted-media"
+                                        frameBorder="0"
+                                    ></iframe>
                                 ) : (
                                     <img
                                         src={project.image}
@@ -108,6 +112,15 @@ const Home = () => {
                         ))}
                     </div>
                 </section>
+
+                <div className="flex justify-center pb-24 -mt-12 bg-neutral-black">
+                    <a
+                        href="/gallery"
+                        className="px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center gap-2 group"
+                    >
+                        View More Work <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
 
                 {/* Trusted By */}
                 <section id="clients" className="py-24 px-6 bg-neutral-black border-t border-white/10">

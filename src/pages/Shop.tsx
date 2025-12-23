@@ -138,6 +138,46 @@ const Shop = () => {
             image: "https://via.placeholder.com/600x800/5a5a5a/ffffff?text=Gradients",
             description: "Custom gradient maps for Photoshop.",
             link: "https://www.mediafire.com/file/vhy8n1kmkuu603z/Sir_Newson_Gradients.grd/file"
+        },
+        {
+            id: 17,
+            name: "Golden Leo",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/wallart_leo.webp",
+            description: "Majestic lion portrait with golden accents. A symbol of strength.",
+        },
+        {
+            id: 18,
+            name: "Vivid Flows",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/wallart_waves.webp",
+            description: "Abstract waves of color and texture. Dynamic and bold.",
+        },
+        {
+            id: 19,
+            name: "Monochrome Flight",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/wallart_butterfly.webp",
+            description: "Minimalist black and white butterfly. Elegance in simplicity.",
+        },
+        {
+            id: 20,
+            name: "Serene Drive",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/wallart_car.webp",
+            description: "Vintage aesthetics meeting nature's calm. A peaceful escape.",
+        },
+        {
+            id: 21,
+            name: "Zen Tiger",
+            category: "Wall Art",
+            price: "KES 15,000",
+            image: "/assets/images/wallart_tiger.webp",
+            description: "Surreal white tiger in meditation. Focusing energy and power.",
         }
     ];
 

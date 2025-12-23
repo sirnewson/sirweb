@@ -8,6 +8,11 @@ export const clientsData = [
         challenge: 'To create a digital presence that reflects the authenticity and humor of the brand while maintaining professional appeal.',
         solution: 'We developed a visual identity that balances playfulness with sophistication, using bold typography and vibrant colors.',
         gallery: [
+            '/assets/images/abel_visual_01.webp',
+            '/assets/images/abel_visual_02.webp',
+            '/assets/images/abel_visual_03.webp',
+            '/assets/images/abel_visual_04.webp',
+            '/assets/images/abel_visual_05.webp',
             '/assets/images/maxresdefault_01c04c98.webp',
             '/assets/images/maxresdefault_94c5dea2.webp',
             '/assets/images/maxresdefault_a0d54086.webp',
