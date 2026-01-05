@@ -19,7 +19,15 @@ const SITES = [
     { name: 'particle_ad', url: 'https://particlead.vercel.app/' },
     { name: 'dimensional_two', url: 'https://dimensional-two.vercel.app/' },
     { name: 'wak_two', url: 'https://wak-two.vercel.app/' },
-    { name: 'driftpad', url: 'https://driftpad.yxm.digital/' }
+    { name: 'driftpad', url: 'https://driftpad.yxm.digital/' },
+    { name: 'tak_network', url: 'https://taknetwork.online/' },
+    { name: 'yxm_digital', url: 'https://yxm.digital/' },
+    { name: 'patakazi', url: 'https://www.patakazi.co.ke/' },
+    { name: 'walltv', url: 'https://walltv.vercel.app/' },
+    { name: 'ordafasta', url: 'https://www.ordafasta.co.ke/' },
+    { name: 'flowclock', url: 'https://flowclock-rose.vercel.app/' },
+    { name: 'finder_yxm', url: 'https://finder.yxm.digital/' },
+    { name: 'captionsmaster', url: 'https://captionsmaster.yxm.digital/' }
 ];
 
 const main = async () => {

@@ -186,6 +186,56 @@ const Home = () => {
                                     border: 'hover:border-purple-400/50',
                                     icon: 'fas fa-briefcase',
                                     bg: 'from-purple-400/10 to-transparent'
+                                },
+                                {
+                                    title: 'WallTV',
+                                    desc: 'Transform your screen into a dynamic digital art display.',
+                                    tags: ['Visuals', 'Art', 'Display'],
+                                    link: 'https://walltv.vercel.app/',
+                                    color: 'text-pink-400',
+                                    border: 'hover:border-pink-400/50',
+                                    icon: 'fas fa-tv',
+                                    bg: 'from-pink-400/10 to-transparent'
+                                },
+                                {
+                                    title: 'OrdaFasta',
+                                    desc: 'Seamless ordering and delivery platform for fast-paced lifestyles.',
+                                    tags: ['Delivery', 'Service', 'Speed'],
+                                    link: 'https://www.ordafasta.co.ke/',
+                                    color: 'text-orange-400',
+                                    border: 'hover:border-orange-400/50',
+                                    icon: 'fas fa-motorcycle',
+                                    bg: 'from-orange-400/10 to-transparent'
+                                },
+                                {
+                                    title: 'FlowClock',
+                                    desc: 'Master your time with this elegant, focus-enhancing productivity tool.',
+                                    tags: ['Productivity', 'Time', 'Focus'],
+                                    link: 'https://flowclock-rose.vercel.app/',
+                                    color: 'text-rose-400',
+                                    border: 'hover:border-rose-400/50',
+                                    icon: 'fas fa-clock',
+                                    bg: 'from-rose-400/10 to-transparent'
+                                },
+                                {
+                                    title: 'Finder YXM',
+                                    desc: 'Discover specialized AI tools and resources tailored for your needs.',
+                                    tags: ['Search', 'AI', 'Resource'],
+                                    link: 'https://finder.yxm.digital/',
+                                    color: 'text-blue-400',
+                                    border: 'hover:border-blue-400/50',
+                                    icon: 'fas fa-search',
+                                    bg: 'from-blue-400/10 to-transparent'
+                                },
+                                {
+                                    title: 'CaptionsMaster',
+                                    desc: 'Generate engaging captions for your social media content instantly.',
+                                    tags: ['Content', 'Social', 'AI'],
+                                    link: 'https://captionsmaster.yxm.digital/',
+                                    color: 'text-green-400',
+                                    border: 'hover:border-green-400/50',
+                                    icon: 'fas fa-closed-captioning',
+                                    bg: 'from-green-400/10 to-transparent'
                                 }
                             ].map((project, index) => (
                                 <a

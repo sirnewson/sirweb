@@ -68,7 +68,7 @@ const Projects = () => {
                         <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Digital Experiences</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                         {[
                             { title: 'Visuals Eta', url: 'https://visuals-eta.vercel.app/', image: '/assets/images/screenshots/visuals_eta.webp' },
                             { title: 'Web Gallery Game', url: 'https://webgallerygame.vercel.app/', image: '/assets/images/screenshots/web_gallery.webp' },
@@ -78,7 +78,15 @@ const Projects = () => {
                             { title: 'Particle Ad', url: 'https://particlead.vercel.app/', image: '/assets/images/screenshots/particle_ad.webp' },
                             { title: 'Dimensional Two', url: 'https://dimensional-two.vercel.app/', image: '/assets/images/screenshots/dimensional_two.webp' },
                             { title: 'Wak Two', url: 'https://wak-two.vercel.app/', image: '/assets/images/screenshots/wak_two.webp' },
-                            { title: 'Driftpad', url: 'https://driftpad.yxm.digital/', image: '/assets/images/screenshots/driftpad.webp' }
+                            { title: 'Driftpad', url: 'https://driftpad.yxm.digital/', image: '/assets/images/screenshots/driftpad.webp' },
+                            { title: 'TAK Network', url: 'https://taknetwork.online/', image: '/assets/images/screenshots/tak_network.webp' },
+                            { title: 'YXM Digital', url: 'https://yxm.digital/', image: '/assets/images/screenshots/yxm_digital.webp' },
+                            { title: 'PataKazi', url: 'https://www.patakazi.co.ke/', image: '/assets/images/screenshots/patakazi.webp' },
+                            { title: 'WallTV', url: 'https://walltv.vercel.app/', image: '/assets/images/screenshots/walltv.webp' },
+                            { title: 'OrdaFasta', url: 'https://www.ordafasta.co.ke/', image: '/assets/images/screenshots/ordafasta.webp' },
+                            { title: 'FlowClock', url: 'https://flowclock-rose.vercel.app/', image: '/assets/images/screenshots/flowclock.webp' },
+                            { title: 'Finder YXM', url: 'https://finder.yxm.digital/', image: '/assets/images/screenshots/finder_yxm.webp' },
+                            { title: 'CaptionsMaster', url: 'https://captionsmaster.yxm.digital/', image: '/assets/images/screenshots/captionsmaster.webp' }
                         ].map((site, index) => (
                             <motion.a
                                 href={site.url}
@@ -91,11 +99,15 @@ const Projects = () => {
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 className="group relative rounded-3xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 shadow-2xl bg-neutral-medium"
                             >
-                                <div className="aspect-[16/10] overflow-hidden">
+                                <div className="aspect-[16/10] overflow-hidden bg-neutral-800">
                                     <img
                                         src={site.image}
                                         alt={site.title}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                        onError={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.src = 'https://placehold.co/600x400/1a1a1a/FFF?text=' + encodeURIComponent(site.title);
+                                        }}
                                     />
                                 </div>
 
