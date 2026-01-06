@@ -11,7 +11,7 @@ const Shop = () => {
             id: 2,
             name: "Adapt & Overcome",
             category: "Wall Art",
-            price: "KES 12,000",
+            price: "KES 7,500",
             image: "/assets/images/ADAPT-1_7994f69b.webp",
             description: "High-quality canvas print. Motivational series."
         },
@@ -177,9 +177,25 @@ const Shop = () => {
             id: 26,
             name: "Earth Unzipped: Magma",
             category: "Wall Art",
-            price: "KES 15,000",
+            price: "KES 7,500",
             image: "/assets/images/earth_zipper_volcano.webp",
             description: "Volcanic fury unleashed from within the earth.",
+        },
+        {
+            id: 27,
+            name: "Gravity",
+            category: "Wall Art",
+            price: "KES 7,500",
+            image: "/assets/images/gravity_poster.webp",
+            description: "True gravity isn't force. It's presence.",
+        },
+        {
+            id: 28,
+            name: "Oceanic Mind",
+            category: "Wall Art",
+            price: "KES 7,500",
+            image: "/assets/images/whale_mind.webp",
+            description: "A surreal blend of nature's giants and human thought.",
         }
     ];
 
