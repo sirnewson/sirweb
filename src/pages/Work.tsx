@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import Hero from '../components/Hero';
 
 import Footer from '../components/Footer';
@@ -13,29 +13,33 @@ const Work = () => {
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
 
     // Get 5 images from specific clients for Recent Work
-    const targetClients = ['muthokinju', 'mkurugenzi', 'tenacity-locks'];
-    const clientRecentWork = targetClients.flatMap(clientId => {
-        const client = clientsData.find(c => c.id === clientId);
-        if (!client) return [];
-        // Take first 5 images from each client's gallery
-        return client.gallery.slice(0, 5).map((img) => ({
-            title: `${client.name}`,
-            image: img,
-            type: 'image'
-        }));
-    });
-
-    const miscRecentWork = [
-        { title: 'Matatu Culture', image: '/assets/images/matatu_964f2996.webp', type: 'image' },
-        { title: 'Amber Ray', image: '/assets/images/AMBER-RAY_dd19587e.webp', type: 'image' },
-        { title: 'Main Audio', image: '/assets/images/Main-Audio-Cover_39e05667.webp', type: 'image' },
-        { title: 'Flaqo Draft', image: '/assets/images/flaqo-draft-progress_79469446.webp', type: 'image' },
-        { title: 'Josae 1M', image: '/assets/images/josae-1m_026dd95f.webp', type: 'image' },
-        { title: 'Vibes Profile', image: '/assets/images/vibes-profile-cover_7ccfe994.webp', type: 'image' }
+    const recentWork = [
+        { title: 'Wild Idea', image: '/assets/images/recent_images/wild-idea.webp', type: 'image' },
+        { title: 'Profile', image: '/assets/images/recent_images/profilee.webp', type: 'image' },
+        { title: 'Silver', image: '/assets/images/recent_images/silver.webp', type: 'image' },
+        { title: 'Countrywide', image: '/assets/images/recent_images/countrywide-1.webp', type: 'image' },
+        { title: 'Fun Concept', image: '/assets/images/recent_images/fun-concept.webp', type: 'image' },
+        { title: 'Youtube', image: '/assets/images/recent_images/youytubeee.webp', type: 'image' },
+        { title: 'Cartoon', image: '/assets/images/recent_images/cartoon.webp', type: 'image' },
+        { title: 'Njugush 3M Post', image: '/assets/images/recent_images/njugush-3m-post.webp', type: 'image' },
+        { title: 'Post File', image: '/assets/images/recent_images/post-file.webp', type: 'image' },
+        { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
+        { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
+        { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
+        { title: 'Motion Reel 01', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68c95f3b08cbbd8bb6bd69f786162eda/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
+        { title: 'Mkurugenzi Hoodies', image: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
+        { title: 'Motion Reel 02', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/a5a314e4a0dc189a3abcf9b61a1adddb/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
+        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
+        { title: 'Saturday Dosage Character', image: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
+        { title: 'Mkurugenzi Women', image: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
+        { title: 'DJ Dibul Portrait', image: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
+        { title: 'KAB Project', image: '/assets/images/kab-1_61b51219.webp', type: 'image' },
+        { title: 'Billboard Design', image: '/assets/images/billbaord_ea33edfb.webp', type: 'image' },
+        { title: 'Motion Reel 03', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68d09a1216c77a6fbff83ba6ba528c8b/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
+        { title: 'Cleaning Concept', image: '/assets/images/cleanshelf-concept-3_3b0dacbc.webp', type: 'image' },
     ];
-
-    // Combine and shuffle, then take 9
-    const recentWork = [...clientRecentWork, ...miscRecentWork].slice(0, 9);
 
     return (
         <div className="bg-neutral-black min-h-screen">
@@ -61,7 +65,7 @@ const Work = () => {
                     </div>
 
                     <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-                        {[...recentWork, ...recentWork].map((work, index) => (
+                        {recentWork.map((work, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, scale: 0.9 }}
@@ -182,6 +186,47 @@ const Work = () => {
                 </div>
             </section>
 
+            {/* Branding Section */}
+            <section className="py-24 px-6 bg-neutral-dark border-t border-white/10">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Visual Identity</p>
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Branding</h2>
+                    </div>
+
+                    <div className="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
+                        {[
+                            { title: 'New Home of Fashion', image: '/assets/images/branding/NEW HOME OF FAHION.webp' },
+                            { title: 'Tech 2', image: '/assets/images/branding/TECH 2.webp' },
+                            { title: 'Branding Board', image: '/assets/images/branding/branding board.webp' },
+                            { title: 'Logo', image: '/assets/images/branding/logo.webp' },
+                            { title: 'Main Logo', image: '/assets/images/branding/main logo oon yellow.webp' },
+                            { title: 'White', image: '/assets/images/branding/white.webp' },
+                        ].map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: (index % 4) * 0.05 }}
+                            >
+                                <TiltCard onClick={() => setSelectedMedia({ src: item.image, title: item.title, type: 'image' })}>
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                                </TiltCard>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+
+
+
             <Footer />
 
             <MediaModal
@@ -192,6 +237,48 @@ const Work = () => {
                 type={selectedMedia?.type || 'image'}
             />
         </div>
+    );
+};
+
+const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => {
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const rotateX = useTransform(y, [-100, 100], [10, -10]);
+    const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+        const xPct = mouseX / width - 0.5;
+        const yPct = mouseY / height - 0.5;
+        x.set(xPct * 200);
+        y.set(yPct * 200);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
+    return (
+        <motion.div
+            style={{
+                rotateX,
+                rotateY,
+                transformStyle: "preserve-3d"
+            }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            onClick={onClick}
+            className="break-inside-avoid rounded-xl overflow-hidden border border-white/10 hover:border-primary hover:shadow-[0_0_30px_#BFFF004D] transition-all duration-300 group mb-4 cursor-pointer relative bg-white/5"
+        >
+            <div style={{ transform: "translateZ(20px)" }} className="p-4">
+                {children}
+            </div>
+        </motion.div>
     );
 };
 

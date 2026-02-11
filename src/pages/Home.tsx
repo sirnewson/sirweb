@@ -15,6 +15,15 @@ const Home = () => {
     ];
 
     const recentWork = [
+        { title: 'Wild Idea', image: '/assets/images/recent_images/wild-idea.webp', type: 'image' },
+        { title: 'Profile', image: '/assets/images/recent_images/profilee.webp', type: 'image' },
+        { title: 'Silver', image: '/assets/images/recent_images/silver.webp', type: 'image' },
+        { title: 'Countrywide', image: '/assets/images/recent_images/countrywide-1.webp', type: 'image' },
+        { title: 'Fun Concept', image: '/assets/images/recent_images/fun-concept.webp', type: 'image' },
+        { title: 'Youtube', image: '/assets/images/recent_images/youytubeee.webp', type: 'image' },
+        { title: 'Cartoon', image: '/assets/images/recent_images/cartoon.webp', type: 'image' },
+        { title: 'Njugush 3M Post', image: '/assets/images/recent_images/njugush-3m-post.webp', type: 'image' },
+        { title: 'Post File', image: '/assets/images/recent_images/post-file.webp', type: 'image' },
         { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
         { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
         { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
