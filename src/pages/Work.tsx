@@ -49,7 +49,7 @@ const Work = () => {
             />
 
             {/* Client Showcase (Parallax Rows) */}
-            <section className="py-24 px-0 bg-neutral-black border-b border-white/5">
+            <section className="py-16 md:py-24 px-0 bg-neutral-black border-b border-white/5">
                 <ParallaxImageRows
                     topRowImages={clientsData.slice(0, 5).map(c => c.image)}
                     bottomRowImages={clientsData.slice(5).map(c => c.image)}
@@ -57,7 +57,7 @@ const Work = () => {
             </section>
 
             {/* Recent Work Section */}
-            <section className="py-24 px-6 bg-neutral-dark">
+            <section className="py-16 md:py-24 px-6 bg-neutral-dark">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Recent Work</h2>
@@ -102,7 +102,7 @@ const Work = () => {
             </section>
 
             {/* Philosophy Grid */}
-            <section className="py-24 px-6 bg-neutral-dark border-y border-white/10">
+            <section className="py-16 md:py-24 px-6 bg-neutral-dark border-y border-white/10">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Philosophy</p>
@@ -139,7 +139,7 @@ const Work = () => {
             </section>
 
             {/* Creative Partnerships (Interactive Grid) */}
-            <section className="py-32 px-6">
+            <section className="py-20 md:py-32 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-20">
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Collaborations</p>
@@ -187,7 +187,7 @@ const Work = () => {
             </section>
 
             {/* Branding Section */}
-            <section className="py-24 px-6 bg-neutral-dark border-t border-white/10">
+            <section className="py-16 md:py-24 px-6 bg-neutral-dark border-t border-white/10">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Visual Identity</p>

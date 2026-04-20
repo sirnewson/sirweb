@@ -32,7 +32,7 @@ const Footer = () => {
                                 />
                             </div>
                             <p className="text-white/60 text-lg leading-relaxed">
-                                Crafting digital experiences that merge human creativity with artificial intelligence.
+                                Merging human intuition with artificial intelligence to craft premium digital experiences.
                                 <br />
                                 <span className="text-primary mt-4 block font-bold">Nairobi, Kenya 🇰🇪</span>
                             </p>
@@ -52,17 +52,17 @@ const Footer = () => {
                                 <p className="text-white/50 text-sm">Curated digital & physical goods.</p>
                             </Link>
 
-                            {/* Drift Notes Banner */}
-                            <Link to="/drift-notes" className="group p-6 rounded-2xl bg-neutral-medium border border-white/5 hover:border-white/50 transition-all duration-300 hover:-translate-y-1 w-full sm:w-64">
+                            {/* Wynmind Banner */}
+                            <a href="https://wynmind.com" target="_blank" rel="noopener noreferrer" className="group p-6 rounded-2xl bg-neutral-medium border border-white/5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 w-full sm:w-64">
                                 <div className="flex justify-between items-start mb-8">
-                                    <i className="fas fa-book-open text-2xl text-white/50 group-hover:text-white transition-colors" />
-                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                                    <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind" className="h-6 opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
                                         <i className="fas fa-arrow-right text-xs" />
                                     </div>
                                 </div>
-                                <h4 className="text-white font-bold mb-1">Drift Notes</h4>
-                                <p className="text-white/50 text-sm">Thoughts, visuals & archives.</p>
-                            </Link>
+                                <h4 className="text-white font-bold mb-1">Wynmind</h4>
+                                <p className="text-white/50 text-sm">Read more. Go deeper.</p>
+                            </a>
                         </div>
                     </div>
 
@@ -88,8 +88,8 @@ const Footer = () => {
                             <ul className="space-y-4">
                                 {[
                                     { name: 'Drift Notes', path: '/drift-notes' },
-                                    { name: 'The Shop', path: '/shop' },
-                                    { name: 'Media Channel', path: '/media' },
+                                    { name: 'Shop', path: '/shop' },
+                                    { name: 'Media', path: '/media' },
                                     { name: 'Gallery', path: '/gallery' },
                                 ].map((item) => (
                                     <li key={item.name}>
@@ -106,9 +106,8 @@ const Footer = () => {
                             <h4 className="text-white font-bold text-lg">Connect</h4>
                             <ul className="space-y-4">
                                 {[
-                                    { name: 'Contact Us', path: '/contact' },
+                                    { name: 'Get in Touch', path: '/contact' },
                                     { name: 'Rate Card', path: '/rate-card' },
-                                    { name: 'Book a Call', path: '/contact' },
                                     { name: 'AI Tools', path: '/ai-tools' },
                                 ].map((item) => (
                                     <li key={item.name}>

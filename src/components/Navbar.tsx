@@ -28,7 +28,7 @@ const Navbar = () => {
         { name: 'Gallery', path: '/gallery' },
         { name: 'Motion', path: '/motion' },
         { name: 'Media', path: '/media' },
-        { name: 'Drift Notes', path: '/drift-notes' },
+        { name: 'Wynmind', path: '/drift-notes' },
         { name: 'Shop', path: '/shop' },
         { name: 'Contact', path: '/contact' },
     ];
@@ -131,7 +131,7 @@ const Navbar = () => {
                         transition={{ duration: 0.3 }}
                         className="fixed inset-0 z-40 bg-neutral-black/95 backdrop-blur-xl pt-32 px-6 md:hidden"
                     >
-                        <div className="flex flex-col items-center gap-8">
+                        <div className="flex flex-col items-center gap-4 sm:gap-6">
                             {navLinks.map((link, index) => (
                                 <motion.div
                                     key={link.name}
@@ -141,7 +141,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         to={link.path}
-                                        className={`text-2xl font-display font-bold tracking-wide ${location.pathname === link.path ? 'text-primary' : 'text-white'
+                                        className={`block py-2 px-8 text-2xl font-display font-bold tracking-wide ${location.pathname === link.path ? 'text-primary' : 'text-white'
                                             }`}
                                     >
                                         {link.name}

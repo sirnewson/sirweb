@@ -1,13 +1,58 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+const SpiralVortex = () => {
+    return (
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden opacity-60 z-0 pointer-events-none mix-blend-screen">
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                className="relative w-full h-full flex items-center justify-center"
+            >
+                {Array.from({ length: 60 }).map((_, i) => {
+                    const startDistance = Math.random() * 20 + 5;
+                    const endDistance = startDistance + Math.random() * 40 + 30;
+                    return (
+                        <motion.div
+                            key={i}
+                            className="absolute top-1/2 left-1/2 origin-left"
+                            style={{
+                                rotate: `${Math.random() * 360}deg`,
+                            }}
+                        >
+                            <motion.div
+                                className="bg-gradient-to-r from-transparent via-primary to-transparent rounded-full"
+                                style={{
+                                    height: `${Math.random() * 2 + 1}px`,
+                                    width: `${Math.random() * 80 + 40}px`,
+                                    boxShadow: '0 0 10px #BFFF00',
+                                }}
+                                animate={{
+                                    x: [`${startDistance}vw`, `${endDistance}vw`],
+                                    opacity: [0, 1, 0]
+                                }}
+                                transition={{
+                                    duration: Math.random() * 1.5 + 1.5,
+                                    repeat: Infinity,
+                                    ease: "easeIn",
+                                    delay: Math.random() * 2
+                                }}
+                            />
+                        </motion.div>
+                    );
+                })}
+            </motion.div>
+        </div>
+    );
+};
+
 const LoadingScreen = () => {
     const count = useMotionValue(0);
     const rounded = useTransform(count, Math.round);
     const [displayCount, setDisplayCount] = useState(0);
 
     useEffect(() => {
-        const animation = animate(count, 100, { duration: 2.5 });
+        const animation = animate(count, 100, { duration: 4.0 });
         return animation.stop;
     }, []);
 
@@ -23,7 +68,9 @@ const LoadingScreen = () => {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-neutral-black flex flex-col items-center justify-center"
         >
-            <div className="relative">
+            <SpiralVortex />
+
+            <div className="relative z-10 flex flex-col items-center">
                 {/* Pulsing Lime Glow */}
                 <motion.div
                     animate={{
@@ -50,16 +97,16 @@ const LoadingScreen = () => {
             </div>
 
             {/* Loading Bar */}
-            <div className="mt-12 w-48 h-1 bg-white/10 rounded-full overflow-hidden relative">
+            <div className="mt-12 w-48 h-1 bg-white/10 rounded-full overflow-hidden relative z-10">
                 <motion.div
                     initial={{ x: '-100%' }}
                     animate={{ x: '0%' }}
-                    transition={{ duration: 2.5, ease: "easeInOut" }}
+                    transition={{ duration: 4.0, ease: "easeInOut" }}
                     className="h-full bg-primary"
                 />
             </div>
 
-            <div className="mt-4 flex flex-col items-center">
+            <div className="mt-4 flex flex-col items-center z-10 relative">
                 <div className="text-4xl font-display font-bold text-primary tabular-nums">
                     {displayCount.toString().padStart(3, '0')}
                 </div>

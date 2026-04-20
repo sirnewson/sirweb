@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
@@ -5,6 +6,8 @@ import Navbar from '../components/Navbar';
 import DriftCinemaxBanner from '../components/DriftCinemaxBanner';
 
 const DriftNotes = () => {
+    const [visibleQuotes, setVisibleQuotes] = useState(12);
+
     const notesImages = [
         '/assets/images/1_11b7e450.webp',
         '/assets/images/2_c4609e0b.webp',
@@ -20,13 +23,49 @@ const DriftNotes = () => {
     return (
         <div className="bg-neutral-black min-h-screen">
             <Navbar />
-            <Hero
-                title="Drift Notes"
-                subtitle="Thoughts & Visuals"
-            />
+            {/* Wynmind Hero */}
+            <section className="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 flex flex-col items-center justify-center text-center">
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+                
+                <div className="relative z-10 flex flex-col items-center">
+                    <img 
+                        src="https://i.ibb.co/BHzH7zP8/normal-logo.png" 
+                        alt="Wynmind Logo" 
+                        className="h-16 md:h-20 mb-12 drop-shadow-[0_0_15px_rgba(191,255,0,0.3)] animate-pulse-glow"
+                    />
+                    
+                    <h1 className="font-display text-5xl md:text-8xl font-bold text-white mb-4 tracking-tight leading-tight">
+                        Win your mind.
+                        <br />
+                        <span className="font-serif italic text-white/50 text-4xl md:text-7xl">Through awareness.</span>
+                    </h1>
+                    
+                    <p className="text-white/60 text-lg md:text-2xl mt-8 mb-12 max-w-2xl mx-auto font-medium">
+                        A library for people who want to think more clearly. Read more, dive deeper, and expand your perspective.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-6">
+                        <a 
+                            href="https://wynmind.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="px-10 py-5 rounded-full bg-primary text-black font-bold text-lg hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(191,255,0,0.4)] flex items-center justify-center gap-3"
+                        >
+                            Enter the Library <i className="fas fa-arrow-right"></i>
+                        </a>
+                        <a 
+                            href="#quotes" 
+                            className="px-10 py-5 rounded-full border border-white/20 text-white font-bold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+                        >
+                            Read Quotes
+                        </a>
+                    </div>
+                </div>
+            </section>
 
             {/* Gallery Grid */}
-            <section className="px-6 py-24">
+            <section className="px-6 py-16 md:py-24">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {notesImages.map((src, index) => (
                         <motion.div
@@ -49,7 +88,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Threads Promo Banner */}
-            <section className="px-6 mb-24">
+            <section className="px-6 mb-16 md:mb-24">
                 <div className="max-w-7xl mx-auto">
                     <a
                         href="https://www.threads.net/@sirnewson"
@@ -78,7 +117,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Thoughts & Quotes Grid */}
-            <section className="px-6 pb-24">
+            <section id="quotes" className="px-6 pb-16 md:pb-24">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-3xl font-display font-bold text-white mb-12 border-l-4 border-primary pl-6">Thoughts & Patterns</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -152,7 +191,7 @@ const DriftNotes = () => {
                             "You change the moment your identity updates, not when your plan does.",
                             "Momentum is more important than motivation.",
                             "Awareness is the first upgrade. Everything else follows."
-                        ].map((thought, index) => (
+                        ].slice(0, visibleQuotes).map((thought, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
@@ -168,25 +207,39 @@ const DriftNotes = () => {
                             </motion.div>
                         ))}
                     </div>
+
+                    {visibleQuotes < 65 && (
+                        <div className="flex justify-center mt-12">
+                            <button
+                                onClick={() => setVisibleQuotes(prev => prev + 12)}
+                                className="px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+                            >
+                                Load More Thoughts
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* Drift Library Section (Replicated from Home) */}
-            <section className="py-40 px-6 bg-neutral-dark border-t border-white/10 relative overflow-hidden">
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <i className="fas fa-quote-left text-5xl text-primary/50 mb-8 block" />
-                    <blockquote className="font-display text-2xl md:text-4xl font-bold text-white leading-relaxed mb-12">
-                        "A global archive of essays exploring the architecture of the mind, the digital soul, and the quiet spaces in between."
-                    </blockquote>
-
-                    <a href="https://thedriftlibrary.yxm.digital/" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 bg-black text-white rounded-full font-semibold hover:bg-neutral-800 transition-colors shadow-lg shadow-black/20">
-                        Start Reading
+            {/* Wynmind Gateway Section */}
+            <section className="py-20 md:py-40 px-6 bg-neutral-dark border-y border-white/10 relative overflow-hidden">
+                <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
+                    <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind" className="h-12 mb-8 opacity-50" />
+                    <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">Read More. Go Deeper.</h2>
+                    <p className="text-white/60 text-lg md:text-xl mb-12 max-w-2xl leading-relaxed">
+                        Don't just scroll past good thoughts. Internalize them. Wynmind is a dedicated space to explore the architecture of the mind, the digital soul, and the quiet spaces in between.
+                    </p>
+                    <a 
+                        href="https://wynmind.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="px-12 py-4 bg-primary text-black rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_20px_#BFFF004D] flex items-center gap-3"
+                    >
+                        Visit Wynmind <i className="fas fa-external-link-alt text-sm"></i>
                     </a>
                 </div>
 
-                <div className="mt-24">
-                    <DriftCinemaxBanner />
-                </div>
+
             </section>
 
             <Footer />

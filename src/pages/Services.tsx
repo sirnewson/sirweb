@@ -92,11 +92,11 @@ const Services = () => {
                 subtitle="Expertise & Offerings"
             />
 
-            <section className="py-24 px-6 relative">
+            <section className="py-16 md:py-24 px-6 relative">
                 {/* Background Glow */}
                 <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
-                <div className="max-w-7xl mx-auto space-y-32">
+                <div className="max-w-7xl mx-auto space-y-16 md:space-y-32">
                     {servicesData.map((category) => (
                         <div key={category.category} className="relative">
                             <motion.div
@@ -141,7 +141,7 @@ const Services = () => {
 
 
             {/* Contact CTA */}
-            <section className="py-24 px-6 border-t border-white/5 relative overflow-hidden">
+            <section className="py-16 md:py-24 px-6 border-t border-white/5 relative overflow-hidden">
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="max-w-4xl mx-auto text-center relative z-10">
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-8">

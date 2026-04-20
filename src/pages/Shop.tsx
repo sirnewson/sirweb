@@ -200,7 +200,7 @@ const Shop = () => {
     ];
 
     const handleOrder = (product: any) => {
-        const message = `Hi Sir Newson, I'm interested in ordering the ${product.name} (${product.price}).`;
+        const message = `Hi Sir Newson, I'm interested in ordering the [ID: ${product.id}] ${product.name} (${product.price}).`;
         const url = `https://wa.me/254702480771?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     };
@@ -221,7 +221,7 @@ const Shop = () => {
                 </div>
             </div>
 
-            <section className="px-6 pb-24">
+            <section className="px-6 pb-16 md:pb-24 mt-12 md:mt-24">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {products.map((product, index) => (
                         <motion.div
@@ -274,17 +274,18 @@ const Shop = () => {
             </section>
 
             {/* Mid Section Banner */}
-            <section className="py-24 px-6">
-                <div className="max-w-5xl mx-auto bg-gradient-to-r from-primary to-lime-400 rounded-3xl p-12 text-center relative overflow-hidden">
+            <section className="py-16 md:py-24 px-6">
+                <div className="max-w-5xl mx-auto bg-neutral-medium border border-white/10 rounded-3xl p-12 text-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
                     <div className="relative z-10">
-                        <h2 className="font-display text-4xl md:text-6xl font-bold text-black mb-6">
-                            This isn't just a shop. <br /> It's your inventory.
+                        <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">
+                            Your Digital Arsenal.
                         </h2>
-                        <p className="text-black/80 text-xl font-medium mb-8">
-                            Equip yourself for the new world. These assets belong to you.
+                        <p className="text-white/60 text-xl font-medium mb-8">
+                            Equip yourself with premium creative assets. These assets belong to you.
                         </p>
-                        <button className="px-8 py-3 bg-black text-white rounded-full font-bold hover:scale-105 transition-transform">
+                        <button className="px-8 py-3 bg-white text-black rounded-full font-bold hover:scale-105 transition-transform shadow-[0_0_20px_#BFFF004D]">
                             Explore Collection
                         </button>
                     </div>

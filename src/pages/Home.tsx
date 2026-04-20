@@ -50,8 +50,18 @@ const Home = () => {
                 <Hero showButtons={true} />
                 <WorkCinemaxBanner />
 
+                {/* About Snippet */}
+                <section className="py-16 md:py-24 px-6 bg-neutral-black relative">
+                    <div className="max-w-4xl mx-auto text-center border border-white/5 rounded-3xl p-10 bg-neutral-medium hover:border-primary/30 transition-colors duration-500">
+                        <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">A Visionary Digital Artisan</h2>
+                        <p className="text-white/60 text-lg md:text-xl leading-relaxed">
+                            Merging human intuition with cutting-edge artificial intelligence. I craft premium, conversion-ready digital experiences—from cinematic branding to full-stack tech ecosystems—designed for lasting impact.
+                        </p>
+                    </div>
+                </section>
+
                 {/* Art of Thoughtful Design */}
-                <section id="about" className="py-32 px-6 bg-neutral-black relative">
+                <section id="about" className="py-16 md:py-32 px-6 bg-neutral-black relative">
                     <div className="max-w-7xl mx-auto">
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
@@ -85,7 +95,7 @@ const Home = () => {
                 </section>
 
                 {/* Selected Work */}
-                <section id="work" className="py-24 px-6 bg-neutral-black">
+                <section id="work" className="py-16 md:py-24 px-6 bg-neutral-black">
                     <div className="text-center mb-16">
                         <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Selected Work</h2>
                         <p className="text-white/60">Curated projects and visual explorations</p>
@@ -122,7 +132,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                <div className="flex justify-center pb-24 -mt-12 bg-neutral-black">
+                <div className="flex justify-center pb-16 md:pb-24 bg-neutral-black">
                     <a
                         href="/gallery"
                         className="px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center gap-2 group"
@@ -132,7 +142,7 @@ const Home = () => {
                 </div>
 
                 {/* Trusted By */}
-                <section id="clients" className="py-24 px-6 bg-neutral-black border-t border-white/10">
+                <section id="clients" className="py-16 md:py-24 px-6 bg-neutral-black border-t border-white/10">
                     <div className="text-center mb-16">
                         <p className="text-primary tracking-[0.2em] uppercase text-sm font-bold">Trusted By</p>
                     </div>
@@ -154,7 +164,7 @@ const Home = () => {
                 </section>
 
                 {/* Biggest Projects */}
-                <section className="py-32 px-6 bg-neutral-black relative overflow-hidden">
+                <section className="py-16 md:py-32 px-6 bg-neutral-black relative overflow-hidden">
                     <div className="max-w-7xl mx-auto">
                         <div className="text-center mb-24">
                             <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Ecosystem</p>
@@ -280,15 +290,14 @@ const Home = () => {
                 </section>
 
                 {/* Learn AI Section */}
-                <section className="py-32 px-6 bg-neutral-dark border-y border-white/10 relative overflow-hidden">
+                <section className="py-16 md:py-32 px-6 bg-neutral-dark border-y border-white/10 relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
                     <div className="max-w-5xl mx-auto text-center relative z-10">
                         <div className="inline-block p-4 rounded-full bg-primary/10 mb-8 animate-pulse">
                             <i className="fas fa-sparkles text-3xl text-primary"></i>
                         </div>
                         <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                            Learn How to Generate <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">with AI Today</span>
+                            Master <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Creative AI</span>
                         </h2>
                         <p className="text-white/60 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
                             Ready to unlock the power of AI for your creative projects? Book a personalized session and discover how to bring your imagination to life with cutting-edge AI tools.
@@ -313,7 +322,7 @@ const Home = () => {
                 </section>
 
                 {/* Testimonial */}
-                <section className="py-40 px-6 bg-neutral-black relative overflow-hidden">
+                <section className="py-20 md:py-40 px-6 bg-neutral-black relative overflow-hidden">
                     <div className="max-w-4xl mx-auto text-center relative z-10">
                         <i className="fas fa-quote-left text-5xl text-primary/50 mb-8 block" />
                         <blockquote className="font-display text-2xl md:text-4xl font-bold text-white leading-relaxed mb-12">
