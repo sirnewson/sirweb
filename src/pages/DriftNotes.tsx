@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Hero from '../components/Hero';
+
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import DriftCinemaxBanner from '../components/DriftCinemaxBanner';
+
 
 const DriftNotes = () => {
     const [visibleQuotes, setVisibleQuotes] = useState(12);
