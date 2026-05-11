@@ -58,7 +58,7 @@ const Home = () => {
                 />
 
                 {/* Floating Cream Dashboard */}
-                <section className="relative z-30 -mt-16 md:-mt-24 px-6 max-w-7xl mx-auto mb-40">
+                <section className="relative z-30 -mt-4 md:-mt-8 px-6 max-w-7xl mx-auto mb-40">
                     <div className="bg-[rgba(238,255,244,0.92)] backdrop-blur-xl rounded-[28px] p-8 md:p-12 border border-black/5 shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                             {dashboardCards.map((card, i) => (
