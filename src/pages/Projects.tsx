@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
@@ -6,11 +7,15 @@ import Footer from '../components/Footer';
 import { projectsData } from '../data/projects';
 
 const Projects = () => {
+    useEffect(() => {
+        document.title = "Creative Projects, Digital Systems & Visual Ideas | Sir Newson";
+    }, []);
     return (
         <div className="bg-neutral-black min-h-screen">
             <Hero
-                title={<>The Lab of <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Infinite Ideas</span></>}
-                subtitle="Experimental Projects & Concepts"
+                title={<>Ideas Built <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Beyond the Brief</span></>}
+                subtitle="Creative Branches"
+                shortParagraph="Some projects begin as client work. Others begin as curiosity, culture, storytelling, or a need to create something useful. This space brings together the systems, platforms, and visual ideas I am building over time."
             />
 
             <section className="py-32 px-6 relative">

@@ -99,3 +99,28 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply bg-neutral-medium rounded-full hover:bg-primary/50 transition-colors;
 }
+
+/* Dark Lime Waves Hover */
+@keyframes lime-waves {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hover-dark-lime-waves {
+  background-size: 200% auto;
+  transition: all 0.5s ease;
+}
+
+.hover-dark-lime-waves:hover {
+  background-image: linear-gradient(
+    90deg,
+    #011111,
+    rgba(191, 255, 0, 0.15),
+    #050505,
+    rgba(191, 255, 0, 0.05),
+    #011111
+  );
+  background-color: #011111;
+  animation: lime-waves 3s ease infinite;
+}

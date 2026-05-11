@@ -6,6 +6,10 @@ import MediaModal from '../components/MediaModal';
 import { clientsData } from '../data/clients';
 
 const Gallery = () => {
+    useEffect(() => {
+        document.title = "Visual Experiments, Concepts & Cinematic Design Studies | Sir Newson";
+    }, []);
+
     // Non-client specific media (e.g. concept videos)
     const conceptMedia = [
         { src: 'https://cdn.midjourney.com/video/d1863d34-2080-4e5f-ab90-f86d66131995/0.mp4', type: 'video' },
@@ -100,8 +104,9 @@ const Gallery = () => {
     return (
         <div className="bg-neutral-black min-h-screen">
             <Hero
-                title={<>Visual <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Playground</span></>}
-                subtitle="A Collection of Moments & Visuals"
+                title={<>Visual Experiments <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">& Atmospheres</span></>}
+                subtitle="Visual Studies"
+                shortParagraph="A collection of images, concepts, moods, and visual studies exploring identity, culture, emotion, and the future of creative expression."
             />
 
             <section className="py-24 px-6">

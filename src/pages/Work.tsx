@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import Hero from '../components/Hero';
 
@@ -10,6 +10,10 @@ import { clientsData } from '../data/clients';
 import ParallaxImageRows from '../components/ParallaxImageRows';
 
 const Work = () => {
+    useEffect(() => {
+        document.title = "Selected Work | Brand Identity, Websites & Visual Storytelling by Sir Newson";
+    }, []);
+
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
 
     // Get 5 images from specific clients for Recent Work
@@ -45,7 +49,8 @@ const Work = () => {
         <div className="bg-neutral-black min-h-screen">
             <Hero
                 title={<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Selected Work</span>}
-                subtitle="Curated Projects"
+                subtitle="Selected Work with a Sense of Identity"
+                shortParagraph="A curated collection of brand visuals, websites, campaigns, and creative systems shaped with clarity, restraint, and emotional presence."
             />
 
             {/* Client Showcase (Parallax Rows) */}

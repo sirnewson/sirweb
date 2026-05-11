@@ -46,7 +46,7 @@ const Navbar = () => {
                     className={`
             relative flex items-center justify-between px-6 py-3 rounded-full overflow-hidden
             transition-all duration-300 shadow-lg shadow-black/10 group
-            bg-primary hover:bg-neutral-black backdrop-blur-xl
+            bg-primary hover-dark-lime-waves backdrop-blur-xl
           `}
                     whileHover={{
                         rotateX: [0, 360],
@@ -60,8 +60,8 @@ const Navbar = () => {
                     }}
                     style={{ transformStyle: "preserve-3d" }}
                 >
-                    {/* Border */}
-                    <div className="absolute inset-0 rounded-full border border-black/10 group-hover:border-white/10 z-10 transition-colors duration-300" />
+                    {/* Border glow */}
+                    <div className="absolute inset-0 rounded-full border border-black/10 group-hover:border-white/10 group-hover:shadow-[0_0_20px_rgba(191,255,0,0.1)] transition-all duration-300 pointer-events-none" />
 
                     {/* Logo */}
                     <Link to="/" className="relative z-20 flex items-center gap-3">
@@ -70,7 +70,7 @@ const Navbar = () => {
                             alt="Sir Newson Logo"
                             className="h-10 w-auto brightness-0 group-hover:brightness-0 group-hover:invert transition-all duration-300"
                         />
-                        <span className="font-display font-bold text-lg tracking-wide text-black group-hover:text-primary transition-colors duration-300">
+                        <span className="font-display font-bold text-lg tracking-wide text-black group-hover:text-white group-hover:hover:text-primary transition-colors duration-300">
                             SIR NEWSON
                         </span>
                     </Link>
@@ -83,10 +83,9 @@ const Navbar = () => {
                                 to={link.path}
                                 className={`text-sm font-medium tracking-wide transition-all duration-300 relative
                                     ${location.pathname === link.path
-                                        ? 'text-black font-bold'
-                                        : 'text-black/70 hover:text-black'
+                                        ? 'text-black group-hover:text-primary font-bold'
+                                        : 'text-black/70 group-hover:text-white/70 hover:text-black group-hover:hover:text-white'
                                     }
-                                    group-hover:text-white group-hover:hover:text-primary
                                 `}
                             >
                                 {link.name}
@@ -103,17 +102,17 @@ const Navbar = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <a
-                        href="/#contact"
-                        className="relative z-20 hidden md:block px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
-                        bg-black text-white group-hover:bg-primary group-hover:text-black hover:!bg-white hover:!text-black shadow-lg"
+                    <Link
+                        to="/contact"
+                        className="relative z-20 hidden md:block px-6 py-2 rounded-full text-sm font-bold transition-all duration-300
+                        bg-[#011111] text-[#eefff4] group-hover:bg-primary group-hover:text-black shadow-lg"
                     >
-                        Get in Touch
-                    </a>
+                        Start a Project
+                    </Link>
 
                     {/* Mobile Menu Button */}
                     <button
-                        className="relative z-20 md:hidden text-xl p-2 text-black group-hover:text-primary transition-colors duration-300"
+                        className="relative z-20 md:hidden text-xl p-2 text-black group-hover:text-white transition-colors duration-300"
                         onClick={() => setIsOpen(!isOpen)}
                     >
                         <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -149,15 +148,18 @@ const Navbar = () => {
                                 </motion.div>
                             ))}
 
-                            <motion.a
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: navLinks.length * 0.1 }}
-                                href="/#contact"
-                                className="mt-8 px-8 py-3 rounded-full bg-primary text-black font-bold text-lg"
                             >
-                                Get in Touch
-                            </motion.a>
+                                <Link
+                                    to="/contact"
+                                    className="mt-8 px-8 py-3 rounded-full bg-primary text-black font-bold text-lg inline-block"
+                                >
+                                    Start a Project
+                                </Link>
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}

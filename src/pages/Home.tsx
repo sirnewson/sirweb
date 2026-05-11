@@ -1,45 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
-import DriftCinemaxBanner from '../components/DriftCinemaxBanner';
-import WorkCinemaxBanner from '../components/WorkCinemaxBanner';
 import PageTransition from '../components/PageTransition';
 import MediaModal from '../components/MediaModal';
 
 const Home = () => {
-    const principles = [
-        { number: '01', title: 'Purpose-Driven', desc: 'Every design decision serves a strategic purpose. Beauty with meaning, not just aesthetics.' },
-        { number: '02', title: 'Human-Centered', desc: 'Technology serves people, not the other way around. Empathy and intuition guide the experience.' },
-        { number: '03', title: 'Future-Focused', desc: 'Building for today while anticipating tomorrow. Innovation balanced with timeless principles.' },
+    useEffect(() => {
+        document.title = "Sir Newson | Creative Direction, Brand Identity & Premium Visual Systems";
+    }, []);
+
+    const dashboardCards = [
+        { name: 'Work', path: '/work', desc: 'Selected visual concepts', icon: 'fas fa-briefcase' },
+        { name: 'Projects', path: '/projects', desc: 'Creative ecosystems', icon: 'fas fa-layer-group' },
+        { name: 'Services', path: '/services', desc: 'Design & tech systems', icon: 'fas fa-pen-nib' },
+        { name: 'Gallery', path: '/gallery', desc: 'Visual archive', icon: 'fas fa-image' },
+        { name: 'Motion', path: '/motion', desc: 'Cinematic movement', icon: 'fas fa-video' },
+        { name: 'Media', path: '/media', desc: 'Stories & publishing', icon: 'fas fa-newspaper' },
+        { name: 'Wynmind', path: '/drift-notes', desc: 'Thinking wing', icon: 'fas fa-brain' },
+        { name: 'Shop', path: '/shop', desc: 'Digital & physical goods', icon: 'fas fa-shopping-cart' },
     ];
 
     const recentWork = [
-        { title: 'Wild Idea', image: '/assets/images/recent_images/wild-idea.webp', type: 'image' },
-        { title: 'Profile', image: '/assets/images/recent_images/profilee.webp', type: 'image' },
-        { title: 'Silver', image: '/assets/images/recent_images/silver.webp', type: 'image' },
-        { title: 'Countrywide', image: '/assets/images/recent_images/countrywide-1.webp', type: 'image' },
-        { title: 'Fun Concept', image: '/assets/images/recent_images/fun-concept.webp', type: 'image' },
-        { title: 'Youtube', image: '/assets/images/recent_images/youytubeee.webp', type: 'image' },
-        { title: 'Cartoon', image: '/assets/images/recent_images/cartoon.webp', type: 'image' },
-        { title: 'Njugush 3M Post', image: '/assets/images/recent_images/njugush-3m-post.webp', type: 'image' },
-        { title: 'Post File', image: '/assets/images/recent_images/post-file.webp', type: 'image' },
-        { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
-        { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
-        { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
-        { title: 'Motion Reel 01', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68c95f3b08cbbd8bb6bd69f786162eda/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
-        { title: 'Mkurugenzi Hoodies', image: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
-        { title: 'Motion Reel 02', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/a5a314e4a0dc189a3abcf9b61a1adddb/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
-        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
-        { title: 'Saturday Dosage Character', image: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
-        { title: 'Mkurugenzi Women', image: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
-        { title: 'DJ Dibul Portrait', image: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
-        { title: 'KAB Project', image: '/assets/images/kab-1_61b51219.webp', type: 'image' },
-        { title: 'Billboard Design', image: '/assets/images/billbaord_ea33edfb.webp', type: 'image' },
-        { title: 'Motion Reel 03', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68d09a1216c77a6fbff83ba6ba528c8b/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Cleaning Concept', image: '/assets/images/cleanshelf-concept-3_3b0dacbc.webp', type: 'image' },
+        { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image', desc: 'Cinematic brand experience and visual storytelling.' },
+        { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image', desc: 'Comprehensive visual identity system and motion concepts.' },
+        { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image', desc: 'Campaign visuals and digital rollout strategy.' },
+        { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image', desc: 'Atmospheric visual concepts for live events and tours.' },
+        { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image', desc: 'Event branding and digital asset production.' },
+        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image', desc: 'Product visuals and seasonal campaign direction.' }
+    ];
+
+    const services = [
+        { title: 'Brand Identity & Visual Systems', desc: 'Logos, typography, color direction, brand mood, identity systems, and visual rules that create a consistent premium presence.', includes: ['Identity direction', 'Visual mood system', 'Campaign look and feel', 'Social media design direction', 'Brand usage guide'], link: '/services' },
+        { title: 'Website & Digital Presence', desc: 'Clean, intentional websites designed to feel modern, trustworthy, and easy to explore across every screen.', includes: ['UX/UI Design', 'Frontend Development', 'Motion & Interactions', 'Performance Optimization', 'SEO Infrastructure'], link: '/services' },
+        { title: 'Creative Direction', desc: 'Visual concepts, campaign direction, content moodboards, layouts, and storytelling systems for brands that need a stronger creative voice.', includes: ['Custom AI workflows', 'Prompt engineering', 'Concept generation', 'High-fidelity renders', 'Asset libraries'], link: '/services' },
+        { title: 'Editorial & Content Design', desc: 'Carousels, campaign visuals, social visuals, presentations, brand stories, and marketing materials designed with clarity and polish.', includes: ['Social Media Visuals', 'Carousels & Layouts', 'Brand Storytelling', 'Presentations', 'Print Ready Assets'], link: '/services' }
+    ];
+
+    const digitalGoods = [
+        { title: 'Prompt Vaults', icon: 'fas fa-terminal', status: 'Coming Soon' },
+        { title: 'Visual Packs', icon: 'fas fa-layer-group', status: 'Available' },
+        { title: 'Brand Templates', icon: 'fas fa-object-group', status: 'Available' },
+        { title: 'Wall Art', icon: 'fas fa-image', status: 'Available' },
     ];
 
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
@@ -47,304 +50,185 @@ const Home = () => {
     return (
         <div className="bg-neutral-black min-h-screen">
             <PageTransition>
-                <Hero showButtons={true} />
-                <WorkCinemaxBanner />
+                <Hero 
+                    showButtons={true} 
+                    title={<>Creative Direction for <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Visual Brands & Digital Systems</span></>}
+                    subtitle="Creative Direction for Businesses"
+                    shortParagraph="I help ambitious brands shape their identity, websites, content, and creative workflows into experiences people can feel, trust, and remember."
+                />
 
-                {/* About Snippet */}
-                <section className="py-16 md:py-24 px-6 bg-neutral-black relative">
-                    <div className="max-w-4xl mx-auto text-center border border-white/5 rounded-3xl p-10 bg-neutral-medium hover:border-primary/30 transition-colors duration-500">
-                        <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">A Visionary Digital Artisan</h2>
-                        <p className="text-white/60 text-lg md:text-xl leading-relaxed">
-                            Merging human intuition with cutting-edge artificial intelligence. I craft premium, conversion-ready digital experiences—from cinematic branding to full-stack tech ecosystems—designed for lasting impact.
-                        </p>
-                    </div>
-                </section>
-
-                {/* Art of Thoughtful Design */}
-                <section id="about" className="py-16 md:py-32 px-6 bg-neutral-black relative">
-                    <div className="max-w-7xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="text-center mb-24"
-                        >
-                            <h2 className="font-display text-4xl md:text-6xl font-bold mb-4 text-white">The Art of Thoughtful Design</h2>
-                            <p className="text-primary tracking-widest uppercase text-sm md:text-base">Three principles that guide every project</p>
-                        </motion.div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
-                            {principles.map((item, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    whileHover={{ y: -10 }}
-                                    transition={{ duration: 0.5, delay: index * 0.2 }}
-                                    className="border-t border-white/20 pt-8 group hover:border-primary/50 transition-colors duration-300"
+                {/* Floating Cream Dashboard */}
+                <section className="relative z-30 -mt-16 md:-mt-24 px-6 max-w-7xl mx-auto mb-40">
+                    <div className="bg-[rgba(238,255,244,0.92)] backdrop-blur-xl rounded-[28px] p-8 md:p-12 border border-black/5 shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            {dashboardCards.map((card, i) => (
+                                <Link 
+                                    key={i} 
+                                    to={card.path}
+                                    className="group block p-6 rounded-[20px] bg-[#011111] border border-white/5 hover-dark-lime-waves hover:border-primary/50 transition-all duration-300 shadow-lg"
                                 >
-                                    <div className="font-display text-6xl font-bold text-white/10 mb-4 group-hover:text-primary/20 transition-colors duration-300">{item.number}</div>
-                                    <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors duration-300">{item.title}</h3>
-                                    <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors duration-300">{item.desc}</p>
-                                </motion.div>
+                                    <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                                        <i className={`${card.icon} text-lg text-white/70 group-hover:text-primary`}></i>
+                                    </div>
+                                    <h3 className="font-display font-bold text-xl text-white mb-2">{card.name}</h3>
+                                    <p className="text-white/50 text-sm hidden md:block">{card.desc}</p>
+                                </Link>
                             ))}
                         </div>
                     </div>
                 </section>
 
                 {/* Selected Work */}
-                <section id="work" className="py-16 md:py-24 px-6 bg-neutral-black">
-                    <div className="text-center mb-16">
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Selected Work</h2>
-                        <p className="text-white/60">Curated projects and visual explorations</p>
-                    </div>
-                    <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 max-w-7xl mx-auto">
-                        {recentWork.map((project, index) => (
-                            <div
-                                key={index}
-                                className="group relative block rounded-2xl overflow-hidden break-inside-avoid cursor-pointer"
-                                onClick={() => setSelectedMedia({ src: project.image, title: project.title, type: project.type as 'image' | 'video' })}
-                            >
-                                {project.type === 'video' ? (
-                                    <iframe
-                                        src={project.image}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 pointer-events-none min-h-[400px]"
-                                        allow="autoplay; encrypted-media"
-                                        frameBorder="0"
-                                    ></iframe>
-                                ) : (
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                                    <h3 className="text-white text-2xl font-bold mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.title}</h3>
-                                    <div className="mt-4 text-white text-xs uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                                        {project.type === 'video' ? 'Watch Video' : 'View Project'}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <div className="flex justify-center pb-16 md:pb-24 bg-neutral-black">
-                    <a
-                        href="/gallery"
-                        className="px-8 py-3 rounded-full border border-white/20 text-white font-bold hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center gap-2 group"
-                    >
-                        View More Work <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-
-                {/* Trusted By */}
-                <section id="clients" className="py-16 md:py-24 px-6 bg-neutral-black border-t border-white/10">
-                    <div className="text-center mb-16">
-                        <p className="text-primary tracking-[0.2em] uppercase text-sm font-bold">Trusted By</p>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-12 md:gap-20 max-w-6xl mx-auto opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                        {[
-                            { icon: 'fab fa-google', name: 'Google' },
-                            { icon: 'fab fa-microsoft', name: 'Microsoft' },
-                            { icon: 'fab fa-spotify', name: 'Spotify' },
-                            { icon: 'fab fa-amazon', name: 'Amazon' },
-                            { icon: 'fab fa-airbnb', name: 'Airbnb' },
-                            { icon: 'fab fa-uber', name: 'Uber' },
-                        ].map((client, i) => (
-                            <div key={i} className="flex flex-col items-center gap-4 group cursor-default">
-                                <i className={`${client.icon} text-4xl md:text-5xl text-white group-hover:text-primary transition-colors duration-300`}></i>
-                                <span className="text-xs uppercase tracking-widest text-white/50 group-hover:text-white transition-colors duration-300">{client.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Biggest Projects */}
-                <section className="py-16 md:py-32 px-6 bg-neutral-black relative overflow-hidden">
+                <section id="work" className="py-32 md:py-40 px-6 bg-neutral-black relative">
                     <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-24">
-                            <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Ecosystem</p>
-                            <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">Our Digital Universe</h2>
-                            <p className="text-white/60 text-lg max-w-2xl mx-auto">
-                                Platforms we've built to empower creators, connect communities, and drive innovation.
-                            </p>
+                        <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                            <div>
+                                <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Selected Work with a Sense of Identity</h2>
+                                <p className="text-white/60 max-w-2xl">A curated collection of brand visuals, websites, campaigns, and creative systems shaped with clarity, restraint, and emotional presence.</p>
+                            </div>
+                            <Link to="/work" className="hidden md:flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm hover:text-white transition-colors">
+                                View All <i className="fas fa-arrow-right"></i>
+                            </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {[
-                                {
-                                    title: 'TAK Network',
-                                    desc: 'AI & tech media space connecting innovators, creators, and visionaries. Building the future of collaborative tech content.',
-                                    tags: ['Community', 'Media', 'Tech'],
-                                    link: 'https://taknetwork.online/',
-                                    color: 'text-cyan-400',
-                                    border: 'hover:border-cyan-400/50',
-                                    icon: 'fas fa-globe',
-                                    bg: 'from-cyan-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'YXM Digital',
-                                    desc: 'AI tools and solutions platform. Empowering businesses with intelligent automation, creative AI, and cutting-edge technology.',
-                                    tags: ['AI Tools', 'Solutions', 'Innovation'],
-                                    link: 'https://yxm.digital/',
-                                    color: 'text-primary',
-                                    border: 'hover:border-primary/50',
-                                    icon: 'fas fa-robot',
-                                    bg: 'from-primary/10 to-transparent'
-                                },
-                                {
-                                    title: 'PataKazi',
-                                    desc: "Learn the skills to pivot your career in the AI economy. Or find verified experts to get the job done.",
-                                    tags: ['Freelancing', 'Jobs', 'Marketplace'],
-                                    link: 'https://www.patakazi.co.ke/',
-                                    color: 'text-purple-400',
-                                    border: 'hover:border-purple-400/50',
-                                    icon: 'fas fa-briefcase',
-                                    bg: 'from-purple-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'WallTV',
-                                    desc: 'Transform your screen into a dynamic digital art display.',
-                                    tags: ['Visuals', 'Art', 'Display'],
-                                    link: 'https://walltv.vercel.app/',
-                                    color: 'text-pink-400',
-                                    border: 'hover:border-pink-400/50',
-                                    icon: 'fas fa-tv',
-                                    bg: 'from-pink-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'OrdaFasta',
-                                    desc: 'Seamless ordering and delivery platform for fast-paced lifestyles.',
-                                    tags: ['Delivery', 'Service', 'Speed'],
-                                    link: 'https://www.ordafasta.co.ke/',
-                                    color: 'text-orange-400',
-                                    border: 'hover:border-orange-400/50',
-                                    icon: 'fas fa-motorcycle',
-                                    bg: 'from-orange-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'FlowClock',
-                                    desc: 'Master your time with this elegant, focus-enhancing productivity tool.',
-                                    tags: ['Productivity', 'Time', 'Focus'],
-                                    link: 'https://flowclock-rose.vercel.app/',
-                                    color: 'text-rose-400',
-                                    border: 'hover:border-rose-400/50',
-                                    icon: 'fas fa-clock',
-                                    bg: 'from-rose-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'Finder YXM',
-                                    desc: 'Discover specialized AI tools and resources tailored for your needs.',
-                                    tags: ['Search', 'AI', 'Resource'],
-                                    link: 'https://finder.yxm.digital/',
-                                    color: 'text-blue-400',
-                                    border: 'hover:border-blue-400/50',
-                                    icon: 'fas fa-search',
-                                    bg: 'from-blue-400/10 to-transparent'
-                                },
-                                {
-                                    title: 'CaptionsMaster',
-                                    desc: 'Generate engaging captions for your social media content instantly.',
-                                    tags: ['Content', 'Social', 'AI'],
-                                    link: 'https://captionsmaster.yxm.digital/',
-                                    color: 'text-green-400',
-                                    border: 'hover:border-green-400/50',
-                                    icon: 'fas fa-closed-captioning',
-                                    bg: 'from-green-400/10 to-transparent'
-                                }
-                            ].map((project, index) => (
-                                <a
-                                    key={index}
-                                    href={project.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`group relative bg-neutral-medium p-10 rounded-3xl border border-white/5 ${project.border} transition-all duration-300 hover:-translate-y-2 overflow-hidden`}
-                                >
-                                    <div className={`absolute inset-0 bg-gradient-to-br ${project.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                                    <div className="relative z-10">
-                                        <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-8 ${project.color} group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-black/20`}>
-                                            <i className={project.icon}></i>
-                                        </div>
-                                        <h3 className="text-3xl font-bold text-white mb-4 font-display">{project.title}</h3>
-                                        <p className="text-white/60 leading-relaxed mb-8 min-h-[80px]">{project.desc}</p>
-                                        <div className="flex flex-wrap gap-2 mb-8">
-                                            {project.tags.map((tag, i) => (
-                                                <span key={i} className="px-3 py-1 rounded-full bg-black/20 text-xs text-white/50 uppercase tracking-wider border border-white/5 backdrop-blur-sm">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <div className={`flex items-center gap-2 text-sm font-bold uppercase tracking-widest ${project.color}`}>
-                                            Visit {project.title} <i className="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {recentWork.map((project, index) => (
+                                <Link to="/work" key={index} className="group flex flex-col bg-[#011111] rounded-[28px] overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-500 shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
+                                    <div 
+                                        className="relative h-[300px] md:h-[400px] overflow-hidden cursor-pointer"
+                                    >
+                                        <img
+                                            src={project.image}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                                        />
+                                        <div className="absolute top-4 left-4">
+                                            <span className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-primary text-xs font-bold uppercase tracking-widest border border-white/10">
+                                                Visual System
+                                            </span>
                                         </div>
                                     </div>
-                                </a>
+                                    <div className="p-8">
+                                        <h3 className="text-white text-2xl font-bold mb-2 font-display">{project.title}</h3>
+                                        <p className="text-white/60 mb-6">{project.desc}</p>
+                                        <div className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
+                                            View Case <i className="fas fa-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
                 </section>
 
-                {/* Learn AI Section */}
-                <section className="py-16 md:py-32 px-6 bg-neutral-dark border-y border-white/10 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
-                    <div className="max-w-5xl mx-auto text-center relative z-10">
-                        <div className="inline-block p-4 rounded-full bg-primary/10 mb-8 animate-pulse">
-                            <i className="fas fa-sparkles text-3xl text-primary"></i>
+                {/* What I Build */}
+                <section className="py-32 md:py-40 px-6 bg-[#011111] border-y border-white/5">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Built for Brands That Care How They Are Remembered</h2>
+                            <p className="text-white/60 max-w-3xl mx-auto text-lg mb-6">
+                                Sir Newson is a creative direction and visual design studio focused on building refined brand identities, digital experiences, and visual systems. The work blends strategy, simplicity, storytelling, and a strong sense of atmosphere to help brands communicate with clarity and confidence.
+                            </p>
+                            <p className="text-white/60 max-w-3xl mx-auto text-lg">
+                                The goal is not just to make things look good. It is to create a visual presence that feels trusted, elevated, and unmistakably aligned with the brand’s next level.
+                            </p>
                         </div>
-                        <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                            Master <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Creative AI</span>
-                        </h2>
-                        <p className="text-white/60 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-                            Ready to unlock the power of AI for your creative projects? Book a personalized session and discover how to bring your imagination to life with cutting-edge AI tools.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <a
-                                href="mailto:sirnewson@gmail.com"
-                                className="px-10 py-5 rounded-full bg-neutral-medium border border-white/10 text-white font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 min-w-[200px]"
-                            >
-                                <i className="fas fa-envelope mr-2"></i> Book via Email
-                            </a>
-                            <a
-                                href="https://wa.me/254702480771?text=Hi,%20I'd%20like%20to%20book%20a%20personalized%20AI%20training%20session."
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-10 py-5 rounded-full bg-primary text-black font-bold text-lg hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(191,255,0,0.3)] hover:shadow-[0_0_50px_rgba(191,255,0,0.5)] min-w-[200px]"
-                            >
-                                <i className="fab fa-whatsapp mr-2"></i> WhatsApp
-                            </a>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {services.map((service, index) => (
+                                <div key={index} className="bg-neutral-black p-8 md:p-10 rounded-[28px] border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col h-full shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
+                                    <h3 className="text-2xl font-bold text-white mb-4 font-display">{service.title}</h3>
+                                    <p className="text-white/60 mb-8 flex-grow">{service.desc}</p>
+                                    
+                                    <div className="mb-8">
+                                        <p className="text-xs uppercase tracking-widest text-primary font-bold mb-4">Includes</p>
+                                        <ul className="space-y-2">
+                                            {service.includes.map((item, i) => (
+                                                <li key={i} className="text-white/80 text-sm flex items-center gap-3">
+                                                    <i className="fas fa-check text-primary text-xs"></i> {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    
+                                    <Link to={service.link} className="inline-flex items-center justify-center w-full py-4 rounded-full bg-white/5 text-white font-bold hover:bg-primary hover:text-black transition-all duration-300">
+                                        Let's Build
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </section>
 
-                {/* Testimonial */}
-                <section className="py-20 md:py-40 px-6 bg-neutral-black relative overflow-hidden">
-                    <div className="max-w-4xl mx-auto text-center relative z-10">
-                        <i className="fas fa-quote-left text-5xl text-primary/50 mb-8 block" />
-                        <blockquote className="font-display text-2xl md:text-4xl font-bold text-white leading-relaxed mb-12">
-                            "Sir Newson didn't just design a website; they crafted a digital soul for our brand. The attention to detail and the seamless blend of art and function is unlike anything we've seen."
-                        </blockquote>
-                        <cite className="not-italic block mb-12">
-                            <span className="block font-bold text-primary mb-2">Sarah Jenkins</span>
-                            <span className="text-white/70 text-sm">CEO, Future Finance</span>
-                        </cite>
-
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Drift Library</h2>
-
-                        <p className="text-white/60 mb-8 text-lg">
-                            A global archive of essays exploring the architecture of the mind, the digital soul, and the quiet spaces in between.
-                        </p>
-                        <a href="https://thedriftlibrary.yxm.digital/" target="_blank" rel="noopener noreferrer" className="inline-block px-12 py-4 bg-primary text-black rounded-full font-semibold hover:bg-white transition-colors shadow-lg shadow-primary/20">
-                            Start Reading
-                        </a>
+                {/* Wynmind Feature */}
+                <section className="py-32 px-6 bg-neutral-black relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15]"></div>
+                    <div className="max-w-5xl mx-auto relative z-10">
+                        <div className="bg-[#011111] border border-white/10 rounded-[40px] p-10 md:p-20 text-center shadow-[0_40px_100px_rgba(0,0,0,0.5)]">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-8">
+                                <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind Logo" className="h-8 object-contain drop-shadow-[0_0_10px_rgba(191,255,0,0.5)] invert opacity-80" />
+                            </div>
+                            <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">Wynmind</h2>
+                            <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                                A reflective space for ideas, visual thoughts, inner worlds, and drift notes. Win your mind. Through awareness.
+                            </p>
+                            
+                            <div className="flex flex-wrap justify-center gap-4 mb-12">
+                                {['Mental Clarity', 'Creative Awareness', 'Inner Visual Worlds'].map((tag, i) => (
+                                    <span key={i} className="px-4 py-2 rounded-full border border-white/10 text-white/70 text-sm">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            
+                            <Link to="/drift-notes" className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-primary text-black font-bold text-lg hover:bg-white transition-all duration-300">
+                                Enter Wynmind <i className="fas fa-arrow-right"></i>
+                            </Link>
+                        </div>
                     </div>
+                </section>
 
-                    <div className="mt-12">
-                        <DriftCinemaxBanner />
+                {/* Digital Goods Preview */}
+                <section className="py-32 md:py-40 px-6 bg-[#011111] border-t border-white/5">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex flex-col md:flex-row justify-between items-end mb-16">
+                            <div className="max-w-2xl">
+                                <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Digital Goods</h2>
+                                <p className="text-white/60">Tools, prompts, templates, and creative assets built for faster thinking and better execution.</p>
+                            </div>
+                            <Link to="/shop" className="hidden md:flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm hover:text-white transition-colors">
+                                View Shop <i className="fas fa-arrow-right"></i>
+                            </Link>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                            {digitalGoods.map((item, i) => (
+                                <Link key={i} to="/shop" className="group bg-neutral-black rounded-[24px] p-8 border border-white/5 hover:border-primary/30 transition-all duration-300 text-center shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
+                                    <div className="w-16 h-16 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors">
+                                        <i className={`${item.icon} text-2xl text-white/50 group-hover:text-primary`}></i>
+                                    </div>
+                                    <h3 className="text-white font-bold mb-2">{item.title}</h3>
+                                    <span className="text-xs uppercase tracking-widest text-white/40">{item.status}</span>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* Final CTA */}
+                <section className="py-32 px-6 bg-neutral-black border-t border-white/5">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-8">
+                            Got an idea that <br/><span className="text-primary italic font-serif">needs form?</span>
+                        </h2>
+                        <div className="flex flex-col sm:flex-row justify-center gap-6">
+                            <Link to="/contact" className="px-10 py-5 rounded-full bg-primary text-black font-bold text-lg hover:bg-white transition-all duration-300 shadow-[0_0_30px_rgba(191,255,0,0.2)] hover:shadow-[0_0_50px_rgba(191,255,0,0.4)]">
+                                Start a Project
+                            </Link>
+                            <Link to="/work" className="px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-lg hover:bg-white/10 transition-all duration-300">
+                                View Work
+                            </Link>
+                        </div>
                     </div>
                 </section>
 

@@ -9,10 +9,9 @@ const ContactSection = () => {
             <div className="max-w-4xl mx-auto relative z-10">
                 <div className="text-center mb-16">
                     <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Get in Touch</p>
-                    <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Let's Create Something Amazing</h2>
-                    <p className="text-white/60 max-w-2xl mx-auto">
-                        Have a project in mind? Looking for a creative partner?
-                        Fill out the form below or reach out directly on social media.
+                    <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something With Presence</h2>
+                    <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
+                        Whether you are shaping a new brand, refining an existing identity, launching a website, or building a visual direction for your next chapter, I would love to hear what you are working on.
                     </p>
                 </div>
 
@@ -72,7 +71,7 @@ const ContactSection = () => {
                                 className="w-full bg-primary text-black font-bold py-4 rounded-lg hover:bg-white transition-colors duration-300 shadow-[0_0_20px_#BFFF004D] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center gap-2"
                             >
                                 <i className="fab fa-whatsapp text-xl"></i>
-                                Send via WhatsApp
+                                Start a Project
                             </button>
                         </form>
                     </motion.div>

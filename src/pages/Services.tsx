@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
@@ -5,91 +6,64 @@ import Navbar from '../components/Navbar';
 
 const servicesData = [
     {
-        category: "Creative Design",
-        icon: "fa-paint-brush",
+        category: "Brand Identity & Visual Systems",
+        icon: "fa-fingerprint",
         services: [
-            { title: "Brand Identity Design", desc: "Clean, timeless logos and full identity systems." },
-            { title: "Product Marketing Visuals", desc: "High-end product scenes, 3D edits, and mockups." },
-            { title: "Social Media Design", desc: "Posters, carousels, campaigns, and visual storytelling." },
-            { title: "3D & AI Visual Creation", desc: "Advanced product manipulation and cinematic AI scenes." }
+            { title: "Identity Design", desc: "Logos, typography, color direction, and brand mood." },
+            { title: "Brand Systems", desc: "Visual rules that create a consistent premium presence." },
+            { title: "Visual Language", desc: "Establishing a timeless and refined aesthetic for modern brands." }
         ]
     },
     {
-        category: "Content & Strategy",
-        icon: "fa-chess-queen",
+        category: "Website & Digital Presence",
+        icon: "fa-laptop-code",
         services: [
-            { title: "Content Strategy & Planning", desc: "Daily content pillars for brands and creators." },
-            { title: "Reels & Video Editing", desc: "Educative reels, cinematic edits, and storytelling." },
-            { title: "Copywriting & Captions", desc: "Hooks, scripts, and persuasive messaging." }
+            { title: "Intentional Web Design", desc: "Clean, intentional websites designed to feel modern and trustworthy." },
+            { title: "User Experience", desc: "Easy to explore interfaces across every screen and device." },
+            { title: "Digital Ecosystems", desc: "Scalable digital platforms built for long-term growth." }
         ]
     },
     {
-        category: "Web & AI Development",
-        icon: "fa-code",
+        category: "Creative Direction",
+        icon: "fa-compass",
         services: [
-            { title: "Website Design", desc: "Minimal, modern sites for brands and businesses." },
-            { title: "Web App Development", desc: "React apps, dashboards, and custom systems." },
-            { title: "AI Tool Creation", desc: "Custom AI agents, generators, automations, and workflows." }
+            { title: "Visual Concepts", desc: "Creative vision and direction for brands that need a stronger voice." },
+            { title: "Campaign Direction", desc: "End-to-end guidance for high-impact visual campaigns." },
+            { title: "Storytelling Systems", desc: "Content moodboards, layouts, and narrative structures." }
         ]
     },
     {
-        category: "Music & Audio",
-        icon: "fa-music",
+        category: "Editorial & Content Design",
+        icon: "fa-book-open",
         services: [
-            { title: "Music Production & Fusions", desc: "Explore Radio mixes and brand sound design." },
-            { title: "AI-Enhanced Music Creation", desc: "Suno-guided compositions and vocal concepts." }
+            { title: "Social Visuals", desc: "Carousels, campaign visuals, and brand stories designed with clarity." },
+            { title: "Marketing Materials", desc: "Presentations and sales assets with a polished, premium feel." },
+            { title: "Content Architecture", desc: "Structuring editorial content for maximum emotional resonance." }
         ]
     },
     {
-        category: "Media & Brand Story",
-        icon: "fa-microphone-alt",
+        category: "Motion & Visual Storytelling",
+        icon: "fa-film",
         services: [
-            { title: "TAK Network Media", desc: "Tech, AI, business, and football content production." },
-            { title: "Brand Messaging & Positioning", desc: "Tone-of-voice, storytelling, and identity alignment." },
-            { title: "Drift Notes Writing", desc: "Philosophical reflections, quotes, and ebooks." }
-        ]
-    },
-    {
-        category: "Photography & Visual Storytelling",
-        icon: "fa-camera",
-        services: [
-            { title: "Creative Photography Concepts", desc: "Sky art, lifestyle visuals, and narrative images." },
-            { title: "Tourism & Cultural Visuals", desc: "Scenes showcasing Kenya’s beauty and culture." }
-        ]
-    },
-    {
-        category: "Marketing & Advertising",
-        icon: "fa-bullhorn",
-        services: [
-            { title: "Campaign Design & Execution", desc: "Restaurants, safaris, events, and retail ads." },
-            { title: "Product & Luxury Listing Content", desc: "Cars, houses, smartphones, and lifestyle products." }
-        ]
-    },
-    {
-        category: "Kids & Education",
-        icon: "fa-child",
-        services: [
-            { title: "Kids eBooks & Storytelling", desc: "Illustrated stories for Ebusoma and YouTube." },
-            { title: "Early Learning Systems", desc: "CBC-aligned content and interactive experiences." }
-        ]
-    },
-    {
-        category: "Entrepreneurial System Building",
-        icon: "fa-rocket",
-        services: [
-            { title: "Ecommerce & Funnels", desc: "Quick Shopping, Tenacity, and product funnels." },
-            { title: "Creative Platforms & Ecosystems", desc: "Travotu, Explore, Pata-Fashion, and more." }
+            { title: "Cinematic Visuals", desc: "High-end motion concepts and atmospheric creative assets." },
+            { title: "Brand Reels", desc: "Dynamic video content that helps ideas feel alive." },
+            { title: "Immersive Experiences", desc: "Motion design that captivates and holds attention." }
         ]
     }
 ];
 
 const Services = () => {
+    useEffect(() => {
+        document.title = "Creative Direction & Brand Design Services in Kenya | Sir Newson";
+    }, []);
+
     return (
         <div className="bg-neutral-black min-h-screen">
             <Navbar />
             <Hero
-                title="Services"
-                subtitle="Expertise & Offerings"
+                title={<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Premium Services</span>}
+                subtitle="Creative Direction & Brand Design"
+                shortParagraph="Bespoke creative direction, brand identity systems, and digital experiences designed for ambitious brands that want to be remembered."
             />
 
             <section className="py-16 md:py-24 px-6 relative">
