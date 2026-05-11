@@ -74,7 +74,7 @@ const Hero = ({
                     )}
 
                     {showButtons && (
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
                             <Link
                                 to="/work"
                                 className="px-8 py-4 rounded-full bg-primary text-black font-semibold text-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_#BFFF004D] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1"
