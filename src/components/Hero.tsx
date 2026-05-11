@@ -16,7 +16,7 @@ const Hero = ({
     stats = true
 }: HeroProps & { showButtons?: boolean; shortParagraph?: string; stats?: boolean }) => {
     return (
-        <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+        <section className="relative min-h-[120vh] w-full overflow-hidden flex items-center justify-center py-32">
             {/* Video Background */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-neutral-black/50 z-10" /> {/* Overlay */}
@@ -33,7 +33,7 @@ const Hero = ({
             </div>
 
             {/* Content */}
-            <div className="relative z-20 text-center px-4 max-w-5xl mx-auto pt-24 md:pt-32 pb-32">
+            <div className="relative z-20 text-center px-4 max-w-5xl mx-auto pt-48 md:pt-64 pb-32">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
