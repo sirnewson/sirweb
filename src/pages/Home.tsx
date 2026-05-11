@@ -28,7 +28,10 @@ const Home = () => {
         { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image', desc: 'Campaign visuals and digital rollout strategy.' },
         { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image', desc: 'Atmospheric visual concepts for live events and tours.' },
         { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image', desc: 'Event branding and digital asset production.' },
-        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image', desc: 'Product visuals and seasonal campaign direction.' }
+        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image', desc: 'Product visuals and seasonal campaign direction.' },
+        { title: 'Abel Mutua Branding', image: '/assets/images/abel_visual_01.webp', type: 'image', desc: 'Comprehensive branding and digital strategy for a lead storyteller.' },
+        { title: 'Phoneplace Kenya', image: '/assets/images/slide-one_c4139737.webp', type: 'image', desc: 'Redefining the mobile shopping experience with a modern platform.' },
+        { title: 'Wattle Safaris', image: '/assets/images/Logo-Placement_f85e9554.webp', type: 'image', desc: 'Luxury safari experiences branded for the international traveler.' }
     ];
 
     const services = [
@@ -91,7 +94,7 @@ const Home = () => {
                             </Link>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {recentWork.map((project, index) => (
                                 <Link to="/work" key={index} className="group flex flex-col bg-[#011111] rounded-[28px] overflow-hidden border border-white/5 hover:border-primary/20 transition-all duration-500 shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
                                     <div 
@@ -124,35 +127,51 @@ const Home = () => {
                 {/* What I Build */}
                 <section className="py-32 md:py-40 px-6 bg-[#011111] border-y border-white/5">
                     <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-16">
-                            <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Built for Brands That Care How They Are Remembered</h2>
-                            <p className="text-white/60 max-w-3xl mx-auto text-lg mb-6">
-                                Sir Newson is a creative direction and visual design studio focused on building refined brand identities, digital experiences, and visual systems. The work blends strategy, simplicity, storytelling, and a strong sense of atmosphere to help brands communicate with clarity and confidence.
-                            </p>
-                            <p className="text-white/60 max-w-3xl mx-auto text-lg">
-                                The goal is not just to make things look good. It is to create a visual presence that feels trusted, elevated, and unmistakably aligned with the brand’s next level.
-                            </p>
+                        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-24">
+                            <div className="lg:w-1/2">
+                                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">Built for Brands That Care How They Are Remembered</h2>
+                                <div className="w-24 h-1 bg-primary rounded-full mt-8"></div>
+                            </div>
+                            <div className="lg:w-1/2 flex flex-col justify-end">
+                                <p className="text-white/60 text-lg md:text-xl mb-6 leading-relaxed">
+                                    Sir Newson is a creative direction and visual design studio focused on building refined brand identities, digital experiences, and visual systems. The work blends strategy, simplicity, storytelling, and a strong sense of atmosphere to help brands communicate with clarity and confidence.
+                                </p>
+                                <p className="text-white/60 text-lg md:text-xl leading-relaxed">
+                                    The goal is not just to make things look good. It is to create a visual presence that feels trusted, elevated, and unmistakably aligned with the brand’s next level.
+                                </p>
+                            </div>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                             {services.map((service, index) => (
-                                <div key={index} className="bg-neutral-black p-8 md:p-10 rounded-[28px] border border-white/5 hover:border-primary/30 transition-all duration-300 flex flex-col h-full shadow-[0_20px_60px_rgba(1,17,17,0.08)]">
-                                    <h3 className="text-2xl font-bold text-white mb-4 font-display">{service.title}</h3>
-                                    <p className="text-white/60 mb-8 flex-grow">{service.desc}</p>
+                                <div key={index} className="group relative bg-neutral-black p-10 md:p-12 rounded-[40px] border border-white/5 hover:border-primary/20 transition-all duration-500 flex flex-col h-full shadow-[0_20px_60px_rgba(1,17,17,0.1)] overflow-hidden">
+                                    {/* Decorative gradient corner */}
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                     
-                                    <div className="mb-8">
-                                        <p className="text-xs uppercase tracking-widest text-primary font-bold mb-4">Includes</p>
-                                        <ul className="space-y-2">
-                                            {service.includes.map((item, i) => (
-                                                <li key={i} className="text-white/80 text-sm flex items-center gap-3">
-                                                    <i className="fas fa-check text-primary text-xs"></i> {item}
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    <div className="mb-8 flex items-start justify-between">
+                                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary text-2xl group-hover:bg-primary group-hover:text-black transition-all duration-500 shadow-lg group-hover:shadow-primary/20">
+                                            <i className={`${index === 0 ? 'fas fa-fingerprint' : index === 1 ? 'fas fa-laptop-code' : index === 2 ? 'fas fa-compass' : 'fas fa-book-open'}`}></i>
+                                        </div>
+                                        <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/20">0{index + 1}</span>
                                     </div>
                                     
-                                    <Link to={service.link} className="inline-flex items-center justify-center w-full py-4 rounded-full bg-white/5 text-white font-bold hover:bg-primary hover:text-black transition-all duration-300">
-                                        Let's Build
+                                    <h3 className="text-3xl font-bold text-white mb-4 font-display group-hover:text-primary transition-colors">{service.title}</h3>
+                                    <p className="text-white/50 text-lg mb-10 flex-grow leading-relaxed">{service.desc}</p>
+                                    
+                                    <div className="mb-10 space-y-4">
+                                        <p className="text-xs uppercase tracking-widest text-primary font-bold mb-6">Expertise Included</p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                                            {service.includes.map((item, i) => (
+                                                <div key={i} className="text-white/70 text-sm flex items-center gap-3 group/item">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover/item:bg-primary transition-colors"></div>
+                                                    {item}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    
+                                    <Link to={service.link} className="inline-flex items-center justify-center gap-3 w-full py-5 rounded-2xl bg-white/5 text-white font-bold hover:bg-primary hover:text-black transition-all duration-500 border border-white/5 group-hover:border-primary/30">
+                                        Let's Build <i className="fas fa-arrow-right text-xs opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1"></i>
                                     </Link>
                                 </div>
                             ))}
