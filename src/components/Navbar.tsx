@@ -23,13 +23,8 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Work', path: '/work' },
-        { name: 'Projects', path: '/projects' },
-        { name: 'Services', path: '/services' },
-        { name: 'Gallery', path: '/gallery' },
-        { name: 'Motion', path: '/motion' },
-        { name: 'Media', path: '/media' },
-        { name: 'Wynmind', path: '/drift-notes' },
         { name: 'Shop', path: '/shop' },
+        { name: 'Threads', path: '/threads' },
         { name: 'Contact', path: '/contact' },
     ];
 

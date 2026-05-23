@@ -24,7 +24,7 @@ const AiTools = () => {
         { title: "AI Data", description: "Analysis tool.", url: "https://aidata-eta.vercel.app/", type: "Premium" },
         { title: "Finmbeca", description: "Finance tool.", url: "https://finmbeca.vercel.app/", type: "Premium" },
         { title: "Visuals", description: "Image Gen.", url: "https://visuals-eta.vercel.app/", type: "Premium" },
-        { title: "Captions", description: "Video tools.", url: "https://captionsmaster.vercel.app/", type: "Premium" },
+        { title: "Captions", description: "Video tools.", url: "https://captionsmaster.yxm.digital/", type: "Premium" },
         { title: "Momentum", description: "Productivity.", url: "https://momentum-five-gamma.vercel.app/", type: "Free" },
         { title: "QR Code", description: "Code generator.", url: "https://qrcode.yxm.digital/", type: "Free" },
         { title: "Pixels", description: "Pixel art.", url: "https://pixels-five-ivory.vercel.app/", type: "Free" },

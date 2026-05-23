@@ -1,119 +1,131 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface HeroProps {
     title?: React.ReactNode;
     subtitle?: string;
-    videoUrl?: string;
+    shortParagraph?: string;
 }
 
 const Hero = ({
-    title = <>Crafting Digital <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Masterpieces</span></>,
-    subtitle = "Creative Director & Digital Artist",
-    videoUrl = "https://cdn.pixabay.com/video/2024/06/06/215484_large.mp4",
-    showButtons = false,
-    shortParagraph = "Building visual identities, dynamic web experiences, and AI-enhanced creative solutions for ambitious brands.",
-    stats = true
-}: HeroProps & { showButtons?: boolean; shortParagraph?: string; stats?: boolean }) => {
+    title = "Sir Newson",
+    subtitle = "Product Design • Web Systems • AI Systems • Marketing Direction",
+    shortParagraph = "Designing premium digital products, high-performance web systems, AI-powered workflows, and strategic marketing directions for brands building in the digital age."
+}: HeroProps) => {
+    const location = useLocation();
+
     return (
-        <section className="relative min-h-[120vh] w-full overflow-hidden flex items-center justify-center py-32">
-            {/* Video Background */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-neutral-black/50 z-10" /> {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-black/80 via-transparent to-neutral-black z-10" />
+        <section className="relative w-full overflow-hidden pt-36 pb-16 flex flex-col items-center justify-center font-sans border-b border-white/5">
+            {/* Background Ocean/Water Motion Video */}
+            <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-black/80 via-neutral-black/60 to-neutral-black z-10" />
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover scale-105 opacity-60"
+                    className="w-full h-full object-cover opacity-25 scale-105"
                 >
-                    <source src={videoUrl} type="video/mp4" />
+                    <source src="https://cdn.pixabay.com/video/2019/05/17/23719-336712399_large.mp4" type="video/mp4" />
                 </video>
             </div>
 
-            {/* Content */}
-            <div className="relative z-20 text-center px-4 max-w-5xl mx-auto pt-48 md:pt-64 pb-32">
+            {/* Hexagonal Pattern Overlay for atmospheric depth */}
+            <div className="absolute inset-0 bg-hexagon-grid opacity-40 mix-blend-color-dodge pointer-events-none z-5" />
+
+            {/* Glowing Ambient Orbs for immersive visual weight */}
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Content Container */}
+            <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl w-full mx-auto">
+                {/* Animated Hexagonal Profile Avatar */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.5 }}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                    className="relative w-28 h-28 md:w-32 md:h-32 mb-6 group cursor-pointer flex items-center justify-center"
                 >
-                    <motion.div
-                        initial={{ scale: 0, rotate: -180 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.2 }}
-                        className="mb-8 inline-block relative"
-                    >
-                        <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-                        <div className="relative w-24 h-24 md:w-32 md:h-32 group cursor-pointer">
+                    {/* Glowing Hex Background */}
+                    <div className="absolute inset-0 bg-primary/20 blur-xl clip-hexagon" />
+                    
+                    {/* Hex Outer Border */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/30 to-transparent p-[2px] clip-hexagon group-hover:from-primary transition-all duration-500">
+                        {/* Hex Image Container */}
+                        <div className="w-full h-full bg-neutral-black clip-hexagon relative overflow-hidden">
                             <img
                                 src="/assets/images/new-logo_e9f3d068.webp"
-                                alt="Sir Newson"
-                                className="w-full h-full object-cover rounded-full absolute inset-0 z-10 drop-shadow-[0_0_15px_rgba(191,255,0,0.3)] border-2 border-primary/20 transition-opacity duration-500 group-hover:opacity-0"
+                                alt="Sir Newson Logo"
+                                className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0"
                             />
                             <img
                                 src="/assets/images/facee_63957c48.webp"
-                                alt="Sir Newson"
-                                className="w-full h-full object-cover rounded-full absolute inset-0 z-10 drop-shadow-[0_0_15px_rgba(191,255,0,0.3)] border-2 border-primary/20 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+                                alt="Sir Newson Face"
+                                className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out opacity-0 scale-105 group-hover:scale-100 group-hover:opacity-100"
                             />
                         </div>
-                    </motion.div>
+                    </div>
+                </motion.div>
 
-                    <h2 className="text-primary font-medium tracking-[0.2em] uppercase mb-6 text-sm md:text-base text-glow">
-                        {subtitle}
-                    </h2>
-                    <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl">
-                        {title}
-                    </h1>
+                {/* Title / Brand Name */}
+                <motion.h1 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="font-display text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight drop-shadow-lg"
+                >
+                    {title}
+                </motion.h1>
 
-                    {shortParagraph && (
-                        <p className="text-white/70 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-                            {shortParagraph}
-                        </p>
-                    )}
+                {/* Subtitle / Focus */}
+                <motion.p 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-primary font-display font-medium tracking-[0.15em] text-xs md:text-sm uppercase mb-4 text-glow"
+                >
+                    {subtitle}
+                </motion.p>
 
-                    {showButtons && (
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-                            <Link
-                                to="/work"
-                                className="px-8 py-4 rounded-full bg-primary text-black font-semibold text-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_#BFFF004D] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1"
-                            >
-                                View Selected Work
-                            </Link>
-                            <Link
-                                to="/contact"
-                                className="px-8 py-4 rounded-full border border-white/20 text-white font-semibold text-lg hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
-                            >
-                                Build With Me
-                            </Link>
-                        </div>
-                    )}
+                {/* Description */}
+                <motion.p 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="text-white/70 text-base md:text-lg max-w-2xl mb-8 leading-relaxed font-light"
+                >
+                    {shortParagraph}
+                </motion.p>
 
-                    {stats && (
-                        <div className="mt-16 mb-16 flex flex-wrap justify-center gap-6 md:gap-12 text-white/50 text-sm uppercase tracking-widest font-bold">
-                            <span>10+ Years in Design</span>
-                            <span className="hidden md:inline">•</span>
-                            <span>Visual Concepts</span>
-                            <span className="hidden md:inline">•</span>
-                            <span>Creative Worlds</span>
-                        </div>
-                    )}
-
-                    {/* Scroll Indicator (Moved inside to flow below stats) */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 2, duration: 1 }}
-                        className="flex flex-col items-center gap-2 text-white/30"
+                {/* Action Buttons with active states based on path */}
+                <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="flex items-center gap-4"
+                >
+                    <Link
+                        to="/work"
+                        className={`px-6 py-3 rounded-full font-bold text-xs md:text-sm transition-all duration-300 ${
+                            location.pathname === '/work'
+                                ? 'bg-white text-black shadow-lg shadow-white/10'
+                                : 'bg-primary text-black hover:bg-white shadow-[0_0_20px_rgba(191,255,0,0.25)]'
+                        }`}
                     >
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Scroll</span>
-                        <div className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent" />
-                    </motion.div>
+                        View Work
+                    </Link>
+                    <Link
+                        to="/contact"
+                        className={`px-6 py-3 rounded-full border font-bold text-xs md:text-sm transition-all duration-300 ${
+                            location.pathname === '/contact'
+                                ? 'bg-white text-black border-white'
+                                : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
+                        }`}
+                    >
+                        Start a Project
+                    </Link>
                 </motion.div>
             </div>
-
-
         </section>
     );
 };

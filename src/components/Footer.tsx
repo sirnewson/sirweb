@@ -1,161 +1,106 @@
 import { Link } from 'react-router-dom';
-import DriftMarquee from './DriftMarquee';
-import GlobalShopBanner from './GlobalShopBanner';
 
 const Footer = () => {
     return (
-        <>
-            <GlobalShopBanner />
-            <DriftMarquee />
-            <footer id="contact" className="relative bg-neutral-black py-24 px-8 border-t border-white/10">
-                <div className="max-w-7xl mx-auto">
-                    {/* Top Section: Branding & Mini Banners */}
-                    <div className="flex flex-col lg:flex-row justify-between items-start gap-16 mb-24 border-b border-white/5 pb-24">
+        <footer className="w-full font-sans select-none">
+            {/* Top Lime Section */}
+            <div className="bg-primary text-black py-16 px-8 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+                    Let's work together
+                </h2>
+                <div className="flex items-center gap-8 text-sm md:text-base font-bold tracking-wide">
+                    <Link 
+                        to="/contact" 
+                        className="border-b-2 border-black pb-1 hover:opacity-75 transition-opacity"
+                    >
+                        Get in Touch
+                    </Link>
+                    <Link 
+                        to="/work" 
+                        className="border-b-2 border-black pb-1 hover:opacity-75 transition-opacity"
+                    >
+                        Selected Work
+                    </Link>
+                </div>
+            </div>
 
-                        {/* Branding */}
-                        <div className="space-y-8 max-w-md">
-                            <div className="flex items-center gap-6">
-                                {/* Circular Profile Image */}
-                                <div className="relative w-24 h-24 group cursor-pointer">
-                                    <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-                                    <img
-                                        src="/assets/images/new-logo_e9f3d068.webp"
-                                        alt="Sir Newson Face"
-                                        className="w-full h-full object-cover rounded-full relative z-10 drop-shadow-[0_0_15px_rgba(191,255,0,0.3)] border-2 border-primary/20 transition-transform duration-500 group-hover:scale-105"
-                                    />
-                                </div>
-                                {/* Main Logo */}
-                                <img
-                                    src="/assets/images/my-logo_2247a828.webp"
-                                    alt="Sir Newson Logo"
-                                    className="h-16 w-auto opacity-80 hover:opacity-100 transition-all duration-500 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
-                                />
+            {/* Bottom White/Light-Gray Section */}
+            <div className="bg-[#FAF9F6] text-black pt-20 pb-8 px-8 md:px-16 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
+                    
+                    {/* Socials & Policies */}
+                    <div className="space-y-12">
+                        {/* Social Icons */}
+                        <div className="flex gap-6 text-xl">
+                            <a 
+                                href="https://linkedin.com/in/sirnewson" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="hover:opacity-70 transition-opacity"
+                                aria-label="LinkedIn"
+                            >
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                            <a 
+                                href="https://instagram.com/sirnewson" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="hover:opacity-70 transition-opacity"
+                                aria-label="Instagram"
+                            >
+                                <i className="fab fa-instagram"></i>
+                            </a>
+                            <a 
+                                href="https://twitter.com/sirnewson" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="hover:opacity-70 transition-opacity"
+                                aria-label="Twitter"
+                            >
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                        </div>
+
+                        {/* Copyright & Terms */}
+                        <div className="text-xs text-black/50 space-y-2 font-medium">
+                            <p>©2026 SIR NEWSON</p>
+                            <div className="flex gap-4">
+                                <Link to="/" className="hover:underline">Terms of Use</Link>
+                                <Link to="/" className="hover:underline">Privacy Policy</Link>
                             </div>
-                            <p className="text-white/60 text-lg leading-relaxed">
-                                Merging human intuition with artificial intelligence to craft premium digital experiences.
-                                <br />
-                                <span className="text-primary mt-4 block font-bold">Nairobi, Kenya 🇰🇪</span>
+                        </div>
+                    </div>
+
+                    {/* Locations Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 md:gap-24 text-left">
+                        {/* Nairobi, Kenya */}
+                        <div className="space-y-3">
+                            <h4 className="font-bold text-sm tracking-wider uppercase text-black/80">Location</h4>
+                            <p className="text-xs text-black/60 leading-relaxed font-medium">
+                                Nairobi, Kenya<br />
+                                Creative HQ & Studio<br />
                             </p>
                         </div>
 
-                        {/* Mini Banners Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full lg:w-auto">
-                            {/* Shop Banner */}
-                            <Link to="/shop" className="group p-6 rounded-2xl bg-neutral-medium border border-white/5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 w-full sm:w-64">
-                                <div className="flex justify-between items-start mb-8">
-                                    <i className="fas fa-shopping-bag text-2xl text-white/50 group-hover:text-primary transition-colors" />
-                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
-                                        <i className="fas fa-arrow-right text-xs" />
-                                    </div>
-                                </div>
-                                <h4 className="text-white font-bold mb-1">The Shop</h4>
-                                <p className="text-white/50 text-sm">Curated digital & physical goods.</p>
-                            </Link>
-
-                            {/* Wynmind Banner */}
-                            <a href="https://wynmind.com" target="_blank" rel="noopener noreferrer" className="group p-6 rounded-2xl bg-neutral-medium border border-white/5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 w-full sm:w-64">
-                                <div className="flex justify-between items-start mb-8">
-                                    <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind" className="h-6 opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
-                                        <i className="fas fa-arrow-right text-xs" />
-                                    </div>
-                                </div>
-                                <h4 className="text-white font-bold mb-1">Wynmind</h4>
-                                <p className="text-white/50 text-sm">Read more. Go deeper.</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Navigation Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-24">
-                        {/* Main */}
-                        <div className="space-y-6">
-                            <h4 className="text-white font-bold text-lg">Main</h4>
-                            <ul className="space-y-4">
-                                {['Home', 'Work', 'Projects', 'Services'].map((item) => (
-                                    <li key={item}>
-                                        <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-white/50 hover:text-white transition-colors">
-                                            {item}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Explore */}
-                        <div className="space-y-6">
-                            <h4 className="text-white font-bold text-lg">Explore</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { name: 'Drift Notes', path: '/drift-notes' },
-                                    { name: 'Shop', path: '/shop' },
-                                    { name: 'Media', path: '/media' },
-                                    { name: 'Gallery', path: '/gallery' },
-                                ].map((item) => (
-                                    <li key={item.name}>
-                                        <Link to={item.path} className="text-white/50 hover:text-primary transition-colors">
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Connect */}
-                        <div className="space-y-6">
-                            <h4 className="text-white font-bold text-lg">Connect</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { name: 'Get in Touch', path: '/contact' },
-                                    { name: 'Rate Card', path: '/rate-card' },
-                                    { name: 'AI Tools', path: '/ai-tools' },
-                                ].map((item) => (
-                                    <li key={item.name}>
-                                        <Link to={item.path} className="text-white/50 hover:text-white transition-colors">
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Socials */}
-                        <div className="space-y-6">
-                            <h4 className="text-white font-bold text-lg">Socials</h4>
-                            <ul className="space-y-4">
-                                {[
-                                    { name: 'Twitter', url: 'https://twitter.com/sirnewson' },
-                                    { name: 'Instagram', url: 'https://instagram.com/sirnewson' },
-                                    { name: 'LinkedIn', url: 'https://linkedin.com/in/sirnewson' },
-                                    { name: 'GitHub', url: 'https://github.com/sirnewson' }
-                                ].map((social) => (
-                                    <li key={social.name}>
-                                        <a
-                                            href={social.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-white/50 hover:text-white transition-colors flex items-center gap-2 group"
-                                        >
-                                            <i className={`fab fa-${social.name.toLowerCase()} group-hover:text-primary transition-colors`} />
-                                            {social.name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* Bottom Bar */}
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-white/30 text-sm">
-                        <span>© 2026 Sir Newson. All rights reserved.</span>
-                        <div className="flex gap-8">
-                            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+                        {/* Direct Inquiries */}
+                        <div className="space-y-3">
+                            <h4 className="font-bold text-sm tracking-wider uppercase text-black/80">Inquiries</h4>
+                            <p className="text-xs text-black/60 leading-relaxed font-medium">
+                                Email: <a href="mailto:sirnewson@gmail.com" className="hover:underline font-bold text-black/80">sirnewson@gmail.com</a><br />
+                                Phone: <a href="tel:0702480771" className="hover:underline font-bold text-black/80">0702480771</a><br />
+                            </p>
                         </div>
                     </div>
                 </div>
-            </footer>
-        </>
+
+                {/* Massive Branding Wordmark at Bottom */}
+                <div className="w-full flex justify-center translate-y-8 select-none pointer-events-none">
+                    <span className="text-[12vw] font-black leading-none tracking-tighter text-black/[0.04] font-display whitespace-nowrap">
+                        SIR NEWSON
+                    </span>
+                </div>
+            </div>
+        </footer>
     );
 };
 

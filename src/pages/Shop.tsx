@@ -6,7 +6,30 @@ import Navbar from '../components/Navbar';
 
 const Shop = () => {
     const products = [
-
+        {
+            id: 29,
+            name: "Mood: Happy T-Shirt",
+            category: "Mood Collection",
+            price: "KES 2,500",
+            image: "https://i.ibb.co/yFY2nZPk/MOOD-Happy.png",
+            description: "Capturing pure euphoria and positive frequencies. Premium heavy-weight cotton T-Shirt from the exclusive Mood Collection."
+        },
+        {
+            id: 30,
+            name: "Mood: Mixed Emotion T-Shirt",
+            category: "Mood Collection",
+            price: "KES 2,500",
+            image: "https://i.ibb.co/spJjXb20/MOOD-Mixed-Emotion.png",
+            description: "A complex visual dialogue of overlapping feelings. Premium heavy-weight cotton T-Shirt from the exclusive Mood Collection."
+        },
+        {
+            id: 31,
+            name: "Positioning T-Shirt",
+            category: "Mood Collection",
+            price: "KES 2,500",
+            image: "https://i.ibb.co/Wvmj4HKW/positioning.png",
+            description: "Finding alignment amidst noise. Premium heavy-weight cotton T-Shirt from the exclusive Mood Collection."
+        },
         {
             id: 2,
             name: "Adapt & Overcome",
@@ -200,7 +223,23 @@ const Shop = () => {
     ];
 
     const handleOrder = (product: any) => {
-        const message = `Hi Sir Newson, I'm interested in ordering the [ID: ${product.id}] ${product.name} (${product.price}).`;
+        let message = `Hi Sir Newson, I'm interested in ordering the [ID: ${product.id}] ${product.name} (${product.price}).`;
+        
+        // Custom fun messages based on product details
+        if (product.category === "Mood Collection") {
+            if (product.name.includes("Happy")) {
+                message = `Yo Sir Newson! ⚡ I am copping the 'Mood: Happy' T-Shirt from the Mood Collection right now! The vibes are absolutely immaculate. Let's get this sorted! 🚀🔥`;
+            } else if (product.name.includes("Mixed Emotion")) {
+                message = `Yo Sir! 🎨 I'm looking at the Mood Collection and 'Mood: Mixed Emotion' T-Shirt completely speaks to my current aesthetic. How do we get this bad boy shipped to me? Let's make it happen! 💎✨`;
+            } else if (product.name.includes("Positioning")) {
+                message = `Yo Sir Newson! 📐 'Positioning' T-Shirt is an absolute masterpiece. I've got to have this in my wardrobe right now! Tell me how we lock this in! 🚀🔥`;
+            }
+        } else if (product.category === "Wall Art") {
+            message = `Hey Sir! ⚡ I just saw '${product.name}' (${product.price}) in your shop and it's a total must-have for my wall. How do I order this beauty? Let's get it done! 🎨🔥`;
+        } else if (product.price === "Free") {
+            message = `Hey Sir Newson! ⚡ I just downloaded the free asset '${product.name}' and wanted to say thank you for sharing such high-value hacks! You're a legend! 🙌✨`;
+        }
+
         const url = `https://wa.me/254702480771?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
     };
@@ -230,23 +269,34 @@ const Shop = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group bg-neutral-medium rounded-2xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2"
+                            className={`group bg-neutral-medium rounded-2xl overflow-hidden border transition-all duration-300 hover:-translate-y-2 ${
+                                product.category === 'Mood Collection'
+                                    ? 'border-purple-500/20 hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)]'
+                                    : 'border-white/5 hover:border-primary/50'
+                            }`}
                         >
-                            <div className="aspect-[4/5] overflow-hidden relative">
+                            <div className="aspect-[4/5] overflow-hidden relative bg-black/40">
                                 <img
                                     src={product.image}
                                     alt={product.name}
+                                    loading="lazy"
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                <div className={`absolute top-4 right-4 backdrop-blur-md text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border ${
+                                    product.category === 'Mood Collection'
+                                        ? 'bg-purple-950/80 text-purple-400 border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.4)] animate-pulse'
+                                        : 'bg-black/80 text-white border-white/5'
+                                }`}>
                                     {product.category}
                                 </div>
                             </div>
 
                             <div className="p-6">
                                 <div className="flex justify-between items-start mb-2">
-                                    <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{product.name}</h3>
-                                    <span className="text-primary font-bold">{product.price}</span>
+                                    <h3 className={`text-xl font-bold text-white transition-colors ${
+                                        product.category === 'Mood Collection' ? 'group-hover:text-purple-400' : 'group-hover:text-primary'
+                                    }`}>{product.name}</h3>
+                                    <span className={product.category === 'Mood Collection' ? 'text-purple-400 font-bold' : 'text-primary font-bold'}>{product.price}</span>
                                 </div>
                                 <p className="text-white/60 text-sm mb-6">{product.description}</p>
 
@@ -262,7 +312,11 @@ const Shop = () => {
                                 ) : (
                                     <button
                                         onClick={() => handleOrder(product)}
-                                        className="w-full py-3 rounded-xl bg-white/10 text-white font-bold hover:bg-primary hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+                                        className={`w-full py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                                            product.category === 'Mood Collection'
+                                                ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30 hover:bg-purple-600 hover:text-white hover:border-purple-600'
+                                                : 'bg-white/10 text-white hover:bg-primary hover:text-black'
+                                        }`}
                                     >
                                         <i className="fab fa-whatsapp"></i> Order Now
                                     </button>

@@ -87,17 +87,17 @@ const ContactSection = () => {
                         <div>
                             <h3 className="text-xl font-bold text-white mb-4">Connect</h3>
                             <div className="flex flex-wrap gap-4">
-                                <a href="https://twitter.com/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-neutral-medium border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group">
-                                    <i className="fab fa-twitter text-xl group-hover:scale-110 transition-transform"></i>
+                                <a href="https://twitter.com/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 clip-hexagon bg-neutral-medium flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all duration-300 group shadow-lg">
+                                    <i className="fab fa-twitter text-lg group-hover:scale-110 transition-transform"></i>
                                 </a>
-                                <a href="https://instagram.com/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-neutral-medium border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group">
-                                    <i className="fab fa-instagram text-xl group-hover:scale-110 transition-transform"></i>
+                                <a href="https://instagram.com/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 clip-hexagon bg-neutral-medium flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all duration-300 group shadow-lg">
+                                    <i className="fab fa-instagram text-lg group-hover:scale-110 transition-transform"></i>
                                 </a>
-                                <a href="https://linkedin.com/in/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-neutral-medium border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group">
-                                    <i className="fab fa-linkedin-in text-xl group-hover:scale-110 transition-transform"></i>
+                                <a href="https://linkedin.com/in/sirnewson" target="_blank" rel="noopener noreferrer" className="w-12 h-12 clip-hexagon bg-neutral-medium flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all duration-300 group shadow-lg">
+                                    <i className="fab fa-linkedin-in text-lg group-hover:scale-110 transition-transform"></i>
                                 </a>
-                                <a href="mailto:sirnewson@gmail.com" className="w-12 h-12 rounded-full bg-neutral-medium border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 group">
-                                    <i className="fas fa-envelope text-xl group-hover:scale-110 transition-transform"></i>
+                                <a href="mailto:sirnewson@gmail.com" className="w-12 h-12 clip-hexagon bg-neutral-medium flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all duration-300 group shadow-lg">
+                                    <i className="fas fa-envelope text-lg group-hover:scale-110 transition-transform"></i>
                                 </a>
                             </div>
                         </div>

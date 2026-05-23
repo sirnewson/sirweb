@@ -124,3 +124,18 @@ body {
   background-color: #011111;
   animation: lime-waves 3s ease infinite;
 }
+
+/* Hexagonal Grid Pattern & Shape Style */
+.bg-hexagon-grid {
+  background-size: 56px 97px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%23BFFF00' stroke-width='0.75' stroke-opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.bg-hexagon-grid-dense {
+  background-size: 28px 48.5px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0 L28 8.08 L28 24.25 L14 32.33 L0 24.25 L0 8.08 Z M14 48.5 L28 40.42 L28 24.25 L14 16.17 L0 24.25 L0 40.42 Z' fill='none' stroke='%23BFFF00' stroke-width='0.5' stroke-opacity='0.04'/%3E%3C/svg%3E");
+}
+
+.clip-hexagon {
+  clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+}
