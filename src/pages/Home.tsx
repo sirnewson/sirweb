@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import MediaModal from '../components/MediaModal';
 import Footer from '../components/Footer';
@@ -23,8 +24,10 @@ interface YouTubeVideo {
 }
 
 const Home = () => {
+
+
     useEffect(() => {
-        document.title = "Sir Newson | Pinterest Feed & Broadcasts";
+        document.title = "Sir Newson | Creative Director & Thinker";
     }, []);
 
     const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
@@ -36,61 +39,6 @@ const Home = () => {
     
     // YouTube player state
     const [activeVideoId, setActiveVideoId] = useState<string>('BI2zz9eCN24');
-
-    // AI Consultation state & configuration
-    const aiIndustries = [
-        {
-            id: 'ecommerce',
-            label: 'E-Commerce & Retail',
-            icon: 'fas fa-shopping-bag',
-            application: 'Hyper-personalized recommendation engines, generative product descriptions, AI-driven stock forecasting, and automated customer success agents.',
-            benefit: 'Up to 35% increase in conversion rates, 24/7 automated support, and optimized inventory reducing storage costs.',
-            whatsappText: "Yo Sir Newson! ⚡ I want to consult on implementing custom AI agents in E-Commerce to boost conversions and automate support. Let's design this! 🚀"
-        },
-        {
-            id: 'fintech',
-            label: 'FinTech & Banking',
-            icon: 'fas fa-chart-line',
-            application: 'Automated fraud detection models, AI risk assessment scoring, natural language interfaces for financial portfolios, and automated document verification.',
-            benefit: '99% reduction in processing time, enhanced security, and real-time customized insights for investors.',
-            whatsappText: "Yo Sir Newson! ⚡ I want to talk AI Consultation for FinTech. Let's look at automating data processing and building smart verification pipelines! 🚀"
-        },
-        {
-            id: 'creative',
-            label: 'Creative Agencies',
-            icon: 'fas fa-palette',
-            application: 'Automated asset generation pipelines, generative brand style-guide validation, AI-guided copy and layout drafting, and hyper-personalized campaign ideation.',
-            benefit: '10x faster brainstorming-to-delivery loops, zero asset bottlenecks, and hyper-targeted marketing assets.',
-            whatsappText: "Hey Sir! ⚡ I'm running a Creative Agency and want to implement custom generative pipelines and asset validators. Let's get this set up! 🚀🎨"
-        },
-        {
-            id: 'saas',
-            label: 'SaaS & Software',
-            icon: 'fas fa-laptop-code',
-            application: 'Predictive user-churn modeling, AI-powered feature recommendation, automated code documentation generation, and intelligent onboarding assistants.',
-            benefit: 'Lower churn, accelerated onboarding cycles, and developers freed from manual documentation tasks.',
-            whatsappText: "Yo Sir Newson! ⚡ I want to consult on integrating AI systems and user-churn models into my SaaS. Let's sync up! 🚀💻"
-        },
-        {
-            id: 'marketing',
-            label: 'Marketing & Ads',
-            icon: 'fas fa-bullhorn',
-            application: 'Automated ad variant generation, generative copywriting, dynamic campaign performance forecasting, and audience sentiment analysis.',
-            benefit: '5x higher CTR through personalization, real-time ad budget optimization, and instant creative iteration.',
-            whatsappText: "Hey Sir! ⚡ Let's brainstorm custom AI ad generators and sentiment analysis systems for our marketing campaigns! 🚀🔥"
-        },
-        {
-            id: 'custom',
-            label: 'Custom Field...',
-            icon: 'fas fa-magic',
-            application: "Let's brainstorm a custom AI system for your specific field! I'll build custom prompt pipelines, autonomous agent groups, or automated workflows.",
-            benefit: 'Tailored solutions built specifically to automate your unique bottlenecks and scale your specific operations.',
-            whatsappText: "Yo Sir Newson! ⚡ I want to consult on custom AI integration for my business. Let's design a personalized solution! 🚀"
-        }
-    ];
-
-    const [selectedIndustry, setSelectedIndustry] = useState(aiIndustries[0].id);
-    const [customField, setCustomField] = useState('');
 
     useEffect(() => {
         localStorage.setItem('sirnewson_saved_pins', JSON.stringify(savedPins));
@@ -586,165 +534,79 @@ const Home = () => {
                     ))}
                 </div>
             </div>
-            {/* AI Consultation Section */}
+            {/* Why Hire Me Section */}
             <section className="py-24 px-4 sm:px-6 md:px-8 border-t border-white/5 relative bg-neutral-black overflow-hidden">
-                {/* Visual grid line accents */}
-                <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+                {/* Subtle background grids and lights */}
+                <div className="absolute inset-0 bg-grid-white/[0.01] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[140px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="text-center mb-16">
-                        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold tracking-widest uppercase border border-primary/20 inline-block mb-4">
-                            AI Consulting & System Design
-                        </span>
-                        <h2 className="font-display text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
-                            Leverage Custom AI Systems.
-                        </h2>
-                        <p className="text-white/60 text-lg md:text-xl font-light max-w-3xl mx-auto leading-relaxed">
-                            I architect autonomous AI agents, prompt pipelines, and custom intelligence layers that integrate into your specific business workflow to automate operations and drive scale.
-                        </p>
-                    </div>
-
-                    {/* Interactive Widget Grid */}
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                        {/* Selector Tabs (Left Col) */}
-                        <div className="lg:col-span-5 flex flex-col gap-3 justify-center">
-                            <span className="text-white/40 text-[10px] font-bold tracking-widest uppercase mb-1 px-2">
-                                Select Your Domain
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                        {/* Title Column */}
+                        <div className="lg:col-span-5 space-y-6">
+                            <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold tracking-widest uppercase border border-primary/20 inline-block">
+                                The Value Proposition
                             </span>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-                                {aiIndustries.map((ind) => {
-                                    const isActive = selectedIndustry === ind.id;
-                                    return (
-                                        <button
-                                            key={ind.id}
-                                            onClick={() => setSelectedIndustry(ind.id)}
-                                            className={`flex items-center gap-4 px-5 py-4 rounded-2xl border text-left transition-all duration-300 ${
-                                                isActive
-                                                    ? 'bg-primary text-black border-primary shadow-[0_0_20px_rgba(191,255,0,0.2)]'
-                                                    : 'bg-white/[0.02] hover:bg-white/[0.05] border-white/5 hover:border-white/10 text-white/70 hover:text-white'
-                                            }`}
-                                        >
-                                            <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm ${
-                                                isActive ? 'bg-black text-primary' : 'bg-white/5 text-white/60'
-                                            }`}>
-                                                <i className={ind.icon} />
-                                            </div>
-                                            <span className="text-xs font-bold uppercase tracking-wider">
-                                                {ind.label}
-                                            </span>
-                                        </button>
-                                    );
-                                })}
+                            <h2 className="font-display text-4xl md:text-6xl font-black text-white leading-tight">
+                                Why Hire Me?
+                            </h2>
+                            <p className="text-white/60 text-lg font-light leading-relaxed">
+                                Good design is not merely decoration; it is the physical representation of your brand's authority. I engineer bespoke digital products and premium visual systems that stand out instantly in a sea of generic layouts.
+                            </p>
+                            <div className="pt-4">
+                                <Link
+                                    to="/contact"
+                                    className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-primary text-black font-extrabold text-xs uppercase tracking-wider hover:scale-105 transition-transform duration-300 shadow-[0_0_25px_rgba(191,255,0,0.15)] animate-pulse"
+                                >
+                                    <span>Start a Project</span>
+                                    <i className="fas fa-arrow-right text-xs" />
+                                </Link>
                             </div>
                         </div>
 
-                        {/* Interactive Screen Display (Right Col) */}
-                        <div className="lg:col-span-7 flex flex-col">
-                            <div className="flex-1 bg-white/[0.02] border border-white/10 rounded-[32px] p-8 md:p-10 flex flex-col justify-between backdrop-blur-xl relative overflow-hidden group hover:border-primary/20 transition-all duration-500 shadow-2xl">
-                                {/* Glass shine overlay */}
-                                <div className="absolute -inset-y-12 -inset-x-12 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:animate-shine pointer-events-none" />
-
-                                <div>
-                                    {/* Display Header */}
-                                    <div className="flex justify-between items-center pb-6 border-b border-white/5 mb-8">
-                                        <div className="flex items-center gap-2">
-                                            <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
-                                            <span className="text-[10px] font-bold tracking-widest text-primary uppercase">
-                                                Active Blueprint
-                                            </span>
-                                        </div>
-                                        <span className="text-[10px] font-bold text-white/30 tracking-wider">
-                                            SIR // CONSULT
-                                        </span>
+                        {/* Pillars Column */}
+                        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {[
+                                {
+                                    icon: "fas fa-code",
+                                    title: "Design-to-Code Unity",
+                                    desc: "I build high-fidelity frontend systems (React, TypeScript, Framer Motion) while maintaining complete creative direction. No lost details in developer handoffs."
+                                },
+                                {
+                                    icon: "fas fa-chess-knight",
+                                    title: "Identity-Driven Strategy",
+                                    desc: "Every pixel, layout alignment, and hover state is selected to reinforce your brand's presence. We choose restraint, authority, and clarity over noisy templates."
+                                },
+                                {
+                                    icon: "fas fa-sliders-h",
+                                    title: "Multi-Disciplinary Speed",
+                                    desc: "From physical brand guides and custom typography to complex web applications, merchandise design, and digital art assets. One partner to execute it all."
+                                },
+                                {
+                                    icon: "fas fa-gem",
+                                    title: "Obsessive Craftsmanship",
+                                    desc: "No generic templates or boring structures. Every aspect is custom-engineered to deliver a visual experience that captures premium value immediately."
+                                }
+                            ].map((pillar, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                                    className="p-8 rounded-3xl bg-white/[0.01] border border-white/5 hover:border-primary/20 hover:bg-white/[0.03] transition-all duration-300 group"
+                                >
+                                    <div className="w-12 h-12 rounded-2xl bg-white/5 text-primary flex items-center justify-center text-lg mb-6 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
+                                        <i className={pillar.icon} />
                                     </div>
-
-                                    {/* Tab Content Display */}
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={selectedIndustry}
-                                            initial={{ opacity: 0, y: 15 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -15 }}
-                                            transition={{ duration: 0.3 }}
-                                            className="space-y-8"
-                                        >
-                                            {selectedIndustry === 'custom' ? (
-                                                <div className="space-y-4">
-                                                    <h3 className="font-display font-black text-2xl md:text-3xl text-white">
-                                                        Tailored AI Blueprint
-                                                    </h3>
-                                                    <p className="text-white/60 text-sm leading-relaxed">
-                                                        No pre-built solution matches your workflow? Let's design a custom AI system from the ground up to solve your exact bottlenecks.
-                                                    </p>
-                                                    <div className="relative mt-4">
-                                                        <input
-                                                            type="text"
-                                                            value={customField}
-                                                            onChange={(e) => setCustomField(e.target.value)}
-                                                            placeholder="Type your industry or field (e.g. EdTech, Law, Fitness)..."
-                                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary/50 transition-colors"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="space-y-6">
-                                                    <h3 className="font-display font-black text-2xl md:text-3xl text-white">
-                                                        {aiIndustries.find(ind => ind.id === selectedIndustry)?.label}
-                                                    </h3>
-                                                    
-                                                    {/* Applications Details */}
-                                                    <div className="space-y-2">
-                                                        <span className="text-[10px] font-bold tracking-widest uppercase text-purple-400">
-                                                            Core Applications
-                                                        </span>
-                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                                                            {aiIndustries.find(ind => ind.id === selectedIndustry)?.application}
-                                                        </p>
-                                                    </div>
-
-                                                    {/* Benefits Details */}
-                                                    <div className="space-y-2">
-                                                        <span className="text-[10px] font-bold tracking-widest uppercase text-primary">
-                                                            Business Value & ROI
-                                                        </span>
-                                                        <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                                                            {aiIndustries.find(ind => ind.id === selectedIndustry)?.benefit}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </motion.div>
-                                    </AnimatePresence>
-                                </div>
-
-                                {/* Booking CTA action */}
-                                <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                                    <div className="text-left">
-                                        <h5 className="text-[10px] text-white/40 uppercase font-bold tracking-wider">
-                                            Ready to automate?
-                                        </h5>
-                                        <p className="text-xs text-white/70">
-                                            Direct channel to Sir Newson
-                                        </p>
-                                    </div>
-                                    <button
-                                        onClick={() => {
-                                            const currentInd = aiIndustries.find(ind => ind.id === selectedIndustry);
-                                            let textMessage = currentInd?.whatsappText || '';
-                                            if (selectedIndustry === 'custom' && customField.trim()) {
-                                                textMessage = `Yo Sir Newson! ⚡ I want to consult on custom AI integration for my field: ${customField.trim()}. Let's design a personalized solution! 🚀`;
-                                            }
-                                            const url = `https://wa.me/254702480771?text=${encodeURIComponent(textMessage)}`;
-                                            window.open(url, '_blank');
-                                        }}
-                                        className="px-6 py-4 rounded-2xl bg-primary text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-3 hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(191,255,0,0.15)]"
-                                    >
-                                        <i className="fab fa-whatsapp text-sm" />
-                                        Consult on {selectedIndustry === 'custom' && customField.trim() ? customField.trim() : (aiIndustries.find(ind => ind.id === selectedIndustry)?.label.split(' & ')[0].split('...')[0])} 🚀
-                                    </button>
-                                </div>
-                            </div>
+                                    <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                                        {pillar.title}
+                                    </h3>
+                                    <p className="text-white/50 text-sm leading-relaxed">
+                                        {pillar.desc}
+                                    </p>
+                                </motion.div>
+                            ))}
                         </div>
                     </div>
                 </div>

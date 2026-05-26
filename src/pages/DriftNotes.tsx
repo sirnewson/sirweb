@@ -143,7 +143,7 @@ const DriftNotes = () => {
     return (
         <div className="bg-neutral-black min-h-screen text-white relative font-sans">
             <Navbar />
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay z-0 pointer-events-none" />
+            <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay z-0 pointer-events-none" />
 
             {/* Toast feedback */}
             <AnimatePresence>

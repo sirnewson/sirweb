@@ -24,7 +24,7 @@ const GlobalShopBanner = () => {
                             />
                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500" />
                             {/* Noise Overlay */}
-                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
+                            <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay" />
                         </div>
 
                         {/* Content */}

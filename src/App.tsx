@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import DriftNotes from './pages/DriftNotes';
 import Dashboard from './pages/Dashboard';
 import Shop from './pages/Shop';
+import ClientDetails from './pages/ClientDetails';
 
 import ParticleBackground from './components/ParticleBackground';
 import ScrollToTop from './components/ScrollToTop';
@@ -46,6 +47,7 @@ function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<Work />} />
+              <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/threads" element={<DriftNotes />} />
               <Route path="/dashboard" element={<Dashboard />} />
@@ -56,7 +58,7 @@ function App() {
         </>
       )}
       {/* Global Noise Overlay */}
-      <div className="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+      <div className="fixed inset-0 z-[100] pointer-events-none opacity-[0.03] bg-noise mix-blend-overlay"></div>
     </div>
   );
 }

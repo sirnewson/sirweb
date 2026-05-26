@@ -15,7 +15,7 @@ const AdBanner = () => {
                     >
                         {/* Abstract Background Pattern */}
                         <div className="absolute inset-0 opacity-20">
-                            <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+                            <div className="absolute top-0 left-0 w-full h-full bg-noise mix-blend-overlay" />
                             <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/20 via-transparent to-transparent animate-spin-slow" />
                         </div>
 

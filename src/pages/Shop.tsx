@@ -330,7 +330,7 @@ const Shop = () => {
             {/* Mid Section Banner */}
             <section className="py-16 md:py-24 px-6">
                 <div className="max-w-5xl mx-auto bg-neutral-medium border border-white/10 rounded-3xl p-12 text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay" />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
                     <div className="relative z-10">
                         <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6">

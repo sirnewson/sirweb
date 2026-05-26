@@ -9,8 +9,8 @@ interface HeroProps {
 
 const Hero = ({
     title = "Sir Newson",
-    subtitle = "Product Design • Web Systems • AI Systems • Marketing Direction",
-    shortParagraph = "Designing premium digital products, high-performance web systems, AI-powered workflows, and strategic marketing directions for brands building in the digital age."
+    subtitle = "Creative Director • Product Design • Web Systems",
+    shortParagraph = "Providing creative marketing direction & content, designing premium digital products, and engineering high-performance web systems for ambitious brands building in the digital age."
 }: HeroProps) => {
     const location = useLocation();
 

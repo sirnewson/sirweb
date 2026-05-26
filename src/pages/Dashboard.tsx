@@ -115,7 +115,7 @@ const Dashboard = () => {
     return (
         <div className="bg-neutral-black min-h-screen text-white relative">
             <Navbar />
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay z-0 pointer-events-none" />
+            <div className="absolute inset-0 bg-noise opacity-[0.02] mix-blend-overlay z-0 pointer-events-none" />
 
             <div className="relative z-10 max-w-6xl mx-auto px-6 pt-36 pb-24">
                 <AnimatePresence mode="wait">

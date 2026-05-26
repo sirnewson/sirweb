@@ -30,7 +30,7 @@ const WorkCinemaxBanner = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
 
                             {/* Noise Texture */}
-                            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+                            <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay" />
                         </div>
 
                         {/* Content */}
