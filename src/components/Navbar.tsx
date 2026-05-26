@@ -23,6 +23,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Work', path: '/work' },
+        { name: 'Websites', path: '/website' },
         { name: 'Shop', path: '/shop' },
         { name: 'Threads', path: '/threads' },
         { name: 'Contact', path: '/contact' },
@@ -55,10 +56,8 @@ const Navbar = () => {
                     }}
                     style={{ transformStyle: "preserve-3d" }}
                 >
-                    {/* Border glow */}
                     <div className="absolute inset-0 rounded-full border border-black/10 group-hover:border-white/10 group-hover:shadow-[0_0_20px_rgba(191,255,0,0.1)] transition-all duration-300 pointer-events-none" />
 
-                    {/* Logo */}
                     <Link to="/" className="relative z-20 flex items-center gap-3">
                         <img
                             src="/assets/images/Asset_204_ce118cb8.webp"
@@ -70,7 +69,6 @@ const Navbar = () => {
                         </span>
                     </Link>
 
-                    {/* Desktop Menu */}
                     <div className="relative z-20 hidden md:flex items-center gap-5 xl:gap-8">
                         {navLinks.map((link) => (
                             <Link
@@ -96,7 +94,6 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* CTA Button */}
                     <Link
                         to="/contact"
                         className="relative z-20 hidden md:block px-6 py-2 rounded-full text-sm font-bold transition-all duration-300
@@ -105,7 +102,6 @@ const Navbar = () => {
                         Start a Project
                     </Link>
 
-                    {/* Mobile Menu Button */}
                     <button
                         className="relative z-20 md:hidden text-xl p-2 text-black group-hover:text-white transition-colors duration-300"
                         onClick={() => setIsOpen(!isOpen)}
@@ -115,7 +111,6 @@ const Navbar = () => {
                 </motion.div>
             </motion.nav>
 
-            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
