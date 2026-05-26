@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Work from './pages/Work';
 import Website from './pages/Website';
+import Services from './pages/Services';
 import Contact from './pages/Contact';
 import DriftNotes from './pages/DriftNotes';
 import Dashboard from './pages/Dashboard';
@@ -49,6 +50,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<Work />} />
               <Route path="/website" element={<Website />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/threads" element={<DriftNotes />} />
