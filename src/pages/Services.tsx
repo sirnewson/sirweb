@@ -1,141 +1,98 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import Hero from '../components/Hero';
+import ServiceEcosystem from '../components/ServiceEcosystem';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 
-const servicesData = [
-    {
-        category: "Brand Identity & Visual Systems",
-        icon: "fa-fingerprint",
-        services: [
-            { title: "Identity Design", desc: "Logos, typography, color direction, and brand mood." },
-            { title: "Brand Systems", desc: "Visual rules that create a consistent premium presence." },
-            { title: "Visual Language", desc: "Establishing a timeless and refined aesthetic for modern brands." }
-        ]
-    },
-    {
-        category: "Website & Digital Presence",
-        icon: "fa-laptop-code",
-        services: [
-            { title: "Intentional Web Design", desc: "Clean, intentional websites designed to feel modern and trustworthy." },
-            { title: "User Experience", desc: "Easy to explore interfaces across every screen and device." },
-            { title: "Digital Ecosystems", desc: "Scalable digital platforms built for long-term growth." }
-        ]
-    },
-    {
-        category: "Creative Direction",
-        icon: "fa-compass",
-        services: [
-            { title: "Visual Concepts", desc: "Creative vision and direction for brands that need a stronger voice." },
-            { title: "Campaign Direction", desc: "End-to-end guidance for high-impact visual campaigns." },
-            { title: "Storytelling Systems", desc: "Content moodboards, layouts, and narrative structures." }
-        ]
-    },
-    {
-        category: "Editorial & Content Design",
-        icon: "fa-book-open",
-        services: [
-            { title: "Social Visuals", desc: "Carousels, campaign visuals, and brand stories designed with clarity." },
-            { title: "Marketing Materials", desc: "Presentations and sales assets with a polished, premium feel." },
-            { title: "Content Architecture", desc: "Structuring editorial content for maximum emotional resonance." }
-        ]
-    },
-    {
-        category: "Motion & Visual Storytelling",
-        icon: "fa-film",
-        services: [
-            { title: "Cinematic Visuals", desc: "High-end motion concepts and atmospheric creative assets." },
-            { title: "Brand Reels", desc: "Dynamic video content that helps ideas feel alive." },
-            { title: "Immersive Experiences", desc: "Motion design that captivates and holds attention." }
-        ]
-    }
+const outcomes = [
+    'Look trusted before the first call',
+    'Make your offers easier to understand',
+    'Turn scattered visuals into a consistent brand world',
+    'Guide visitors toward WhatsApp, inquiry, or purchase',
+    'Build a premium digital presence that compounds over time',
+    'Create reusable systems instead of one-off design chaos'
+];
+
+const process = [
+    ['01', 'Clarity', 'We define the buyer, offer, message, visual direction, and the action the brand must drive.'],
+    ['02', 'Structure', 'We build the website, identity, or creative system around hierarchy, trust, and conversion.'],
+    ['03', 'Presence', 'We polish the details so the final experience feels premium, clear, and memorable.']
 ];
 
 const Services = () => {
-    useEffect(() => {
-        document.title = "Creative Direction & Brand Design Services in Kenya | Sir Newson";
-    }, []);
-
     return (
-        <div className="bg-neutral-black min-h-screen">
-            <Navbar />
+        <main className="bg-neutral-black min-h-screen text-white bg-hexagon-grid">
+            <SEO
+                title="Services | Website Design, Branding & AI Creative Systems | Sir Newson"
+                description="Premium website design, brand identity, creative direction and AI visual systems for founders, businesses and creators in Kenya and beyond."
+                keywords="website design Kenya, Nairobi web designer, brand identity Kenya, creative director Nairobi, AI visuals Kenya, landing page design, digital presence systems"
+            />
             <Hero
-                title={<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Premium Services</span>}
-                subtitle="Creative Direction & Brand Design"
-                shortParagraph="Bespoke creative direction, brand identity systems, and digital experiences designed for ambitious brands that want to be remembered."
+                title={<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Services</span>}
+                subtitle="Digital Presence • Brand Systems • AI Creative Direction"
+                shortParagraph="I help founders, creators, and businesses build the parts of their brand people judge first: the website, the identity, the visuals, and the system behind how everything connects."
+                primaryCtaLabel="Build My Website"
+                primaryCtaPath="/website"
+                secondaryCtaLabel="Start a Project"
+                secondaryCtaPath="/contact"
             />
 
-            <section className="py-16 md:py-24 px-6 relative">
-                {/* Background Glow */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+            <ServiceEcosystem />
 
-                <div className="max-w-7xl mx-auto space-y-16 md:space-y-32">
-                    {servicesData.map((category) => (
-                        <div key={category.category} className="relative">
+            <section className="px-6 py-20 md:py-28 border-b border-white/5 bg-neutral-dark/70">
+                <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                    <div>
+                        <p className="text-primary text-xs font-black uppercase tracking-[0.25em] mb-4">What you are buying</p>
+                        <h2 className="font-display text-4xl md:text-5xl font-black leading-tight">Not design decoration. Business perception.</h2>
+                        <p className="mt-6 text-white/60 leading-relaxed text-lg">Most people do not have time to understand your greatness slowly. They judge fast. The work here is to make your value visible, believable, and easy to act on.</p>
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        {outcomes.map((outcome, index) => (
                             <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                key={outcome}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.6 }}
-                                className="flex items-center gap-4 mb-12"
+                                transition={{ delay: index * 0.06 }}
+                                className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
                             >
-                                <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-primary text-xl border border-white/10">
-                                    <i className={`fas ${category.icon}`} />
-                                </div>
-                                <h2 className="font-display text-3xl md:text-4xl font-bold text-white uppercase tracking-wide">
-                                    {category.category}
-                                </h2>
+                                <p className="text-primary font-black mb-3">0{index + 1}</p>
+                                <p className="font-bold text-white leading-relaxed">{outcome}</p>
                             </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {category.services.map((service, index) => (
-                                    <motion.div
-                                        key={service.title}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="group p-8 rounded-2xl bg-neutral-medium border border-white/5 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:bg-white/5"
-                                    >
-                                        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-primary transition-colors">
-                                            {service.title}
-                                        </h3>
-                                        <p className="text-white/60 text-sm leading-relaxed">
-                                            {service.desc}
-                                        </p>
-                                    </motion.div>
-                                ))}
+            <section className="px-6 py-20 md:py-28 border-b border-white/5">
+                <div className="max-w-6xl mx-auto text-center">
+                    <p className="text-primary text-xs font-black uppercase tracking-[0.25em] mb-4">The process</p>
+                    <h2 className="font-display text-4xl md:text-5xl font-black leading-tight mb-12">Simple enough to move fast. Deep enough to matter.</h2>
+                    <div className="grid gap-5 md:grid-cols-3 text-left">
+                        {process.map(([num, title, desc]) => (
+                            <div key={title} className="rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+                                <p className="text-primary font-black mb-5">{num}</p>
+                                <h3 className="font-display text-2xl font-black mb-4">{title}</h3>
+                                <p className="text-white/55 leading-7 text-sm">{desc}</p>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
 
-
-
-            {/* Contact CTA */}
-            <section className="py-16 md:py-24 px-6 border-t border-white/5 relative overflow-hidden">
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="max-w-4xl mx-auto text-center relative z-10">
-                    <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-8">
-                        Ready to build something <span className="text-primary">iconic</span>?
-                    </h2>
-                    <p className="text-white/60 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl mx-auto">
-                        Whether it's a full brand overhaul, a custom AI tool, or a cinematic visual campaign—let's bring your vision to life.
-                    </p>
-                    <a
-                        href="/contact"
-                        className="inline-flex items-center gap-4 bg-white text-black px-12 py-5 rounded-full font-bold text-lg hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-105 shadow-xl shadow-white/5"
-                    >
-                        <span>Start a Project</span>
-                        <i className="fas fa-arrow-right" />
-                    </a>
+            <section className="px-6 py-24 text-center">
+                <div className="max-w-4xl mx-auto rounded-[2rem] border border-primary/20 bg-primary p-10 md:p-16 text-black">
+                    <h2 className="font-display text-4xl md:text-6xl font-black leading-tight">Let us make your brand easier to trust, buy from, and remember.</h2>
+                    <p className="mt-6 text-black/70 text-lg">Start with a website, brand system, or creative direction sprint. The goal is simple: make the outside finally match the value inside.</p>
+                    <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                        <Link to="/website" className="rounded-full bg-black px-8 py-4 text-white font-black hover:bg-white hover:text-black transition-colors">View Website Packages</Link>
+                        <Link to="/contact" className="rounded-full border border-black/20 px-8 py-4 text-black font-black hover:bg-black hover:text-white transition-colors">Start a Project</Link>
+                    </div>
                 </div>
             </section>
-
             <Footer />
-        </div>
+        </main>
     );
 };
 
