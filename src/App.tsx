@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Work from './pages/Work';
+import Website from './pages/Website';
 import Contact from './pages/Contact';
 import DriftNotes from './pages/DriftNotes';
 import Dashboard from './pages/Dashboard';
@@ -47,6 +48,7 @@ function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<Home />} />
               <Route path="/work" element={<Work />} />
+              <Route path="/website" element={<Website />} />
               <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/threads" element={<DriftNotes />} />
