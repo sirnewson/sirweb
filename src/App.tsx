@@ -10,6 +10,7 @@ import DriftNotes from './pages/DriftNotes';
 import Dashboard from './pages/Dashboard';
 import Shop from './pages/Shop';
 import ClientDetails from './pages/ClientDetails';
+import RateCard from './pages/RateCard';
 
 import ParticleBackground from './components/ParticleBackground';
 import ScrollToTop from './components/ScrollToTop';
@@ -51,6 +52,8 @@ function App() {
               <Route path="/work" element={<Work />} />
               <Route path="/website" element={<Website />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/rate-card" element={<RateCard />} />
+              <Route path="/rates" element={<RateCard />} />
               <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/threads" element={<DriftNotes />} />
