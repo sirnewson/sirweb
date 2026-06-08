@@ -37,6 +37,39 @@ const proofPoints = [
   'Design with mobile-first Kenyan buyer behavior in mind'
 ];
 
+const websiteSamples = [
+  {
+    name: 'Nyukia Sali',
+    url: 'https://nyukiasali.com/',
+    note: 'A clean brand-first website presence shaped for clarity and trust.'
+  },
+  {
+    name: 'OrdaFasta',
+    url: 'https://ordafasta.com/',
+    note: 'A conversion-focused web experience for fast product and order discovery.'
+  },
+  {
+    name: 'TAK Network',
+    url: 'https://taknetwork.co.ke/',
+    note: 'A structured platform-style site for media, ideas, and network growth.'
+  },
+  {
+    name: 'PataKazi',
+    url: 'https://patakazi.co.ke/',
+    note: 'A practical digital platform for discovery, listings, and user action.'
+  },
+  {
+    name: 'YXM Digital',
+    url: 'https://yxm.digital/',
+    note: 'A digital studio and product ecosystem presence for tools and services.'
+  },
+  {
+    name: 'Mapenzi Vibandaski',
+    url: 'https://mapenzivibandaski.co.ke/',
+    note: 'A campaign and event website with personality, story, and direct conversion.'
+  }
+];
+
 const Website = () => {
   useEffect(() => {
     document.title = 'Website Design | Sir Newson';
@@ -127,6 +160,50 @@ const Website = () => {
               <p className="mb-4 text-sm font-bold text-primary">0{index + 1}</p>
               <p className="text-lg font-semibold leading-7">{point}</p>
             </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
+        <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary">Websites Done</p>
+            <h2 className="mt-4 font-display text-4xl font-black sm:text-5xl">Live websites and digital platforms.</h2>
+            <p className="mt-5 max-w-2xl text-[#eefff4]/65">
+              Selected websites and product pages built around trust, clear navigation, mobile behavior, and strong brand presence.
+            </p>
+          </div>
+          <a
+            href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20a%20website%20like%20the%20samples%20on%20your%20site."
+            className="inline-flex w-fit rounded-full bg-primary px-7 py-4 text-sm font-black text-black transition hover:scale-[1.02] hover:bg-[#eefff4]"
+          >
+            Discuss a Website
+          </a>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {websiteSamples.map((site, index) => (
+            <motion.a
+              key={site.url}
+              href={site.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06 }}
+              className="group rounded-[2rem] border border-[#eefff4]/10 bg-[#eefff4]/5 p-7 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-[#eefff4]/10"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#eefff4]/45">Live Website</span>
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-[#eefff4]">
+                  <i className="fas fa-external-link-alt text-xs" />
+                </span>
+              </div>
+              <h3 className="font-display text-3xl font-black">{site.name}</h3>
+              <p className="mt-4 text-sm leading-6 text-[#eefff4]/60">{site.note}</p>
+              <p className="mt-6 text-sm font-bold text-primary">{site.url.replace('https://', '').replace('/', '')}</p>
+            </motion.a>
           ))}
         </div>
       </section>

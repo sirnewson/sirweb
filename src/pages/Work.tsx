@@ -211,7 +211,7 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                         className={`group relative mb-5 break-inside-avoid cursor-pointer overflow-hidden transition hover:-translate-y-1 ${
                             layout === 'video-grid'
                                 ? 'rounded-none border-0 bg-transparent'
-                                : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' ? 'aspect-[4/5]' : ''}`
+                                : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' && asset.type !== 'video' ? 'aspect-[4/5]' : ''}`
                         }`}
                     >
                         {asset.type === 'video' ? (

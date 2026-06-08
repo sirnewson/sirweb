@@ -45,13 +45,13 @@ const Motion = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: (index % 4) * 0.1 }}
-                            className="break-inside-avoid rounded-2xl overflow-hidden border border-white/10 hover:border-primary hover:shadow-[0_0_30px_#BFFF004D] transition-all duration-300 group relative bg-neutral-medium cursor-pointer"
+                            className="break-inside-avoid overflow-hidden transition-all duration-300 group relative cursor-pointer"
                             onClick={() => setSelectedMedia({ src: item.url.replace('/watch', '/iframe'), title: `Motion Sequence 0${(index % 16) + 1}` })}
                         >
-                            <div className={`relative w-full ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'} bg-black`}>
+                            <div className={`relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black hover:border-primary ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'}`}>
                                 <iframe
                                     src={item.url.replace('/watch', '/iframe') + '?autoplay=true&loop=true&muted=true&controls=false'}
-                                    className="w-full h-full absolute inset-0 group-hover:scale-105 transition-transform duration-700 pointer-events-none"
+                                    className="absolute inset-0 h-full w-full pointer-events-none"
                                     allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
                                     allowFullScreen={true}
                                 ></iframe>

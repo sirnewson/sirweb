@@ -127,7 +127,7 @@ const Gallery = () => {
                                             loop
                                             muted
                                             playsInline
-                                            className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                                            className="w-full h-auto object-contain"
                                         >
                                             <source src={item.src} type="video/mp4" />
                                         </video>
