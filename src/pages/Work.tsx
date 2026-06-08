@@ -195,8 +195,8 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                     layout === 'masonry'
                         ? 'columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
                         : layout === 'video-grid'
-                            ? 'grid gap-5 sm:grid-cols-2 xl:grid-cols-3'
-                            : 'grid gap-5 sm:grid-cols-2 lg:grid-cols-4'
+                            ? 'columns-1 gap-5 space-y-5 sm:columns-2 xl:columns-3'
+                            : 'columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
                 }
             >
                 {assets.map((asset, index) => (

@@ -249,7 +249,7 @@ const Home = () => {
                         </Link>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+                    <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-4">
                         {recentUploadAssets.slice(0, 8).map((asset, index) => (
                             <AssetCard
                                 key={asset.id}
