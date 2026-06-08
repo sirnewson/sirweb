@@ -24,9 +24,8 @@ const ParallaxImageRows = ({ topRowImages, bottomRowImages }: ParallaxImageRowsP
             {/* Top Row - Scrolls Left */}
             <motion.div style={{ x: xLeft }} className="flex gap-8 w-max">
                 {[...topRowImages, ...topRowImages].map((src, index) => (
-                    <div key={`top-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative group border border-white/5">
-                        <img src={src} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                        <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
+                    <div key={`top-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative border border-white/10 bg-black">
+                        <img src={src} alt="" className="w-full h-full object-cover opacity-95" />
                     </div>
                 ))}
             </motion.div>
@@ -34,9 +33,8 @@ const ParallaxImageRows = ({ topRowImages, bottomRowImages }: ParallaxImageRowsP
             {/* Bottom Row - Scrolls Right */}
             <motion.div style={{ x: xRight }} className="flex gap-8 w-max">
                 {[...bottomRowImages, ...bottomRowImages].map((src, index) => (
-                    <div key={`bottom-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative group border border-white/5">
-                        <img src={src} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                        <div className="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 mix-blend-overlay" />
+                    <div key={`bottom-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative border border-white/10 bg-black">
+                        <img src={src} alt="" className="w-full h-full object-cover opacity-95" />
                     </div>
                 ))}
             </motion.div>

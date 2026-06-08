@@ -1,290 +1,260 @@
-﻿import { useState, useEffect } from 'react';
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
-
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
+import { brandingAssets, graphicsAssets, motionAssets, recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
 
-import { Link } from 'react-router-dom';
-import { clientsData } from '../data/clients';
-import ParallaxImageRows from '../components/ParallaxImageRows';
+const websiteSamples = [
+    {
+        title: 'Nyukia Sali',
+        url: 'https://nyukiasali.com/',
+        description: 'A polished public web presence with a clean brand-first structure.',
+    },
+    {
+        title: 'OrdaFasta',
+        url: 'https://ordafasta.com/',
+        description: 'A practical product and ordering experience shaped for quick buyer action.',
+    },
+    {
+        title: 'TAK Network',
+        url: 'https://taknetwork.co.ke/',
+        description: 'A structured organizational site with clear navigation and trust signals.',
+    },
+    {
+        title: 'PataKazi',
+        url: 'https://patakazi.co.ke/',
+        description: 'A platform-style web experience for discovery, listings, and useful action.',
+    },
+    {
+        title: 'YXM Digital',
+        url: 'https://yxm.digital/',
+        description: 'A digital studio presence with service clarity and a premium interface feel.',
+    },
+    {
+        title: 'Mapenzi Vibandaski',
+        url: 'https://mapenzivibandaski.co.ke/',
+        description: 'An event and campaign site with personality, story, and direct conversion flow.',
+    },
+];
 
 const Work = () => {
     useEffect(() => {
-        document.title = "Selected Work | Brand Identity, Websites & Visual Storytelling by Sir Newson";
+        document.title = 'Selected Work | Branding, Graphics, Motion & Websites by Sir Newson';
     }, []);
 
-    const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
-
-    // Get 5 images from specific clients for Recent Work
-    const recentWork = [
-        { title: 'Wild Idea', image: '/assets/images/recent_images/wild-idea.webp', type: 'image' },
-        { title: 'Profile', image: '/assets/images/recent_images/profilee.webp', type: 'image' },
-        { title: 'Silver', image: '/assets/images/recent_images/silver.webp', type: 'image' },
-        { title: 'Countrywide', image: '/assets/images/recent_images/countrywide-1.webp', type: 'image' },
-        { title: 'Fun Concept', image: '/assets/images/recent_images/fun-concept.webp', type: 'image' },
-        { title: 'Youtube', image: '/assets/images/recent_images/youytubeee.webp', type: 'image' },
-        { title: 'Cartoon', image: '/assets/images/recent_images/cartoon.webp', type: 'image' },
-        { title: 'Njugush 3M Post', image: '/assets/images/recent_images/njugush-3m-post.webp', type: 'image' },
-        { title: 'Post File', image: '/assets/images/recent_images/post-file.webp', type: 'image' },
-        { title: 'The Gikonyore Experience', image: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
-        { title: 'Saturday Dosage Season 4', image: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
-        { title: 'DJ Dibul Brand Identity', image: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
-        { title: 'Motion Reel 01', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68c95f3b08cbbd8bb6bd69f786162eda/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Midnight Poetry Tour', image: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
-        { title: 'Mkurugenzi Hoodies', image: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
-        { title: 'Motion Reel 02', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/a5a314e4a0dc189a3abcf9b61a1adddb/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Big Voices Fest', image: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
-        { title: 'Tenacity Locks Xmas', image: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
-        { title: 'Saturday Dosage Character', image: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
-        { title: 'Mkurugenzi Women', image: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
-        { title: 'DJ Dibul Portrait', image: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
-        { title: 'KAB Project', image: '/assets/images/kab-1_61b51219.webp', type: 'image' },
-        { title: 'Billboard Design', image: '/assets/images/billbaord_ea33edfb.webp', type: 'image' },
-        { title: 'Motion Reel 03', image: 'https://customer-zeyxzc88epauzzxx.cloudflarestream.com/68d09a1216c77a6fbff83ba6ba528c8b/iframe?autoplay=true&loop=true&muted=true&controls=false', type: 'video' },
-        { title: 'Cleaning Concept', image: '/assets/images/cleanshelf-concept-3_3b0dacbc.webp', type: 'image' },
-    ];
+    const [selectedMedia, setSelectedMedia] = useState<UploadAsset | null>(null);
 
     return (
-        <div className="bg-neutral-black min-h-screen">
+        <div className="min-h-screen bg-neutral-black text-white">
             <Hero
-                title={<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Selected Work</span>}
-                subtitle="Selected Work with a Sense of Identity"
-                shortParagraph="A curated collection of brand visuals, websites, campaigns, and creative systems shaped with clarity, restraint, and emotional presence."
+                title={<span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">Selected Work</span>}
+                subtitle="Branding • Graphics • Motion • Websites"
+                shortParagraph="A cleaned-up, folder-backed archive of the real creative assets currently in the upload folders, plus sample websites already shipped."
+                primaryCtaLabel="Start a Project"
+                primaryCtaPath="/contact"
+                secondaryCtaLabel="Website Services"
+                secondaryCtaPath="/website"
             />
 
-            {/* Client Showcase (Parallax Rows) */}
-            <section className="py-16 md:py-24 px-0 bg-neutral-black border-b border-white/5">
-                <ParallaxImageRows
-                    topRowImages={clientsData.slice(0, 5).map(c => c.image)}
-                    bottomRowImages={clientsData.slice(5).map(c => c.image)}
-                />
+            <section className="px-6 py-14">
+                <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
+                    {[
+                        ['Brand Identity', 'Logos, systems, boards, and mockups'],
+                        ['Graphic Design', 'Posters, campaigns, social visuals'],
+                        ['Motion & Video', 'Reels, loops, logo animations'],
+                        ['Websites', 'Live websites and digital product pages'],
+                    ].map(([label, value]) => (
+                        <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]">
+                            <p className="font-display text-xl font-black text-primary">{label}</p>
+                            <p className="mt-3 text-sm leading-6 text-white/55">{value}</p>
+                        </div>
+                    ))}
+                </div>
             </section>
 
-            {/* Recent Work Section */}
-            <section className="py-16 md:py-24 px-6 bg-neutral-dark">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Recent Work</h2>
-                        <p className="text-white/60">Latest projects showcasing creative direction and design excellence</p>
+            <PortfolioSection
+                eyebrow="Recent Work"
+                title="Recent Creative Work"
+                description="A current selection of brand systems, campaign visuals, posters, and motion pieces."
+                assets={recentUploadAssets}
+                onOpen={setSelectedMedia}
+                layout="feature-grid"
+            />
+
+            <PortfolioSection
+                eyebrow="Visual Identity"
+                title="Branding"
+                description="Logos, brand boards, mockups, and identity systems from the branding folder."
+                assets={brandingAssets}
+                onOpen={setSelectedMedia}
+                layout="masonry"
+                dark
+            />
+
+            <PortfolioSection
+                eyebrow="Campaign Visuals"
+                title="Graphics"
+                description="Poster systems, event visuals, promotional designs, wallpapers, and social graphics."
+                assets={graphicsAssets}
+                onOpen={setSelectedMedia}
+                layout="masonry"
+            />
+
+            <PortfolioSection
+                eyebrow="Motion & Video"
+                title="Motion"
+                description="Logo animations, reels, loops, social motion, and video concepts from the motion folder."
+                assets={motionAssets}
+                onOpen={setSelectedMedia}
+                layout="video-grid"
+                dark
+            />
+
+            <section className="border-t border-white/5 px-6 py-20">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+                        <div>
+                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Website Page</p>
+                            <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Sample Websites Done</h2>
+                            <p className="mt-3 max-w-2xl text-white/60">
+                                A small live-site shelf for the web work, kept separate from the upload-folder media archive.
+                            </p>
+                        </div>
+                        <Link
+                            to="/website"
+                            className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
+                        >
+                            Website Services
+                            <i className="fas fa-arrow-right" />
+                        </Link>
                     </div>
 
-                    <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-                        {recentWork.map((work, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                        {websiteSamples.map((site, index) => (
+                            <motion.a
+                                key={site.url}
+                                href={site.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                className="relative rounded-lg overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-300 group cursor-pointer break-inside-avoid"
-                                onClick={() => setSelectedMedia({ src: work.image, title: work.title, type: work.type as 'image' | 'video' })}
+                                transition={{ delay: index * 0.06 }}
+                                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06]"
                             >
-                                {work.type === 'video' ? (
-                                    <video
-                                        autoPlay
-                                        loop
-                                        muted
-                                        playsInline
-                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                                    >
-                                        <source src={work.image} type="video/mp4" />
-                                    </video>
-                                ) : (
-                                    <img
-                                        src={work.image}
-                                        alt={work.title}
-                                        className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                )}
-                                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    <p className="text-white text-xs font-bold uppercase tracking-widest text-center px-2">{work.title}</p>
+                                <div className="mb-8 flex items-center justify-between">
+                                    <span className="text-xs font-black uppercase tracking-[0.24em] text-white/45">Live Site</span>
+                                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-white">
+                                        <i className="fas fa-external-link-alt text-xs" />
+                                    </span>
                                 </div>
-                            </motion.div>
+                                <h3 className="font-display text-3xl font-black">{site.title}</h3>
+                                <p className="mt-4 text-sm leading-6 text-white/60">{site.description}</p>
+                            </motion.a>
                         ))}
                     </div>
                 </div>
             </section>
-
-            {/* Philosophy Grid */}
-            <section className="py-16 md:py-24 px-6 bg-neutral-dark border-y border-white/10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Philosophy</p>
-                        <h2 className="font-display text-4xl font-bold text-white">The Art & Thought of Design</h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            { number: '01', icon: 'fas fa-eye', title: 'Vision', desc: 'See beyond the obvious. Design starts with seeing what others miss.' },
-                            { number: '02', icon: 'fas fa-brain', title: 'Strategy', desc: 'Every pixel serves a purpose. Every color tells a story.' },
-                            { number: '03', icon: 'fas fa-heart', title: 'Emotion', desc: 'Design that moves people. Create connections, not just aesthetics.' },
-                            { number: '04', icon: 'fas fa-rocket', title: 'Innovation', desc: 'Push boundaries. Challenge conventions. Create the unexpected.' },
-                            { number: '05', icon: 'fas fa-balance-scale', title: 'Balance', desc: 'Harmony between chaos and order. Beauty in simplicity.' },
-                            { number: '06', icon: 'fas fa-bolt', title: 'Impact', desc: 'Design that creates change. Work that leaves a mark.' },
-                            { number: '07', icon: 'fas fa-infinity', title: 'Evolution', desc: 'Continuous growth. Never settle. Always improving.' },
-                            { number: '08', icon: 'fas fa-star', title: 'Excellence', desc: 'Obsess over details. Craft matters. Quality over quantity.' },
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="bg-neutral-medium p-8 rounded-2xl border border-white/5 hover:border-primary/50 transition-colors duration-300 text-center group"
-                            >
-                                <div className="font-display text-6xl font-bold text-primary/20 mb-4 group-hover:text-primary/40 transition-colors">{item.number}</div>
-                                <div className="text-3xl text-primary mb-6"><i className={item.icon}></i></div>
-                                <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
-                                <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Creative Partnerships (Interactive Grid) */}
-            <section className="py-20 md:py-32 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-20">
-                        <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Collaborations</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Creative Partnerships</h2>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {clientsData.map((client, index) => (
-                            <Link to={`/clients/${client.id}`} key={index}>
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                                    className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/5"
-                                >
-                                    {/* Background Image */}
-                                    <img
-                                        src={client.image}
-                                        alt={client.name}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
-                                    />
-
-                                    {/* Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-
-                                    {/* Border Glow Effect */}
-                                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-2xl transition-colors duration-300 pointer-events-none" />
-
-                                    {/* Content */}
-                                    <div className="absolute bottom-0 left-0 w-full p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                                        <div className="text-primary text-xs uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                                            {client.category}
-                                        </div>
-                                        <h3 className="text-white text-xl font-bold font-display leading-tight group-hover:text-primary transition-colors duration-300">
-                                            {client.name}
-                                        </h3>
-                                        <div className="h-1 w-0 bg-primary mt-3 group-hover:w-12 transition-all duration-500 delay-200" />
-                                    </div>
-                                </motion.div>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Branding Section */}
-            <section className="py-16 md:py-24 px-6 bg-neutral-dark border-t border-white/10">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Visual Identity</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Branding</h2>
-                    </div>
-
-                    <div className="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
-                        {[
-                            { title: 'New Home of Fashion', image: '/assets/images/branding/NEW HOME OF FAHION.webp' },
-                            { title: 'Tech 2', image: '/assets/images/branding/TECH 2.webp' },
-                            { title: 'Branding Board', image: '/assets/images/branding/branding board.webp' },
-                            { title: 'Logo', image: '/assets/images/branding/logo.webp' },
-                            { title: 'Main Logo', image: '/assets/images/branding/main logo oon yellow.webp' },
-                            { title: 'White', image: '/assets/images/branding/white.webp' },
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: (index % 4) * 0.05 }}
-                            >
-                                <TiltCard onClick={() => setSelectedMedia({ src: item.image, title: item.title, type: 'image' })}>
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                                </TiltCard>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-
-
-
-            <Footer />
 
             <MediaModal
-                isOpen={!!selectedMedia}
+                isOpen={Boolean(selectedMedia)}
                 onClose={() => setSelectedMedia(null)}
                 src={selectedMedia?.src || ''}
                 title={selectedMedia?.title || ''}
                 type={selectedMedia?.type || 'image'}
             />
+
+            <Footer />
         </div>
     );
 };
 
-const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useTransform(y, [-100, 100], [10, -10]);
-    const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+interface PortfolioSectionProps {
+    eyebrow: string;
+    title: string;
+    description: string;
+    assets: UploadAsset[];
+    layout: 'feature-grid' | 'masonry' | 'video-grid';
+    dark?: boolean;
+    onOpen: (asset: UploadAsset) => void;
+}
 
-    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct * 200);
-        y.set(yPct * 200);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d"
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onClick={onClick}
-            className="break-inside-avoid rounded-xl overflow-hidden border border-white/10 hover:border-primary hover:shadow-[0_0_30px_#BFFF004D] transition-all duration-300 group mb-4 cursor-pointer relative bg-white/5"
-        >
-            <div style={{ transform: "translateZ(20px)" }} className="p-4">
-                {children}
+const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = false, onOpen }: PortfolioSectionProps) => (
+    <section className={`border-t border-white/5 px-6 py-20 ${dark ? 'bg-neutral-dark' : 'bg-neutral-black'}`}>
+        <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-3xl">
+                <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">{eyebrow}</p>
+                <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">{title}</h2>
+                <p className="mt-3 text-white/60">{description}</p>
             </div>
-        </motion.div>
-    );
-};
+
+            <div
+                className={
+                    layout === 'masonry'
+                        ? 'columns-1 gap-5 space-y-5 sm:columns-2 lg:columns-4'
+                        : layout === 'video-grid'
+                            ? 'grid gap-5 sm:grid-cols-2 xl:grid-cols-3'
+                            : 'grid gap-5 sm:grid-cols-2 lg:grid-cols-4'
+                }
+            >
+                {assets.map((asset, index) => (
+                    <motion.article
+                        key={asset.id}
+                        id={asset.id}
+                        initial={{ opacity: 0, y: 22 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.45, delay: Math.min(index * 0.035, 0.28) }}
+                        onClick={() => onOpen(asset)}
+                        className={`group relative mb-5 break-inside-avoid cursor-pointer overflow-hidden transition hover:-translate-y-1 ${
+                            layout === 'video-grid'
+                                ? 'rounded-none border-0 bg-transparent'
+                                : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' ? 'aspect-[4/5]' : ''}`
+                        }`}
+                    >
+                        {asset.type === 'video' ? (
+                            <video
+                                src={asset.src}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                className="h-auto w-full rounded-2xl border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60"
+                            />
+                        ) : (
+                            <img
+                                src={asset.src}
+                                alt={asset.title}
+                                loading="lazy"
+                                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                            />
+                        )}
+                        <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/65 via-black/5 to-black/85 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span className="w-fit rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/70">
+                                {asset.category}
+                            </span>
+                            <div className="flex items-end justify-between gap-4">
+                                <h3 className="line-clamp-2 font-display text-xl font-black leading-tight">{asset.title}</h3>
+                                <button
+                                    type="button"
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                        onOpen(asset);
+                                    }}
+                                    className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-black text-black transition hover:bg-white"
+                                >
+                                    Open
+                                </button>
+                            </div>
+                        </div>
+                    </motion.article>
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default Work;
