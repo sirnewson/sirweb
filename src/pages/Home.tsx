@@ -15,6 +15,109 @@ interface ThreadPreview {
     timestamp?: { seconds: number };
 }
 
+const startHerePaths = [
+    {
+        title: 'I want to hire you',
+        description: 'Start with services, pricing direction, and the kind of work I can build with you.',
+        path: '/services',
+        icon: 'fas fa-handshake',
+    },
+    {
+        title: 'I want to see your work',
+        description: 'Browse recent branding, graphics, motion, and website work from the live archive.',
+        path: '/work',
+        icon: 'fas fa-images',
+    },
+    {
+        title: 'I want to read your thoughts',
+        description: 'Explore Drift Notes: quick reflections on design, systems, awareness, and creativity.',
+        path: '/threads',
+        icon: 'fas fa-feather-alt',
+    },
+    {
+        title: 'I want to explore your tools',
+        description: 'Visit YXM Labs and see experimental tools, AI systems, and product concepts.',
+        path: '/tools',
+        icon: 'fas fa-flask',
+    },
+    {
+        title: 'I want to understand the bigger vision',
+        description: 'Jump into the future ecosystem behind the brand: media, education, living, and creative tech.',
+        path: '/#future-ecosystem',
+        icon: 'fas fa-project-diagram',
+    },
+];
+
+const hireLanes = [
+    {
+        title: 'For Brands',
+        description: 'Identity systems, campaign visuals, social media design, product marketing, and brand storytelling.',
+        icon: 'fas fa-bullseye',
+    },
+    {
+        title: 'For Events',
+        description: 'Event identity, motion visuals, recap direction, content systems, posters, and promotional assets.',
+        icon: 'fas fa-ticket-alt',
+    },
+    {
+        title: 'For Startups & Founders',
+        description: 'Website concepts, pitch visuals, brand narrative, product mockups, and AI prototype direction.',
+        icon: 'fas fa-rocket',
+    },
+    {
+        title: 'For Creators',
+        description: 'Thumbnails, visual worlds, content direction, music visuals, campaign looks, and audience-facing systems.',
+        icon: 'fas fa-magic',
+    },
+];
+
+const futurePillars = [
+    {
+        title: 'Media',
+        description: 'TAK Network, business insights, AI stories, culture, interviews, and future-facing commentary.',
+    },
+    {
+        title: 'Education',
+        description: "Ebusoma, learning tools, children's content, and education built for the AI era.",
+    },
+    {
+        title: 'Living',
+        description: 'Furniture ideas, spaces, home concepts, visual lifestyle systems, and TAK Living.',
+    },
+    {
+        title: 'Creative Tech',
+        description: 'YXM Labs, AI tools, digital systems, prototypes, experiments, and product experiences.',
+    },
+];
+
+const worldCards = [
+    {
+        title: 'Sir Newson Visuals',
+        description: 'Surreal edits, creative posters, visual storytelling, cinematic concepts, and campaign art direction.',
+        path: '/work',
+    },
+    {
+        title: 'Drift Notes',
+        description: 'Reflections, ideas, philosophy, awareness, creative thinking, and lessons from the studio.',
+        path: '/threads',
+    },
+    {
+        title: 'YXM Labs',
+        description: 'Experimental digital tools, AI systems, app concepts, and future-facing product ideas.',
+        path: '/tools',
+    },
+    {
+        title: 'TAK Network',
+        description: 'Media, business thoughts, AI insights, technology, living, culture, and education.',
+        path: '/#future-ecosystem',
+    },
+    {
+        title: 'Music & Wallframes',
+        description: 'Ambient visuals, music fusions, YouTube experiences, and mood-based screen art.',
+        path: '/shop',
+    },
+];
+
 const Home = () => {
     useEffect(() => {
         document.title = 'Sir Newson | Creative Director & Thinker';
@@ -94,6 +197,42 @@ const Home = () => {
 
             <section className="px-6 py-20">
                 <div className="mx-auto max-w-7xl">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Start Here</p>
+                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Where Do You Want To Begin?</h2>
+                        <p className="mt-4 text-lg leading-8 text-white/60">
+                            Choose the path that fits what you need today. The brand is wide, but the entry points should be simple.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+                        {startHerePaths.map((item, index) => (
+                            <motion.div
+                                key={item.title}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <Link
+                                    to={item.path}
+                                    className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06]"
+                                >
+                                    <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-black">
+                                        <i className={item.icon} />
+                                    </div>
+                                    <h3 className="font-display text-xl font-black leading-tight">{item.title}</h3>
+                                    <p className="mt-4 grow text-sm leading-6 text-white/55">{item.description}</p>
+                                    <span className="mt-6 text-xs font-black uppercase tracking-wider text-primary">Begin <i className="fas fa-arrow-right ml-2" /></span>
+                                </Link>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="px-6 py-20">
+                <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
                             <h2 className="font-display text-3xl font-black md:text-5xl">Recent Work</h2>
@@ -127,19 +266,103 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="border-t border-white/5 px-6 py-24">
+            <section className="border-t border-white/5 bg-neutral-dark px-6 py-24">
                 <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
                     <div>
-                        <h2 className="font-display text-4xl font-black md:text-6xl">Need work that looks current and sells clearly?</h2>
+                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Hire Sir Newson For</p>
+                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Creative Direction That Turns Ideas Into Usable Brand Systems</h2>
                         <p className="mt-5 text-lg leading-8 text-white/60">
-                            I shape brand systems, websites, campaign visuals, and motion pieces with one clear aim: make the work easy to trust and hard to ignore.
+                            Bring the idea, brand, event, product, or campaign. I help shape the identity, visual language, digital presence, and content direction so the work feels clear, current, and ready to move.
                         </p>
+                        <Link
+                            to="/contact"
+                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
+                        >
+                            Start a Project
+                            <i className="fas fa-arrow-right" />
+                        </Link>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
-                        {['Brand identity systems', 'Campaign posters', 'Logo motion', 'Website direction'].map((item) => (
-                            <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-lg font-bold">
-                                {item}
-                            </div>
+                        {hireLanes.map((item, index) => (
+                            <motion.article
+                                key={item.title}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.06 }}
+                                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]"
+                            >
+                                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                    <i className={item.icon} />
+                                </div>
+                                <h3 className="font-display text-xl font-black">{item.title}</h3>
+                                <p className="mt-3 text-sm leading-6 text-white/55">{item.description}</p>
+                            </motion.article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section id="future-ecosystem" className="border-t border-white/5 px-6 py-24">
+                <div className="mx-auto max-w-7xl">
+                    <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+                        <div>
+                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">The Future I'm Building</p>
+                            <h2 className="mt-3 font-display text-4xl font-black leading-tight md:text-6xl">The Future Is Not Just Content. It Is Systems.</h2>
+                            <p className="mt-6 text-lg leading-8 text-white/62">
+                                Sir Newson is evolving from design services into a creative technology ecosystem: tools, media spaces, learning platforms, visual experiences, and brand systems for the next generation of creators, businesses, and communities.
+                            </p>
+                        </div>
+
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {futurePillars.map((pillar, index) => (
+                                <motion.article
+                                    key={pillar.title}
+                                    initial={{ opacity: 0, y: 18 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.06 }}
+                                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]"
+                                >
+                                    <span className="font-display text-4xl font-black text-primary/30">0{index + 1}</span>
+                                    <h3 className="mt-5 font-display text-2xl font-black">{pillar.title}</h3>
+                                    <p className="mt-3 text-sm leading-6 text-white/55">{pillar.description}</p>
+                                </motion.article>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="border-t border-white/5 bg-neutral-dark px-6 py-24">
+                <div className="mx-auto max-w-7xl">
+                    <div className="mb-10 max-w-3xl">
+                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">The Sir Newson World</p>
+                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">One Brand, Multiple Doors</h2>
+                        <p className="mt-4 text-lg leading-8 text-white/60">
+                            The work connects through visual storytelling, systems thinking, tools, media, learning, and experiences.
+                        </p>
+                    </div>
+
+                    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+                        {worldCards.map((card, index) => (
+                            <motion.div
+                                key={card.title}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.05 }}
+                            >
+                                <Link
+                                    to={card.path}
+                                    className="group flex h-full flex-col rounded-2xl border border-white/10 bg-black/30 p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-black/60"
+                                >
+                                    <p className="text-[10px] font-black uppercase tracking-[0.24em] text-primary/70">World 0{index + 1}</p>
+                                    <h3 className="mt-5 font-display text-2xl font-black leading-tight">{card.title}</h3>
+                                    <p className="mt-4 grow text-sm leading-6 text-white/55">{card.description}</p>
+                                    <span className="mt-7 text-xs font-black uppercase tracking-wider text-primary">Explore <i className="fas fa-arrow-right ml-2" /></span>
+                                </Link>
+                            </motion.div>
                         ))}
                     </div>
                 </div>

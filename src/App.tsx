@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Contact from './pages/Contact';
 import DriftNotes from './pages/DriftNotes';
 import Dashboard from './pages/Dashboard';
+import AiTools from './pages/AiTools';
 import Shop from './pages/Shop';
 import ClientDetails from './pages/ClientDetails';
 import RateCard from './pages/RateCard';
@@ -57,6 +58,7 @@ function App() {
               <Route path="/clients/:id" element={<ClientDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/threads" element={<DriftNotes />} />
+              <Route path="/tools" element={<AiTools />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/shop" element={<Shop />} />
               <Route path="*" element={<Home />} />
