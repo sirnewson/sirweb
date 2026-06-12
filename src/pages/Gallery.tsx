@@ -10,11 +10,11 @@ const Gallery = () => {
         document.title = "Visual Experiments, Concepts & Cinematic Design Studies | Sir Newson";
     }, []);
 
-    // Non-client specific media (e.g. concept videos)
+    // Concept videos — all local, no external CDN
     const conceptMedia = [
-        { src: 'https://cdn.midjourney.com/video/d1863d34-2080-4e5f-ab90-f86d66131995/0.mp4', type: 'video' },
-        { src: 'https://cdn.midjourney.com/video/d0d9357e-3c4f-4c97-9092-3808023a06ff/0.mp4', type: 'video' },
-        { src: 'https://cdn.midjourney.com/video/45b2b40c-7aa5-4195-b93f-2d87a66a6157/0.mp4', type: 'video' },
+        { src: '/uploads/motion%20and%20video/arsenal-castle-countdown-reel.mp4', type: 'video' },
+        { src: '/uploads/motion%20and%20video/mapenzi-jibandaski-day-ones-reel.mp4', type: 'video' },
+        { src: '/uploads/motion%20and%20video/erling-haaland-viking-motion.mp4', type: 'video' },
     ];
 
     const miscMedia = [
@@ -71,13 +71,11 @@ const Gallery = () => {
         }))
     );
 
-    // Combine media (Concepts + Client Work + Misc)
-    // Combine media (Concepts + Client Work + Misc)
+    // Combine: Concepts + Client Work + Misc
     const initialMediaItems = [...conceptMedia, ...clientMedia, ...miscMedia];
 
     const [mediaItems, setMediaItems] = useState(initialMediaItems);
 
-    // Shuffle function
     const shuffleArray = (array: any[]) => {
         const shuffled = [...array];
         for (let i = shuffled.length - 1; i > 0; i--) {
@@ -87,15 +85,11 @@ const Gallery = () => {
         return shuffled;
     };
 
-    // Shuffle on mount and every 1 minute
     useEffect(() => {
-        // Initial shuffle on mount
         setMediaItems(shuffleArray(initialMediaItems));
-
         const interval = setInterval(() => {
             setMediaItems(prevItems => shuffleArray(prevItems));
-        }, 60000); // 1 minute
-
+        }, 60000);
         return () => clearInterval(interval);
     }, []);
 
@@ -127,6 +121,7 @@ const Gallery = () => {
                                             loop
                                             muted
                                             playsInline
+                                            preload="metadata"
                                             className="w-full h-auto object-contain"
                                         >
                                             <source src={item.src} type="video/mp4" />
@@ -142,14 +137,12 @@ const Gallery = () => {
                                         className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
                                     />
                                 )}
-
-                                {/* Overlay for hover effect */}
                                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                             </TiltCard>
                         </motion.div>
                     ))}
                 </div>
-            </section >
+            </section>
 
             <MediaModal
                 isOpen={!!selectedMedia}
@@ -160,7 +153,7 @@ const Gallery = () => {
             />
 
             <Footer />
-        </div >
+        </div>
     );
 };
 
@@ -172,12 +165,8 @@ const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: (
 
     const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const rect = event.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
+        const xPct = (event.clientX - rect.left) / rect.width - 0.5;
+        const yPct = (event.clientY - rect.top) / rect.height - 0.5;
         x.set(xPct * 200);
         y.set(yPct * 200);
     };
@@ -189,11 +178,7 @@ const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: (
 
     return (
         <motion.div
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d"
-            }}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onClick={onClick}

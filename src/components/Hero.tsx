@@ -33,7 +33,7 @@ const Hero = ({
                     playsInline
                     className="w-full h-full object-cover opacity-25 scale-105"
                 >
-                    <source src="https://cdn.pixabay.com/video/2019/05/17/23719-336712399_large.mp4" type="video/mp4" />
+                    <source src="/uploads/motion%20and%20video/water-background.mp4" type="video/mp4" />
                 </video>
             </div>
 

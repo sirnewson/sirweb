@@ -250,7 +250,7 @@ const Home = () => {
                     </div>
 
                     <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-4">
-                        {recentUploadAssets.slice(0, 8).map((asset, index) => (
+                        {recentUploadAssets.slice(0, 12).map((asset, index) => (
                             <AssetCard
                                 key={asset.id}
                                 asset={asset}

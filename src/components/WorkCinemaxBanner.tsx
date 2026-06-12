@@ -23,7 +23,7 @@ const WorkCinemaxBanner = () => {
                                 playsInline
                                 className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700 scale-105 group-hover:scale-100 transition-transform duration-700"
                             >
-                                <source src="https://cdn.midjourney.com/video/d1863d34-2080-4e5f-ab90-f86d66131995/0.mp4" type="video/mp4" />
+                                <source src="/uploads/motion%20and%20video/big-screen-countdown.mp4" type="video/mp4" />
                             </video>
 
                             {/* Cinematic Overlay */}

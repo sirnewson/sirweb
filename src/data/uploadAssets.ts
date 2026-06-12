@@ -12,10 +12,12 @@ export interface UploadAsset {
 }
 
 const brandingFiles = [
+    'BZ ONE - BACK.webp',
+    'DRAFT BANNER.webp',
+    'IDEA TWO.webp',
     'aceera-logo-2x.webp',
     'anticipatory-logo.webp',
     'becoming-eco-branding-mockup.webp',
-    'beverex-africa-mockups.png',
     'budget-gadget-branding-board.webp',
     'cdmkuet-branding-board.webp',
     'farmplus-branding-board.webp',
@@ -39,18 +41,29 @@ const brandingFiles = [
 ];
 
 const graphicsFiles = [
+    '1.webp',
+    '1500 by 1600.webp',
+    '179cm by 104cm.webp',
+    '3 PART CLEAN.webp',
+    '5 days.webp',
+    'A good lock doesn\'t shout. It holds.webp',
+    'Ywaya Tajiri.webp',
     'adidas-pink-sneaker-poster.webp',
+    'baba talishaaa.webp',
     'big-voices-fest-madaraka-poster.webp',
     'birthday-pirate-ship-poster.webp',
     'bitter-rivals-event-poster.webp',
+    'coookinggg.webp',
     'countrywide-delivery-music-upgrade-poster.webp',
     'countrywide-delivery-promo.webp',
     'cristiano-ronaldo-king-is-here-poster.webp',
     'dj-bibu-business-card.webp',
+    'eid.webp',
     'erling-haaland-viking-poster.webp',
     'golbet-brand-identity.webp',
     'gucci-luxury-concept-poster.webp',
     'happy-madaraka-day-poster.webp',
+    'hh.jpg',
     'kenya-builds-brand-identity.webp',
     'mapenzi-jibandaski-day-ones-poster.webp',
     'mapenzi-jibandaski-karun-poster.webp',
@@ -60,6 +73,8 @@ const graphicsFiles = [
     'mkurugenzi-join-movement-merch.webp',
     'ndunyu-njeru-brand-identity.webp',
     'phoneplace-vivo-y21d-poster.webp',
+    'pushing products.webp',
+    'rerun poster.webp',
     'sayuni-kenyan-chapter-premiere-poster.webp',
     'sayuni-premiere-gates-poster.webp',
     'ships-changed-form-poster.webp',
@@ -67,12 +82,18 @@ const graphicsFiles = [
     'storytime-sunflower-lamp-poster.webp',
     'tenacity-big-f6-wall-print-poster.webp',
     'tenacity-medium-locks-order-poster.webp',
+    'to uganda on foot.jpg',
     'ttnt-season-6-event-poster.webp',
     'ttnt-season-6-wallpaper.webp',
 ];
 
 const motionFiles = [
+    '1.mp4',
+    'ABE MUTUA END SCREEN 1.mp4',
+    'abel mutuaaaa.mp4',
+    'ARSENAL CLIP.mp4',
     'arsenal-castle-countdown-reel.mp4',
+    'artists loop - wyre.mp4',
     'big-screen-countdown.mp4',
     'big-voices-fest-gold-loop.mp4',
     'big-voices-fest-good-old-days-reel.mp4',
@@ -81,7 +102,9 @@ const motionFiles = [
     'big-voices-fest-season-six-loop.mp4',
     'black-warrior-facing-castle-scene.mp4',
     'byd-car-motion.mp4',
+    'erling haaland Norway.mp4',
     'erling-haaland-viking-motion.mp4',
+    'HITTERS.mp4',
     'kenya-builds-lifestyle-heights-reel.mp4',
     'kifaru-campfire-promo-reel.mp4',
     'kifaru-event-promo-reel.mp4',
@@ -92,9 +115,15 @@ const motionFiles = [
     'phoneplace-kenya-logo-motion.mp4',
     'phoneplace-kenya-long-motion.mp4',
     'phoneplace-kenya-product-clips.mp4',
+    'Retro TV Intro.mp4',
+    'Screen - Netflix.mp4',
+    'Screen_7.mp4',
+    'Screen_9.mp4',
     'sirnews-matchday-countdown-reel.mp4',
     'tenacity-big-f6-locks-reel.mp4',
     'trinity-logo-motion.mp4',
+    'ttnt logo motion.mp4',
+    'water-background.mp4',
 ];
 
 const folderByGroup: Record<UploadAssetGroup, string> = {
@@ -148,11 +177,15 @@ const featuredIds = [
     'branding-wibo-branding-board',
     'graphics-mapenzi-jibandaski-day-ones-poster',
     'graphics-ttnt-season-6-event-poster',
+    'motion-big-screen-countdown',
+    'motion-erling-haaland-viking-motion',
     'graphics-tenacity-medium-locks-order-poster',
     'branding-kenya-builds-logo',
     'branding-farmplus-product-mockups',
     'motion-tenacity-big-f6-locks-reel',
     'motion-phoneplace-kenya-product-clips',
+    'motion-black-warrior-facing-castle-scene',
+    'motion-retro-tv-intro',
 ];
 
 export const uploadedAssets = [...brandingAssets, ...graphicsAssets, ...motionAssets];
