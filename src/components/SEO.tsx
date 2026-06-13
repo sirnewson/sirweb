@@ -18,7 +18,7 @@ const upsertMeta = (selector: string, attr: 'name' | 'property', key: string, co
   element.setAttribute('content', content);
 };
 
-const SEO = ({ title, description, keywords, image = '/assets/images/new-logo_e9f3d068.webp', url = window.location.href }: SEOProps) => {
+const SEO = ({ title, description, keywords, image = '/uploads/logo/logo%20on%20dark%20background.png', url = window.location.href }: SEOProps) => {
   useEffect(() => {
     document.title = title;
     upsertMeta('meta[name="description"]', 'name', 'description', description);

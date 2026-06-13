@@ -59,11 +59,18 @@ const Navbar = () => {
                     <div className="absolute inset-0 rounded-full border border-black/10 group-hover:border-white/10 group-hover:shadow-[0_0_20px_rgba(191,255,0,0.1)] transition-all duration-300 pointer-events-none" />
 
                     <Link to="/" className="relative z-20 flex items-center gap-3">
-                        <img
-                            src="/assets/images/Asset_204_ce118cb8.webp"
-                            alt="Sir Newson Logo"
-                            className="h-10 w-auto brightness-0 group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                        />
+                        <div className="relative h-10 w-10 flex items-center justify-center">
+                            <img
+                                src="/uploads/logo/logo%20on%20bright.png"
+                                alt="Sir Newson Logo"
+                                className="absolute inset-0 h-full w-auto object-contain transition-opacity duration-300 group-hover:opacity-0"
+                            />
+                            <img
+                                src="/uploads/logo/logo%20on%20dark%20background.png"
+                                alt="Sir Newson Logo"
+                                className="absolute inset-0 h-full w-auto object-contain transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                            />
+                        </div>
                         <span className="font-display font-bold text-lg tracking-wide text-black group-hover:text-white group-hover:hover:text-primary transition-colors duration-300">
                             SIR NEWSON
                         </span>

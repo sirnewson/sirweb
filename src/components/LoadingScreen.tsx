@@ -85,15 +85,24 @@ const LoadingScreen = () => {
                     className="absolute inset-0 bg-primary/20 blur-3xl rounded-full"
                 />
 
-                {/* Logo */}
-                <motion.img
+                {/* Avatar Hexagon */}
+                <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    src="/assets/images/Asset_204_ce118cb8.webp"
-                    alt="Sir Newson"
-                    className="w-32 md:w-48 relative z-10 brightness-0 invert"
-                />
+                    className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center z-10"
+                >
+                    <div className="absolute inset-0 bg-primary/20 blur-xl clip-hexagon" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-transparent p-[2px] clip-hexagon">
+                        <div className="w-full h-full bg-neutral-black clip-hexagon relative overflow-hidden">
+                            <img
+                                src="/assets/images/facee_63957c48.webp"
+                                alt="Sir Newson Avatar"
+                                className="w-full h-full object-cover absolute inset-0 z-10"
+                            />
+                        </div>
+                    </div>
+                </motion.div>
             </div>
 
             {/* Loading Bar */}
