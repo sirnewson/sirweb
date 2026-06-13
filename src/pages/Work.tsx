@@ -51,7 +51,6 @@ const Work = () => {
             <Hero
                 title={<span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">Selected Work</span>}
                 subtitle="Branding • Graphics • Motion • Websites"
-                shortParagraph="A cleaned-up, folder-backed archive of the real creative assets currently in the upload folders, plus sample websites already shipped."
                 primaryCtaLabel="Start a Project"
                 primaryCtaPath="/contact"
                 secondaryCtaLabel="Website Services"
