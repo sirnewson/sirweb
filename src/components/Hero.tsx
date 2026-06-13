@@ -52,7 +52,7 @@ const Hero = ({
                     <div className="absolute inset-0 bg-gradient-to-b from-primary/30 to-transparent p-[2px] clip-hexagon group-hover:from-primary transition-all duration-500">
                         <div className="w-full h-full bg-neutral-black clip-hexagon relative overflow-hidden">
                             <img
-                                src="/uploads/logo/logo%20on%20dark%20background.png"
+                                src="/assets/images/new-logo_e9f3d068.webp"
                                 alt="Sir Newson brand mark"
                                 className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0"
                             />
