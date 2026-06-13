@@ -87,20 +87,53 @@ const LoadingScreen = () => {
 
                 {/* Avatar Hexagon */}
                 <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center z-10"
+                    initial={{ scale: 0.8, opacity: 0, rotate: 0 }}
+                    animate={{ 
+                        scale: 1, 
+                        opacity: 1,
+                        y: [0, -6, 0]
+                    }}
+                    whileHover={{ 
+                        scale: 1.15,
+                        rotate: 15,
+                        y: -10
+                    }}
+                    whileTap={{ 
+                        scale: 0.9,
+                        rotate: -15
+                    }}
+                    transition={{
+                        scale: { type: "spring", stiffness: 300, damping: 15 },
+                        rotate: { type: "spring", stiffness: 300, damping: 15 },
+                        y: {
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }
+                    }}
+                    className="relative w-32 h-32 md:w-40 md:h-40 flex items-center justify-center z-10 cursor-pointer"
                 >
-                    <div className="absolute inset-0 bg-primary/20 blur-xl clip-hexagon" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-primary/50 to-transparent p-[2px] clip-hexagon">
-                        <div className="w-full h-full bg-neutral-black clip-hexagon relative overflow-hidden">
-                            <img
-                                src="/assets/images/facee_63957c48.webp"
-                                alt="Sir Newson Avatar"
-                                className="w-full h-full object-cover absolute inset-0 z-10"
-                            />
-                        </div>
+                    {/* Rotating Background Glow */}
+                    <motion.div 
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 bg-primary/30 blur-2xl clip-hexagon" 
+                    />
+                    
+                    {/* Rotating Border */}
+                    <motion.div 
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 bg-gradient-to-tr from-primary/60 via-transparent to-primary/60 p-[2px] clip-hexagon"
+                    />
+
+                    {/* Non-rotating Inner Face Container (stays upright!) */}
+                    <div className="absolute inset-[2px] bg-neutral-black clip-hexagon overflow-hidden flex items-center justify-center">
+                        <img
+                            src="/assets/images/facee_63957c48.webp"
+                            alt="Sir Newson Avatar"
+                            className="w-full h-full object-cover absolute inset-0 z-10 pointer-events-none"
+                        />
                     </div>
                 </motion.div>
             </div>
