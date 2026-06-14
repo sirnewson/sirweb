@@ -52,7 +52,7 @@ const LoadingScreen = () => {
     const [displayCount, setDisplayCount] = useState(0);
 
     useEffect(() => {
-        const animation = animate(count, 100, { duration: 4.0 });
+        const animation = animate(count, 100, { duration: 2.8 });
         return animation.stop;
     }, []);
 
@@ -143,7 +143,7 @@ const LoadingScreen = () => {
                 <motion.div
                     initial={{ x: '-100%' }}
                     animate={{ x: '0%' }}
-                    transition={{ duration: 4.0, ease: "easeInOut" }}
+                    transition={{ duration: 2.8, ease: "easeInOut" }}
                     className="h-full bg-primary"
                 />
             </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Magnetic } from './Animated';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -75,36 +76,39 @@ const Navbar = () => {
 
                     <div className="relative z-20 hidden md:flex items-center gap-5 xl:gap-8">
                         {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className={`text-sm font-medium tracking-wide transition-all duration-300 relative
-                                    ${location.pathname === link.path
-                                        ? 'text-black group-hover:text-primary font-bold'
-                                        : 'text-black/70 group-hover:text-white/70 hover:text-black group-hover:hover:text-white'
-                                    }
-                                `}
-                            >
-                                {link.name}
-                                {location.pathname === link.path && (
-                                    <motion.div
-                                        layoutId="navbar-indicator"
-                                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-black group-hover:bg-primary"
-                                        initial={false}
-                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                    />
-                                )}
-                            </Link>
+                            <Magnetic key={link.name} range={35} strength={0.22}>
+                                <Link
+                                    to={link.path}
+                                    className={`text-sm font-medium tracking-wide transition-all duration-300 relative block py-1 px-2
+                                        ${location.pathname === link.path
+                                            ? 'text-black group-hover:text-primary font-bold'
+                                            : 'text-black/70 group-hover:text-white/70 hover:text-black group-hover:hover:text-white'
+                                        }
+                                    `}
+                                >
+                                    {link.name}
+                                    {location.pathname === link.path && (
+                                        <motion.div
+                                            layoutId="navbar-indicator"
+                                            className="absolute -bottom-1 left-0 right-0 h-0.5 bg-black group-hover:bg-primary"
+                                            initial={false}
+                                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                        />
+                                    )}
+                                </Link>
+                            </Magnetic>
                         ))}
                     </div>
 
-                    <Link
-                        to="/contact"
-                        className="relative z-20 hidden md:block px-6 py-2 rounded-full text-sm font-bold transition-all duration-300
-                        bg-[#011111] text-[#eefff4] group-hover:bg-primary group-hover:text-black shadow-lg"
-                    >
-                        Start a Project
-                    </Link>
+                    <Magnetic range={45} strength={0.25}>
+                        <Link
+                            to="/contact"
+                            className="relative z-20 hidden md:block px-6 py-2 rounded-full text-sm font-bold transition-all duration-300
+                            bg-[#011111] text-[#eefff4] group-hover:bg-primary group-hover:text-black shadow-lg"
+                        >
+                            Start a Project
+                        </Link>
+                    </Magnetic>
 
                     <button
                         className="relative z-20 md:hidden text-xl p-2 text-black group-hover:text-white transition-colors duration-300"

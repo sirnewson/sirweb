@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
 import { brandingAssets, graphicsAssets, motionAssets, recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
+import { ScrollReveal, Magnetic } from '../components/Animated';
 
 const websiteSamples = [
     {
@@ -121,37 +121,44 @@ const Work = () => {
                                 A small live-site shelf for the web work, kept separate from the upload-folder media archive.
                             </p>
                         </div>
-                        <Link
-                            to="/website"
-                            className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
-                        >
-                            Website Services
-                            <i className="fas fa-arrow-right" />
-                        </Link>
+                        <Magnetic>
+                            <Link
+                                to="/website"
+                                className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black block text-center"
+                            >
+                                Website Services
+                                <i className="fas fa-arrow-right" />
+                            </Link>
+                        </Magnetic>
                     </div>
 
                     <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                         {websiteSamples.map((site, index) => (
-                            <motion.a
+                            <ScrollReveal
                                 key={site.url}
-                                href={site.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0, y: 18 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.06 }}
-                                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06]"
+                                direction="up"
+                                delay={index * 0.06}
+                                duration={0.6}
+                                className="h-full"
                             >
-                                <div className="mb-8 flex items-center justify-between">
-                                    <span className="text-xs font-black uppercase tracking-[0.24em] text-white/45">Live Site</span>
-                                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-white">
-                                        <i className="fas fa-external-link-alt text-xs" />
-                                    </span>
-                                </div>
-                                <h3 className="font-display text-3xl font-black">{site.title}</h3>
-                                <p className="mt-4 text-sm leading-6 text-white/60">{site.description}</p>
-                            </motion.a>
+                                <a
+                                    href={site.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06] h-full flex flex-col justify-between block"
+                                >
+                                    <div>
+                                        <div className="mb-8 flex items-center justify-between">
+                                            <span className="text-xs font-black uppercase tracking-[0.24em] text-white/45">Live Site</span>
+                                            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-white">
+                                                <i className="fas fa-external-link-alt text-xs" />
+                                            </span>
+                                        </div>
+                                        <h3 className="font-display text-3xl font-black">{site.title}</h3>
+                                        <p className="mt-4 text-sm leading-6 text-white/60">{site.description}</p>
+                                    </div>
+                                </a>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -183,11 +190,13 @@ interface PortfolioSectionProps {
 const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = false, onOpen }: PortfolioSectionProps) => (
     <section className={`border-t border-white/5 px-6 py-20 ${dark ? 'bg-neutral-dark' : 'bg-neutral-black'}`}>
         <div className="mx-auto max-w-7xl">
-            <div className="mb-10 max-w-3xl">
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">{eyebrow}</p>
-                <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">{title}</h2>
-                <p className="mt-3 text-white/60">{description}</p>
-            </div>
+            <ScrollReveal direction="up" duration={0.6}>
+                <div className="mb-10 max-w-3xl">
+                    <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">{eyebrow}</p>
+                    <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">{title}</h2>
+                    <p className="mt-3 text-white/60">{description}</p>
+                </div>
+            </ScrollReveal>
 
             <div
                 className={
@@ -199,57 +208,59 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                 }
             >
                 {assets.map((asset, index) => (
-                    <motion.article
+                    <ScrollReveal
                         key={asset.id}
-                        id={asset.id}
-                        initial={{ opacity: 0, y: 22 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.45, delay: Math.min(index * 0.035, 0.28) }}
-                        onClick={() => onOpen(asset)}
-                        className={`group relative mb-5 break-inside-avoid cursor-pointer overflow-hidden transition hover:-translate-y-1 ${
-                            layout === 'video-grid'
-                                ? 'rounded-none border-0 bg-transparent'
-                                : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' && asset.type !== 'video' ? 'aspect-[4/5]' : ''}`
-                        }`}
+                        direction="up"
+                        delay={Math.min(index * 0.035, 0.25)}
+                        duration={0.5}
                     >
-                        {asset.type === 'video' ? (
-                            <video
-                                src={asset.src}
-                                autoPlay
-                                muted
-                                loop
-                                playsInline
-                                preload="metadata"
-                                className="h-auto w-full rounded-2xl border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60"
-                            />
-                        ) : (
-                            <img
-                                src={asset.src}
-                                alt={asset.title}
-                                loading="lazy"
-                                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                            />
-                        )}
-                        <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/65 via-black/5 to-black/85 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <span className="w-fit rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/70">
-                                {asset.category}
-                            </span>
-                            <div className="flex items-end justify-between gap-4">
-                                <h3 className="line-clamp-2 font-display text-xl font-black leading-tight">{asset.title}</h3>
-                                <button
-                                    type="button"
-                                    onClick={(event) => {
-                                        event.stopPropagation();
-                                        onOpen(asset);
-                                    }}
-                                    className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-black text-black transition hover:bg-white"
-                                >
-                                    Open
-                                </button>
+                        <article
+                            id={asset.id}
+                            onClick={() => onOpen(asset)}
+                            className={`group relative mb-5 break-inside-avoid cursor-pointer overflow-hidden transition hover:-translate-y-1 ${
+                                layout === 'video-grid'
+                                    ? 'rounded-none border-0 bg-transparent'
+                                    : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' && asset.type !== 'video' ? 'aspect-[4/5]' : ''}`
+                            }`}
+                        >
+                            {asset.type === 'video' ? (
+                                <video
+                                    src={asset.src}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    className="h-auto w-full rounded-2xl border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60"
+                                />
+                            ) : (
+                                <img
+                                    src={asset.src}
+                                    alt={asset.title}
+                                    loading="lazy"
+                                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                />
+                            )}
+                            <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/65 via-black/5 to-black/85 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                <span className="w-fit rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/70">
+                                    {asset.category}
+                                </span>
+                                <div className="flex items-end justify-between gap-4">
+                                    <h3 className="line-clamp-2 font-display text-xl font-black leading-tight">{asset.title}</h3>
+                                    <button
+                                        type="button"
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                            onOpen(asset);
+                                        }}
+                                        className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-black text-black transition hover:bg-white"
+                                    >
+                                        Open
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </motion.article>
+                        </article>
+                    </ScrollReveal>
                 ))}
             </div>
         </div>

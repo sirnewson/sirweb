@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
+import { ScrollReveal } from '../components/Animated';
 
 // Local video files from /public/uploads/motion and video/
 const V = (name: string) => `/uploads/motion%20and%20video/${encodeURIComponent(name)}`;
@@ -59,35 +59,37 @@ const Motion = () => {
             <section className="py-24 px-6">
                 <div className="columns-1 md:columns-2 lg:columns-4 gap-6 space-y-6 max-w-[1920px] mx-auto">
                     {videos.map((item, index) => (
-                        <motion.div
+                        <ScrollReveal
                             key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: (index % 4) * 0.1 }}
-                            className="break-inside-avoid overflow-hidden transition-all duration-300 group relative cursor-pointer"
-                            onClick={() => setSelectedMedia({ src: item.url, title: `Motion Sequence ${String(index + 1).padStart(2, '0')}` })}
+                            direction="up"
+                            delay={(index % 4) * 0.08}
+                            duration={0.6}
                         >
-                            <div className={`relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black hover:border-primary ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'}`}>
-                                <video
-                                    src={item.url}
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    preload="metadata"
-                                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                                />
-                            </div>
+                            <div
+                                className="break-inside-avoid overflow-hidden transition-all duration-300 group relative cursor-pointer"
+                                onClick={() => setSelectedMedia({ src: item.url, title: `Motion Sequence ${String(index + 1).padStart(2, '0')}` })}
+                            >
+                                <div className={`relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black hover:border-primary ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'}`}>
+                                    <video
+                                        src={item.url}
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload="metadata"
+                                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                                    />
+                                </div>
 
-                            {/* Hover overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none rounded-2xl">
-                                <div>
-                                    <p className="text-primary text-xs uppercase tracking-widest mb-1">Motion Reel</p>
-                                    <h3 className="text-white font-bold text-lg">Sequence {String(index + 1).padStart(2, '0')}</h3>
+                                {/* Hover overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none rounded-2xl">
+                                    <div>
+                                        <p className="text-primary text-xs uppercase tracking-widest mb-1">Motion Reel</p>
+                                        <h3 className="text-white font-bold text-lg">Sequence {String(index + 1).padStart(2, '0')}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </motion.div>
+                        </ScrollReveal>
                     ))}
                 </div>
             </section>

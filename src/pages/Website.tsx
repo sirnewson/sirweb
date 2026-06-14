@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import { ScrollReveal, Float, Magnetic } from '../components/Animated';
 
 const packages = [
   {
@@ -97,18 +98,22 @@ const Website = () => {
               Premium websites, landing pages, and digital presence systems for founders, creators, and businesses that need to look trusted, sharp, and ready to sell. Not just pages. A credibility machine.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20a%20website%20for%20my%20brand."
-                className="rounded-full bg-primary px-7 py-4 text-center font-bold text-black transition hover:scale-[1.02] hover:bg-[#eefff4]"
-              >
-                Start on WhatsApp
-              </a>
-              <Link
-                to="/work"
-                className="rounded-full border border-[#eefff4]/20 px-7 py-4 text-center font-bold text-[#eefff4] transition hover:border-primary hover:text-primary"
-              >
-                View Work
-              </Link>
+              <Magnetic>
+                <a
+                  href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20a%20website%20for%20my%20brand."
+                  className="rounded-full bg-primary px-7 py-4 text-center font-bold text-black transition hover:scale-[1.02] hover:bg-[#eefff4] block"
+                >
+                  Start on WhatsApp
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <Link
+                  to="/work"
+                  className="rounded-full border border-[#eefff4]/20 px-7 py-4 text-center font-bold text-[#eefff4] transition hover:border-primary hover:text-primary block"
+                >
+                  View Work
+                </Link>
+              </Magnetic>
             </div>
           </motion.div>
 
@@ -149,17 +154,19 @@ const Website = () => {
       <section className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
         <div className="grid gap-5 md:grid-cols-4">
           {proofPoints.map((point, index) => (
-            <motion.div
+            <ScrollReveal
               key={point}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="rounded-3xl border border-[#eefff4]/10 bg-[#eefff4]/5 p-6"
+              direction="up"
+              delay={index * 0.08}
+              duration={0.6}
             >
-              <p className="mb-4 text-sm font-bold text-primary">0{index + 1}</p>
-              <p className="text-lg font-semibold leading-7">{point}</p>
-            </motion.div>
+              <div className="rounded-3xl border border-[#eefff4]/10 bg-[#eefff4]/5 p-6 h-full">
+                <Float y={2} duration={3 + index} className="w-fit mb-4">
+                  <p className="text-sm font-bold text-primary">0{index + 1}</p>
+                </Float>
+                <p className="text-lg font-semibold leading-7">{point}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -173,37 +180,45 @@ const Website = () => {
               Selected websites and product pages built around trust, clear navigation, mobile behavior, and strong brand presence.
             </p>
           </div>
-          <a
-            href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20a%20website%20like%20the%20samples%20on%20your%20site."
-            className="inline-flex w-fit rounded-full bg-primary px-7 py-4 text-sm font-black text-black transition hover:scale-[1.02] hover:bg-[#eefff4]"
-          >
-            Discuss a Website
-          </a>
+          <Magnetic>
+            <a
+              href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20a%20website%20like%20the%20samples%20on%20your%20site."
+              className="inline-flex w-fit rounded-full bg-primary px-7 py-4 text-sm font-black text-black transition hover:scale-[1.02] hover:bg-[#eefff4] text-center"
+            >
+              Discuss a Website
+            </a>
+          </Magnetic>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {websiteSamples.map((site, index) => (
-            <motion.a
+            <ScrollReveal
               key={site.url}
-              href={site.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.06 }}
-              className="group rounded-[2rem] border border-[#eefff4]/10 bg-[#eefff4]/5 p-7 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-[#eefff4]/10"
+              direction="up"
+              delay={index * 0.06}
+              duration={0.6}
             >
-              <div className="mb-8 flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#eefff4]/45">Live Website</span>
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-[#eefff4]">
-                  <i className="fas fa-external-link-alt text-xs" />
-                </span>
-              </div>
-              <h3 className="font-display text-3xl font-black">{site.name}</h3>
-              <p className="mt-4 text-sm leading-6 text-[#eefff4]/60">{site.note}</p>
-              <p className="mt-6 text-sm font-bold text-primary">{site.url.replace('https://', '').replace('/', '')}</p>
-            </motion.a>
+              <a
+                href={site.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-[2rem] border border-[#eefff4]/10 bg-[#eefff4]/5 p-7 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-[#eefff4]/10 h-full flex flex-col justify-between block"
+              >
+                <div>
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#eefff4]/45">Live Website</span>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-[#eefff4]">
+                      <i className="fas fa-external-link-alt text-xs" />
+                    </span>
+                  </div>
+                  <h3 className="font-display text-3xl font-black">{site.name}</h3>
+                  <p className="mt-4 text-sm leading-6 text-[#eefff4]/60">{site.note}</p>
+                </div>
+                <div>
+                  <p className="mt-6 text-sm font-bold text-primary">{site.url.replace('https://', '').replace('/', '')}</p>
+                </div>
+              </a>
+            </ScrollReveal>
           ))}
         </div>
       </section>
@@ -215,73 +230,97 @@ const Website = () => {
           <p className="mt-5 text-[#eefff4]/65">This keeps low-budget chaos outside the gate and lets serious clients choose fast. The website should not arrive wearing bathroom slippers to a boardroom.</p>
         </div>
         <div className="grid gap-6 lg:grid-cols-2">
-          {packages.map((pkg) => (
-            <motion.article
+          {packages.map((pkg, index) => (
+            <ScrollReveal
               key={pkg.name}
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="rounded-[2rem] border border-[#eefff4]/10 bg-[#eefff4]/5 p-7 transition hover:border-primary/50 hover:bg-[#eefff4]/10"
+              direction="up"
+              delay={index * 0.08}
+              duration={0.65}
             >
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <article className="rounded-[2rem] border border-[#eefff4]/10 bg-[#eefff4]/5 p-7 transition hover:border-primary/50 hover:bg-[#eefff4]/10 h-full flex flex-col justify-between">
                 <div>
-                  <h3 className="font-display text-2xl font-black">{pkg.name}</h3>
-                  <p className="mt-3 text-[#eefff4]/60">{pkg.note}</p>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="font-display text-2xl font-black">{pkg.name}</h3>
+                      <p className="mt-3 text-[#eefff4]/60">{pkg.note}</p>
+                    </div>
+                    <Float y={1.5} duration={3.5 + index} className="shrink-0">
+                      <p className="shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-black text-black">{pkg.price}</p>
+                    </Float>
+                  </div>
+                  <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {pkg.items.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm text-[#eefff4]/75">
+                        <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <p className="shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-black text-black">{pkg.price}</p>
-              </div>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                {pkg.items.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm text-[#eefff4]/75">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.article>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
-        <div className="rounded-[2rem] border border-primary/20 bg-primary p-8 text-black sm:p-12 lg:p-16">
-          <p className="font-bold uppercase tracking-[0.25em]">Best for</p>
-          <h2 className="mt-4 font-display text-4xl font-black sm:text-5xl">People who already have something valuable, but the internet cannot tell yet.</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {['Founders launching offers', 'Service businesses needing trust', 'Creators turning attention into sales'].map((item) => (
-              <div key={item} className="rounded-3xl bg-black/10 p-5 font-bold">{item}</div>
-            ))}
+        <ScrollReveal direction="up" duration={0.75}>
+          <div className="rounded-[2rem] border border-primary/20 bg-primary p-8 text-black sm:p-12 lg:p-16">
+            <p className="font-bold uppercase tracking-[0.25em]">Best for</p>
+            <h2 className="mt-4 font-display text-4xl font-black sm:text-5xl">People who already have something valuable, but the internet cannot tell yet.</h2>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {['Founders launching offers', 'Service businesses needing trust', 'Creators turning attention into sales'].map((item) => (
+                <div key={item} className="rounded-3xl bg-black/10 p-5 font-bold">{item}</div>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-20 text-center sm:px-8 lg:px-12">
-        <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary">Process</p>
-        <h2 className="mt-4 font-display text-4xl font-black sm:text-5xl">Strategy first. Design second. Confusion last.</h2>
+        <ScrollReveal direction="up" duration={0.6}>
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary">Process</p>
+          <h2 className="mt-4 font-display text-4xl font-black sm:text-5xl">Strategy first. Design second. Confusion last.</h2>
+        </ScrollReveal>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {[
             ['01', 'Clarity Call', 'We define the offer, buyer, proof, and the main action the page must drive.'],
             ['02', 'Design Direction', 'I shape the layout, copy flow, visual hierarchy, and premium feel.'],
             ['03', 'Build & Launch', 'The page goes live with responsive design, contact flow, and a clean handover.']
-          ].map(([num, title, desc]) => (
-            <div key={title} className="rounded-3xl border border-[#eefff4]/10 bg-[#eefff4]/5 p-6 text-left">
-              <p className="text-primary font-black">{num}</p>
-              <h3 className="mt-4 text-xl font-black">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#eefff4]/60">{desc}</p>
-            </div>
+          ].map(([num, title, desc], index) => (
+            <ScrollReveal
+              key={title}
+              direction="up"
+              delay={index * 0.08}
+              duration={0.65}
+            >
+              <div className="rounded-3xl border border-[#eefff4]/10 bg-[#eefff4]/5 p-6 text-left h-full">
+                <Float y={2} duration={4 + index} className="w-fit">
+                  <p className="text-primary font-black">{num}</p>
+                </Float>
+                <h3 className="mt-4 text-xl font-black">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#eefff4]/60">{desc}</p>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-6 py-24 text-center sm:px-8 lg:px-12">
-        <h2 className="font-display text-4xl font-black sm:text-6xl">Your website should quietly do the selling before you enter the room.</h2>
-        <p className="mx-auto mt-6 max-w-2xl text-[#eefff4]/65">Send your current site, idea, or business name. I’ll help you shape the right level of website for where your brand is going.</p>
-        <a
-          href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20to%20talk%20about%20a%20website%20project."
-          className="mt-9 inline-flex rounded-full bg-[#eefff4] px-8 py-4 font-black text-[#011111] transition hover:scale-[1.02] hover:bg-primary"
-        >
-          Talk Website Project
-        </a>
+        <ScrollReveal direction="up" duration={0.75}>
+          <h2 className="font-display text-4xl font-black sm:text-6xl">Your website should quietly do the selling before you enter the room.</h2>
+          <p className="mx-auto mt-6 max-w-2xl text-[#eefff4]/65">Send your current site, idea, or business name. I’ll help you shape the right level of website for where your brand is going.</p>
+          <div className="mt-9 flex justify-center">
+            <Magnetic>
+              <a
+                href="https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20want%20to%20talk%20about%20a%20website%20project."
+                className="inline-flex rounded-full bg-[#eefff4] px-8 py-4 font-black text-[#011111] transition hover:scale-[1.02] hover:bg-primary block text-center"
+              >
+                Talk Website Project
+              </a>
+            </Magnetic>
+          </div>
+        </ScrollReveal>
       </section>
 
       <Footer />

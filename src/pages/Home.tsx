@@ -7,6 +7,7 @@ import MediaModal from '../components/MediaModal';
 import Footer from '../components/Footer';
 import { recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
 import { db } from '../firebase';
+import { ScrollReveal, Float, Magnetic } from '../components/Animated';
 
 interface ThreadPreview {
     id: string;
@@ -207,25 +208,27 @@ const Home = () => {
 
                     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
                         {startHerePaths.map((item, index) => (
-                            <motion.div
+                            <ScrollReveal
                                 key={item.title}
-                                initial={{ opacity: 0, y: 18 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
+                                direction="up"
+                                delay={index * 0.05}
+                                duration={0.6}
+                                className="h-full"
                             >
                                 <Link
                                     to={item.path}
                                     className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06]"
                                 >
-                                    <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-black">
-                                        <i className={item.icon} />
-                                    </div>
+                                    <Float y={3} rotate={2} duration={4 + index} className="mb-8 w-12 h-12">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-black">
+                                            <i className={item.icon} />
+                                        </div>
+                                    </Float>
                                     <h3 className="font-display text-xl font-black leading-tight">{item.title}</h3>
                                     <p className="mt-4 grow text-sm leading-6 text-white/55">{item.description}</p>
                                     <span className="mt-6 text-xs font-black uppercase tracking-wider text-primary">Begin <i className="fas fa-arrow-right ml-2" /></span>
                                 </Link>
-                            </motion.div>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -240,13 +243,15 @@ const Home = () => {
                                 A small visible cut from the real upload folders. The full archive lives on the Work page.
                             </p>
                         </div>
-                        <Link
-                            to="/work"
-                            className="inline-flex w-fit items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
-                        >
-                            View Full Work
-                            <i className="fas fa-arrow-right" />
-                        </Link>
+                        <Magnetic>
+                            <Link
+                                to="/work"
+                                className="inline-flex w-fit items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
+                            >
+                                View Full Work
+                                <i className="fas fa-arrow-right" />
+                            </Link>
+                        </Magnetic>
                     </div>
 
                     <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-4">
@@ -274,30 +279,34 @@ const Home = () => {
                         <p className="mt-5 text-lg leading-8 text-white/60">
                             Bring the idea, brand, event, product, or campaign. I help shape the identity, visual language, digital presence, and content direction so the work feels clear, current, and ready to move.
                         </p>
-                        <Link
-                            to="/contact"
-                            className="mt-8 inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
-                        >
-                            Start a Project
-                            <i className="fas fa-arrow-right" />
-                        </Link>
+                        <Magnetic>
+                            <Link
+                                to="/contact"
+                                className="mt-8 inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
+                            >
+                                Start a Project
+                                <i className="fas fa-arrow-right" />
+                            </Link>
+                        </Magnetic>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
                         {hireLanes.map((item, index) => (
-                            <motion.article
+                            <ScrollReveal
                                 key={item.title}
-                                initial={{ opacity: 0, y: 18 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.06 }}
-                                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]"
+                                direction="up"
+                                delay={index * 0.06}
+                                duration={0.6}
                             >
-                                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                    <i className={item.icon} />
-                                </div>
-                                <h3 className="font-display text-xl font-black">{item.title}</h3>
-                                <p className="mt-3 text-sm leading-6 text-white/55">{item.description}</p>
-                            </motion.article>
+                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06] h-full">
+                                    <Float y={2.5} duration={4.5 + index} className="mb-5 w-11 h-11">
+                                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <i className={item.icon} />
+                                        </div>
+                                    </Float>
+                                    <h3 className="font-display text-xl font-black">{item.title}</h3>
+                                    <p className="mt-3 text-sm leading-6 text-white/55">{item.description}</p>
+                                </article>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -316,18 +325,20 @@ const Home = () => {
 
                         <div className="grid gap-4 sm:grid-cols-2">
                             {futurePillars.map((pillar, index) => (
-                                <motion.article
+                                <ScrollReveal
                                     key={pillar.title}
-                                    initial={{ opacity: 0, y: 18 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.06 }}
-                                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]"
+                                    direction="up"
+                                    delay={index * 0.06}
+                                    duration={0.6}
                                 >
-                                    <span className="font-display text-4xl font-black text-primary/30">0{index + 1}</span>
-                                    <h3 className="mt-5 font-display text-2xl font-black">{pillar.title}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-white/55">{pillar.description}</p>
-                                </motion.article>
+                                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06] h-full">
+                                        <Float y={3} rotate={1} duration={5 + index} className="w-fit">
+                                            <span className="font-display text-4xl font-black text-primary/30 block">0{index + 1}</span>
+                                        </Float>
+                                        <h3 className="mt-5 font-display text-2xl font-black">{pillar.title}</h3>
+                                        <p className="mt-3 text-sm leading-6 text-white/55">{pillar.description}</p>
+                                    </article>
+                                </ScrollReveal>
                             ))}
                         </div>
                     </div>
@@ -346,12 +357,12 @@ const Home = () => {
 
                     <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
                         {worldCards.map((card, index) => (
-                            <motion.div
+                            <ScrollReveal
                                 key={card.title}
-                                initial={{ opacity: 0, y: 18 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05 }}
+                                direction="up"
+                                delay={index * 0.05}
+                                duration={0.6}
+                                className="h-full"
                             >
                                 <Link
                                     to={card.path}
@@ -362,7 +373,7 @@ const Home = () => {
                                     <p className="mt-4 grow text-sm leading-6 text-white/55">{card.description}</p>
                                     <span className="mt-7 text-xs font-black uppercase tracking-wider text-primary">Explore <i className="fas fa-arrow-right ml-2" /></span>
                                 </Link>
-                            </motion.div>
+                            </ScrollReveal>
                         ))}
                     </div>
                 </div>
@@ -378,48 +389,50 @@ const Home = () => {
                                 Quick notes on design, systems, AI, creative direction, and the work behind the work.
                             </p>
                         </div>
-                        <Link
-                            to="/threads"
-                            className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
-                        >
-                            Read Threads
-                            <i className="fas fa-arrow-right" />
-                        </Link>
+                        <Magnetic>
+                            <Link
+                                to="/threads"
+                                className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
+                            >
+                                Read Threads
+                                <i className="fas fa-arrow-right" />
+                            </Link>
+                        </Magnetic>
                     </div>
 
                     <div className="grid gap-5 md:grid-cols-3">
                         {latestThreads.length > 0 ? latestThreads.map((thread, index) => (
-                            <motion.article
+                            <ScrollReveal
                                 key={thread.id}
-                                initial={{ opacity: 0, y: 18 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.06 }}
-                                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]"
+                                direction="up"
+                                delay={index * 0.06}
+                                duration={0.65}
                             >
-                                <div className="mb-5 flex items-center justify-between">
-                                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
-                                        {thread.category || 'Thought'}
-                                    </span>
-                                    <span className="text-[10px] font-mono uppercase text-white/35">
-                                        {thread.timestamp ? new Date(thread.timestamp.seconds * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Now'}
-                                    </span>
-                                </div>
-                                <p className="line-clamp-5 text-base font-medium leading-7 text-white/80">{thread.content}</p>
-                            </motion.article>
+                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06] h-full">
+                                    <div className="mb-5 flex items-center justify-between">
+                                        <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
+                                            {thread.category || 'Thought'}
+                                        </span>
+                                        <span className="text-[10px] font-mono uppercase text-white/35">
+                                            {thread.timestamp ? new Date(thread.timestamp.seconds * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Now'}
+                                        </span>
+                                    </div>
+                                    <p className="line-clamp-5 text-base font-medium leading-7 text-white/80">{thread.content}</p>
+                                </article>
+                            </ScrollReveal>
                         )) : (
                             ['Design gets stronger when the thinking gets clearer.', 'A good system makes the next good decision easier.', 'Creative direction is taste plus responsibility.'].map((thread, index) => (
-                                <motion.article
+                                <ScrollReveal
                                     key={thread}
-                                    initial={{ opacity: 0, y: 18 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: index * 0.06 }}
-                                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                                    direction="up"
+                                    delay={index * 0.06}
+                                    duration={0.65}
                                 >
-                                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">Studio Note</span>
-                                    <p className="mt-5 text-base font-medium leading-7 text-white/80">{thread}</p>
-                                </motion.article>
+                                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 h-full">
+                                        <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">Studio Note</span>
+                                        <p className="mt-5 text-base font-medium leading-7 text-white/80">{thread}</p>
+                                    </article>
+                                </ScrollReveal>
                             ))
                         )}
                     </div>
