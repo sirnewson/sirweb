@@ -1,6 +1,18 @@
-# Sir Newson Uploads Directory
+# Sir Newson Creative Uploads
 
-Put your images (`.webp`, `.png`, `.jpg`) and video files (`.mp4`, `.webm`) in this folder.
+Drop new work into the most relevant category folder:
+
+- `business-posters`
+- `church-and-events`
+- `brand-identity`
+- `social-media-and-ads`
+- `company-profiles-and-editorial`
+- `print-and-packaging`
+- `motion-and-video`
+
+The older `graphics`, `branding`, `logo`, and `motion and video` folders are preserved as the existing source library.
+
+Use clear filenames such as `client-project-campaign.webp`. Preferred formats are `.webp`, `.jpg`, `.png`, `.mp4`, and `.webm`.
 
 ## How to add them to your website:
 To show them on the **Home** or **Work** boards, edit the `uploads` array inside `src/pages/Home.tsx` or `src/pages/Work.tsx` by adding a new item like:

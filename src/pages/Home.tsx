@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import { recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
 import { db } from '../firebase';
 import { ScrollReveal, Float, Magnetic } from '../components/Animated';
+import ClientTicker from '../components/ClientTicker';
 
 interface ThreadPreview {
     id: string;
@@ -188,6 +189,8 @@ const Home = () => {
                 secondaryCtaLabel="Get in Touch"
                 secondaryCtaPath="/contact"
             />
+            
+            <ClientTicker />
 
             <section className="border-y border-white/5 bg-neutral-dark/80 px-6 py-8">
                 <div className="mx-auto flex max-w-7xl flex-col gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
