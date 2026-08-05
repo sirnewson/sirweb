@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { collection, limit as limitQuery, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Hero from '../components/Hero';
+import SEO from '../components/SEO';
 import MediaModal from '../components/MediaModal';
 import Footer from '../components/Footer';
 import { recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
 import { db } from '../firebase';
-import { ScrollReveal, Float, Magnetic } from '../components/Animated';
+import { ScrollReveal, Magnetic } from '../components/Animated';
 import ClientTicker from '../components/ClientTicker';
+import ReadyRotator from '../components/ReadyRotator';
+import PresentationPillars from '../components/PresentationPillars';
+import ReadinessFramework from '../components/ReadinessFramework';
+import Manifesto from '../components/Manifesto';
+import FinalCta from '../components/FinalCta';
 
 interface ThreadPreview {
     id: string;
@@ -17,114 +23,39 @@ interface ThreadPreview {
     timestamp?: { seconds: number };
 }
 
-const startHerePaths = [
-    {
-        title: 'I want to hire you',
-        description: 'Start with services, pricing direction, and the kind of work I can build with you.',
-        path: '/services',
-        icon: 'fas fa-handshake',
-    },
-    {
-        title: 'I want to see your work',
-        description: 'Browse recent branding, graphics, motion, and website work from the live archive.',
-        path: '/work',
-        icon: 'fas fa-images',
-    },
-    {
-        title: 'I want to read your thoughts',
-        description: 'Explore Drift Notes: quick reflections on design, systems, awareness, and creativity.',
-        path: '/threads',
-        icon: 'fas fa-feather-alt',
-    },
-    {
-        title: 'I want to explore your tools',
-        description: 'Visit YXM Labs and see experimental tools, AI systems, and product concepts.',
-        path: '/tools',
-        icon: 'fas fa-flask',
-    },
-    {
-        title: 'I want to understand the bigger vision',
-        description: 'Jump into the future ecosystem behind the brand: media, education, living, and creative tech.',
-        path: '/#future-ecosystem',
-        icon: 'fas fa-project-diagram',
-    },
+const transformationRows: [string, string][] = [
+    ['Raw product photos', 'Sales-ready product visuals'],
+    ['Unedited footage', 'Publish-ready videos'],
+    ['A product list', 'A professional catalogue'],
+    ['A business idea', 'A credible digital presence'],
+    ['An event concept', 'A complete visual campaign'],
+    ['A rough idea', 'A way for the world to see it'],
 ];
 
-const hireLanes = [
+const whyPoints = [
     {
-        title: 'For Brands',
-        description: 'Identity systems, campaign visuals, social media design, product marketing, and brand storytelling.',
-        icon: 'fas fa-bullseye',
+        title: 'I understand the assignment',
+        desc: 'Clients arrive with scattered photos, voice notes, rough ideas, product lists, or urgent announcements. I find the finished communication hiding inside the raw material.',
+        icon: 'fas fa-crosshairs',
     },
     {
-        title: 'For Events',
-        description: 'Event identity, motion visuals, recap direction, content systems, posters, and promotional assets.',
-        icon: 'fas fa-ticket-alt',
+        title: 'I think beyond the asset',
+        desc: 'A poster is not just a poster. Each piece has a job: create interest, build trust, clarify value, or move someone to act.',
+        icon: 'fas fa-brain',
     },
     {
-        title: 'For Startups & Founders',
-        description: 'Website concepts, pitch visuals, brand narrative, product mockups, and AI prototype direction.',
-        icon: 'fas fa-rocket',
+        title: 'I bring multiple skills together',
+        desc: 'Design, motion, writing, storytelling, branding, websites and AI work under one goal — presenting the idea properly.',
+        icon: 'fas fa-layer-group',
     },
     {
-        title: 'For Creators',
-        description: 'Thumbnails, visual worlds, content direction, music visuals, campaign looks, and audience-facing systems.',
-        icon: 'fas fa-magic',
-    },
-];
-
-const futurePillars = [
-    {
-        title: 'Media',
-        description: 'TAK Network, business insights, AI stories, culture, interviews, and future-facing commentary.',
-    },
-    {
-        title: 'Education',
-        description: "Ebusoma, learning tools, children's content, and education built for the AI era.",
-    },
-    {
-        title: 'Living',
-        description: 'Furniture ideas, spaces, home concepts, visual lifestyle systems, and TAK Living.',
-    },
-    {
-        title: 'Creative Tech',
-        description: 'YXM Labs, AI tools, digital systems, prototypes, experiments, and product experiences.',
-    },
-];
-
-const worldCards = [
-    {
-        title: 'Sir Newson Visuals',
-        description: 'Surreal edits, creative posters, visual storytelling, cinematic concepts, and campaign art direction.',
-        path: '/work',
-    },
-    {
-        title: 'Drift Notes',
-        description: 'Reflections, ideas, philosophy, awareness, creative thinking, and lessons from the studio.',
-        path: '/threads',
-    },
-    {
-        title: 'YXM Labs',
-        description: 'Experimental digital tools, AI systems, app concepts, and future-facing product ideas.',
-        path: '/tools',
-    },
-    {
-        title: 'TAK Network',
-        description: 'Media, business thoughts, AI insights, technology, living, culture, and education.',
-        path: '/#future-ecosystem',
-    },
-    {
-        title: 'Music & Wallframes',
-        description: 'Ambient visuals, music fusions, YouTube experiences, and mood-based screen art.',
-        path: '/shop',
+        title: 'I build for the real world',
+        desc: 'The work is designed to be used. To be posted, shared, watched, clicked, sold, and remembered.',
+        icon: 'fas fa-bolt',
     },
 ];
 
 const Home = () => {
-    useEffect(() => {
-        document.title = 'Sir Newson | Creative Director & Thinker';
-    }, []);
-
     const [selectedMedia, setSelectedMedia] = useState<UploadAsset | null>(null);
     const [latestThreads, setLatestThreads] = useState<ThreadPreview[]>([]);
     const [savedPins, setSavedPins] = useState<Record<string, boolean>>(() => {
@@ -170,6 +101,13 @@ const Home = () => {
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-neutral-black text-white font-sans bg-hexagon-grid">
+            <SEO
+                title="Sir Newson | Creative Director & Presentation Architect in Kenya"
+                description="Sir Newson helps ideas, products, stories and businesses move from unfinished to ready. Product visuals, video editing, catalogues, brand identity, websites and creative direction in Nairobi, Kenya."
+                keywords="Sir Newson, presentation architect Kenya, creative director Kenya, brand identity Kenya, website design Kenya, product visuals Kenya, catalogue design Kenya, video editing Kenya, motion graphics Nairobi, creative agency Nairobi"
+                path="/"
+            />
+
             <AnimatePresence>
                 {toastMessage && (
                     <motion.div
@@ -184,66 +122,86 @@ const Home = () => {
             </AnimatePresence>
 
             <Hero
-                primaryCtaLabel="Selected Work"
-                primaryCtaPath="/work"
-                secondaryCtaLabel="Get in Touch"
-                secondaryCtaPath="/contact"
+                trustLine="Creative direction since 2020 · Nairobi, Kenya · Usually replies the same day"
+                primaryCtaLabel="Start a Project"
+                primaryCtaPath="/contact"
+                secondaryCtaLabel="View Selected Work"
+                secondaryCtaPath="/work"
             />
-            
+
             <ClientTicker />
 
-            <section className="border-y border-white/5 bg-neutral-dark/80 px-6 py-8">
-                <div className="mx-auto flex max-w-7xl flex-col gap-3 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-                    <p className="font-display text-2xl font-black text-white md:text-3xl">Creative Director Since 2020</p>
-                    <p className="text-xs font-bold uppercase tracking-[0.24em] text-white/45">Brand systems, visual campaigns, websites, motion</p>
-                </div>
-            </section>
-
-            <section className="px-6 py-20">
+            {/* The core positioning: what you bring vs what I build */}
+            <section className="border-t border-white/5 px-6 py-24">
                 <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 max-w-3xl">
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Start Here</p>
-                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Where Do You Want To Begin?</h2>
+                    <div className="mb-14 max-w-3xl">
+                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Presentation Is More Than Design</p>
+                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">What You Bring. What I Build.</h2>
                         <p className="mt-4 text-lg leading-8 text-white/60">
-                            Choose the path that fits what you need today. The brand is wide, but the entry points should be simple.
+                            Most people do not come to me because they need "a graphic." They come with something unfinished — a product that needs to look ready for sale, footage that needs editing for the internet, a business that needs to look credible. My job is to take the raw form and shape it into something people understand, trust, and act on.
                         </p>
                     </div>
 
-                    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-                        {startHerePaths.map((item, index) => (
+                    <div className="mb-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        {transformationRows.map(([before, after], index) => (
                             <ScrollReveal
-                                key={item.title}
+                                key={before}
                                 direction="up"
                                 delay={index * 0.05}
                                 duration={0.6}
                                 className="h-full"
                             >
-                                <Link
-                                    to={item.path}
-                                    className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06]"
-                                >
-                                    <Float y={3} rotate={2} duration={4 + index} className="mb-8 w-12 h-12">
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition group-hover:bg-primary group-hover:text-black">
-                                            <i className={item.icon} />
-                                        </div>
-                                    </Float>
-                                    <h3 className="font-display text-xl font-black leading-tight">{item.title}</h3>
-                                    <p className="mt-4 grow text-sm leading-6 text-white/55">{item.description}</p>
-                                    <span className="mt-6 text-xs font-black uppercase tracking-wider text-primary">Begin <i className="fas fa-arrow-right ml-2" /></span>
-                                </Link>
+                                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white/35">You bring</p>
+                                    <p className="mt-2 font-display text-lg font-black text-white/70">{before}</p>
+                                    <div className="my-4 flex items-center gap-2 text-primary">
+                                        <span className="h-px flex-1 bg-primary/30" />
+                                        <i className="fas fa-arrow-down text-xs" />
+                                        <span className="h-px flex-1 bg-primary/30" />
+                                    </div>
+                                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-primary/70">I build</p>
+                                    <p className="mt-2 font-display text-lg font-black text-white">{after}</p>
+                                </div>
                             </ScrollReveal>
                         ))}
                     </div>
+
+                    <ScrollReveal direction="up" duration={0.6}>
+                        <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-10 text-center sm:flex-row sm:justify-center sm:gap-10">
+                            <div className="flex flex-wrap justify-center gap-2">
+                                {['Raw', 'Incomplete', 'Internal', 'Confusing', 'Unpolished'].map((tag) => (
+                                    <span key={tag} className="rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/40">{tag}</span>
+                                ))}
+                            </div>
+                            <i className="fas fa-arrow-right hidden text-xl text-primary sm:block" />
+                            <i className="fas fa-arrow-down text-xl text-primary sm:hidden" />
+                            <div className="flex flex-wrap justify-center gap-2">
+                                {['Professional', 'Clear', 'Attractive', 'Trusted', 'Ready'].map((tag) => (
+                                    <span key={tag} className="rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-primary">{tag}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    <p className="mx-auto mt-10 max-w-3xl text-center font-display text-2xl font-black text-white md:text-3xl">
+                        The work is not finished when it looks good. <span className="text-primary">It is finished when it is ready to meet its audience.</span>
+                    </p>
                 </div>
             </section>
 
-            <section className="px-6 py-20">
+            <ReadyRotator />
+
+            <PresentationPillars />
+
+            {/* Proof: real work */}
+            <section className="border-t border-white/5 px-6 py-24">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
-                            <h2 className="font-display text-3xl font-black md:text-5xl">Recent Work</h2>
+                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Proof, Not Claims</p>
+                            <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">Work That Went Out Into the World.</h2>
                             <p className="mt-3 max-w-2xl text-white/60">
-                                A small visible cut from the real upload folders. The full archive lives on the Work page.
+                                Real campaigns, products and posts that shipped. The full archive lives on the Work page.
                             </p>
                         </div>
                         <Magnetic>
@@ -274,40 +232,39 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="border-t border-white/5 bg-neutral-dark px-6 py-24">
-                <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <ReadinessFramework />
+
+            {/* Why people call */}
+            <section className="border-t border-white/5 px-6 py-24">
+                <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
                     <div>
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Hire Sir Newson For</p>
-                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Creative Direction That Turns Ideas Into Usable Brand Systems</h2>
-                        <p className="mt-5 text-lg leading-8 text-white/60">
-                            Bring the idea, brand, event, product, or campaign. I help shape the identity, visual language, digital presence, and content direction so the work feels clear, current, and ready to move.
+                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Why People Call</p>
+                        <h2 className="mt-3 font-display text-4xl font-black leading-tight md:text-5xl">
+                            Not because the gradients are nice.
+                        </h2>
+                        <p className="mt-6 text-lg leading-8 text-white/60">
+                            Because nobody wants to embarrass themselves when they launch. People pay for the confidence of knowing the work is ready.
                         </p>
                         <Magnetic>
                             <Link
-                                to="/contact"
-                                className="mt-8 inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
+                                to="/services"
+                                className="mt-8 inline-flex items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
                             >
-                                Start a Project
+                                See How I Work
                                 <i className="fas fa-arrow-right" />
                             </Link>
                         </Magnetic>
                     </div>
+
                     <div className="grid gap-4 sm:grid-cols-2">
-                        {hireLanes.map((item, index) => (
-                            <ScrollReveal
-                                key={item.title}
-                                direction="up"
-                                delay={index * 0.06}
-                                duration={0.6}
-                            >
-                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06] h-full">
-                                    <Float y={2.5} duration={4.5 + index} className="mb-5 w-11 h-11">
-                                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                            <i className={item.icon} />
-                                        </div>
-                                    </Float>
-                                    <h3 className="font-display text-xl font-black">{item.title}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-white/55">{item.description}</p>
+                        {whyPoints.map((point, index) => (
+                            <ScrollReveal key={point.title} direction="up" delay={index * 0.06} duration={0.6} className="h-full">
+                                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]">
+                                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                        <i className={point.icon} />
+                                    </div>
+                                    <h3 className="font-display text-xl font-black">{point.title}</h3>
+                                    <p className="mt-3 text-sm leading-6 text-white/55">{point.desc}</p>
                                 </article>
                             </ScrollReveal>
                         ))}
@@ -315,82 +272,15 @@ const Home = () => {
                 </div>
             </section>
 
-            <section id="future-ecosystem" className="border-t border-white/5 px-6 py-24">
-                <div className="mx-auto max-w-7xl">
-                    <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-                        <div>
-                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">The Future I'm Building</p>
-                            <h2 className="mt-3 font-display text-4xl font-black leading-tight md:text-6xl">The Future Is Not Just Content. It Is Systems.</h2>
-                            <p className="mt-6 text-lg leading-8 text-white/62">
-                                Sir Newson is evolving from design services into a creative technology ecosystem: tools, media spaces, learning platforms, visual experiences, and brand systems for the next generation of creators, businesses, and communities.
-                            </p>
-                        </div>
+            <Manifesto />
 
-                        <div className="grid gap-4 sm:grid-cols-2">
-                            {futurePillars.map((pillar, index) => (
-                                <ScrollReveal
-                                    key={pillar.title}
-                                    direction="up"
-                                    delay={index * 0.06}
-                                    duration={0.6}
-                                >
-                                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06] h-full">
-                                        <Float y={3} rotate={1} duration={5 + index} className="w-fit">
-                                            <span className="font-display text-4xl font-black text-primary/30 block">0{index + 1}</span>
-                                        </Float>
-                                        <h3 className="mt-5 font-display text-2xl font-black">{pillar.title}</h3>
-                                        <p className="mt-3 text-sm leading-6 text-white/55">{pillar.description}</p>
-                                    </article>
-                                </ScrollReveal>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="border-t border-white/5 bg-neutral-dark px-6 py-24">
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 max-w-3xl">
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">The Sir Newson World</p>
-                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">One Brand, Multiple Doors</h2>
-                        <p className="mt-4 text-lg leading-8 text-white/60">
-                            The work connects through visual storytelling, systems thinking, tools, media, learning, and experiences.
-                        </p>
-                    </div>
-
-                    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-                        {worldCards.map((card, index) => (
-                            <ScrollReveal
-                                key={card.title}
-                                direction="up"
-                                delay={index * 0.05}
-                                duration={0.6}
-                                className="h-full"
-                            >
-                                <Link
-                                    to={card.path}
-                                    className="group flex h-full flex-col rounded-2xl border border-white/10 bg-black/30 p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-black/60"
-                                >
-                                    <p className="text-[10px] font-black uppercase tracking-[0.24em] text-primary/70">World 0{index + 1}</p>
-                                    <h3 className="mt-5 font-display text-2xl font-black leading-tight">{card.title}</h3>
-                                    <p className="mt-4 grow text-sm leading-6 text-white/55">{card.description}</p>
-                                    <span className="mt-7 text-xs font-black uppercase tracking-wider text-primary">Explore <i className="fas fa-arrow-right ml-2" /></span>
-                                </Link>
-                            </ScrollReveal>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
+            {/* Studio notes — kept light */}
             <section className="border-t border-white/5 bg-neutral-dark px-6 py-20">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
-                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Latest Threads</p>
+                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Drift Notes</p>
                             <h2 className="mt-3 font-display text-3xl font-black md:text-5xl">Thoughts From the Studio</h2>
-                            <p className="mt-3 max-w-2xl text-white/60">
-                                Quick notes on design, systems, AI, creative direction, and the work behind the work.
-                            </p>
                         </div>
                         <Magnetic>
                             <Link
@@ -405,13 +295,8 @@ const Home = () => {
 
                     <div className="grid gap-5 md:grid-cols-3">
                         {latestThreads.length > 0 ? latestThreads.map((thread, index) => (
-                            <ScrollReveal
-                                key={thread.id}
-                                direction="up"
-                                delay={index * 0.06}
-                                duration={0.65}
-                            >
-                                <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06] h-full">
+                            <ScrollReveal key={thread.id} direction="up" delay={index * 0.06} duration={0.65} className="h-full">
+                                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]">
                                     <div className="mb-5 flex items-center justify-between">
                                         <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
                                             {thread.category || 'Thought'}
@@ -424,14 +309,13 @@ const Home = () => {
                                 </article>
                             </ScrollReveal>
                         )) : (
-                            ['Design gets stronger when the thinking gets clearer.', 'A good system makes the next good decision easier.', 'Creative direction is taste plus responsibility.'].map((thread, index) => (
-                                <ScrollReveal
-                                    key={thread}
-                                    direction="up"
-                                    delay={index * 0.06}
-                                    duration={0.65}
-                                >
-                                    <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 h-full">
+                            [
+                                'Design gets stronger when the thinking gets clearer.',
+                                'A good system makes the next good decision easier.',
+                                'Creative direction is taste plus responsibility.'
+                            ].map((thread, index) => (
+                                <ScrollReveal key={thread} direction="up" delay={index * 0.06} duration={0.65} className="h-full">
+                                    <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
                                         <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">Studio Note</span>
                                         <p className="mt-5 text-base font-medium leading-7 text-white/80">{thread}</p>
                                     </article>
@@ -441,6 +325,8 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            <FinalCta />
 
             <MediaModal
                 isOpen={Boolean(selectedMedia)}

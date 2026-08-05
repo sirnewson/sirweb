@@ -4,6 +4,7 @@ import { collection, query, orderBy, onSnapshot, updateDoc, doc, increment } fro
 import { db } from '../firebase';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 
 interface Thread {
     id: string;
@@ -142,6 +143,12 @@ const DriftNotes = () => {
 
     return (
         <div className="bg-neutral-black min-h-screen text-white relative font-sans">
+            <SEO
+                title="Drift Notes | Thoughts on Design, Systems & Creative Direction | Sir Newson"
+                description="Raw notes and reflections from the studio: design thinking, creative direction, presentation, awareness, systems and building in the AI era."
+                keywords="design thoughts Kenya, creative direction blog, design philosophy, creative notes Nairobi, Sir Newson drift notes"
+                path="/threads"
+            />
             <Navbar />
             <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay z-0 pointer-events-none" />
 

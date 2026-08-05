@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Float, ScrollReveal, Magnetic, TextReveal } from './Animated';
 
@@ -10,39 +11,75 @@ interface HeroProps {
     primaryCtaPath?: string;
     secondaryCtaLabel?: string;
     secondaryCtaPath?: string;
+    /** Understated credibility line under the CTAs. Landing hero only. */
+    trustLine?: string;
 }
 
 const Hero = ({
-    title = "Sir Newson",
-    subtitle = "Creative Director • Website Design • Brand Systems • AI Visuals",
-    shortParagraph = "I help ambitious brands look trusted, explain their value clearly, and turn attention into action through premium websites, brand identity systems, visual storytelling, and AI-powered creative workflows.",
+    title = "I Make Ideas Ready for the World.",
+    subtitle = "Creative Direction • Presentation Systems • Digital Experiences",
+    shortParagraph = "You bring the raw material — photos, footage, a product, a rough idea. I shape it into something clear, professional, and ready to meet its audience.",
     primaryCtaLabel = "View Work",
     primaryCtaPath = "/work",
     secondaryCtaLabel = "Start a Project",
-    secondaryCtaPath = "/contact"
+    secondaryCtaPath = "/contact",
+    trustLine
 }: HeroProps) => {
     const location = useLocation();
+    const sectionRef = useRef<HTMLElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start start', 'end start']
+    });
+
+    // Content drifts up and dissolves; the backdrop pushes down. Subtle depth split.
+    const contentY = useSpring(useTransform(scrollYProgress, [0, 1], [0, -90]), {
+        stiffness: 120,
+        damping: 30,
+        mass: 0.4
+    });
+    const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+    const backdropY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+    const backdropScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.16]);
 
     return (
-        <section className="relative w-full overflow-hidden pt-36 pb-16 flex flex-col items-center justify-center font-sans border-b border-white/5">
-            <div className="absolute inset-0 z-0 select-none pointer-events-none">
+        <section
+            ref={sectionRef}
+            className="relative w-full overflow-hidden pt-36 pb-16 flex flex-col items-center justify-center font-sans border-b border-white/5"
+        >
+            <motion.div
+                style={{ y: backdropY, scale: backdropScale }}
+                className="absolute inset-0 z-0 select-none pointer-events-none"
+            >
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-black/80 via-neutral-black/60 to-neutral-black z-10" />
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover opacity-25 scale-105"
+                    className="w-full h-full object-cover opacity-25"
                 >
                     <source src="/uploads/motion%20and%20video/water-background.mp4" type="video/mp4" />
                 </video>
-            </div>
+            </motion.div>
 
             <div className="absolute inset-0 bg-hexagon-grid opacity-40 mix-blend-color-dodge pointer-events-none z-5" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
+            <motion.div
+                animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
+                transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"
+            />
+            <motion.div
+                animate={{ scale: [1.12, 1, 1.12], opacity: [0.4, 0.75, 0.4] }}
+                transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"
+            />
 
-            <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl w-full mx-auto">
+            <motion.div
+                style={{ y: contentY, opacity: contentOpacity }}
+                className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl w-full mx-auto"
+            >
                 <Float y={5} rotate={1.5} duration={5} className="mb-6">
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
@@ -126,7 +163,31 @@ const Hero = ({
                         </Link>
                     </Magnetic>
                 </ScrollReveal>
-            </div>
+
+                {trustLine && (
+                    <ScrollReveal direction="up" delay={0.65} duration={0.8}>
+                        <p className="mt-7 text-[11px] font-medium tracking-wide text-white/40">{trustLine}</p>
+                    </ScrollReveal>
+                )}
+            </motion.div>
+
+            {/* Scroll cue */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.4, duration: 0.8 }}
+                style={{ opacity: contentOpacity }}
+                className="relative z-10 mt-14 flex flex-col items-center gap-2"
+            >
+                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-white/25">Scroll</span>
+                <div className="h-10 w-px overflow-hidden bg-white/10">
+                    <motion.div
+                        animate={{ y: ['-100%', '100%'] }}
+                        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                        className="h-full w-full bg-primary"
+                    />
+                </div>
+            </motion.div>
         </section>
     );
 };

@@ -20,6 +20,8 @@ import SideScrollLines from './components/SideScrollLines';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import LoadingScreen from './components/LoadingScreen';
 import CustomCursor from './components/CustomCursor';
+import WhatsAppFab from './components/WhatsAppFab';
+import ScrollProgress from './components/ScrollProgress';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -49,10 +51,12 @@ function App() {
       {!isLoading && (
         <>
           {/* Site chrome — hidden on proposal pages */}
+          {!isProposalRoute && <ScrollProgress />}
           {!isProposalRoute && <CustomCursor />}
           {!isProposalRoute && <ParticleBackground />}
           <ScrollToTop />
           {!isProposalRoute && <ScrollToTopButton />}
+          {!isProposalRoute && <WhatsAppFab />}
           {!isProposalRoute && <SideScrollLines />}
           {!isProposalRoute && <Navbar />}
 

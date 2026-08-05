@@ -10,9 +10,9 @@ const ContactSection = () => {
                 <ScrollReveal direction="up" duration={0.6} className="text-center mb-16">
                     <div>
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Get in Touch</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Let's Build Something With Presence</h2>
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">What Are You Trying to Make Ready?</h2>
                         <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
-                            Whether you are shaping a new brand, refining an existing identity, launching a website, or building a visual direction for your next chapter, I would love to hear what you are working on.
+                            Bring the raw material — the photos, footage, product, idea, or business. Tell me what needs to go from unfinished to ready, and I'll help you shape it into something the world can see.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -63,7 +63,7 @@ const ContactSection = () => {
                                         rows={4}
                                         required
                                         className="w-full bg-neutral-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                                        placeholder="Tell me about your project..."
+                                        placeholder="Tell me what you're trying to make ready..."
                                         defaultValue={new URLSearchParams(window.location.search).get('interest') ? `Hi, I'm interested in ${new URLSearchParams(window.location.search).get('interest')}.` : ''}
                                     />
                                 </div>

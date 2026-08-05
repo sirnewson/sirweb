@@ -22,12 +22,12 @@ const Navbar = () => {
     }, [location]);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
         { name: 'Work', path: '/work' },
+        { name: 'Services', path: '/services' },
         { name: 'Websites', path: '/website' },
+        { name: 'Pricing', path: '/rate-card' },
         { name: 'Shop', path: '/shop' },
         { name: 'Threads', path: '/threads' },
-        { name: 'Contact', path: '/contact' },
     ];
 
     return (

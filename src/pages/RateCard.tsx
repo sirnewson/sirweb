@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 import PageTransition from '../components/PageTransition';
 
 const getPriceDisplay = (value: string | number) => {
@@ -67,7 +68,7 @@ const RateCard = () => {
         {
             slot: "Slot 1",
             title: "Basic Identity",
-            price: "15,000",
+            price: "22,500",
             description: "Perfect for a clean starting point.",
             highlight: false,
             features: ["Logo Only", "3 Logo Variations", "2 Revision Round", "High-resolution files", "Light/dark versions"]
@@ -75,7 +76,7 @@ const RateCard = () => {
         {
             slot: "Slot 2",
             title: "Standard Identity",
-            price: "35,000",
+            price: "52,500",
             description: "Consistency for daily posts and in-store marketing.",
             highlight: false,
             features: ["Logo + Core Brand Kit", "4 Logo Variations & Primary Logo", "1 Alternate Logo", "Color Palette & Typography", "Icon style guide", "2 Revision rounds"]
@@ -83,7 +84,7 @@ const RateCard = () => {
         {
             slot: "Slot 3",
             title: "Full Brand Identity",
-            price: "60,000",
+            price: "90,000",
             description: "Strong identity for scaling and multiple departments.",
             highlight: true,
             badge: "Recommended",
@@ -92,7 +93,7 @@ const RateCard = () => {
         {
             slot: "Slot 4",
             title: "Premium Suite",
-            price: "100,000",
+            price: "150,000",
             description: "The ultimate full identity + a modern online profile.",
             highlight: false,
             features: ["Complete Identity + Online Presence", "8 Logo Variations", "Full Extended Palette & Patterns", "Flyers & Poster templates", "Packaging mockups", "Full Brand Guidelines", "3-Page Website Included"]
@@ -103,7 +104,7 @@ const RateCard = () => {
         {
             slot: "Slot 1",
             title: "Starter Website",
-            basePrice: 25000,
+            basePrice: 37500,
             description: "Simple, clean online presence.",
             pages: "3 Pages",
             layout: "1 Layout Variation",
@@ -112,7 +113,7 @@ const RateCard = () => {
         {
             slot: "Slot 2",
             title: "Business Website",
-            basePrice: 45000,
+            basePrice: 67500,
             description: "Great for supermarkets showing deals + categories.",
             pages: "5 Pages",
             layout: "2 Layout Variations",
@@ -121,7 +122,7 @@ const RateCard = () => {
         {
             slot: "Slot 3",
             title: "Advanced Website",
-            basePrice: 75000,
+            basePrice: 112500,
             description: "For bigger stores that need structure and clarity.",
             highlight: true,
             badge: "Best Value",
@@ -132,7 +133,7 @@ const RateCard = () => {
         {
             slot: "Slot 4",
             title: "Corporate Website",
-            basePrice: 100000,
+            basePrice: 150000,
             description: "Perfect for supermarkets with many departments.",
             pages: "8 to 10 Pages",
             layout: "4 Layout Variations",
@@ -144,7 +145,7 @@ const RateCard = () => {
         {
             slot: "Slot 1",
             title: "Steady Visibility",
-            price: "50,000",
+            price: "75,000",
             period: "/mo",
             description: "Good for brands testing consistent creative flow.",
             highlight: false,
@@ -153,7 +154,7 @@ const RateCard = () => {
         {
             slot: "Slot 2",
             title: "Frequent Campaigns",
-            price: "85,000",
+            price: "127,500",
             period: "/mo",
             description: "Balanced, reliable, and high-value for regular campaigns.",
             highlight: false,
@@ -162,7 +163,7 @@ const RateCard = () => {
         {
             slot: "Slot 3",
             title: "Heavy Activity",
-            price: "120,000",
+            price: "180,000",
             period: "/mo",
             description: "This slot gives you a full creative department without hiring one.",
             highlight: true,
@@ -173,6 +174,12 @@ const RateCard = () => {
 
     return (
         <div className="bg-neutral-black min-h-screen">
+            <SEO
+                title="Pricing & Rate Card | Branding, Websites & Social Media | Sir Newson"
+                description="Transparent pricing for brand identity, website design and social media creative packages in Kenya. Clear slots, clear deliverables, clear timelines."
+                keywords="branding prices Kenya, website design cost Kenya, social media management pricing Nairobi, logo design price Kenya, creative rate card Kenya"
+                path="/rate-card"
+            />
             <PageTransition>
                 <Navbar />
 
@@ -185,7 +192,7 @@ const RateCard = () => {
                     >
                         <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6">Service Rate Card</h1>
                         <p className="text-white/60 text-xl max-w-2xl mx-auto">
-                            Professional creative solutions tailored for brands and businesses.
+                            Clear slots, clear deliverables, clear timelines. Pick what you need made ready and we start from there.
                         </p>
                     </motion.div>
                 </div>

@@ -5,7 +5,7 @@ const services = [
   {
     label: '01',
     title: 'Website Design & Digital Presence',
-    desc: 'Premium websites, landing pages, and digital homes that make your brand look trusted, clear, and ready to sell.',
+    desc: 'I prepare your business for the internet: premium websites, landing pages, and digital homes that make your brand look trusted, clear, and ready to sell.',
     keywords: 'Websites • Landing Pages • Portfolios • Business Sites',
     path: '/website',
     cta: 'Explore Website Services'
@@ -13,7 +13,7 @@ const services = [
   {
     label: '02',
     title: 'Brand Identity & Visual Systems',
-    desc: 'Logo direction, visual identity, design systems, campaign look, and brand assets that make your business feel more valuable.',
+    desc: 'I prepare your brand to be recognized and trusted: logo direction, visual identity, design systems, campaign look, and brand assets that make your business feel more valuable.',
     keywords: 'Branding • Logo Systems • Campaign Identity • Creative Direction',
     path: '/work',
     cta: 'View Brand Work'
@@ -21,7 +21,7 @@ const services = [
   {
     label: '03',
     title: 'AI Visuals, Content & Creative Systems',
-    desc: 'AI-assisted visuals, content concepts, reels direction, product visuals, and creative workflows for brands that need attention with taste.',
+    desc: 'I prepare your products, moments, and ideas for publishing: AI-assisted visuals, content concepts, reels direction, product visuals, and creative workflows for brands that need attention with taste.',
     keywords: 'AI Visuals • Content Systems • Product Ads • Motion Concepts',
     path: '/contact',
     cta: 'Start a Creative System'
@@ -38,10 +38,10 @@ const ServiceEcosystem = () => {
           <ScrollReveal direction="up" duration={0.6}>
             <p className="text-primary text-xs font-black uppercase tracking-[0.25em] mb-4">The Offer Architecture</p>
             <h2 className="font-display text-4xl md:text-6xl font-black text-white leading-tight">
-              One creative partner for the parts of your brand people judge first.
+              One creative partner to prepare everything the world judges first.
             </h2>
             <p className="mt-6 text-white/60 text-lg leading-relaxed">
-              Before people call, buy, book, or trust you, they judge your digital presence. This is where I help: the website, the identity, the visuals, and the system behind how your brand is experienced.
+              Before people call, buy, book, or trust you, they judge your digital presence. This is where I help: the website, the identity, the visuals, and the system behind how your brand is prepared to be seen.
             </p>
           </ScrollReveal>
         </div>

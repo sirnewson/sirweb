@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '../components/Navbar';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 
 const AiTools = () => {
@@ -42,6 +43,12 @@ const AiTools = () => {
 
     return (
         <div className="bg-neutral-black min-h-screen">
+            <SEO
+                title="YXM Labs | AI Tools & Creative Web Apps | Sir Newson"
+                description="Experimental AI tools, creative web apps and digital systems from YXM Labs — the infrastructure behind Sir Newson's presentation work."
+                keywords="AI tools Kenya, creative web apps, YXM Labs, AI creative tools Nairobi, digital tools Kenya, creative technology Kenya"
+                path="/tools"
+            />
             <Navbar />
 
             <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-screen">

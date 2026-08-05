@@ -1,31 +1,31 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 import { ScrollReveal, Float, Magnetic } from '../components/Animated';
 
 const packages = [
   {
     name: 'Website Fix-Up',
-    price: 'KSh 15K – 35K',
+    price: 'KSh 22K – 52K',
     note: 'For brands with a site that already exists but feels tired, confusing, or not trusted enough.',
     items: ['Homepage cleanup', 'Visual hierarchy polish', 'CTA and WhatsApp flow', 'Mobile layout review']
   },
   {
     name: 'Premium One-Page Website',
-    price: 'KSh 35K – 80K',
+    price: 'KSh 52K – 120K',
     note: 'For founders, creators, consultants, and small businesses that need to look serious fast.',
     items: ['Conversion-focused landing page', 'Copy direction', 'Premium visual layout', 'Contact and inquiry flow']
   },
   {
     name: 'Full Brand Website',
-    price: 'KSh 80K – 180K',
+    price: 'KSh 120K – 270K',
     note: 'For businesses that need a complete online presence with structure, trust, and room to grow.',
     items: ['Home, about, services and contact', 'Portfolio or product sections', 'Basic SEO setup', 'Responsive design']
   },
   {
     name: 'Website + Content System',
-    price: 'KSh 150K+',
+    price: 'KSh 225K+',
     note: 'For brands that want more than a website: landing pages, content flow, offer structure, and automation thinking.',
     items: ['Website strategy', 'Content sections', 'Sales flow design', 'WhatsApp/client journey system']
   }
@@ -72,12 +72,14 @@ const websiteSamples = [
 ];
 
 const Website = () => {
-  useEffect(() => {
-    document.title = 'Website Design | Sir Newson';
-  }, []);
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#011111] text-[#eefff4] pt-32">
+      <SEO
+        title="Website Design in Kenya | Get Your Business Ready for the Internet | Sir Newson"
+        description="Premium website design in Nairobi, Kenya. Landing pages, business websites and digital presence systems from KSh 22,000 — built to make your brand look trusted and ready to sell."
+        keywords="website design Kenya, web designer Nairobi, landing page design Kenya, business website Kenya, website pricing Kenya, affordable website design Nairobi, ecommerce website Kenya"
+        path="/website"
+      />
       <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-10 sm:px-8 lg:px-12">
         <div className="absolute left-[-10%] top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
         <div className="absolute bottom-10 right-[-8%] h-96 w-96 rounded-full bg-[#eefff4]/10 blur-3xl" />
@@ -95,7 +97,7 @@ const Website = () => {
               Websites that make your brand feel ready before you even speak.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#eefff4]/70">
-              Premium websites, landing pages, and digital presence systems for founders, creators, and businesses that need to look trusted, sharp, and ready to sell. Not just pages. A credibility machine.
+              I prepare businesses for the internet. Websites, landing pages and digital presence systems for founders, creators and businesses that need to look trusted before the first call — not just pages, but a credibility machine.
             </p>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <Magnetic>

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
 import type { ReactNode } from 'react';
 
 interface ScrollRevealProps {
@@ -244,5 +244,125 @@ export const TextReveal = ({
                 </span>
             ))}
         </motion.span>
+    );
+};
+
+/* ---------------------------------------------------------------
+   Scroll-linked primitives
+   --------------------------------------------------------------- */
+
+interface ParallaxProps {
+    children: ReactNode;
+    /** Pixels of travel across the full scroll pass. Negative moves up. */
+    distance?: number;
+    className?: string;
+}
+
+/** Moves content at a different rate than the page as it scrolls past. */
+export const Parallax = ({ children, distance = -80, className = "" }: ParallaxProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ['start end', 'end start']
+    });
+    const y = useTransform(scrollYProgress, [0, 1], [0, distance]);
+    const smoothY = useSpring(y, { stiffness: 120, damping: 30, mass: 0.4 });
+
+    return (
+        <div ref={ref} className={className}>
+            <motion.div style={{ y: smoothY }}>{children}</motion.div>
+        </div>
+    );
+};
+
+interface RevealMaskProps {
+    children: ReactNode;
+    delay?: number;
+    duration?: number;
+    className?: string;
+}
+
+/** Wipes content into view behind a clip-path mask. Good for images and headings. */
+export const RevealMask = ({ children, delay = 0, duration = 0.9, className = "" }: RevealMaskProps) => (
+    <motion.div
+        initial={{ clipPath: 'inset(0 100% 0 0)', opacity: 0.4 }}
+        whileInView={{ clipPath: 'inset(0 0% 0 0)', opacity: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+        className={className}
+    >
+        {children}
+    </motion.div>
+);
+
+interface TiltProps {
+    children: ReactNode;
+    /** Max rotation in degrees. */
+    max?: number;
+    /** Adds a cursor-following light wash. */
+    spotlight?: boolean;
+    className?: string;
+}
+
+/** 3D tilt toward the cursor, with an optional spotlight that tracks the pointer. */
+export const Tilt = ({ children, max = 7, spotlight = true, className = "" }: TiltProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+
+    const rotateX = useMotionValue(0);
+    const rotateY = useMotionValue(0);
+    const pointerX = useMotionValue(50);
+    const pointerY = useMotionValue(50);
+    const glow = useMotionValue(0);
+
+    const springConfig = { stiffness: 200, damping: 20, mass: 0.4 };
+    const smoothRotateX = useSpring(rotateX, springConfig);
+    const smoothRotateY = useSpring(rotateY, springConfig);
+    const smoothGlow = useSpring(glow, { stiffness: 150, damping: 25 });
+
+    const background = useMotionTemplate`radial-gradient(340px circle at ${pointerX}% ${pointerY}%, rgba(191,255,0,0.14), transparent 70%)`;
+
+    const handleMouseMove = (event: React.MouseEvent) => {
+        if (!ref.current) return;
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
+        const px = (event.clientX - left) / width;
+        const py = (event.clientY - top) / height;
+
+        rotateY.set((px - 0.5) * max * 2);
+        rotateX.set((0.5 - py) * max * 2);
+        pointerX.set(px * 100);
+        pointerY.set(py * 100);
+    };
+
+    const handleMouseEnter = () => glow.set(1);
+
+    const handleMouseLeave = () => {
+        rotateX.set(0);
+        rotateY.set(0);
+        glow.set(0);
+    };
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                rotateX: smoothRotateX,
+                rotateY: smoothRotateY,
+                transformStyle: 'preserve-3d',
+                transformPerspective: 900
+            }}
+            className={`relative ${className}`}
+        >
+            {children}
+            {spotlight && (
+                <motion.div
+                    aria-hidden
+                    style={{ background, opacity: smoothGlow }}
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                />
+            )}
+        </motion.div>
     );
 };

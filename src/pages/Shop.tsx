@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 
 interface ShopItem {
@@ -18,7 +18,7 @@ const products: ShopItem[] = [
         id: 'mood-happy-tee',
         name: 'Mood: Happy T-Shirt',
         category: 'Mood Collection',
-        price: 'KES 2,500',
+        price: 'KES 3,750',
         image: 'https://i.ibb.co/yFY2nZPk/MOOD-Happy.png',
         description: 'Premium heavy-weight cotton T-shirt from the Mood Collection.',
         format: 'Apparel',
@@ -30,7 +30,7 @@ const playbooks: ShopItem[] = [
         id: 'creative-director-2026',
         name: 'How to Be a Creative Director in 2026',
         category: 'Career Playbook',
-        price: 'KES 1,500',
+        price: 'KES 5,000',
         description: 'A practical guide for thinking like a creative director: taste, references, client language, portfolio structure, and decision-making.',
         format: 'PDF + Notion checklist',
     },
@@ -38,7 +38,7 @@ const playbooks: ShopItem[] = [
         id: 'brand-systems-starter',
         name: 'Brand Systems Starter Kit',
         category: 'Design Playbook',
-        price: 'KES 2,000',
+        price: 'KES 5,000',
         description: 'A starter framework for turning logos, colors, typography, mockups, and content rules into a usable brand system.',
         format: 'PDF + templates',
     },
@@ -46,7 +46,7 @@ const playbooks: ShopItem[] = [
         id: 'client-proposal-playbook',
         name: 'Creative Proposal Playbook',
         category: 'Business Playbook',
-        price: 'KES 1,800',
+        price: 'KES 5,000',
         description: 'Proposal sections, pricing language, scope boundaries, and follow-up scripts for creative services.',
         format: 'PDF + copy blocks',
     },
@@ -54,7 +54,7 @@ const playbooks: ShopItem[] = [
         id: 'content-direction-board',
         name: '30-Day Content Direction Board',
         category: 'Content Playbook',
-        price: 'KES 1,200',
+        price: 'KES 5,000',
         description: 'A month of content prompts for brands that need better posts, clearer campaigns, and sharper visual direction.',
         format: 'Notion board',
     },
@@ -62,17 +62,13 @@ const playbooks: ShopItem[] = [
         id: 'portfolio-upgrade-system',
         name: 'Portfolio Upgrade System',
         category: 'Portfolio Playbook',
-        price: 'KES 1,500',
+        price: 'KES 5,000',
         description: 'A simple system for choosing projects, writing case-study captions, and arranging work so clients understand your value quickly.',
         format: 'PDF workbook',
     },
 ];
 
 const Shop = () => {
-    useEffect(() => {
-        document.title = 'Sir Newson Shop | Playbooks, Wall Art, Design Assets & Creative Drops';
-    }, []);
-
     const handleOrder = (item: ShopItem) => {
         const message = `Hi Sir Newson, I'm interested in ${item.name} (${item.price}).`;
         window.open(`https://wa.me/254702480771?text=${encodeURIComponent(message)}`, '_blank');
@@ -80,10 +76,16 @@ const Shop = () => {
 
     return (
         <div className="min-h-screen bg-neutral-black text-white">
+            <SEO
+                title="Shop | Creative Playbooks, Design Assets & Drops | Sir Newson"
+                description="Practical playbooks and creative tools from Sir Newson: creative direction guides, brand system kits, proposal templates and content boards. Playbooks KES 5,000 each."
+                keywords="creative playbook Kenya, brand system template, creative director guide, design assets Kenya, proposal template creative, content calendar Kenya"
+                path="/shop"
+            />
             <Hero
                 title={<span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">The Shop</span>}
                 subtitle="Playbooks • Digital Assets • Apparel • Creative Drops"
-                shortParagraph="A practical shop for creative direction tools, design assets, premium drops, and guides that help you think and build with better taste."
+                shortParagraph="The systems I use to get work ready, packaged so you can use them too. Playbooks, templates and drops for people who want their own work to arrive properly."
                 primaryCtaLabel="Browse Playbooks"
                 primaryCtaPath="/shop#playbooks"
                 secondaryCtaLabel="View Work"

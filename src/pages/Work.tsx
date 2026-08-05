@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
 import { brandingAssets, graphicsAssets, motionAssets, recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
@@ -40,17 +41,20 @@ const websiteSamples = [
 ];
 
 const Work = () => {
-    useEffect(() => {
-        document.title = 'Selected Work | Branding, Graphics, Motion & Websites by Sir Newson';
-    }, []);
-
     const [selectedMedia, setSelectedMedia] = useState<UploadAsset | null>(null);
 
     return (
         <div className="min-h-screen bg-neutral-black text-white">
+            <SEO
+                title="Selected Work | Branding, Product Visuals, Motion & Websites | Sir Newson"
+                description="Real work that shipped: brand identities, product posters, catalogues, campaign visuals, motion graphics and websites prepared for launch by Sir Newson in Nairobi, Kenya."
+                keywords="creative portfolio Kenya, branding portfolio Nairobi, product poster design Kenya, catalogue design Kenya, motion graphics Kenya, website portfolio Kenya, campaign visuals Kenya"
+                path="/work"
+            />
             <Hero
-                title={<span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">Selected Work</span>}
-                subtitle="Branding • Graphics • Motion • Websites"
+                title={<span className="bg-gradient-to-r from-primary to-white bg-clip-text text-transparent">Work That Went Out Into the World</span>}
+                subtitle="Products • Stories • Brands • Businesses"
+                shortParagraph="Not a mood board. These are the campaigns, products, videos and websites that actually launched — prepared to be posted, sold, watched and trusted."
                 primaryCtaLabel="Start a Project"
                 primaryCtaPath="/contact"
                 secondaryCtaLabel="Website Services"

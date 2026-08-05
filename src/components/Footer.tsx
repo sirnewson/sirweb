@@ -1,103 +1,167 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const WHATSAPP = 'https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20have%20something%20I%20want%20to%20make%20ready.';
+
+const columns = [
+    {
+        heading: 'Make It Ready',
+        links: [
+            { label: 'Product visuals', to: '/work' },
+            { label: 'Video & motion', to: '/work' },
+            { label: 'Brand identity', to: '/services' },
+            { label: 'Websites', to: '/website' },
+            { label: 'Catalogues', to: '/contact' },
+        ],
+    },
+    {
+        heading: 'Explore',
+        links: [
+            { label: 'Selected work', to: '/work' },
+            { label: 'Services', to: '/services' },
+            { label: 'Pricing', to: '/rate-card' },
+            { label: 'Shop & playbooks', to: '/shop' },
+            { label: 'YXM Labs tools', to: '/tools' },
+        ],
+    },
+    {
+        heading: 'Read & Follow',
+        links: [
+            { label: 'Drift Notes', to: '/threads' },
+            { label: 'Start a project', to: '/contact' },
+        ],
+    },
+];
+
+const socials = [
+    { href: 'https://linkedin.com/in/sirnewson', icon: 'fab fa-linkedin-in', label: 'LinkedIn' },
+    { href: 'https://instagram.com/sirnewson', icon: 'fab fa-instagram', label: 'Instagram' },
+    { href: 'https://twitter.com/sirnewson', icon: 'fab fa-twitter', label: 'Twitter' },
+    { href: 'https://www.youtube.com/@sirnewson', icon: 'fab fa-youtube', label: 'YouTube' },
+];
 
 const Footer = () => {
     return (
         <footer className="w-full font-sans select-none">
-            {/* Top Lime Section */}
+            {/* Conversion band */}
             <div className="bg-primary text-black py-16 px-8 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-                    Let's work together
-                </h2>
-                <div className="flex items-center gap-8 text-sm md:text-base font-bold tracking-wide">
-                    <Link 
-                        to="/contact" 
-                        className="border-b-2 border-black pb-1 hover:opacity-75 transition-opacity"
+                <div>
+                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">Let's make it ready.</h2>
+                    <p className="mt-3 text-sm md:text-base font-medium text-black/60">
+                        Usually replies the same day. Send what you have — we start from there.
+                    </p>
+                </div>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <a
+                        href={WHATSAPP}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-3 rounded-full bg-black px-7 py-4 text-sm md:text-base font-black text-white transition hover:bg-white hover:text-black"
                     >
-                        Get in Touch
-                    </Link>
-                    <Link 
-                        to="/work" 
-                        className="border-b-2 border-black pb-1 hover:opacity-75 transition-opacity"
+                        <i className="fab fa-whatsapp text-xl"></i>
+                        WhatsApp
+                    </a>
+                    <Link
+                        to="/contact"
+                        className="rounded-full border-2 border-black/25 px-7 py-4 text-center text-sm md:text-base font-black transition hover:bg-black hover:text-white"
                     >
-                        Selected Work
+                        Send a Brief
                     </Link>
                 </div>
             </div>
 
-            {/* Bottom White/Light-Gray Section */}
+            {/* Directory */}
             <div className="bg-[#FAF9F6] text-black pt-20 pb-8 px-8 md:px-16 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-20">
-                    
-                    {/* Socials & Policies */}
-                    <div className="space-y-12">
-                        {/* Social Icons */}
-                        <div className="flex gap-6 text-xl">
-                            <a 
-                                href="https://linkedin.com/in/sirnewson" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="hover:opacity-70 transition-opacity"
-                                aria-label="LinkedIn"
-                            >
-                                <i className="fab fa-linkedin-in"></i>
-                            </a>
-                            <a 
-                                href="https://instagram.com/sirnewson" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="hover:opacity-70 transition-opacity"
-                                aria-label="Instagram"
-                            >
-                                <i className="fab fa-instagram"></i>
-                            </a>
-                            <a 
-                                href="https://twitter.com/sirnewson" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="hover:opacity-70 transition-opacity"
-                                aria-label="Twitter"
-                            >
-                                <i className="fab fa-twitter"></i>
-                            </a>
+                <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-[1.1fr_2fr] mb-16">
+                    {/* Brand + contact */}
+                    <div className="space-y-8">
+                        <div>
+                            <p className="font-display text-2xl font-black tracking-tight">Sir Newson</p>
+                            <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-black/45">
+                                Presentation Architect
+                            </p>
+                            <p className="mt-4 max-w-sm text-sm leading-6 text-black/60">
+                                Helping ideas, products, stories and businesses move from unfinished to ready.
+                            </p>
                         </div>
 
-                        {/* Copyright & Terms */}
-                        <div className="text-xs text-black/50 space-y-2 font-medium">
-                            <p>©2026 SIR NEWSON</p>
-                            <div className="flex gap-4">
-                                <Link to="/" className="hover:underline">Terms of Use</Link>
-                                <Link to="/" className="hover:underline">Privacy Policy</Link>
-                            </div>
+                        <div className="space-y-2 text-sm">
+                            <p className="text-xs font-bold uppercase tracking-wider text-black/50">Direct</p>
+                            <p>
+                                <a href="mailto:sirnewson@gmail.com" className="font-bold hover:underline">
+                                    sirnewson@gmail.com
+                                </a>
+                            </p>
+                            <p>
+                                <a href="tel:+254702480771" className="font-bold hover:underline">
+                                    +254 702 480 771
+                                </a>
+                            </p>
+                            <p className="text-black/55">Nairobi, Kenya — remote worldwide</p>
+                        </div>
+
+                        <div className="flex gap-5 text-lg">
+                            {socials.map((social) => (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={social.label}
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 transition hover:bg-black hover:text-white"
+                                >
+                                    <i className={social.icon}></i>
+                                </a>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Locations Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 md:gap-24 text-left">
-                        {/* Nairobi, Kenya */}
-                        <div className="space-y-3">
-                            <h4 className="font-bold text-sm tracking-wider uppercase text-black/80">Location</h4>
-                            <p className="text-xs text-black/60 leading-relaxed font-medium">
-                                Nairobi, Kenya<br />
-                                Creative HQ & Studio<br />
-                            </p>
-                        </div>
-
-                        {/* Direct Inquiries */}
-                        <div className="space-y-3">
-                            <h4 className="font-bold text-sm tracking-wider uppercase text-black/80">Inquiries</h4>
-                            <p className="text-xs text-black/60 leading-relaxed font-medium">
-                                Email: <a href="mailto:sirnewson@gmail.com" className="hover:underline font-bold text-black/80">sirnewson@gmail.com</a><br />
-                                Phone: <a href="tel:0702480771" className="hover:underline font-bold text-black/80">0702480771</a><br />
-                            </p>
-                        </div>
+                    {/* Link columns */}
+                    <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+                        {columns.map((column) => (
+                            <div key={column.heading} className="space-y-4">
+                                <h4 className="text-xs font-black uppercase tracking-[0.18em] text-black/45">
+                                    {column.heading}
+                                </h4>
+                                <ul className="space-y-3">
+                                    {column.links.map((link) => (
+                                        <li key={link.label}>
+                                            <Link
+                                                to={link.to}
+                                                className="text-sm font-medium text-black/70 transition hover:text-black hover:underline"
+                                            >
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* Massive Branding Wordmark at Bottom */}
-                <div className="w-full flex justify-center translate-y-8 select-none pointer-events-none">
-                    <span className="text-[12vw] font-black leading-none tracking-tighter text-black/[0.04] font-display whitespace-nowrap">
-                        SIR NEWSON
-                    </span>
+                <div className="max-w-7xl mx-auto flex flex-col gap-3 border-t border-black/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs font-medium text-black/45">©{new Date().getFullYear()} Sir Newson. All rights reserved.</p>
+                    <p className="text-xs font-medium text-black/45">Presentation is how an idea meets the world.</p>
+                </div>
+
+                {/* Scrolling wordmark */}
+                <div className="mt-12 w-full overflow-hidden translate-y-6 pointer-events-none">
+                    <motion.div
+                        className="flex w-max items-center"
+                        animate={{ x: ['0%', '-50%'] }}
+                        transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+                    >
+                        {Array.from({ length: 6 }).map((_, i) => (
+                            <span
+                                key={i}
+                                className="whitespace-nowrap font-display text-[13vw] font-black leading-none tracking-tighter text-black/[0.06]"
+                            >
+                                SIR NEWSON
+                                <span className="mx-8 text-black/[0.04]">•</span>
+                            </span>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </footer>
