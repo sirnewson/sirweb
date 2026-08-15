@@ -13,7 +13,7 @@ const GlobalShopBanner = () => {
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.01 }}
                         transition={{ duration: 0.5 }}
-                        className="relative rounded-[2rem] overflow-hidden h-[400px] flex items-center justify-center text-center group cursor-pointer"
+                        className="relative rounded-[16px] overflow-hidden h-[400px] flex items-center justify-center text-center group cursor-pointer"
                     >
                         {/* Background Image */}
                         <div className="absolute inset-0">
@@ -45,14 +45,14 @@ const GlobalShopBanner = () => {
                                 className="font-display text-4xl md:text-6xl font-bold text-white mb-8 leading-tight"
                             >
                                 Invest in your Identity. <br />
-                                <span className="italic text-white/80">Own the pieces that define who you are.</span>
+                                <span className="italic text-white/85">Own the pieces that define who you are.</span>
                             </motion.h2>
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
                             >
-                                <span className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold text-lg group-hover:bg-primary transition-colors duration-300">
+                                <span className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-[8px] font-bold text-lg group-hover:bg-primary transition-colors duration-300">
                                     Visit Shop <i className="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                                 </span>
                             </motion.div>

@@ -95,7 +95,7 @@ interface PulseGlowProps {
 export const PulseGlow = ({
     children,
     duration = 3,
-    color = "rgba(191,255,0,0.25)",
+    color = "rgba(242,139,44,0.25)",
     className = ""
 }: PulseGlowProps) => {
     return (
@@ -319,7 +319,7 @@ export const Tilt = ({ children, max = 7, spotlight = true, className = "" }: Ti
     const smoothRotateY = useSpring(rotateY, springConfig);
     const smoothGlow = useSpring(glow, { stiffness: 150, damping: 25 });
 
-    const background = useMotionTemplate`radial-gradient(340px circle at ${pointerX}% ${pointerY}%, rgba(191,255,0,0.14), transparent 70%)`;
+    const background = useMotionTemplate`radial-gradient(340px circle at ${pointerX}% ${pointerY}%, rgba(242,139,44,0.14), transparent 70%)`;
 
     const handleMouseMove = (event: React.MouseEvent) => {
         if (!ref.current) return;
@@ -366,3 +366,71 @@ export const Tilt = ({ children, max = 7, spotlight = true, className = "" }: Ti
         </motion.div>
     );
 };
+
+
+/* ---------------------------------------------------------------
+   Editorial text motion
+   --------------------------------------------------------------- */
+
+interface WordRiseProps {
+    text: string;
+    className?: string;
+    /** Seconds between each word. */
+    stagger?: number;
+    delay?: number;
+}
+
+/**
+ * Words rise out of a clipped line as the block scrolls in. Heavier than
+ * TextReveal and meant for the one or two statement lines on a page.
+ */
+export const WordRise = ({ text, className = '', stagger = 0.055, delay = 0 }: WordRiseProps) => {
+    const words = text.split(' ');
+
+    // The trigger lives on the container, not the words. Each word starts
+    // translated fully below an overflow-hidden wrapper, so watching the word
+    // itself deadlocks: it is clipped, never intersects, and never animates.
+    const container = {
+        hidden: {},
+        visible: { transition: { staggerChildren: stagger, delayChildren: delay } },
+    };
+
+    const word = {
+        hidden: { y: '110%', opacity: 0 },
+        visible: {
+            y: '0%',
+            opacity: 1,
+            transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as const },
+        },
+    };
+
+    return (
+        <motion.span
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className={`inline-flex flex-wrap ${className}`}
+        >
+            {words.map((w, i) => (
+                <span key={`${w}-${i}`} className="mr-[0.25em] inline-block overflow-hidden pb-[0.08em]">
+                    <motion.span variants={word} className="inline-block">
+                        {w}
+                    </motion.span>
+                </span>
+            ))}
+        </motion.span>
+    );
+};
+
+/** Draws a hairline rule in from the left as it enters view. */
+export const RuleDraw = ({ className = '' }: { className?: string }) => (
+    <motion.span
+        aria-hidden
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className={`block h-px origin-left bg-white/15 ${className}`}
+    />
+);

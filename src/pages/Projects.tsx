@@ -30,11 +30,11 @@ const Projects = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="group relative bg-neutral-medium/30 backdrop-blur-md rounded-3xl overflow-hidden border border-white/5 hover:border-transparent transition-all duration-500"
+                                className="group relative bg-neutral-medium/30 backdrop-blur-md rounded-[12px] overflow-hidden border border-white/5 hover:border-transparent transition-all duration-500"
                             >
                                 {/* Gradient Border Glow on Hover */}
                                 <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary via-secondary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="absolute inset-[1px] -z-10 bg-neutral-black rounded-3xl" />
+                                <div className="absolute inset-[1px] -z-10 bg-neutral-black rounded-[12px]" />
 
                                 {/* Image */}
                                 <div className="aspect-square overflow-hidden">
@@ -49,7 +49,7 @@ const Projects = () => {
                                 <div className="p-8 relative">
                                     <div className="text-primary text-xs uppercase tracking-widest mb-2 font-bold">{project.category}</div>
                                     <h3 className="text-2xl font-display font-bold text-white mb-4 group-hover:text-primary transition-colors">{project.title}</h3>
-                                    <p className="text-white/60 text-sm leading-relaxed mb-6">
+                                    <p className="text-white/70 text-sm leading-relaxed mb-6">
                                         {project.description}
                                     </p>
                                     <div className="flex items-center gap-2 text-white text-sm font-medium group-hover:gap-4 transition-all">
@@ -102,7 +102,7 @@ const Projects = () => {
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="group relative rounded-3xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 shadow-2xl bg-neutral-medium"
+                                className="group relative rounded-[12px] overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-500 shadow-2xl bg-neutral-medium"
                             >
                                 <div className="aspect-[16/10] overflow-hidden bg-neutral-800">
                                     <img

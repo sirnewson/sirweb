@@ -28,7 +28,7 @@ const WhatsAppFab = () => {
                     className="group fixed bottom-8 left-8 z-50 flex items-center gap-0 overflow-hidden rounded-full bg-[#25D366] py-4 pl-4 pr-4 text-black shadow-[0_0_24px_rgba(37,211,102,0.35)] transition-all duration-300 hover:pr-6 hover:shadow-[0_0_34px_rgba(37,211,102,0.55)]"
                 >
                     <i className="fab fa-whatsapp text-2xl" />
-                    <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-black opacity-0 transition-all duration-300 group-hover:ml-3 group-hover:max-w-[12rem] group-hover:opacity-100">
+                    <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 group-hover:ml-3 group-hover:max-w-[12rem] group-hover:opacity-100">
                         Make it ready
                     </span>
                 </motion.a>

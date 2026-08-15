@@ -69,7 +69,7 @@ const Motion = () => {
                                 className="break-inside-avoid overflow-hidden transition-all duration-300 group relative cursor-pointer"
                                 onClick={() => setSelectedMedia({ src: item.url, title: `Motion Sequence ${String(index + 1).padStart(2, '0')}` })}
                             >
-                                <div className={`relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black hover:border-primary ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'}`}>
+                                <div className={`relative w-full overflow-hidden rounded-[12px] border border-white/10 bg-black hover:border-primary ${item.isLandscape ? 'aspect-video' : 'aspect-[9/16]'}`}>
                                     <video
                                         src={item.url}
                                         autoPlay
@@ -82,7 +82,7 @@ const Motion = () => {
                                 </div>
 
                                 {/* Hover overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none rounded-2xl">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none rounded-[12px]">
                                     <div>
                                         <p className="text-primary text-xs uppercase tracking-widest mb-1">Motion Reel</p>
                                         <h3 className="text-white font-bold text-lg">Sequence {String(index + 1).padStart(2, '0')}</h3>

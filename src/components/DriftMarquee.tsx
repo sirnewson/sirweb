@@ -39,7 +39,7 @@ const DriftMarquee = () => {
             href="https://www.threads.com/@sirnewson"
             target="_blank"
             rel="noopener noreferrer"
-            className="block bg-primary py-3 overflow-hidden border-t border-black/10 hover:bg-white transition-colors duration-300 cursor-pointer relative z-40"
+            className="block bg-primary py-3 overflow-hidden border-t border-black/10 hover:bg-clay transition-colors duration-300 cursor-pointer relative z-40"
         >
             <motion.div
                 className="flex whitespace-nowrap"

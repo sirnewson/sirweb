@@ -11,7 +11,7 @@ const ContactSection = () => {
                     <div>
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Get in Touch</p>
                         <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">What Are You Trying to Make Ready?</h2>
-                        <p className="text-white/60 max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-white/70 max-w-2xl mx-auto leading-relaxed">
                             Bring the raw material — the photos, footage, product, idea, or business. Tell me what needs to go from unfinished to ready, and I'll help you shape it into something the world can see.
                         </p>
                     </div>
@@ -24,7 +24,7 @@ const ContactSection = () => {
                         duration={0.6}
                         className="h-full"
                     >
-                        <div className="bg-neutral-medium/50 backdrop-blur-xl p-8 rounded-2xl border border-white/10 h-full">
+                        <div className="bg-neutral-medium/50 backdrop-blur-xl p-8 rounded-[12px] border border-white/10 h-full">
                             <form className="space-y-6" onSubmit={(e) => {
                                 e.preventDefault();
                                 const name = (document.getElementById('name') as HTMLInputElement).value;
@@ -37,32 +37,32 @@ const ContactSection = () => {
                                 window.open(whatsappUrl, '_blank');
                             }}>
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-2">Name</label>
+                                    <label htmlFor="name" className="block text-sm font-medium text-white/85 mb-2">Name</label>
                                     <input
                                         type="text"
                                         id="name"
                                         required
-                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-[8px] px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                         placeholder="Your Name"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">Email</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-white/85 mb-2">Email</label>
                                     <input
                                         type="email"
                                         id="email"
                                         required
-                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-[8px] px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                         placeholder="your@email.com"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="message" className="block text-sm font-medium text-white/80 mb-2">Message</label>
+                                    <label htmlFor="message" className="block text-sm font-medium text-white/85 mb-2">Message</label>
                                     <textarea
                                         id="message"
                                         rows={4}
                                         required
-                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                                        className="w-full bg-neutral-black/50 border border-white/10 rounded-[8px] px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                                         placeholder="Tell me what you're trying to make ready..."
                                         defaultValue={new URLSearchParams(window.location.search).get('interest') ? `Hi, I'm interested in ${new URLSearchParams(window.location.search).get('interest')}.` : ''}
                                     />
@@ -70,7 +70,7 @@ const ContactSection = () => {
                                 <Magnetic className="w-full">
                                     <button
                                         type="submit"
-                                        className="w-full bg-primary text-black font-bold py-4 rounded-lg hover:bg-white transition-colors duration-300 shadow-[0_0_20px_#BFFF004D] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center gap-2 cursor-pointer"
+                                        className="w-full bg-primary text-black font-bold py-4 rounded-[8px] hover:bg-clay transition-colors duration-300 shadow-[0_0_20px_rgba(242,139,44,0.30)] hover:shadow-[0_6px_24px_rgba(242,139,44,0.35)] flex items-center justify-center gap-2 cursor-pointer"
                                     >
                                         <i className="fab fa-whatsapp text-xl"></i>
                                         Start a Project
@@ -114,9 +114,9 @@ const ContactSection = () => {
                                 </div>
                             </div>
 
-                            <div className="bg-gradient-to-br from-neutral-medium to-neutral-dark p-8 rounded-2xl border border-white/5">
+                            <div className="bg-gradient-to-br from-neutral-medium to-neutral-dark p-8 rounded-[12px] border border-white/5">
                                 <h3 className="text-xl font-bold text-white mb-2">Based in</h3>
-                                <p className="text-white/60 mb-6">Nairobi, Kenya<br />Available for remote work worldwide.</p>
+                                <p className="text-white/70 mb-6">Nairobi, Kenya<br />Available for remote work worldwide.</p>
 
                                 <h3 className="text-xl font-bold text-white mb-2">Email</h3>
                                 <a href="mailto:sirnewson@gmail.com" className="text-primary hover:text-white transition-colors">sirnewson@gmail.com</a>

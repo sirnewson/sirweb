@@ -25,7 +25,7 @@ const SpiralVortex = () => {
                                 style={{
                                     height: `${Math.random() * 2 + 1}px`,
                                     width: `${Math.random() * 80 + 40}px`,
-                                    boxShadow: '0 0 10px #BFFF00',
+                                    boxShadow: '0 0 10px #F28B2C',
                                 }}
                                 animate={{
                                     x: [`${startDistance}vw`, `${endDistance}vw`],
@@ -66,11 +66,22 @@ const LoadingScreen = () => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-neutral-black flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[100] bg-soft-black overflow-hidden"
         >
+            {/* Splash loop behind the counter */}
+            <video
+                src="/uploads/loops/splash.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-45"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-soft-black/70 via-soft-black/55 to-soft-black" />
+
             <SpiralVortex />
 
-            <div className="relative z-10 flex flex-col items-center">
+            <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
                 {/* Pulsing Lime Glow */}
                 <motion.div
                     animate={{
@@ -138,29 +149,31 @@ const LoadingScreen = () => {
                 </motion.div>
             </div>
 
-            {/* Loading Bar */}
-            <div className="mt-12 w-48 h-1 bg-white/10 rounded-full overflow-hidden relative z-10">
-                <motion.div
-                    initial={{ x: '-100%' }}
-                    animate={{ x: '0%' }}
-                    transition={{ duration: 2.8, ease: "easeInOut" }}
-                    className="h-full bg-primary"
-                />
+            {/* Count + progress, anchored to the bottom */}
+            <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-8 md:px-10 md:pb-10">
+                <div className="mx-auto flex max-w-5xl items-end justify-between gap-6">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-warm-white/45">
+                        Loading experience
+                    </p>
+                    <div className="font-display text-[5rem] font-semibold leading-[0.8] tabular-nums text-warm-white md:text-[8rem]">
+                        {displayCount.toString().padStart(2, '0')}
+                        <span className="ml-1 align-top font-mono text-lg text-sunset md:text-2xl">%</span>
+                    </div>
+                </div>
+
+                {/* Progress rail — the glow travels left to right with the fill */}
+                <div className="mx-auto mt-5 h-[3px] w-full max-w-5xl overflow-hidden rounded-full bg-warm-white/10">
+                    <motion.div
+                        initial={{ width: '0%' }}
+                        animate={{ width: `${displayCount}%` }}
+                        transition={{ ease: 'linear', duration: 0.15 }}
+                        className="relative h-full bg-gradient-to-r from-sunset via-lime to-golden-hour"
+                    >
+                        <span className="absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 translate-x-1/2 rounded-full bg-lime shadow-[0_0_16px_4px_rgba(191,255,0,0.65)]" />
+                    </motion.div>
+                </div>
             </div>
 
-            <div className="mt-4 flex flex-col items-center z-10 relative">
-                <div className="text-4xl font-display font-bold text-primary tabular-nums">
-                    {displayCount.toString().padStart(3, '0')}
-                </div>
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-2 text-white/50 font-display tracking-widest text-xs"
-                >
-                    LOADING EXPERIENCE
-                </motion.p>
-            </div>
         </motion.div>
     );
 };

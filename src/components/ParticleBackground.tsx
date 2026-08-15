@@ -41,7 +41,7 @@ const ParticleBackground = () => {
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.size = Math.random() * 2 + 0.5;
-                this.color = '#BFFF00'; // Lime
+                this.color = '#F28B2C'; // Lime
             }
 
             update() {
@@ -98,7 +98,7 @@ const ParticleBackground = () => {
             });
 
             // Draw connections
-            ctx.strokeStyle = '#BFFF00';
+            ctx.strokeStyle = '#F28B2C';
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {

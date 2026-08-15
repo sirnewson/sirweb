@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, addDoc, deleteDoc, doc, query, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
-import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 interface Thread {
@@ -114,7 +113,6 @@ const Dashboard = () => {
 
     return (
         <div className="bg-neutral-black min-h-screen text-white relative">
-            <Navbar />
             <div className="absolute inset-0 bg-noise opacity-[0.02] mix-blend-overlay z-0 pointer-events-none" />
 
             <div className="relative z-10 max-w-6xl mx-auto px-6 pt-36 pb-24">
@@ -128,15 +126,15 @@ const Dashboard = () => {
                             exit={{ opacity: 0, y: -20 }}
                             className="flex flex-col items-center justify-center min-h-[50vh] text-center"
                         >
-                            <div className="max-w-md w-full p-8 rounded-3xl bg-neutral-dark border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                            <div className="max-w-md w-full p-8 rounded-[12px] bg-neutral-dark border border-white/5 shadow-2xl relative overflow-hidden backdrop-blur-md">
                                 <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary to-secondary" />
                                 
-                                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center text-2xl mx-auto mb-6 shadow-[0_0_15px_rgba(191,255,0,0.1)]">
+                                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center text-2xl mx-auto mb-6 shadow-[0_0_15px_rgba(242,139,44,0.1)]">
                                     <i className="fas fa-lock" />
                                 </div>
                                 
                                 <h1 className="font-display text-2xl font-bold mb-2">Access Thread Control</h1>
-                                <p className="text-white/50 text-sm mb-6">Enter your credentials to publish design hacks and ideas.</p>
+                                <p className="text-white/62 text-sm mb-6">Enter your credentials to publish design hacks and ideas.</p>
                                 
                                 <form onSubmit={handleLogin} className="space-y-4">
                                     <div>
@@ -145,7 +143,7 @@ const Dashboard = () => {
                                             value={passcode}
                                             onChange={(e) => setPasscode(e.target.value)}
                                             placeholder="Enter Access Key..."
-                                            className="w-full px-5 py-4 rounded-xl bg-black border border-white/10 focus:border-primary/50 text-center text-white tracking-widest text-lg font-bold outline-none transition-colors"
+                                            className="w-full px-5 py-4 rounded-[10px] bg-black border border-white/10 focus:border-primary/50 text-center text-white tracking-widest text-lg font-bold outline-none transition-colors"
                                         />
                                     </div>
                                     
@@ -155,7 +153,7 @@ const Dashboard = () => {
                                     
                                     <button
                                         type="submit"
-                                        className="w-full py-4 rounded-xl bg-primary text-black font-bold text-sm tracking-wider uppercase hover:bg-white hover:scale-[1.02] transition-all duration-300"
+                                        className="w-full py-4 rounded-[10px] bg-primary text-black font-bold text-sm tracking-wider uppercase hover:bg-clay hover:scale-[1.02] transition-all duration-300"
                                     >
                                         Verify Access
                                     </button>
@@ -172,11 +170,11 @@ const Dashboard = () => {
                         >
                             {/* Left Column: Creator Profile & Compose */}
                             <div className="lg:col-span-5 space-y-8">
-                                <div className="p-8 rounded-3xl bg-neutral-dark border border-white/5 shadow-xl relative overflow-hidden backdrop-blur-md">
+                                <div className="p-8 rounded-[12px] bg-neutral-dark border border-white/5 shadow-xl relative overflow-hidden backdrop-blur-md">
                                     <div className="absolute top-0 right-0 p-4">
                                         <button
                                             onClick={handleLogout}
-                                            className="text-xs text-white/40 hover:text-red-500 font-bold transition-colors uppercase tracking-wider"
+                                            className="text-xs text-white/55 hover:text-red-500 font-bold transition-colors uppercase tracking-wider"
                                         >
                                             Logout <i className="fas fa-sign-out-alt ml-1" />
                                         </button>
@@ -196,17 +194,17 @@ const Dashboard = () => {
                                     
                                     <form onSubmit={handlePost} className="space-y-6">
                                         <div>
-                                            <label className="block text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Category</label>
+                                            <label className="block text-xs font-bold text-white/62 uppercase tracking-wider mb-2">Category</label>
                                             <div className="grid grid-cols-2 gap-2">
                                                 {CATEGORIES.map((cat) => (
                                                     <button
                                                         key={cat.value}
                                                         type="button"
                                                         onClick={() => setCategory(cat.value)}
-                                                        className={`px-3 py-3 rounded-xl border text-xs font-bold text-center transition-all ${
+                                                        className={`px-3 py-3 rounded-[10px] border text-xs font-bold text-center transition-all ${
                                                             category === cat.value
-                                                                ? 'border-primary bg-primary/10 text-primary shadow-[0_0_10px_rgba(191,255,0,0.1)]'
-                                                                : 'border-white/5 bg-white/5 text-white/60 hover:border-white/10 hover:text-white'
+                                                                ? 'border-primary bg-primary/10 text-primary shadow-[0_0_10px_rgba(242,139,44,0.1)]'
+                                                                : 'border-white/5 bg-white/5 text-white/70 hover:border-white/10 hover:text-white'
                                                         }`}
                                                     >
                                                         {cat.label}
@@ -216,7 +214,7 @@ const Dashboard = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-bold text-white/50 uppercase tracking-wider mb-2">
+                                            <label className="block text-xs font-bold text-white/62 uppercase tracking-wider mb-2">
                                                 Content ({content.length}/500)
                                             </label>
                                             <textarea
@@ -225,7 +223,7 @@ const Dashboard = () => {
                                                 value={content}
                                                 onChange={(e) => setContent(e.target.value)}
                                                 placeholder="Write your thought, hack, or design nugget..."
-                                                className="w-full p-4 rounded-2xl bg-black border border-white/10 focus:border-primary/50 text-white text-base outline-none resize-none transition-colors"
+                                                className="w-full p-4 rounded-[12px] bg-black border border-white/10 focus:border-primary/50 text-white text-base outline-none resize-none transition-colors"
                                             />
                                         </div>
 
@@ -235,7 +233,7 @@ const Dashboard = () => {
                                                     initial={{ opacity: 0, y: 10 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     exit={{ opacity: 0 }}
-                                                    className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-xs font-bold text-center"
+                                                    className="p-3 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-[10px] text-xs font-bold text-center"
                                                 >
                                                     ✓ Thread successfully cast onto the network.
                                                 </motion.div>
@@ -245,10 +243,10 @@ const Dashboard = () => {
                                         <button
                                             type="submit"
                                             disabled={isPosting || !content.trim()}
-                                            className={`w-full py-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
+                                            className={`w-full py-4 rounded-[10px] font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
                                                 isPosting || !content.trim()
-                                                    ? 'bg-neutral-medium text-white/30 border border-white/5 cursor-not-allowed'
-                                                    : 'bg-primary text-black hover:scale-[1.02] hover:bg-white shadow-[0_0_20px_rgba(191,255,0,0.2)]'
+                                                    ? 'bg-neutral-medium text-white/50 border border-white/5 cursor-not-allowed'
+                                                    : 'bg-primary text-black hover:scale-[1.02] hover:bg-clay shadow-[0_0_20px_rgba(242,139,44,0.2)]'
                                             }`}
                                         >
                                             {isPosting ? 'Publishing...' : 'Cast Thread'} <i className="fas fa-paper-plane" />
@@ -266,7 +264,7 @@ const Dashboard = () => {
 
                                 <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-2 custom-scrollbar">
                                     {threads.length === 0 ? (
-                                        <div className="p-8 text-center border border-white/5 rounded-2xl bg-white/2 text-white/40">
+                                        <div className="p-8 text-center border border-white/5 rounded-[12px] bg-white/2 text-white/55">
                                             No threads found in database. Broadcast stream is silent.
                                         </div>
                                     ) : (
@@ -280,7 +278,7 @@ const Dashboard = () => {
                                                 <motion.div
                                                     key={thread.id}
                                                     layout
-                                                    className="p-6 rounded-2xl bg-neutral-dark border border-white/5 hover:border-white/10 transition-all duration-300 flex flex-col justify-between gap-4 relative group"
+                                                    className="p-6 rounded-[12px] bg-neutral-dark border border-white/5 hover:border-white/10 transition-all duration-300 flex flex-col justify-between gap-4 relative group"
                                                 >
                                                     <div className="flex items-start justify-between">
                                                         <div className="flex items-center gap-3">
@@ -292,7 +290,7 @@ const Dashboard = () => {
                                                                     <span className="text-xs font-bold">@sirnewson</span>
                                                                     <i className="fas fa-check-circle text-primary text-[10px]" />
                                                                 </div>
-                                                                <span className="text-[10px] text-white/30">{displayDate}</span>
+                                                                <span className="text-[10px] text-white/50">{displayDate}</span>
                                                             </div>
                                                         </div>
 
@@ -304,7 +302,7 @@ const Dashboard = () => {
                                                             )}
                                                             <button
                                                                 onClick={() => handleDelete(thread.id)}
-                                                                className="text-white/30 hover:text-red-500 transition-colors p-1"
+                                                                className="text-white/50 hover:text-red-500 transition-colors p-1"
                                                                 title="Delete Thread"
                                                             >
                                                                 <i className="fas fa-trash-alt text-xs" />
@@ -312,7 +310,7 @@ const Dashboard = () => {
                                                         </div>
                                                     </div>
 
-                                                    <p className="text-white/80 text-sm whitespace-pre-wrap leading-relaxed">
+                                                    <p className="text-white/85 text-sm whitespace-pre-wrap leading-relaxed">
                                                         {thread.content}
                                                     </p>
                                                 </motion.div>

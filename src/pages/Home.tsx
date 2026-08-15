@@ -6,15 +6,15 @@ import Hero from '../components/Hero';
 import SEO from '../components/SEO';
 import MediaModal from '../components/MediaModal';
 import Footer from '../components/Footer';
-import { recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
+import HangingGallery from '../components/HangingGallery';
+import WorkWall from '../components/WorkWall';
+import { uploadedAssets, recentUploadAssets, type UploadAsset } from '../data/uploadAssets';
 import { db } from '../firebase';
-import { ScrollReveal, Magnetic } from '../components/Animated';
+import { ScrollReveal, WordRise, RuleDraw } from '../components/Animated';
 import ClientTicker from '../components/ClientTicker';
-import ReadyRotator from '../components/ReadyRotator';
-import PresentationPillars from '../components/PresentationPillars';
-import ReadinessFramework from '../components/ReadinessFramework';
-import Manifesto from '../components/Manifesto';
 import FinalCta from '../components/FinalCta';
+import MotionBento from '../components/MotionBento';
+import FeaturedProject from '../components/FeaturedProject';
 
 interface ThreadPreview {
     id: string;
@@ -23,84 +23,77 @@ interface ThreadPreview {
     timestamp?: { seconds: number };
 }
 
-const transformationRows: [string, string][] = [
-    ['Raw product photos', 'Sales-ready product visuals'],
-    ['Unedited footage', 'Publish-ready videos'],
-    ['A product list', 'A professional catalogue'],
-    ['A business idea', 'A credible digital presence'],
-    ['An event concept', 'A complete visual campaign'],
-    ['A rough idea', 'A way for the world to see it'],
+/** Featured items first, then the wider archive, so the wall opens strong. */
+const featured = recentUploadAssets.slice(0, 16);
+const wallAssets = uploadedAssets
+    .filter((a) => !featured.some((f) => f.id === a.id))
+    .slice(0, 20);
+
+/** The four brands operating under Sir Newson. */
+const worlds = [
+    {
+        num: '01',
+        label: 'Apparel',
+        title: 'Jinwear',
+        note: 'Wearable design — apparel, drops and wall art.',
+        path: 'https://www.jinwear.co.ke/',
+        external: true,
+    },
+    {
+        num: '02',
+        label: 'Writing',
+        title: 'Wynmind',
+        note: 'Thinking out loud about design, systems and culture.',
+        path: 'https://wynmind.com',
+        external: true,
+    },
+    {
+        num: '03',
+        label: 'Creative tech',
+        title: 'YXM Digital',
+        note: 'Tools, AI systems and product experiments.',
+        path: 'https://yxm.digital/',
+        external: true,
+    },
+    {
+        num: '04',
+        label: 'Media',
+        title: 'TAK Network',
+        note: 'Business insight, culture and technology commentary.',
+        path: 'https://taknetwork.co.ke',
+        external: true,
+    },
 ];
 
-const whyPoints = [
-    {
-        title: 'I understand the assignment',
-        desc: 'Clients arrive with scattered photos, voice notes, rough ideas, product lists, or urgent announcements. I find the finished communication hiding inside the raw material.',
-        icon: 'fas fa-crosshairs',
-    },
-    {
-        title: 'I think beyond the asset',
-        desc: 'A poster is not just a poster. Each piece has a job: create interest, build trust, clarify value, or move someone to act.',
-        icon: 'fas fa-brain',
-    },
-    {
-        title: 'I bring multiple skills together',
-        desc: 'Design, motion, writing, storytelling, branding, websites and AI work under one goal — presenting the idea properly.',
-        icon: 'fas fa-layer-group',
-    },
-    {
-        title: 'I build for the real world',
-        desc: 'The work is designed to be used. To be posted, shared, watched, clicked, sold, and remembered.',
-        icon: 'fas fa-bolt',
-    },
+const fallbackNotes = [
+    { id: 'a', text: 'Design gets stronger when the thinking gets clearer.', tag: 'Note' },
+    { id: 'b', text: 'A good system makes the next good decision easier.', tag: 'Note' },
+    { id: 'c', text: 'Creative direction is taste plus responsibility.', tag: 'Note' },
 ];
 
 const Home = () => {
     const [selectedMedia, setSelectedMedia] = useState<UploadAsset | null>(null);
     const [latestThreads, setLatestThreads] = useState<ThreadPreview[]>([]);
-    const [savedPins, setSavedPins] = useState<Record<string, boolean>>(() => {
-        const saved = localStorage.getItem('sirnewson_saved_pins');
-        return saved ? JSON.parse(saved) : {};
-    });
-    const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-    useEffect(() => {
-        localStorage.setItem('sirnewson_saved_pins', JSON.stringify(savedPins));
-    }, [savedPins]);
+    const [toastMessage] = useState<string | null>(null);
 
     useEffect(() => {
         const threadsQuery = query(collection(db, 'threads'), orderBy('timestamp', 'desc'), limitQuery(3));
         const unsubscribe = onSnapshot(
             threadsQuery,
             (snapshot) => {
-                setLatestThreads(snapshot.docs.map((threadDoc) => ({ id: threadDoc.id, ...threadDoc.data() })) as ThreadPreview[]);
+                setLatestThreads(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })) as ThreadPreview[]);
             },
             () => setLatestThreads([])
         );
-
         return () => unsubscribe();
     }, []);
 
-    const showToast = (message: string) => {
-        setToastMessage(message);
-        window.setTimeout(() => setToastMessage(null), 2200);
-    };
-
-    const toggleSave = (asset: UploadAsset, event: React.MouseEvent) => {
-        event.stopPropagation();
-        const isSaved = savedPins[asset.id];
-        setSavedPins((prev) => ({ ...prev, [asset.id]: !isSaved }));
-        showToast(isSaved ? 'Removed from saved work' : 'Saved to your board');
-    };
-
-    const copyAssetLink = (asset: UploadAsset, event: React.MouseEvent) => {
-        event.stopPropagation();
-        navigator.clipboard.writeText(`${window.location.origin}/work#${asset.id}`);
-        showToast('Work link copied');
-    };
+    const notes = latestThreads.length > 0
+        ? latestThreads.map((t) => ({ id: t.id, text: t.content, tag: t.category || 'Note' }))
+        : fallbackNotes;
 
     return (
-        <div className="relative min-h-screen overflow-hidden bg-neutral-black text-white font-sans bg-hexagon-grid">
+        <div className="relative min-h-screen overflow-hidden bg-neutral-black font-sans text-white">
             <SEO
                 title="Sir Newson | Creative Director & Presentation Architect in Kenya"
                 description="Sir Newson helps ideas, products, stories and businesses move from unfinished to ready. Product visuals, video editing, catalogues, brand identity, websites and creative direction in Nairobi, Kenya."
@@ -114,7 +107,7 @@ const Home = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="fixed bottom-10 left-1/2 z-50 -translate-x-1/2 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wide text-black shadow-2xl"
+                        className="fixed bottom-10 left-1/2 z-50 -translate-x-1/2 rounded-[8px] bg-sunset px-6 py-3 font-mono text-[11px] uppercase tracking-wide text-black shadow-2xl"
                     >
                         {toastMessage}
                     </motion.div>
@@ -122,211 +115,126 @@ const Home = () => {
             </AnimatePresence>
 
             <Hero
-                trustLine="Creative direction since 2020 · Nairobi, Kenya · Usually replies the same day"
-                primaryCtaLabel="Start a Project"
-                primaryCtaPath="/contact"
-                secondaryCtaLabel="View Selected Work"
-                secondaryCtaPath="/work"
+                trustLine="Creative direction since 2020 · Nairobi, Kenya"
+                primaryCtaLabel="See the Work"
+                primaryCtaPath="/work"
+                secondaryCtaLabel="Start a Project"
+                secondaryCtaPath="/contact"
             />
 
             <ClientTicker />
 
-            {/* The core positioning: what you bring vs what I build */}
-            <section className="border-t border-white/5 px-6 py-24">
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-14 max-w-3xl">
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Presentation Is More Than Design</p>
-                        <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">What You Bring. What I Build.</h2>
-                        <p className="mt-4 text-lg leading-8 text-white/60">
-                            Most people do not come to me because they need "a graphic." They come with something unfinished — a product that needs to look ready for sale, footage that needs editing for the internet, a business that needs to look credible. My job is to take the raw form and shape it into something people understand, trust, and act on.
-                        </p>
-                    </div>
-
-                    <div className="mb-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        {transformationRows.map(([before, after], index) => (
-                            <ScrollReveal
-                                key={before}
-                                direction="up"
-                                delay={index * 0.05}
-                                duration={0.6}
-                                className="h-full"
-                            >
-                                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-white/35">You bring</p>
-                                    <p className="mt-2 font-display text-lg font-black text-white/70">{before}</p>
-                                    <div className="my-4 flex items-center gap-2 text-primary">
-                                        <span className="h-px flex-1 bg-primary/30" />
-                                        <i className="fas fa-arrow-down text-xs" />
-                                        <span className="h-px flex-1 bg-primary/30" />
-                                    </div>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.22em] text-primary/70">I build</p>
-                                    <p className="mt-2 font-display text-lg font-black text-white">{after}</p>
-                                </div>
-                            </ScrollReveal>
-                        ))}
-                    </div>
-
-                    <ScrollReveal direction="up" duration={0.6}>
-                        <div className="flex flex-col items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-10 text-center sm:flex-row sm:justify-center sm:gap-10">
-                            <div className="flex flex-wrap justify-center gap-2">
-                                {['Raw', 'Incomplete', 'Internal', 'Confusing', 'Unpolished'].map((tag) => (
-                                    <span key={tag} className="rounded-full border border-white/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/40">{tag}</span>
-                                ))}
-                            </div>
-                            <i className="fas fa-arrow-right hidden text-xl text-primary sm:block" />
-                            <i className="fas fa-arrow-down text-xl text-primary sm:hidden" />
-                            <div className="flex flex-wrap justify-center gap-2">
-                                {['Professional', 'Clear', 'Attractive', 'Trusted', 'Ready'].map((tag) => (
-                                    <span key={tag} className="rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-xs font-black uppercase tracking-wider text-primary">{tag}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </ScrollReveal>
-
-                    <p className="mx-auto mt-10 max-w-3xl text-center font-display text-2xl font-black text-white md:text-3xl">
-                        The work is not finished when it looks good. <span className="text-primary">It is finished when it is ready to meet its audience.</span>
-                    </p>
-                </div>
-            </section>
-
-            <ReadyRotator />
-
-            <PresentationPillars />
-
-            {/* Proof: real work */}
-            <section className="border-t border-white/5 px-6 py-24">
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-                        <div>
-                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Proof, Not Claims</p>
-                            <h2 className="mt-3 font-display text-4xl font-black md:text-5xl">Work That Went Out Into the World.</h2>
-                            <p className="mt-3 max-w-2xl text-white/60">
-                                Real campaigns, products and posts that shipped. The full archive lives on the Work page.
-                            </p>
-                        </div>
-                        <Magnetic>
-                            <Link
-                                to="/work"
-                                className="inline-flex w-fit items-center gap-3 rounded-full bg-primary px-6 py-3 text-xs font-black uppercase tracking-wider text-black transition hover:bg-white"
-                            >
-                                View Full Work
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                        </Magnetic>
-                    </div>
-
-                    <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-4">
-                        {recentUploadAssets.slice(0, 12).map((asset, index) => (
-                            <AssetCard
-                                key={asset.id}
-                                asset={asset}
-                                index={index}
-                                isSaved={Boolean(savedPins[asset.id])}
-                                onOpen={setSelectedMedia}
-                                onSave={toggleSave}
-                                onShare={copyAssetLink}
-                                featured
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <ReadinessFramework />
-
-            {/* Why people call */}
-            <section className="border-t border-white/5 px-6 py-24">
-                <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-                    <div>
-                        <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Why People Call</p>
-                        <h2 className="mt-3 font-display text-4xl font-black leading-tight md:text-5xl">
-                            Not because the gradients are nice.
-                        </h2>
-                        <p className="mt-6 text-lg leading-8 text-white/60">
-                            Because nobody wants to embarrass themselves when they launch. People pay for the confidence of knowing the work is ready.
-                        </p>
-                        <Magnetic>
-                            <Link
-                                to="/services"
-                                className="mt-8 inline-flex items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
-                            >
-                                See How I Work
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                        </Magnetic>
-                    </div>
-
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {whyPoints.map((point, index) => (
-                            <ScrollReveal key={point.title} direction="up" delay={index * 0.06} duration={0.6} className="h-full">
-                                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]">
-                                    <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                        <i className={point.icon} />
-                                    </div>
-                                    <h3 className="font-display text-xl font-black">{point.title}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-white/55">{point.desc}</p>
-                                </article>
-                            </ScrollReveal>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <Manifesto />
-
-            {/* Studio notes — kept light */}
-            <section className="border-t border-white/5 bg-neutral-dark px-6 py-20">
-                <div className="mx-auto max-w-7xl">
-                    <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-                        <div>
-                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Drift Notes</p>
-                            <h2 className="mt-3 font-display text-3xl font-black md:text-5xl">Thoughts From the Studio</h2>
-                        </div>
-                        <Magnetic>
-                            <Link
-                                to="/threads"
-                                className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black"
-                            >
-                                Read Threads
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                        </Magnetic>
-                    </div>
-
-                    <div className="grid gap-5 md:grid-cols-3">
-                        {latestThreads.length > 0 ? latestThreads.map((thread, index) => (
-                            <ScrollReveal key={thread.id} direction="up" delay={index * 0.06} duration={0.65} className="h-full">
-                                <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/50 hover:bg-white/[0.06]">
-                                    <div className="mb-5 flex items-center justify-between">
-                                        <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">
-                                            {thread.category || 'Thought'}
-                                        </span>
-                                        <span className="text-[10px] font-mono uppercase text-white/35">
-                                            {thread.timestamp ? new Date(thread.timestamp.seconds * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Now'}
-                                        </span>
-                                    </div>
-                                    <p className="line-clamp-5 text-base font-medium leading-7 text-white/80">{thread.content}</p>
-                                </article>
-                            </ScrollReveal>
-                        )) : (
-                            [
-                                'Design gets stronger when the thinking gets clearer.',
-                                'A good system makes the next good decision easier.',
-                                'Creative direction is taste plus responsibility.'
-                            ].map((thread, index) => (
-                                <ScrollReveal key={thread} direction="up" delay={index * 0.06} duration={0.65} className="h-full">
-                                    <article className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                                        <span className="text-[10px] font-black uppercase tracking-[0.22em] text-primary">Studio Note</span>
-                                        <p className="mt-5 text-base font-medium leading-7 text-white/80">{thread}</p>
-                                    </article>
-                                </ScrollReveal>
-                            ))
-                        )}
-                    </div>
-                </div>
-            </section>
-
             <FinalCta />
+
+            <MotionBento onOpen={setSelectedMedia} />
+
+            <FeaturedProject />
+
+            {/* The work leads. Everything else earns its place after it. */}
+            <HangingGallery assets={featured} onOpen={setSelectedMedia} />
+
+            <WorkWall assets={wallAssets} onOpen={setSelectedMedia} />
+
+            {/* The whole positioning, in one line instead of five sections. */}
+            <section className="aurora-solid relative overflow-hidden border-y border-white/5 px-6 py-28 md:py-40">
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/25 blur-[150px]" />
+                <ScrollReveal direction="up" duration={0.8}>
+                    <p className="relative mx-auto max-w-5xl text-center font-editorial text-4xl leading-[1.08] md:text-7xl">
+                        <WordRise text="Clients rarely arrive with a brief." className="justify-center" />
+                        <span className="mt-2 block" />
+                        <WordRise text="They arrive with raw material" className="justify-center" delay={0.12} />
+                        <span className="mt-2 block" />
+                        <WordRise text="and a date it has to be ready." className="justify-center" delay={0.24} />
+                    </p>
+                </ScrollReveal>
+                <ScrollReveal direction="up" delay={0.2} duration={0.7}>
+                    <p className="relative mx-auto mt-10 max-w-xl text-center text-sm leading-7 text-white/55 md:text-base">
+                        Photographs, footage, a product, a half-formed idea. My work is to give it the shape, clarity and finish it needs to stand in front of an audience.
+                    </p>
+                </ScrollReveal>
+                <ScrollReveal direction="up" delay={0.3} duration={0.7}>
+                    <div className="relative mt-10 flex justify-center">
+                        <Link
+                            to="/services"
+                            className="group inline-flex items-center gap-3 border-b border-espresso/30 pb-2 font-mono text-xs uppercase tracking-[0.2em] transition hover:border-espresso"
+                        >
+                            How it works
+                            <i className="fas fa-arrow-right transition-transform group-hover:translate-x-1" />
+                        </Link>
+                    </div>
+                </ScrollReveal>
+            </section>
+
+            {/* What else I'm building */}
+            <section className="px-3 py-16 md:px-4 md:py-24">
+                <div className="mb-10 px-3 md:px-6">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">The Brands</p>
+                    <RuleDraw className="mt-4 max-w-xs" />
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-4">
+                    {worlds.map((world, index) => {
+                        const inner = (
+                            <>
+                                {/* Sunset floods up from the base on hover */}
+                                <span className="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-sunset/18 to-transparent transition-all duration-500 ease-out group-hover:h-full" />
+                                <span className="absolute right-6 top-6 font-mono text-[11px] text-white/20 transition-colors duration-500 group-hover:text-sunset">
+                                    {world.num}
+                                </span>
+                                <div className="relative">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-sunset">{world.label}</p>
+                                    <h3 className="mt-3 font-display text-4xl transition-transform duration-500 ease-out group-hover:-translate-y-1 md:text-5xl">
+                                        {world.title}
+                                    </h3>
+                                    <p className="mt-3 max-w-xs text-sm leading-6 text-white/55">{world.note}</p>
+                                    <span className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/70 transition group-hover:text-sunset">
+                                        {world.external ? 'Visit' : 'Enter'}
+                                        <i className={`fas ${world.external ? 'fa-arrow-up-right-from-square text-[9px]' : 'fa-arrow-right'} transition-transform group-hover:translate-x-1`} />
+                                    </span>
+                                </div>
+                                <span className="pointer-events-none absolute inset-0 rounded-[10px] ring-1 ring-inset ring-white/10 transition group-hover:ring-sunset/45" />
+                            </>
+                        );
+                        const cls = 'glow-stroke glow-stroke--hover group relative flex h-[280px] flex-col justify-end overflow-hidden rounded-[10px] border border-white/[0.06] bg-neutral-dark p-7 transition-colors duration-500 hover:bg-neutral-medium md:h-[360px]';
+
+                        return (
+                            <ScrollReveal key={world.title} direction="up" delay={index * 0.08} duration={0.7} className="h-full">
+                                {world.external ? (
+                                    <a href={world.path} target="_blank" rel="noopener noreferrer" className={cls}>
+                                        {inner}
+                                    </a>
+                                ) : (
+                                    <Link to={world.path} className={cls}>{inner}</Link>
+                                )}
+                            </ScrollReveal>
+                        );
+                    })}
+                </div>
+            </section>
+
+            {/* The mind — three short notes, no essay */}
+            <section className="border-t border-white/5 px-6 py-16 md:px-10 md:py-24">
+                <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">From the Studio</p>
+                    <Link
+                        to="/threads"
+                        className="group inline-flex w-fit items-center gap-3 border-b border-white/20 pb-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70 transition hover:border-sunset hover:text-sunset"
+                    >
+                        All notes
+                        <i className="fas fa-arrow-right transition-transform group-hover:translate-x-1" />
+                    </Link>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-3 md:gap-4">
+                    {notes.map((note, index) => (
+                        <ScrollReveal key={note.id} direction="up" delay={index * 0.06} duration={0.65} className="h-full">
+                            <article className="h-full rounded-[10px] border border-white/10 bg-white/[0.02] p-7 transition hover:border-sunset/30 hover:bg-white/[0.04]">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-sunset">{note.tag}</p>
+                                <p className="mt-5 line-clamp-5 font-display text-xl leading-[1.4] text-white/85">{note.text}</p>
+                            </article>
+                        </ScrollReveal>
+                    ))}
+                </div>
+            </section>
 
             <MediaModal
                 isOpen={Boolean(selectedMedia)}
@@ -340,75 +248,5 @@ const Home = () => {
         </div>
     );
 };
-
-interface AssetCardProps {
-    asset: UploadAsset;
-    index: number;
-    isSaved: boolean;
-    featured?: boolean;
-    onOpen: (asset: UploadAsset) => void;
-    onSave: (asset: UploadAsset, event: React.MouseEvent) => void;
-    onShare: (asset: UploadAsset, event: React.MouseEvent) => void;
-}
-
-const AssetCard = ({ asset, index, isSaved, featured = false, onOpen, onSave, onShare }: AssetCardProps) => (
-    <motion.article
-        id={asset.id}
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.45, delay: Math.min(index * 0.03, 0.24) }}
-        onClick={() => onOpen(asset)}
-        className={`group relative mb-5 break-inside-avoid overflow-hidden cursor-pointer transition duration-300 hover:-translate-y-1 ${
-            asset.type === 'video'
-                ? 'rounded-none border-0 bg-transparent'
-                : `rounded-2xl border border-white/10 bg-black/40 hover:border-primary/60 ${featured ? 'aspect-[4/5]' : ''}`
-        }`}
-    >
-        {asset.type === 'video' ? (
-            <video src={asset.src} autoPlay muted loop playsInline preload="metadata" className="h-auto w-full rounded-2xl border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60" />
-        ) : (
-            <img src={asset.src} alt={asset.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-        )}
-
-        <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/60 via-black/5 to-black/80 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <div className="flex items-start justify-between gap-3">
-                <span className="rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/75">
-                    {asset.category}
-                </span>
-                <button
-                    type="button"
-                    onClick={(event) => onSave(asset, event)}
-                    className={`rounded-full px-4 py-2 text-xs font-black transition ${isSaved ? 'bg-white text-black' : 'bg-primary text-black hover:bg-white'}`}
-                >
-                    {isSaved ? 'Saved' : 'Save'}
-                </button>
-            </div>
-            <div className="flex items-end justify-between gap-3">
-                <h3 className="line-clamp-2 font-display text-lg font-black leading-tight">{asset.title}</h3>
-                <div className="flex shrink-0 gap-2">
-                    <button
-                        type="button"
-                        onClick={(event) => {
-                            event.stopPropagation();
-                            onOpen(asset);
-                        }}
-                        className="rounded-full bg-white px-4 py-2 text-xs font-black text-black transition hover:bg-primary"
-                    >
-                        Open
-                    </button>
-                    <button
-                        type="button"
-                        onClick={(event) => onShare(asset, event)}
-                        aria-label={`Copy ${asset.title} link`}
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/70 text-xs text-white transition hover:bg-primary hover:text-black"
-                    >
-                        <i className="fas fa-paper-plane" />
-                    </button>
-                </div>
-            </div>
-        </div>
-    </motion.article>
-);
 
 export default Home;

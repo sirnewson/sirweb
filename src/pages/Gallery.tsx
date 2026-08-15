@@ -1,193 +1,218 @@
-import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import Hero from '../components/Hero';
+import { useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 import MediaModal from '../components/MediaModal';
-import { clientsData } from '../data/clients';
+import { portfolioItems, type PortfolioItem, type Docket } from '../data/portfolio';
+import { whatsappFor } from '../data/quickRates';
+
+const STORE = 'sirnewson_saved_ideas';
+
+const FILTERS: { key: Docket | 'all' | 'saved'; label: string }[] = [
+    { key: 'all', label: 'Everything' },
+    { key: 'gallery', label: 'Posters' },
+    { key: 'events', label: 'Events' },
+    { key: 'graphics', label: 'Graphics' },
+    { key: 'branding', label: 'Branding' },
+    { key: 'product', label: 'Product' },
+    { key: 'saved', label: 'Saved' },
+];
 
 const Gallery = () => {
+    const [filter, setFilter] = useState<Docket | 'all' | 'saved'>('all');
+    const [selected, setSelected] = useState<PortfolioItem | null>(null);
+    const [saved, setSaved] = useState<Record<string, boolean>>(() => {
+        try { return JSON.parse(localStorage.getItem(STORE) || '{}'); } catch { return {}; }
+    });
+    const [toast, setToast] = useState<string | null>(null);
+
     useEffect(() => {
-        document.title = "Visual Experiments, Concepts & Cinematic Design Studies | Sir Newson";
-    }, []);
+        localStorage.setItem(STORE, JSON.stringify(saved));
+    }, [saved]);
 
-    // Concept videos — all local, no external CDN
-    const conceptMedia = [
-        { src: '/uploads/motion%20and%20video/arsenal-castle-countdown-reel.mp4', type: 'video' },
-        { src: '/uploads/motion%20and%20video/mapenzi-jibandaski-day-ones-reel.mp4', type: 'video' },
-        { src: '/uploads/motion%20and%20video/erling-haaland-viking-motion.mp4', type: 'video' },
-    ];
+    const savedCount = Object.values(saved).filter(Boolean).length;
 
-    const miscMedia = [
-        { src: '/assets/images/matatu_964f2996.webp', type: 'image' },
-        { src: '/assets/images/advance_f5b5eb1e.webp', type: 'image' },
-        { src: '/assets/images/bill-two_807ef42b.webp', type: 'image' },
-        { src: '/assets/images/design-one_d42e0b83.webp', type: 'image' },
-        { src: '/assets/images/AMBER-RAY_dd19587e.webp', type: 'image' },
-        { src: '/assets/images/guess-who_fdf5aff6.webp', type: 'image' },
-        { src: '/assets/images/Main-Audio-Cover_39e05667.webp', type: 'image' },
-        { src: '/assets/images/PIKACHUUU_b5b95cb6.webp', type: 'image' },
-        { src: '/assets/images/1000bob_3d3ebff8.webp', type: 'image' },
-        { src: '/assets/images/vibes-profile-cover_7ccfe994.webp', type: 'image' },
-        { src: '/assets/images/savee_b3931833.webp', type: 'image' },
-        { src: '/assets/images/Maritee-Solar_d16b16cb.webp', type: 'image' },
-        { src: '/assets/images/ndumooo_c7466626.webp', type: 'image' },
-        { src: '/assets/images/FLASH_138f8fa0.webp', type: 'image' },
-        { src: '/assets/images/groupp_be28be7a.webp', type: 'image' },
-        { src: '/assets/images/50_b8a0208d.webp', type: 'image' },
-        { src: '/assets/images/SEE-YOU-TONIGHT_8e1dcf75.webp', type: 'image' },
-        { src: '/assets/images/coveer_c05ef28c.webp', type: 'image' },
-        { src: '/assets/images/outlook1_7183423e.webp', type: 'image' },
-        { src: '/assets/images/flaqo-draft-progress_79469446.webp', type: 'image' },
-        { src: '/assets/images/post-2_7e7d8fa1.webp', type: 'image' },
-        { src: '/assets/images/slaps_c6e846c4.webp', type: 'image' },
-        { src: '/assets/images/welcome_63390453.webp', type: 'image' },
-        { src: '/assets/images/josae-1m_026dd95f.webp', type: 'image' },
-        { src: '/assets/images/time_95b26164.webp', type: 'image' },
-        { src: '/assets/images/cleanshelf-concept-3_2f0bf9e3.webp', type: 'image' },
-        { src: '/assets/images/1580-x-1080_cf412c7f.webp', type: 'image' },
-        { src: '/assets/images/mockup_997028e3.webp', type: 'image' },
-        { src: '/assets/images/gallery_new_01.webp', type: 'image' },
-        { src: '/assets/images/gallery_new_02.webp', type: 'image' },
-        { src: '/assets/images/gallery_new_03.webp', type: 'image' },
-        { src: '/assets/images/gallery_new_04.webp', type: 'image' },
-        { src: '/assets/images/gallery_new_05.webp', type: 'image' },
-        { src: '/assets/images/recent_work_gikonyore.webp', type: 'image' },
-        { src: '/assets/images/recent_work_saturday_dosage_wide.webp', type: 'image' },
-        { src: '/assets/images/recent_work_dj_dibul_wide.webp', type: 'image' },
-        { src: '/assets/images/recent_work_midnight_poetry.webp', type: 'image' },
-        { src: '/assets/images/recent_work_mkurugenzi_hoodies_men.webp', type: 'image' },
-        { src: '/assets/images/recent_work_big_voices_fest.webp', type: 'image' },
-        { src: '/assets/images/recent_work_tenacity_locks_xmas.webp', type: 'image' },
-        { src: '/assets/images/recent_work_saturday_dosage_portrait.webp', type: 'image' },
-        { src: '/assets/images/recent_work_mkurugenzi_hoodies_women.webp', type: 'image' },
-        { src: '/assets/images/recent_work_dj_dibul_portrait.webp', type: 'image' },
-    ];
+    const items = useMemo(() => {
+        if (filter === 'all') return portfolioItems;
+        if (filter === 'saved') return portfolioItems.filter((i) => saved[i.id]);
+        return portfolioItems.filter((i) => i.docket === filter);
+    }, [filter, saved]);
 
-    // Get 3 images from each client
-    const clientMedia = clientsData.flatMap(client =>
-        client.gallery.slice(0, 3).map(img => ({
-            src: img,
-            type: 'image'
-        }))
-    );
-
-    // Combine: Concepts + Client Work + Misc
-    const initialMediaItems = [...conceptMedia, ...clientMedia, ...miscMedia];
-
-    const [mediaItems, setMediaItems] = useState(initialMediaItems);
-
-    const shuffleArray = (array: any[]) => {
-        const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        return shuffled;
+    const ping = (msg: string) => {
+        setToast(msg);
+        window.setTimeout(() => setToast(null), 1800);
     };
 
-    useEffect(() => {
-        setMediaItems(shuffleArray(initialMediaItems));
-        const interval = setInterval(() => {
-            setMediaItems(prevItems => shuffleArray(prevItems));
-        }, 60000);
-        return () => clearInterval(interval);
-    }, []);
+    const toggleSave = (item: PortfolioItem, e: React.MouseEvent) => {
+        e.stopPropagation();
+        const on = !saved[item.id];
+        setSaved((prev) => ({ ...prev, [item.id]: on }));
+        ping(on ? 'Saved to your board' : 'Removed');
+    };
 
-    const [selectedMedia, setSelectedMedia] = useState<{ src: string; title: string; type: 'image' | 'video' } | null>(null);
+    const copyLink = (item: PortfolioItem, e: React.MouseEvent) => {
+        e.stopPropagation();
+        navigator.clipboard.writeText(`${window.location.origin}/gallery#${item.id}`);
+        ping('Link copied');
+    };
 
     return (
-        <div className="bg-neutral-black min-h-screen">
-            <Hero
-                title={<>Visual Experiments <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">& Atmospheres</span></>}
-                subtitle="Visual Studies"
-                shortParagraph="A collection of images, concepts, moods, and visual studies exploring identity, culture, emotion, and the future of creative expression."
+        <div className="min-h-screen bg-neutral-black text-white">
+            <SEO
+                title="Design Gallery | Posters, Campaigns & Visual Archive | Sir Newson"
+                description="An open archive of posters, campaign key art, branding and product visuals by Sir Newson. Save the ideas you like and send them straight over on WhatsApp."
+                keywords="poster design gallery Kenya, graphic design archive Nairobi, campaign visuals Kenya, design inspiration Kenya, Sir Newson gallery"
+                path="/gallery"
             />
 
-            <section className="py-24 px-6">
-                <div className="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4 max-w-[1920px] mx-auto">
-                    {mediaItems.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: (index % 4) * 0.05 }}
-                        >
-                            <TiltCard onClick={() => setSelectedMedia({ src: item.src, title: `Gallery Item ${index + 1}`, type: item.type as 'image' | 'video' })}>
-                                {item.type === 'video' ? (
-                                    <div className="relative">
-                                        <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            playsInline
-                                            preload="metadata"
-                                            className="w-full h-auto object-contain"
-                                        >
-                                            <source src={item.src} type="video/mp4" />
-                                        </video>
-                                        <div className="absolute top-2 right-2 bg-black/50 p-1 rounded-full">
-                                            <i className="fas fa-video text-white text-xs"></i>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <img
-                                        src={item.src}
-                                        alt={`Gallery item ${index}`}
-                                        className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105"
-                                    />
-                                )}
-                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                            </TiltCard>
-                        </motion.div>
-                    ))}
+            <AnimatePresence>
+                {toast && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 16 }}
+                        className="fixed bottom-8 left-1/2 z-[90] -translate-x-1/2 rounded-[8px] bg-sunset px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.16em] text-black shadow-2xl"
+                    >
+                        {toast}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            <section className="aurora-section relative overflow-hidden px-6 pb-10 pt-36 md:px-10 md:pt-44">
+                <div className="mx-auto max-w-7xl">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">The Archive</p>
+                    <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.98] md:text-8xl">
+                        Everything, <span className="italic text-white/55">in one wall.</span>
+                    </h1>
+                    <p className="mt-6 max-w-xl text-sm leading-7 text-white/62 md:text-base">
+                        {portfolioItems.length} pieces across posters, events, branding and product.
+                        Save what you like — your board stays on this device — then send it to me.
+                    </p>
                 </div>
             </section>
 
+            {/* Sticky filter rail */}
+            <div className="sticky top-0 z-40 border-y border-white/10 bg-neutral-black/85 px-6 py-3 backdrop-blur-xl md:px-10">
+                <div className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto">
+                    {FILTERS.map((f) => (
+                        <button
+                            key={f.key}
+                            type="button"
+                            onClick={() => setFilter(f.key)}
+                            className={`shrink-0 rounded-[6px] px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition ${
+                                filter === f.key
+                                    ? 'bg-sunset text-black'
+                                    : 'border border-white/12 text-white/60 hover:border-sunset/40 hover:text-sunset'
+                            }`}
+                        >
+                            {f.label}
+                            {f.key === 'saved' && savedCount > 0 && ` · ${savedCount}`}
+                        </button>
+                    ))}
+                    <span className="ml-auto shrink-0 pl-4 font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
+                        {items.length} shown
+                    </span>
+                </div>
+            </div>
+
+            {/* Masonry */}
+            <section className="px-3 py-8 md:px-4 md:py-10">
+                {items.length === 0 ? (
+                    <div className="mx-auto max-w-md py-24 text-center">
+                        <p className="font-display text-2xl text-white/70">Nothing saved yet.</p>
+                        <p className="mt-3 text-sm text-white/50">
+                            Tap the bookmark on anything you like and it will collect here.
+                        </p>
+                    </div>
+                ) : (
+                    <div className="columns-2 gap-3 md:columns-4 md:gap-4 xl:columns-5">
+                        {items.map((item, index) => (
+                            <motion.div
+                                key={item.id}
+                                id={item.id}
+                                initial={{ opacity: 0, y: 18 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ duration: 0.45, delay: Math.min((index % 10) * 0.03, 0.25) }}
+                                onClick={() => setSelected(item)}
+                                className="group relative mb-3 block cursor-pointer break-inside-avoid overflow-hidden rounded-[10px] border border-white/10 bg-neutral-dark md:mb-4"
+                            >
+                                <img
+                                    src={item.src}
+                                    alt={item.title}
+                                    loading="lazy"
+                                    width={item.w}
+                                    height={item.h}
+                                    className="w-full transition duration-700 group-hover:scale-[1.03]"
+                                />
+
+                                {/* Hover actions */}
+                                <div className="pointer-events-none absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-soft-black/60 via-transparent to-soft-black/85 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                    <div className="pointer-events-auto flex justify-end">
+                                        <button
+                                            type="button"
+                                            onClick={(e) => toggleSave(item, e)}
+                                            aria-label={saved[item.id] ? 'Remove from board' : 'Save idea'}
+                                            className={`flex h-8 w-8 items-center justify-center rounded-[6px] text-[11px] transition ${
+                                                saved[item.id]
+                                                    ? 'bg-sunset text-black'
+                                                    : 'bg-soft-black/70 text-warm-white hover:bg-sunset hover:text-black'
+                                            }`}
+                                        >
+                                            <i className={saved[item.id] ? 'fas fa-bookmark' : 'far fa-bookmark'} />
+                                        </button>
+                                    </div>
+
+                                    <div className="pointer-events-auto">
+                                        <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-sunset">{item.client}</p>
+                                        <p className="mt-0.5 line-clamp-2 text-left font-display text-xs leading-snug text-warm-white">
+                                            {item.title}
+                                        </p>
+                                        <div className="mt-2 flex gap-1.5">
+                                            <a
+                                                href={whatsappFor({ title: item.title, client: item.client, docket: item.docket })}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="flex h-7 items-center gap-1.5 rounded-[5px] bg-sunset px-2.5 font-mono text-[9px] uppercase tracking-[0.12em] text-black transition hover:bg-clay"
+                                            >
+                                                <i className="fab fa-whatsapp" /> Get a quote
+                                            </a>
+                                            <button
+                                                type="button"
+                                                onClick={(e) => copyLink(item, e)}
+                                                aria-label="Copy link"
+                                                className="flex h-7 w-7 items-center justify-center rounded-[5px] border border-white/20 bg-soft-black/70 text-[9px] text-warm-white transition hover:border-sunset hover:text-sunset"
+                                            >
+                                                <i className="fas fa-link" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {saved[item.id] && (
+                                    <span className="pointer-events-none absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-[5px] bg-sunset text-[10px] text-black group-hover:opacity-0">
+                                        <i className="fas fa-bookmark" />
+                                    </span>
+                                )}
+
+                                <span className="pointer-events-none absolute inset-0 rounded-[10px] ring-1 ring-inset ring-white/10 transition group-hover:ring-sunset/45" />
+                            </motion.div>
+                        ))}
+                    </div>
+                )}
+            </section>
+
             <MediaModal
-                isOpen={!!selectedMedia}
-                onClose={() => setSelectedMedia(null)}
-                src={selectedMedia?.src || ''}
-                title={selectedMedia?.title || ''}
-                type={selectedMedia?.type || 'image'}
+                isOpen={Boolean(selected)}
+                onClose={() => setSelected(null)}
+                src={selected?.src || ''}
+                title={selected?.title || ''}
+                type="image"
             />
 
             <Footer />
         </div>
-    );
-};
-
-const TiltCard = ({ children, onClick }: { children: React.ReactNode, onClick: () => void }) => {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const rotateX = useTransform(y, [-100, 100], [10, -10]);
-    const rotateY = useTransform(x, [-100, 100], [-10, 10]);
-
-    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const xPct = (event.clientX - rect.left) / rect.width - 0.5;
-        const yPct = (event.clientY - rect.top) / rect.height - 0.5;
-        x.set(xPct * 200);
-        y.set(yPct * 200);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onClick={onClick}
-            className="break-inside-avoid rounded-xl overflow-hidden border border-white/10 hover:border-primary hover:shadow-[0_0_30px_#BFFF004D] transition-all duration-300 group mb-4 cursor-pointer relative"
-        >
-            <div style={{ transform: "translateZ(20px)" }}>
-                {children}
-            </div>
-        </motion.div>
     );
 };
 

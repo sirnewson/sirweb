@@ -24,9 +24,9 @@ const websiteSamples = [
         description: 'A structured organizational site with clear navigation and trust signals.',
     },
     {
-        title: 'PataKazi',
-        url: 'https://patakazi.co.ke/',
-        description: 'A platform-style web experience for discovery, listings, and useful action.',
+        title: 'Big Voice Fest',
+        url: 'https://bigvoicefest.com/',
+        description: 'A festival site carrying lineup, tickets and campaign in one place.',
     },
     {
         title: 'YXM Digital',
@@ -69,9 +69,9 @@ const Work = () => {
                         ['Motion & Video', 'Reels, loops, logo animations'],
                         ['Websites', 'Live websites and digital product pages'],
                     ].map(([label, value]) => (
-                        <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-white/[0.06]">
-                            <p className="font-display text-xl font-black text-primary">{label}</p>
-                            <p className="mt-3 text-sm leading-6 text-white/55">{value}</p>
+                        <div key={label} className="rounded-[12px] border border-white/10 bg-white/[0.03] p-6 transition hover:border-primary/50 hover:bg-clay/[0.06]">
+                            <p className="font-display text-xl font-semibold text-primary">{label}</p>
+                            <p className="mt-3 text-sm leading-6 text-white/70">{value}</p>
                         </div>
                     ))}
                 </div>
@@ -119,16 +119,16 @@ const Work = () => {
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
-                            <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">Website Page</p>
-                            <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">Sample Websites Done</h2>
-                            <p className="mt-3 max-w-2xl text-white/60">
+                            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary font-mono">Website Page</p>
+                            <h2 className="mt-3 font-display text-4xl font-semibold md:text-6xl">Sample Websites Done</h2>
+                            <p className="mt-3 max-w-2xl text-white/70">
                                 A small live-site shelf for the web work, kept separate from the upload-folder media archive.
                             </p>
                         </div>
                         <Magnetic>
                             <Link
                                 to="/website"
-                                className="inline-flex w-fit items-center gap-3 rounded-full border border-primary/40 px-6 py-3 text-xs font-black uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black block text-center"
+                                className="inline-flex w-fit items-center gap-3 rounded-[8px] border border-primary/40 px-6 py-3 text-xs font-semibold uppercase tracking-wider text-primary transition hover:bg-primary hover:text-black block text-center"
                             >
                                 Website Services
                                 <i className="fas fa-arrow-right" />
@@ -149,17 +149,17 @@ const Work = () => {
                                     href={site.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-white/[0.06] h-full flex flex-col justify-between block"
+                                    className="group rounded-[12px] border border-white/10 bg-white/[0.03] p-6 transition hover:-translate-y-1 hover:border-primary/60 hover:bg-clay/[0.06] h-full flex flex-col justify-between block"
                                 >
                                     <div>
                                         <div className="mb-8 flex items-center justify-between">
-                                            <span className="text-xs font-black uppercase tracking-[0.24em] text-white/45">Live Site</span>
-                                            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-white">
+                                            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-white/60 font-mono">Live Site</span>
+                                            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-black transition group-hover:bg-clay">
                                                 <i className="fas fa-external-link-alt text-xs" />
                                             </span>
                                         </div>
-                                        <h3 className="font-display text-3xl font-black">{site.title}</h3>
-                                        <p className="mt-4 text-sm leading-6 text-white/60">{site.description}</p>
+                                        <h3 className="font-display text-3xl font-semibold">{site.title}</h3>
+                                        <p className="mt-4 text-sm leading-6 text-white/70">{site.description}</p>
                                     </div>
                                 </a>
                             </ScrollReveal>
@@ -196,9 +196,9 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
         <div className="mx-auto max-w-7xl">
             <ScrollReveal direction="up" duration={0.6}>
                 <div className="mb-10 max-w-3xl">
-                    <p className="text-xs font-black uppercase tracking-[0.28em] text-primary">{eyebrow}</p>
-                    <h2 className="mt-3 font-display text-4xl font-black md:text-6xl">{title}</h2>
-                    <p className="mt-3 text-white/60">{description}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary font-mono">{eyebrow}</p>
+                    <h2 className="mt-3 font-display text-4xl font-semibold md:text-6xl">{title}</h2>
+                    <p className="mt-3 text-white/70">{description}</p>
                 </div>
             </ScrollReveal>
 
@@ -224,7 +224,7 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                             className={`group relative mb-5 break-inside-avoid cursor-pointer overflow-hidden transition hover:-translate-y-1 ${
                                 layout === 'video-grid'
                                     ? 'rounded-none border-0 bg-transparent'
-                                    : `rounded-2xl border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' && asset.type !== 'video' ? 'aspect-[4/5]' : ''}`
+                                    : `rounded-[12px] border border-white/10 bg-black hover:border-primary/60 ${layout === 'feature-grid' && asset.type !== 'video' ? 'aspect-[4/5]' : ''}`
                             }`}
                         >
                             {asset.type === 'video' ? (
@@ -235,7 +235,7 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                                     loop
                                     playsInline
                                     preload="metadata"
-                                    className="h-auto w-full rounded-2xl border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60"
+                                    className="h-auto w-full rounded-[12px] border border-white/10 object-contain opacity-95 transition duration-500 group-hover:scale-[1.01] group-hover:border-primary/60"
                                 />
                             ) : (
                                 <img
@@ -246,18 +246,18 @@ const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = 
                                 />
                             )}
                             <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/65 via-black/5 to-black/85 p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                <span className="w-fit rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white/70">
+                                <span className="w-fit rounded-[8px] border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/78">
                                     {asset.category}
                                 </span>
                                 <div className="flex items-end justify-between gap-4">
-                                    <h3 className="line-clamp-2 font-display text-xl font-black leading-tight">{asset.title}</h3>
+                                    <h3 className="line-clamp-2 font-display text-xl font-semibold leading-tight">{asset.title}</h3>
                                     <button
                                         type="button"
                                         onClick={(event) => {
                                             event.stopPropagation();
                                             onOpen(asset);
                                         }}
-                                        className="shrink-0 rounded-full bg-primary px-4 py-2 text-xs font-black text-black transition hover:bg-white"
+                                        className="shrink-0 rounded-[8px] bg-primary px-4 py-2 text-xs font-semibold text-black transition hover:bg-clay"
                                     >
                                         Open
                                     </button>

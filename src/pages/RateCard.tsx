@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 import PageTransition from '../components/PageTransition';
 
@@ -18,27 +17,27 @@ const PricingCard = ({ pkg, onSelect }: { pkg: any, onSelect: () => void }) => {
     const display = getPriceDisplay(pkg.price);
 
     return (
-        <div className={`relative bg-neutral-medium rounded-3xl p-8 border transition-all duration-300 group hover:-translate-y-2 ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(191,255,0,0.1)]' : 'border-white/5 hover:border-white/20'}`}>
-            {pkg.highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wide">{pkg.badge || 'Recommended'}</div>}
+        <div className={`relative bg-neutral-medium rounded-[12px] p-8 border transition-all duration-300 group hover:-translate-y-2 ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(242,139,44,0.1)]' : 'border-white/5 hover:border-white/20'}`}>
+            {pkg.highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black text-xs font-bold px-4 py-1 rounded-[8px] uppercase tracking-wide">{pkg.badge || 'Recommended'}</div>}
 
             <div className="mb-6">
-                <span className="text-xs font-bold text-white/40 uppercase tracking-widest">{pkg.slot}</span>
+                <span className="text-xs font-bold text-white/55 uppercase tracking-widest">{pkg.slot}</span>
                 <h3 className="text-2xl font-bold text-white mt-2">{pkg.title}</h3>
             </div>
 
             <div className="mb-8 pb-8 border-b border-white/5">
                 <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold text-primary">{display.kes}</span>
-                    <span className="text-sm text-white/40">KES {pkg.period}</span>
+                    <span className="text-sm text-white/55">KES {pkg.period}</span>
                 </div>
-                <div className="text-white/40 font-medium mt-1">${display.usd} USD {pkg.period}</div>
-                <p className="text-white/60 text-sm mt-4 leading-relaxed">{pkg.description}</p>
+                <div className="text-white/55 font-medium mt-1">${display.usd} USD {pkg.period}</div>
+                <p className="text-white/70 text-sm mt-4 leading-relaxed">{pkg.description}</p>
             </div>
 
             <ul className="space-y-4 mb-8">
                 {pkg.features.map((feature: string, i: number) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-white/70">
-                        <i className={`fas fa-check mt-1 ${pkg.highlight ? 'text-primary' : 'text-white/40'}`}></i>
+                    <li key={i} className="flex items-start gap-3 text-sm text-white/78">
+                        <i className={`fas fa-check mt-1 ${pkg.highlight ? 'text-primary' : 'text-white/55'}`}></i>
                         <span className="leading-snug">{feature}</span>
                     </li>
                 ))}
@@ -46,7 +45,7 @@ const PricingCard = ({ pkg, onSelect }: { pkg: any, onSelect: () => void }) => {
 
             <button
                 onClick={onSelect}
-                className={`w-full py-4 rounded-xl font-bold transition-all ${pkg.highlight ? 'bg-primary text-black hover:bg-white' : 'bg-white/10 text-white hover:bg-white hover:text-black'}`}
+                className={`w-full py-4 rounded-[10px] font-bold transition-all ${pkg.highlight ? 'bg-primary text-black hover:bg-clay' : 'bg-white/10 text-white hover:bg-clay hover:text-black'}`}
             >
                 Select Package
             </button>
@@ -181,7 +180,6 @@ const RateCard = () => {
                 path="/rate-card"
             />
             <PageTransition>
-                <Navbar />
 
                 {/* Header */}
                 <div className="pt-40 pb-20 px-6 text-center bg-neutral-dark border-b border-white/10">
@@ -191,7 +189,7 @@ const RateCard = () => {
                         className="max-w-4xl mx-auto"
                     >
                         <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6">Service Rate Card</h1>
-                        <p className="text-white/60 text-xl max-w-2xl mx-auto">
+                        <p className="text-white/70 text-xl max-w-2xl mx-auto">
                             Clear slots, clear deliverables, clear timelines. Pick what you need made ready and we start from there.
                         </p>
                     </motion.div>
@@ -211,16 +209,16 @@ const RateCard = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="bg-neutral-medium p-8 rounded-2xl border border-white/10 hover:border-primary/50 transition-colors group"
+                                    className="bg-neutral-medium p-8 rounded-[12px] border border-white/10 hover:border-primary/50 transition-colors group"
                                 >
-                                    <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center text-primary text-xl mb-6 group-hover:scale-110 transition-transform">
+                                    <div className="w-12 h-12 bg-white/5 rounded-[10px] flex items-center justify-center text-primary text-xl mb-6 group-hover:scale-110 transition-transform">
                                         <i className={service.icon}></i>
                                     </div>
                                     <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>
-                                    <p className="text-white/60 text-sm mb-6 leading-relaxed">{service.desc}</p>
+                                    <p className="text-white/70 text-sm mb-6 leading-relaxed">{service.desc}</p>
                                     <div className="flex flex-wrap gap-2">
                                         {service.tags.map((tag, i) => (
-                                            <span key={i} className="text-xs bg-black/20 text-white/40 px-3 py-1 rounded-full border border-white/5">
+                                            <span key={i} className="text-xs bg-black/20 text-white/55 px-3 py-1 rounded-[8px] border border-white/5">
                                                 {tag}
                                             </span>
                                         ))}
@@ -242,9 +240,9 @@ const RateCard = () => {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id as any)}
-                                className={`px-6 py-3 rounded-xl font-bold flex items-center gap-3 transition-all whitespace-nowrap ${activeTab === tab.id
-                                        ? 'bg-primary text-black shadow-[0_0_20px_rgba(191,255,0,0.4)] scale-105'
-                                        : 'bg-neutral-medium text-white/60 hover:bg-white/10 hover:text-white'
+                                className={`px-6 py-3 rounded-[10px] font-bold flex items-center gap-3 transition-all whitespace-nowrap ${activeTab === tab.id
+                                        ? 'bg-primary text-black shadow-[0_0_20px_rgba(242,139,44,0.4)] scale-105'
+                                        : 'bg-neutral-medium text-white/70 hover:bg-clay/10 hover:text-white'
                                     }`}
                             >
                                 <i className={tab.icon}></i>
@@ -259,16 +257,16 @@ const RateCard = () => {
                     {/* E-Commerce Toggle */}
                     {activeTab === 'website' && (
                         <div className="flex justify-center mb-12">
-                            <div className="bg-neutral-medium border border-white/10 p-2 rounded-2xl flex items-center gap-4 relative">
+                            <div className="bg-neutral-medium border border-white/10 p-2 rounded-[12px] flex items-center gap-4 relative">
                                 <button
                                     onClick={() => setIsEcommerce(false)}
-                                    className={`px-6 py-3 rounded-xl font-bold transition-all ${!isEcommerce ? 'bg-white/10 text-white' : 'text-white/40'}`}
+                                    className={`px-6 py-3 rounded-[10px] font-bold transition-all ${!isEcommerce ? 'bg-white/10 text-white' : 'text-white/55'}`}
                                 >
                                     Standard
                                 </button>
                                 <button
                                     onClick={() => setIsEcommerce(true)}
-                                    className={`px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 ${isEcommerce ? 'bg-green-500 text-black shadow-lg' : 'text-white/40'}`}
+                                    className={`px-6 py-3 rounded-[10px] font-bold transition-all flex items-center gap-2 ${isEcommerce ? 'bg-green-500 text-black shadow-lg' : 'text-white/55'}`}
                                 >
                                     E-Commerce <i className="fas fa-shopping-cart"></i>
                                 </button>
@@ -297,11 +295,11 @@ const RateCard = () => {
                                 const price = isEcommerce ? pkg.basePrice * 2 : pkg.basePrice;
                                 const display = getPriceDisplay(price);
                                 return (
-                                    <div key={index} className={`relative bg-neutral-medium rounded-3xl p-8 border transition-all duration-300 group hover:-translate-y-2 ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(191,255,0,0.1)]' : 'border-white/5 hover:border-white/20'}`}>
-                                        {pkg.highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wide">Best Value</div>}
+                                    <div key={index} className={`relative bg-neutral-medium rounded-[12px] p-8 border transition-all duration-300 group hover:-translate-y-2 ${pkg.highlight ? 'border-primary shadow-[0_0_30px_rgba(242,139,44,0.1)]' : 'border-white/5 hover:border-white/20'}`}>
+                                        {pkg.highlight && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black text-xs font-bold px-4 py-1 rounded-[8px] uppercase tracking-wide">Best Value</div>}
 
                                         <div className="mb-6">
-                                            <span className="text-xs font-bold text-white/40 uppercase tracking-widest">{pkg.slot}</span>
+                                            <span className="text-xs font-bold text-white/55 uppercase tracking-widest">{pkg.slot}</span>
                                             <h3 className="text-2xl font-bold text-white mt-2 mb-1">{pkg.title}</h3>
                                             {isEcommerce && <span className="text-green-400 text-sm font-bold">with E-Commerce</span>}
                                         </div>
@@ -309,26 +307,26 @@ const RateCard = () => {
                                         <div className="mb-8 pb-8 border-b border-white/5">
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-4xl font-bold text-primary">{display.kes}</span>
-                                                <span className="text-sm text-white/40">KES</span>
+                                                <span className="text-sm text-white/55">KES</span>
                                             </div>
-                                            <div className="text-white/40 font-medium mt-1">${display.usd} USD</div>
-                                            <p className="text-white/60 text-sm mt-4 leading-relaxed">{pkg.description}</p>
+                                            <div className="text-white/55 font-medium mt-1">${display.usd} USD</div>
+                                            <p className="text-white/70 text-sm mt-4 leading-relaxed">{pkg.description}</p>
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-3 mb-6">
-                                            <div className="bg-black/20 p-3 rounded-xl text-center border border-white/5">
+                                            <div className="bg-black/20 p-3 rounded-[10px] text-center border border-white/5">
                                                 <i className="fas fa-layer-group text-primary mb-2"></i>
-                                                <div className="text-xs text-white/60 font-bold">{pkg.pages}</div>
+                                                <div className="text-xs text-white/70 font-bold">{pkg.pages}</div>
                                             </div>
-                                            <div className="bg-black/20 p-3 rounded-xl text-center border border-white/5">
+                                            <div className="bg-black/20 p-3 rounded-[10px] text-center border border-white/5">
                                                 <i className="fas fa-mobile-alt text-primary mb-2"></i>
-                                                <div className="text-xs text-white/60 font-bold">{pkg.layout}</div>
+                                                <div className="text-xs text-white/70 font-bold">{pkg.layout}</div>
                                             </div>
                                         </div>
 
                                         <ul className="space-y-4 mb-8">
                                             {pkg.features.map((feature, i) => (
-                                                <li key={i} className="flex items-start gap-3 text-sm text-white/70">
+                                                <li key={i} className="flex items-start gap-3 text-sm text-white/78">
                                                     <i className="fas fa-check text-primary mt-1"></i>
                                                     <span className="leading-snug">{feature}</span>
                                                 </li>
@@ -348,7 +346,7 @@ const RateCard = () => {
 
                                         <button
                                             onClick={() => handleWhatsAppClick(isEcommerce ? `Hi, I'm interested in the ${pkg.title} (E-Commerce) package.` : `Hi, I'm interested in the ${pkg.title} package.`)}
-                                            className={`w-full py-4 rounded-xl font-bold transition-all ${pkg.highlight ? 'bg-primary text-black hover:bg-white' : 'bg-white/10 text-white hover:bg-white hover:text-black'}`}
+                                            className={`w-full py-4 rounded-[10px] font-bold transition-all ${pkg.highlight ? 'bg-primary text-black hover:bg-clay' : 'bg-white/10 text-white hover:bg-clay hover:text-black'}`}
                                         >
                                             {isEcommerce ? 'Get E-Commerce' : 'Get Website'}
                                         </button>

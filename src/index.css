@@ -1,22 +1,80 @@
 @import "tailwindcss";
 
 @theme {
-  /* Neon / LED Palette */
-  --color-primary: #BFFF00;
-  /* Lime Neon */
-  --color-secondary: #7000FF;
-  /* Purple Neon */
-  --color-accent: #FF0055;
-  /* Pink Neon */
-  --color-warning: #FFD600;
-  /* Yellow Neon */
+  /* ---------------------------------------------------------------
+     Sir Newson — warm editorial identity, dark canvas
+     Soft Black ground, Warm White type, amber warmth as the accent that carries
+     interaction. Signature range:
+       Soft Amber -> Golden Hour -> Sunset -> Sienna -> Deep Amber
+     --------------------------------------------------------------- */
 
-  --color-neutral-black: #050505;
-  --color-neutral-dark: #0A0A0A;
-  --color-neutral-medium: #151515;
+  /* Core */
+  --color-warm-white: #F7F3ED;
+  --color-soft-black: #16120F;
 
+  /* Signature warmth — amber through espresso */
+  --color-soft-amber: #FFD9A3;
+  --color-golden-hour: #FFB45C;
+  --color-sunset: #F28B2C;
+  --color-sienna: #C35A1A;
+  --color-deep-amber: #7A2E0B;
+  --color-espresso: #1A0D06;
+
+  /* Retained from the previous identity as a punch colour for select CTAs. */
+  --color-lime: #BFFF00;
+
+  /* Lifted grounds between Soft Black and the ambers, for section bands and
+     input tiles. Warm-tinted rather than neutral grey so the dark stays amber. */
+  --color-ground: #1F1610;
+  --color-ground-lift: #2A1C14;
+
+  /* Aliases kept so existing utilities (bg-cream, text-espresso, bg-clay)
+     continue to resolve after the palette change. */
+  --color-cream: #F7F3ED;
+  --color-beige: #FFD9A3;
+  --color-sand: #FFD9A3;
+  --color-deep-brown: #7A2E0B;
+  --color-surface: #2A1C14;
+
+  /* `clay` is the hover partner for `primary`. It must stay distinct from it or
+     every `bg-primary hover:bg-clay` button becomes a no-op — so primary sits at
+     Sunset and lifts to Golden Hour on hover. */
+  --color-clay: #FFB45C;
+
+  /* Semantic roles. On a dark ground the warmth carries the emphasis: Sunset
+     Orange fills the primary blocks and buttons with Soft Black type on top. */
+  --color-primary: #F28B2C;
+  --color-secondary: #FFB45C;
+  --color-accent: #F28B2C;
+  --color-warning: #C35A1A;
+
+  /* The canvas scale. */
+  --color-neutral-black: #16120F;
+  --color-neutral-dark: #1A0D06;
+  --color-neutral-medium: #2A1C14;
+
+  /* Foreground.
+     `white` is the warm ink and `black` the ground beneath the ambers, so the
+     ~300 existing text-white / text-black utilities land correctly without
+     touching each component. Alpha variants (text-white/70, bg-white/[0.03],
+     border-white/10) resolve to warm tints of the same ink. */
+  --color-white: #F7F3ED;
+  --color-black: #16120F;
+
+  /* True values kept available for the rare case that needs them */
+  --color-pure-white: #FFFFFF;
+  --color-pure-black: #000000;
+
+  /* Three voices: Playfair carries editorial headlines, Inter carries UI and
+     body, SUSE Mono carries labels, annotations, dates and coordinates.
+     `font-display` now resolves to Inter so the system holds one sans, not two. */
   --font-sans: 'Inter', sans-serif;
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-editorial: 'EB Garamond', Georgia, serif;
+  --font-mono: 'SUSE Mono', ui-monospace, monospace;
+
+  --radius-card: 12px;
+  --radius-control: 8px;
 
   --animate-gradient-x: gradient-x 3s ease infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -53,38 +111,362 @@
     0%,
     100% {
       opacity: 1;
-      box-shadow: 0 0 20px var(--color-primary);
+      box-shadow: 0 0 20px rgba(242, 139, 44, 0.38);
     }
 
     50% {
       opacity: 0.5;
-      box-shadow: 0 0 10px var(--color-primary);
+      box-shadow: 0 0 10px rgba(242, 139, 44, 0.22);
     }
   }
 }
 
-/* Custom base styles */
+/* ---------------------------------------------------------------
+   Light mode.
+   Only the neutrals and the ink flip. Sunset stays the accent in both modes so
+   the brand reads the same, and `black` stays dark because it is the ink that
+   sits *on* the amber blocks, not the page ground.
+   --------------------------------------------------------------- */
+:root[data-theme="light"] {
+  --color-neutral-black: #F7F3ED;
+  --color-neutral-dark: #FBF4EA;
+  --color-neutral-medium: #F1E4D2;
+
+  --color-white: #16120F;
+
+  /* `black` is the ink that sits ON the amber blocks, so it inverts with the
+     ground: dark ink on Sunset in dark mode, cream ink on Sienna in light. */
+  --color-black: #F7F3ED;
+
+  /* Sunset reads at only 2.2:1 on Warm White. Text-bearing accents drop to
+     Burnt Sienna in light mode, which clears 4.9:1 on the same ground. */
+  --color-sunset: #C35A1A;
+  --color-primary: #C35A1A;
+  --color-accent: #C35A1A;
+  --color-clay: #7A2E0B;
+  --color-surface: #F1E4D2;
+}
+
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(circle at 15% 45%, rgba(242, 139, 44, 0.10), transparent 32%),
+    radial-gradient(circle at 85% 25%, rgba(255, 180, 92, 0.14), transparent 34%);
+}
+
+/* Structural rules invert with the ground. */
+:root[data-theme="light"] .bg-hexagon-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%2316120F' stroke-width='0.75' stroke-opacity='0.06'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="light"] .rule-hairline {
+  border-top: 1px solid rgba(22, 18, 15, 0.14);
+}
+
+/* Theme transition */
+body,
+body * {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  body * {
+    transition: none;
+  }
+}
+
+
+/* ---------------------------------------------------------------
+   Aurora
+   Replaces the hero's background video. Four blurred amber fields drift
+   against the dark ground on GPU-friendly transforms, so it costs a few KB of
+   CSS rather than the ~54MB clip it stands in for.
+   --------------------------------------------------------------- */
+.aurora {
+  position: absolute;
+  inset: -25%;
+  overflow: hidden;
+  filter: blur(72px) saturate(1.15);
+  opacity: 0.85;
+}
+
+.aurora__band {
+  position: absolute;
+  border-radius: 45% 55% 52% 48% / 48% 45% 55% 52%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.aurora__band--one {
+  width: 62vw;
+  height: 52vw;
+  left: -8%;
+  top: -6%;
+  background: radial-gradient(closest-side, rgba(242, 139, 44, 0.55), rgba(242, 139, 44, 0) 72%);
+  animation: aurora-drift-a 26s ease-in-out infinite alternate;
+}
+
+.aurora__band--two {
+  width: 54vw;
+  height: 48vw;
+  right: -10%;
+  top: -12%;
+  background: radial-gradient(closest-side, rgba(255, 180, 92, 0.42), rgba(255, 180, 92, 0) 70%);
+  animation: aurora-drift-b 32s ease-in-out infinite alternate;
+}
+
+.aurora__band--three {
+  width: 70vw;
+  height: 44vw;
+  left: 12%;
+  bottom: -22%;
+  background: radial-gradient(closest-side, rgba(195, 90, 26, 0.46), rgba(195, 90, 26, 0) 74%);
+  animation: aurora-drift-c 38s ease-in-out infinite alternate;
+}
+
+.aurora__band--four {
+  width: 46vw;
+  height: 46vw;
+  right: 8%;
+  bottom: -14%;
+  background: radial-gradient(closest-side, rgba(122, 46, 11, 0.6), rgba(122, 46, 11, 0) 68%);
+  animation: aurora-drift-d 29s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  to   { transform: translate3d(9%, 7%, 0) scale(1.18) rotate(14deg); }
+}
+
+@keyframes aurora-drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.12) rotate(0deg); }
+  to   { transform: translate3d(-11%, 9%, 0) scale(0.95) rotate(-16deg); }
+}
+
+@keyframes aurora-drift-c {
+  from { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  to   { transform: translate3d(7%, -10%, 0) scale(1.22) rotate(10deg); }
+}
+
+@keyframes aurora-drift-d {
+  from { transform: translate3d(0, 0, 0) scale(1.08) rotate(0deg); }
+  to   { transform: translate3d(-8%, -6%, 0) scale(0.92) rotate(-12deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora__band { animation: none; }
+}
+
+
+/* ---------------------------------------------------------------
+   Glow stroke
+   A conic gradient rotates behind the element and is masked to the border box,
+   so only the 1px edge lights up. Wrap any surface in .glow-stroke.
+   --------------------------------------------------------------- */
+/* No `position` here: an unlayered declaration would override Tailwind's
+   positioning utilities. Consumers supply their own `relative` / `fixed`. */
+.glow-stroke {
+  isolation: isolate;
+}
+
+.glow-stroke::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--glow-angle, 0deg),
+    transparent 0deg,
+    var(--color-sunset) 60deg,
+    var(--color-lime) 120deg,
+    var(--color-golden-hour) 180deg,
+    transparent 260deg,
+    transparent 360deg
+  );
+  /* Mask everything but the border ring */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: glow-spin 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft bloom sitting just outside the ring */
+.glow-stroke::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glow-stroke:hover::after { opacity: 0.35; }
+
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes glow-spin {
+  to { --glow-angle: 360deg; }
+}
+
+/* Only lights up on hover */
+.glow-stroke--hover::before {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glow-stroke--hover:hover::before { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-stroke::before { animation: none; }
+}
+
+
+/* Section-scale aurora. Lime against deep amber, dialled well back so it sits
+   behind copy rather than competing with it. Add .aurora-section to any
+   position:relative section and keep its children on a higher stacking layer. */
+.aurora-section {
+  isolation: isolate;
+}
+
+.aurora-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 12% 18%, rgba(191, 255, 0, 0.10), transparent 68%),
+    radial-gradient(55% 60% at 88% 22%, rgba(242, 139, 44, 0.14), transparent 70%),
+    radial-gradient(70% 60% at 50% 96%, rgba(122, 46, 11, 0.30), transparent 72%);
+  filter: blur(38px);
+  animation: aurora-breathe 24s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes aurora-breathe {
+  from { transform: scale(1) translate3d(0, 0, 0); opacity: 0.85; }
+  to   { transform: scale(1.14) translate3d(-2%, -3%, 0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-section::before { animation: none; }
+}
+
+
+/* ---------------------------------------------------------------
+   Solid aurora
+   A full-opacity lime-to-brown wash for feature sections. Because the ground
+   flips from dark to bright, the ink inside has to flip with it — so this scopes
+   its own foreground rather than relying on the page tokens.
+   --------------------------------------------------------------- */
+.aurora-solid {
+  background: linear-gradient(135deg,
+      var(--color-lime) 0%,
+      var(--color-golden-hour) 34%,
+      var(--color-sienna) 68%,
+      var(--color-deep-amber) 100%);
+  color: var(--color-espresso);
+}
+
+/* Ink. Utilities inside these sections resolve against a bright ground, so the
+   warm-white tokens they normally use would vanish. */
+.aurora-solid :is(h1, h2, h3, h4, p, span, li, a, strong, em) {
+  color: inherit;
+}
+
+.aurora-solid .text-sunset,
+.aurora-solid .text-golden-hour,
+.aurora-solid .text-primary {
+  color: var(--color-deep-amber);
+}
+
+.aurora-solid .text-white\/62,
+.aurora-solid .text-white\/70,
+.aurora-solid .text-white\/55,
+.aurora-solid .text-white\/50 {
+  color: color-mix(in oklab, var(--color-espresso) 74%, transparent);
+}
+
+.aurora-solid :is(hr, .border-t, .border-b, .border) {
+  border-color: color-mix(in oklab, var(--color-espresso) 22%, transparent);
+}
+
+/* The aurora underlay is redundant when the section is already a solid wash. */
+.aurora-solid.aurora-section::before { display: none; }
+
+/* Base */
 body {
   @apply bg-neutral-black text-white font-sans antialiased overflow-x-hidden;
   background-image:
-    radial-gradient(circle at 15% 50%, #7000FF0D, transparent 25%),
-    radial-gradient(circle at 85% 30%, #BFFF000D, transparent 25%);
+    radial-gradient(circle at 15% 45%, rgba(242, 139, 44, 0.10), transparent 32%),
+    radial-gradient(circle at 85% 25%, rgba(122, 46, 11, 0.22), transparent 34%);
 }
 
-/* Fluid Card Utility */
+/* Editorial serif — quotes, essays, Drift Notes, campaign titles.
+   Deliberately reserved; it should never carry the whole brand. */
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Editorial headline treatment. Large section headings carry EB Garamond; nav,
+   labels, buttons and body stay on the sans so the serif never dominates. */
+h1.font-display,
+h2.font-display,
+.font-editorial {
+  font-family: var(--font-editorial);
+  letter-spacing: -0.01em;
+  line-height: 1.06;
+}
+
+/* Headings hold at a considered semibold. EB Garamond is an old-style face that
+   loses its warmth when pushed heavy, so nothing here goes above 600. */
+h1.font-display,
+h2.font-display,
+.font-editorial {
+  font-weight: 600;
+}
+
+/* Mono labels — small caps annotations, eyebrows, dates, page numbers. */
+.label-mono {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-feature-settings: 'ss01';
+}
+
+/* Card surface */
 .fluid-card {
-  @apply relative overflow-hidden bg-neutral-medium/50 backdrop-blur-xl border border-white/10 transition-all duration-500;
-  border-radius: 20px;
+  @apply relative overflow-hidden bg-neutral-medium/40 backdrop-blur-xl border border-white/10 transition-all duration-500;
+  border-radius: var(--radius-card);
 }
 
 .fluid-card:hover {
-  @apply border-primary/50 shadow-[0_0_30px_#BFFF0033];
+  @apply border-accent/40;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
   transform: translateY(-5px);
 }
 
-/* Neon Text */
+/* Retired neon glow. Kept as a no-op so existing markup stays valid while the
+   warm identity relies on weight and spacing instead of luminosity. */
 .text-glow {
-  text-shadow: 0 0 10px currentColor;
+  text-shadow: none;
 }
 
 /* Scrollbar */
@@ -93,15 +475,25 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-black;
+  @apply bg-neutral-dark;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-medium rounded-full hover:bg-primary/50 transition-colors;
+  @apply bg-deep-brown transition-colors;
+  border-radius: 4px;
 }
 
-/* Dark Lime Waves Hover */
-@keyframes lime-waves {
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-sunset;
+}
+
+::selection {
+  background-color: var(--color-sunset);
+  color: var(--color-soft-black);
+}
+
+/* Warm wash used behind the navbar on hover (was the lime wave) */
+@keyframes warm-drift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -115,31 +507,37 @@ body {
 .hover-dark-lime-waves:hover {
   background-image: linear-gradient(
     90deg,
-    #011111,
-    rgba(191, 255, 0, 0.15),
-    #050505,
-    rgba(191, 255, 0, 0.05),
-    #011111
+    #1A0D06,
+    rgba(242, 139, 44, 0.38),
+    #7A2E0B,
+    rgba(255, 217, 163, 0.25),
+    #1A0D06
   );
-  background-color: #011111;
-  animation: lime-waves 3s ease infinite;
+  background-color: #1A0D06;
+  animation: warm-drift 3s ease infinite;
 }
 
-/* Hexagonal Grid Pattern & Shape Style */
+/* Structural grid — now an architectural rule pattern rather than a tech grid */
 .bg-hexagon-grid {
   background-size: 56px 97px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%23BFFF00' stroke-width='0.75' stroke-opacity='0.03'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%23F7F3ED' stroke-width='0.75' stroke-opacity='0.05'/%3E%3C/svg%3E");
 }
 
 .bg-hexagon-grid-dense {
   background-size: 28px 48.5px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0 L28 8.08 L28 24.25 L14 32.33 L0 24.25 L0 8.08 Z M14 48.5 L28 40.42 L28 24.25 L14 16.17 L0 24.25 L0 40.42 Z' fill='none' stroke='%23BFFF00' stroke-width='0.5' stroke-opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0 L28 8.08 L28 24.25 L14 32.33 L0 24.25 L0 8.08 Z M14 48.5 L28 40.42 L28 24.25 L14 16.17 L0 24.25 L0 40.42 Z' fill='none' stroke='%23F7F3ED' stroke-width='0.5' stroke-opacity='0.06'/%3E%3C/svg%3E");
 }
 
 .clip-hexagon {
   clip-path: polygon(50% 0%, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
 }
 
+/* Paper grain. Subtle — depth, not noise. */
 .bg-noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Thin editorial rule */
+.rule-hairline {
+  border-top: 1px solid rgba(247, 243, 237, 0.14);
 }

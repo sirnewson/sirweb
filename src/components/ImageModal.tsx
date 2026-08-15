@@ -36,12 +36,12 @@ const ImageModal = ({ isOpen, onClose, imageSrc, title }: ImageModalProps) => {
                     >
                         <button
                             onClick={onClose}
-                            className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors"
+                            className="absolute -top-12 right-0 text-white/62 hover:text-white transition-colors"
                         >
                             <i className="fas fa-times text-2xl"></i>
                         </button>
 
-                        <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 w-full h-full">
+                        <div className="relative rounded-[12px] overflow-hidden shadow-2xl border border-white/10 w-full h-full">
                             <img
                                 src={imageSrc}
                                 alt={title}
@@ -54,7 +54,7 @@ const ImageModal = ({ isOpen, onClose, imageSrc, title }: ImageModalProps) => {
                             <div className="h-1 w-1 bg-white/30 rounded-full" />
                             <button
                                 onClick={handleDownload}
-                                className="px-6 py-2 bg-primary text-black rounded-full font-bold text-sm hover:bg-white transition-colors shadow-[0_0_20px_rgba(191,255,0,0.3)] flex items-center gap-2"
+                                className="px-6 py-2 bg-primary text-black rounded-[8px] font-bold text-sm hover:bg-clay transition-colors shadow-[0_0_20px_rgba(242,139,44,0.3)] flex items-center gap-2"
                             >
                                 <i className="fas fa-download"></i> Download
                             </button>

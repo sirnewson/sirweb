@@ -51,7 +51,7 @@ const Media = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="rounded-2xl overflow-hidden border border-white/10 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(191,255,0,0.2)] transition-all duration-500"
+                                className="rounded-[12px] overflow-hidden border border-white/10 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(242,139,44,0.2)] transition-all duration-500"
                             >
                                 <iframe
                                     style={{ borderRadius: '12px' }}
@@ -76,7 +76,7 @@ const Media = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="relative rounded-2xl overflow-hidden group cursor-pointer border border-white/10 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(191,255,0,0.2)] transition-all duration-500 aspect-video"
+                                className="relative rounded-[12px] overflow-hidden group cursor-pointer border border-white/10 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(242,139,44,0.2)] transition-all duration-500 aspect-video"
                             >
                                 <iframe
                                     width="100%"
@@ -105,7 +105,7 @@ const Media = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                className="rounded-2xl overflow-hidden border border-white/10 hover:border-[#1DB954]/50 hover:shadow-[0_0_30px_rgba(29,185,84,0.2)] transition-all duration-500"
+                                className="rounded-[12px] overflow-hidden border border-white/10 hover:border-[#1DB954]/50 hover:shadow-[0_0_30px_rgba(29,185,84,0.2)] transition-all duration-500"
                             >
                                 <iframe
                                     style={{ borderRadius: '12px' }}

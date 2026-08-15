@@ -57,8 +57,8 @@ const Section = ({
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
   <motion.div variants={fadeUp} custom={0} className="mb-4">
-    <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#BFFF00] border border-[#BFFF00]/30 px-3 py-1.5 rounded-full">
-      <span className="w-1 h-1 rounded-full bg-[#BFFF00] inline-block" />
+    <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#F28B2C] border border-[#F28B2C]/30 px-3 py-1.5 rounded-[8px]">
+      <span className="w-1 h-1 rounded-full bg-[#F28B2C] inline-block" />
       {children}
     </span>
   </motion.div>
@@ -70,7 +70,7 @@ const SectionTitle = ({ children, className = '' }: { children: React.ReactNode;
   <motion.h2
     variants={fadeUp}
     custom={0.1}
-    className={`font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#EEFFF4] leading-tight ${className}`}
+    className={`font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#F7F3ED] leading-tight ${className}`}
   >
     {children}
   </motion.h2>
@@ -82,7 +82,7 @@ const KeywordTag = ({ children, delay = 0 }: { children: string; delay?: number 
   <motion.span
     variants={fadeUp}
     custom={delay}
-    className="inline-block text-sm font-bold text-[#BFFF00] border border-[#BFFF00]/40 bg-[#BFFF00]/5 px-4 py-2 rounded-full hover:bg-[#BFFF00]/10 hover:border-[#BFFF00]/70 transition-all duration-300 cursor-default"
+    className="inline-block text-sm font-bold text-[#F28B2C] border border-[#F28B2C]/40 bg-[#F28B2C]/5 px-4 py-2 rounded-[8px] hover:bg-[#F28B2C]/10 hover:border-[#F28B2C]/70 transition-all duration-300 cursor-default"
   >
     {children}
   </motion.span>
@@ -104,12 +104,12 @@ const InsightCard = ({
   <motion.div
     variants={fadeUp}
     custom={delay}
-    className="group relative p-8 rounded-3xl border border-[#BFFF00]/10 bg-[#071A1A] hover:border-[#BFFF00]/30 transition-all duration-500 hover:shadow-[0_0_40px_#BFFF0010]"
+    className="group relative p-8 rounded-[12px] border border-[#F28B2C]/10 bg-[#071A1A] hover:border-[#F28B2C]/30 transition-all duration-500 hover:shadow-[0_0_40px_#F28B2C10]"
   >
     <div className="text-3xl mb-4">{icon}</div>
-    <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#BFFF00] mb-3">{label}</div>
+    <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#F28B2C] mb-3">{label}</div>
     <p className="text-[#AFC9C3] text-sm leading-relaxed">{text}</p>
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#BFFF00]/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <div className="absolute inset-0 rounded-[12px] bg-gradient-to-br from-[#F28B2C]/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
   </motion.div>
 );
 
@@ -129,10 +129,10 @@ const OpportunityCard = ({
   <motion.div
     variants={fadeUp}
     custom={delay}
-    className="group p-7 rounded-2xl border border-white/5 bg-[#071A1A]/60 hover:border-[#BFFF00]/25 transition-all duration-400 hover:-translate-y-1"
+    className="group p-7 rounded-[12px] border border-white/5 bg-[#071A1A]/60 hover:border-[#F28B2C]/25 transition-all duration-400 hover:-translate-y-1"
   >
     <div className="text-2xl mb-4">{icon}</div>
-    <h3 className="font-display text-lg font-bold text-[#EEFFF4] mb-2">{title}</h3>
+    <h3 className="font-display text-lg font-bold text-[#F7F3ED] mb-2">{title}</h3>
     <p className="text-[#AFC9C3] text-sm leading-relaxed">{description}</p>
   </motion.div>
 );
@@ -143,12 +143,12 @@ const DeliverableItem = ({ text, delay = 0 }: { text: string; delay?: number }) 
   <motion.div
     variants={fadeUp}
     custom={delay}
-    className="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-[#071A1A]/40 hover:border-[#BFFF00]/20 transition-all duration-300 group"
+    className="flex items-center gap-3 p-4 rounded-[10px] border border-white/5 bg-[#071A1A]/40 hover:border-[#F28B2C]/20 transition-all duration-300 group"
   >
-    <span className="w-5 h-5 rounded-full bg-[#BFFF00]/10 border border-[#BFFF00]/30 flex items-center justify-center flex-shrink-0">
-      <span className="w-2 h-2 rounded-full bg-[#BFFF00]" />
+    <span className="w-5 h-5 rounded-full bg-[#F28B2C]/10 border border-[#F28B2C]/30 flex items-center justify-center flex-shrink-0">
+      <span className="w-2 h-2 rounded-full bg-[#F28B2C]" />
     </span>
-    <span className="text-[#EEFFF4]/80 text-sm group-hover:text-[#EEFFF4] transition-colors">{text}</span>
+    <span className="text-[#F7F3ED]/80 text-sm group-hover:text-[#F7F3ED] transition-colors">{text}</span>
   </motion.div>
 );
 
@@ -170,26 +170,26 @@ const PricingCard = ({
     <motion.div
       variants={fadeUp}
       custom={delay}
-      className={`relative flex flex-col rounded-3xl p-8 border transition-all duration-500 hover:-translate-y-2 ${
+      className={`relative flex flex-col rounded-[12px] p-8 border transition-all duration-500 hover:-translate-y-2 ${
         pkg.recommended
-          ? 'border-[#BFFF00]/50 bg-[#071A1A] shadow-[0_0_60px_#BFFF0015]'
-          : 'border-white/8 bg-[#071A1A]/60 hover:border-[#BFFF00]/20'
+          ? 'border-[#F28B2C]/50 bg-[#071A1A] shadow-[0_0_60px_#F28B2C15]'
+          : 'border-white/8 bg-[#071A1A]/60 hover:border-[#F28B2C]/20'
       }`}
     >
       {pkg.recommended && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#BFFF00] text-black text-[11px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest whitespace-nowrap">
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#F28B2C] text-black text-[11px] font-bold px-4 py-1.5 rounded-[8px] uppercase tracking-widest whitespace-nowrap">
           Recommended
         </div>
       )}
       <div className="mb-6">
         <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#AFC9C3]">{pkg.name} Package</span>
-        <div className="mt-3 text-3xl font-bold text-[#BFFF00] font-display">{pkg.price}</div>
+        <div className="mt-3 text-3xl font-bold text-[#F28B2C] font-display">{pkg.price}</div>
         <p className="mt-3 text-[#AFC9C3] text-sm leading-relaxed">{pkg.description}</p>
       </div>
       <ul className="space-y-3 flex-1 mb-8 border-t border-white/5 pt-6">
         {pkg.features.map((f, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm text-[#EEFFF4]/70">
-            <span className="text-[#BFFF00] mt-0.5 flex-shrink-0">✓</span>
+          <li key={i} className="flex items-start gap-3 text-sm text-[#F7F3ED]/70">
+            <span className="text-[#F28B2C] mt-0.5 flex-shrink-0">✓</span>
             <span>{f}</span>
           </li>
         ))}
@@ -198,10 +198,10 @@ const PricingCard = ({
         href={buildWhatsAppUrl(whatsappNumber, waMsg)}
         target="_blank"
         rel="noopener noreferrer"
-        className={`w-full py-4 rounded-2xl font-bold text-sm text-center transition-all duration-300 ${
+        className={`w-full py-4 rounded-[12px] font-bold text-sm text-center transition-all duration-300 ${
           pkg.recommended
-            ? 'bg-[#BFFF00] text-black hover:bg-white hover:shadow-[0_0_30px_#BFFF0060]'
-            : 'bg-white/5 text-[#EEFFF4] border border-white/10 hover:bg-[#BFFF00]/10 hover:border-[#BFFF00]/40'
+            ? 'bg-[#F28B2C] text-black hover:bg-clay hover:shadow-[0_0_30px_#F28B2C60]'
+            : 'bg-white/5 text-[#F7F3ED] border border-white/10 hover:bg-[#F28B2C]/10 hover:border-[#F28B2C]/40'
         }`}
       >
         Select {pkg.name} Package
@@ -226,13 +226,13 @@ const ProcessStep = ({
   <motion.div variants={fadeUp} custom={delay} className="relative">
     <div className="flex gap-5">
       <div className="flex flex-col items-center">
-        <div className="w-10 h-10 rounded-full border border-[#BFFF00]/40 bg-[#BFFF00]/5 flex items-center justify-center flex-shrink-0">
-          <span className="text-[#BFFF00] font-bold text-sm font-display">{number}</span>
+        <div className="w-10 h-10 rounded-full border border-[#F28B2C]/40 bg-[#F28B2C]/5 flex items-center justify-center flex-shrink-0">
+          <span className="text-[#F28B2C] font-bold text-sm font-display">{number}</span>
         </div>
-        <div className="w-px flex-1 mt-4 bg-gradient-to-b from-[#BFFF00]/20 to-transparent" />
+        <div className="w-px flex-1 mt-4 bg-gradient-to-b from-[#F28B2C]/20 to-transparent" />
       </div>
       <div className="pb-10">
-        <h3 className="font-display text-xl font-bold text-[#EEFFF4] mb-2">{title}</h3>
+        <h3 className="font-display text-xl font-bold text-[#F7F3ED] mb-2">{title}</h3>
         <p className="text-[#AFC9C3] text-sm leading-relaxed">{description}</p>
       </div>
     </div>
@@ -255,7 +255,7 @@ const VisualPreviewCard = ({
   <motion.div
     variants={fadeUp}
     custom={delay}
-    className="group relative rounded-2xl overflow-hidden border border-white/8 bg-[#071A1A] hover:border-[#BFFF00]/30 transition-all duration-500 hover:-translate-y-1"
+    className="group relative rounded-[12px] overflow-hidden border border-white/8 bg-[#071A1A] hover:border-[#F28B2C]/30 transition-all duration-500 hover:-translate-y-1"
   >
     <div className="aspect-[4/3] relative overflow-hidden">
       {image ? (
@@ -263,8 +263,8 @@ const VisualPreviewCard = ({
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-[#071A1A] via-[#0a2222] to-[#071A1A] flex items-center justify-center">
           <div className="text-center">
-            <div className="w-16 h-16 mx-auto rounded-2xl border border-[#BFFF00]/20 bg-[#BFFF00]/5 flex items-center justify-center mb-3">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#BFFF00" strokeWidth="1.5" strokeOpacity="0.6">
+            <div className="w-16 h-16 mx-auto rounded-[12px] border border-[#F28B2C]/20 bg-[#F28B2C]/5 flex items-center justify-center mb-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F28B2C" strokeWidth="1.5" strokeOpacity="0.6">
                 <rect x="3" y="3" width="18" height="18" rx="2" />
                 <circle cx="8.5" cy="8.5" r="1.5" />
                 <path d="m21 15-5-5L5 21" />
@@ -274,10 +274,10 @@ const VisualPreviewCard = ({
           </div>
         </div>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#011111]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1A0D06]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
     <div className="p-5">
-      <h4 className="font-display font-bold text-[#EEFFF4] text-sm mb-1">{title}</h4>
+      <h4 className="font-display font-bold text-[#F7F3ED] text-sm mb-1">{title}</h4>
       <p className="text-[#AFC9C3] text-xs">{subtitle}</p>
     </div>
   </motion.div>
@@ -300,10 +300,10 @@ const TimelineItem = ({
     className="flex gap-5 group"
   >
     <div className="flex-shrink-0 pt-1">
-      <span className="inline-block font-bold text-xs text-[#BFFF00] font-display w-20">{period}</span>
+      <span className="inline-block font-bold text-xs text-[#F28B2C] font-display w-20">{period}</span>
     </div>
     <div className="flex-1 pb-6 border-b border-white/5 group-last:border-0">
-      <p className="text-[#EEFFF4]/80 text-sm leading-relaxed group-hover:text-[#EEFFF4] transition-colors">{task}</p>
+      <p className="text-[#F7F3ED]/80 text-sm leading-relaxed group-hover:text-[#F7F3ED] transition-colors">{task}</p>
     </div>
   </motion.div>
 );
@@ -341,13 +341,13 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? 'bg-[#011111]/90 backdrop-blur-2xl border-b border-white/5 py-4'
+            ? 'bg-[#1A0D06]/90 backdrop-blur-2xl border-b border-white/5 py-4'
             : 'bg-transparent py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="font-display font-bold text-[#EEFFF4] text-sm tracking-wider hover:text-[#BFFF00] transition-colors">
+          <Link to="/" className="font-display font-bold text-[#F7F3ED] text-sm tracking-wider hover:text-[#F28B2C] transition-colors">
             SIR NEWSON
           </Link>
 
@@ -357,7 +357,7 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className="text-[#AFC9C3] text-xs font-medium hover:text-[#EEFFF4] transition-colors cursor-pointer"
+                className="text-[#AFC9C3] text-xs font-medium hover:text-[#F7F3ED] transition-colors cursor-pointer"
               >
                 {link.label}
               </button>
@@ -369,7 +369,7 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
             href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 bg-[#BFFF00] text-black text-xs font-bold px-5 py-2.5 rounded-full hover:bg-white transition-all duration-300 hover:shadow-[0_0_25px_#BFFF0060]"
+            className="hidden md:flex items-center gap-2 bg-[#F28B2C] text-black text-xs font-bold px-5 py-2.5 rounded-[8px] hover:bg-clay transition-all duration-300 hover:shadow-[0_0_25px_#F28B2C60]"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -380,7 +380,7 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-[#EEFFF4] p-2"
+            className="md:hidden text-[#F7F3ED] p-2"
             aria-label="Toggle menu"
           >
             <div className="w-5 space-y-1.5">
@@ -400,14 +400,14 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-16 inset-x-0 z-40 bg-[#011111]/95 backdrop-blur-2xl border-b border-white/5 py-6 px-5"
+            className="fixed top-16 inset-x-0 z-40 bg-[#1A0D06]/95 backdrop-blur-2xl border-b border-white/5 py-6 px-5"
           >
             <nav className="flex flex-col gap-4 mb-6">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-left text-[#EEFFF4] text-sm font-medium py-2 border-b border-white/5 hover:text-[#BFFF00] transition-colors"
+                  className="text-left text-[#F7F3ED] text-sm font-medium py-2 border-b border-white/5 hover:text-[#F28B2C] transition-colors"
                 >
                   {link.label}
                 </button>
@@ -417,7 +417,7 @@ const ProposalNav = ({ proposal }: { proposal: ProposalData }) => {
               href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#BFFF00] text-black text-sm font-bold px-5 py-3.5 rounded-2xl w-full"
+              className="flex items-center justify-center gap-2 bg-[#F28B2C] text-black text-sm font-bold px-5 py-3.5 rounded-[12px] w-full"
             >
               Discuss Proposal on WhatsApp
             </a>
@@ -454,7 +454,7 @@ const FloatingCTA = ({ proposal }: { proposal: ProposalData }) => {
             href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 bg-[#BFFF00] text-black text-sm font-bold px-5 py-4 rounded-2xl w-full shadow-[0_8px_40px_#BFFF0050]"
+            className="flex items-center justify-center gap-2 bg-[#F28B2C] text-black text-sm font-bold px-5 py-4 rounded-[12px] w-full shadow-[0_8px_40px_#F28B2C50]"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -533,11 +533,11 @@ const Proposal = () => {
     <div
       className="min-h-screen font-sans"
       style={{
-        backgroundColor: '#011111',
-        color: '#EEFFF4',
+        backgroundColor: '#1A0D06',
+        color: '#F7F3ED',
         backgroundImage: `
-          radial-gradient(ellipse at 20% 0%, rgba(191,255,0,0.04) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 100%, rgba(191,255,0,0.03) 0%, transparent 50%)
+          radial-gradient(ellipse at 20% 0%, rgba(242,139,44,0.04) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 100%, rgba(242,139,44,0.03) 0%, transparent 50%)
         `,
       }}
     >
@@ -549,7 +549,7 @@ const Proposal = () => {
       <section className="relative min-h-screen flex flex-col justify-center px-5 md:px-10 lg:px-16 pt-28 pb-24 overflow-hidden">
         {/* Background video (water loop) */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#011111]/80 via-transparent to-[#011111] z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1A0D06]/80 via-transparent to-[#1A0D06] z-10" />
           <video
             autoPlay
             loop
@@ -565,7 +565,7 @@ const Proposal = () => {
         <div className="absolute inset-0 pointer-events-none">
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px]"
-            style={{ background: 'radial-gradient(circle, rgba(191,255,0,0.05) 0%, transparent 70%)' }}
+            style={{ background: 'radial-gradient(circle, rgba(242,139,44,0.05) 0%, transparent 70%)' }}
           />
         </div>
 
@@ -573,7 +573,7 @@ const Proposal = () => {
         <div
           className="absolute inset-0 pointer-events-none opacity-30"
           style={{
-            backgroundImage: `linear-gradient(rgba(191,255,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(191,255,0,0.03) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(242,139,44,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(242,139,44,0.03) 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
@@ -586,8 +586,8 @@ const Proposal = () => {
           >
             {/* Label */}
             <motion.div variants={fadeUp} custom={0} className="mb-6 flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#BFFF00] border border-[#BFFF00]/30 px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#BFFF00] animate-pulse inline-block" />
+              <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#F28B2C] border border-[#F28B2C]/30 px-3 py-1.5 rounded-[8px]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F28B2C] animate-pulse inline-block" />
                 {proposal.proposalLabel}
               </span>
               {proposal.industry && (
@@ -601,15 +601,15 @@ const Proposal = () => {
             <motion.h1
               variants={fadeUp}
               custom={0.1}
-              className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] text-[#EEFFF4] mb-6"
+              className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] text-[#F7F3ED] mb-6"
             >
               Visual Growth
               <br />
-              <span className="text-[#BFFF00]">Proposal</span>
+              <span className="text-[#F28B2C]">Proposal</span>
               {proposal.clientName !== 'Your Brand' && (
                 <>
                   <br />
-                  <span className="text-[#EEFFF4]/60">for {proposal.clientName}</span>
+                  <span className="text-[#F7F3ED]/60">for {proposal.clientName}</span>
                 </>
               )}
             </motion.h1>
@@ -625,12 +625,12 @@ const Proposal = () => {
 
             {/* Prepared by */}
             <motion.div variants={fadeUp} custom={0.25} className="mb-10 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#BFFF00]/10 border border-[#BFFF00]/30 flex items-center justify-center">
-                <span className="text-[#BFFF00] text-xs font-bold">SN</span>
+              <div className="w-8 h-8 rounded-full bg-[#F28B2C]/10 border border-[#F28B2C]/30 flex items-center justify-center">
+                <span className="text-[#F28B2C] text-xs font-bold">SN</span>
               </div>
               <div>
                 <p className="text-[11px] text-[#AFC9C3] uppercase tracking-widest">Prepared by</p>
-                <p className="text-sm font-bold text-[#EEFFF4]">{proposal.preparedBy} · sirnewson.com</p>
+                <p className="text-sm font-bold text-[#F7F3ED]">{proposal.preparedBy} · sirnewson.com</p>
               </div>
             </motion.div>
 
@@ -641,7 +641,7 @@ const Proposal = () => {
                   const el = document.getElementById('overview');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="inline-flex items-center justify-center gap-2 bg-[#BFFF00] text-black font-bold px-8 py-4 rounded-2xl hover:bg-white transition-all duration-300 hover:shadow-[0_0_40px_#BFFF0060] text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-[#F28B2C] text-black font-bold px-8 py-4 rounded-[12px] hover:bg-clay transition-all duration-300 hover:shadow-[0_0_40px_#F28B2C60] text-sm"
               >
                 View Proposal
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -652,7 +652,7 @@ const Proposal = () => {
                 href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-transparent text-[#EEFFF4] font-bold px-8 py-4 rounded-2xl border border-white/15 hover:border-[#BFFF00]/50 hover:text-[#BFFF00] transition-all duration-300 text-sm"
+                className="inline-flex items-center justify-center gap-2 bg-transparent text-[#F7F3ED] font-bold px-8 py-4 rounded-[12px] border border-white/15 hover:border-[#F28B2C]/50 hover:text-[#F28B2C] transition-all duration-300 text-sm"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -685,7 +685,7 @@ const Proposal = () => {
       </section>
 
       {/* Section divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#BFFF00]/15 to-transparent mx-5 md:mx-16" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#F28B2C]/15 to-transparent mx-5 md:mx-16" />
 
       {/* ── Client Snapshot (What I See) ──────────────────────────────────── */}
       <Section id="overview" className="py-24">
@@ -693,7 +693,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           I've studied your brand.
           <br />
-          <span className="text-[#EEFFF4]/50">Here's what I found.</span>
+          <span className="text-[#F7F3ED]/50">Here's what I found.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Before proposing any creative direction, I take time to understand where a brand is, what it has, and where it can go.
@@ -729,7 +729,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           Better creative work
           <br />
-          <span className="text-[#EEFFF4]/50">changes how business flows.</span>
+          <span className="text-[#F7F3ED]/50">changes how business flows.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Here's what becomes possible when visual communication is done with strategy, intentionality, and creative excellence.
@@ -756,7 +756,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           This is how your brand
           <br />
-          <span className="text-[#BFFF00]">should look and feel.</span>
+          <span className="text-[#F28B2C]">should look and feel.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           {proposal.directionSummary}
@@ -766,27 +766,27 @@ const Proposal = () => {
         {(proposal.toneOfVoice || proposal.campaignDirection || proposal.contentDirection || proposal.designDirection) && (
           <motion.div variants={fadeUp} custom={0.3} className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-14">
             {proposal.toneOfVoice && (
-              <div className="p-6 rounded-2xl border border-white/8 bg-[#071A1A]/50">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#BFFF00] mb-2">Tone of Voice</p>
-                <p className="text-[#EEFFF4]/80 text-sm">{proposal.toneOfVoice}</p>
+              <div className="p-6 rounded-[12px] border border-white/8 bg-[#071A1A]/50">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#F28B2C] mb-2">Tone of Voice</p>
+                <p className="text-[#F7F3ED]/80 text-sm">{proposal.toneOfVoice}</p>
               </div>
             )}
             {proposal.campaignDirection && (
-              <div className="p-6 rounded-2xl border border-white/8 bg-[#071A1A]/50">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#BFFF00] mb-2">Campaign Direction</p>
-                <p className="text-[#EEFFF4]/80 text-sm">{proposal.campaignDirection}</p>
+              <div className="p-6 rounded-[12px] border border-white/8 bg-[#071A1A]/50">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#F28B2C] mb-2">Campaign Direction</p>
+                <p className="text-[#F7F3ED]/80 text-sm">{proposal.campaignDirection}</p>
               </div>
             )}
             {proposal.contentDirection && (
-              <div className="p-6 rounded-2xl border border-white/8 bg-[#071A1A]/50">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#BFFF00] mb-2">Content Direction</p>
-                <p className="text-[#EEFFF4]/80 text-sm">{proposal.contentDirection}</p>
+              <div className="p-6 rounded-[12px] border border-white/8 bg-[#071A1A]/50">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#F28B2C] mb-2">Content Direction</p>
+                <p className="text-[#F7F3ED]/80 text-sm">{proposal.contentDirection}</p>
               </div>
             )}
             {proposal.designDirection && (
-              <div className="p-6 rounded-2xl border border-white/8 bg-[#071A1A]/50">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#BFFF00] mb-2">Design Direction</p>
-                <p className="text-[#EEFFF4]/80 text-sm">{proposal.designDirection}</p>
+              <div className="p-6 rounded-[12px] border border-white/8 bg-[#071A1A]/50">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#F28B2C] mb-2">Design Direction</p>
+                <p className="text-[#F7F3ED]/80 text-sm">{proposal.designDirection}</p>
               </div>
             )}
           </motion.div>
@@ -808,7 +808,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           What the creative work
           <br />
-          <span className="text-[#EEFFF4]/50">will look like.</span>
+          <span className="text-[#F7F3ED]/50">will look like.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Below is a preview of the creative directions and content formats planned for {proposal.clientName}. Mockup visuals will be produced after confirmation.
@@ -835,7 +835,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           What you'll receive
           <br />
-          <span className="text-[#EEFFF4]/50">every month.</span>
+          <span className="text-[#F7F3ED]/50">every month.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Each deliverable is designed with a purpose — to move {proposal.clientName} closer to stronger brand presence, better trust, and more consistent growth.
@@ -856,7 +856,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           Choose the level of
           <br />
-          <span className="text-[#BFFF00]">creative partnership.</span>
+          <span className="text-[#F28B2C]">creative partnership.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Every package is built for results, not just deliverables. The right fit depends on the pace of growth you're ready for.
@@ -878,16 +878,16 @@ const Proposal = () => {
         <motion.div
           variants={fadeUp}
           custom={0.4}
-          className="mt-8 p-8 rounded-3xl border border-dashed border-white/15 bg-[#071A1A]/30 text-center"
+          className="mt-8 p-8 rounded-[12px] border border-dashed border-white/15 bg-[#071A1A]/30 text-center"
         >
           <p className="text-[#AFC9C3] text-sm mb-4">
-            Need something tailored? I offer <span className="text-[#EEFFF4] font-semibold">custom packages</span> for brands with specific requirements or larger scopes.
+            Need something tailored? I offer <span className="text-[#F7F3ED] font-semibold">custom packages</span> for brands with specific requirements or larger scopes.
           </p>
           <a
             href={buildWhatsAppUrl(proposal.whatsappNumber, `Hello Sir Newson, I'd like to discuss a custom creative package for ${proposal.clientName}.`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-[#BFFF00] text-sm font-bold hover:underline"
+            className="inline-flex items-center gap-2 text-[#F28B2C] text-sm font-bold hover:underline"
           >
             Request Custom Package
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -905,7 +905,7 @@ const Proposal = () => {
         <SectionTitle className="mb-4">
           More than a designer.
           <br />
-          <span className="text-[#EEFFF4]/50">A creative partner.</span>
+          <span className="text-[#F7F3ED]/50">A creative partner.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           Sir Newson combines design, storytelling, AI-assisted creative production, strategy, and social-first thinking to help brands communicate better, faster, and with more emotional impact.
@@ -924,11 +924,11 @@ const Proposal = () => {
               key={i}
               variants={fadeUp}
               custom={i * 0.07}
-              className="flex gap-4 p-6 rounded-2xl border border-white/5 bg-[#071A1A]/40 hover:border-[#BFFF00]/20 transition-all duration-300"
+              className="flex gap-4 p-6 rounded-[12px] border border-white/5 bg-[#071A1A]/40 hover:border-[#F28B2C]/20 transition-all duration-300"
             >
               <span className="text-2xl flex-shrink-0">{item.icon}</span>
               <div>
-                <p className="font-bold text-[#EEFFF4] text-sm mb-1">{item.label}</p>
+                <p className="font-bold text-[#F7F3ED] text-sm mb-1">{item.label}</p>
                 <p className="text-[#AFC9C3] text-sm leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>
@@ -946,7 +946,7 @@ const Proposal = () => {
             <SectionTitle className="mb-4">
               A clear process.
               <br />
-              <span className="text-[#EEFFF4]/50">No guesswork.</span>
+              <span className="text-[#F7F3ED]/50">No guesswork.</span>
             </SectionTitle>
             <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg leading-relaxed">
               Every project follows a structured creative process designed to move efficiently from understanding to execution to growth.
@@ -992,7 +992,7 @@ const Proposal = () => {
             <SectionTitle className="mb-4">
               From brief to
               <br />
-              <span className="text-[#BFFF00]">live creative.</span>
+              <span className="text-[#F28B2C]">live creative.</span>
             </SectionTitle>
             <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg leading-relaxed">
               A clear timeline so you know exactly when to expect work, reviews, and ongoing production.
@@ -1007,7 +1007,7 @@ const Proposal = () => {
         </div>
       </Section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[#BFFF00]/15 to-transparent mx-5 md:mx-16 my-4" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#F28B2C]/15 to-transparent mx-5 md:mx-16 my-4" />
 
       {/* ── CTA Section ────────────────────────────────────────────────────── */}
       <section className="relative py-32 px-5 md:px-10 lg:px-16 overflow-hidden">
@@ -1015,7 +1015,7 @@ const Proposal = () => {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at 50% 50%, rgba(191,255,0,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(242,139,44,0.06) 0%, transparent 70%)',
           }}
         />
 
@@ -1028,20 +1028,20 @@ const Proposal = () => {
             <motion.span
               variants={fadeUp}
               custom={0}
-              className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#BFFF00] border border-[#BFFF00]/30 px-3 py-1.5 rounded-full mb-6"
+              className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#F28B2C] border border-[#F28B2C]/30 px-3 py-1.5 rounded-[8px] mb-6"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#BFFF00] animate-pulse inline-block" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F28B2C] animate-pulse inline-block" />
               Ready to Begin
             </motion.span>
 
             <motion.h2
               variants={fadeUp}
               custom={0.1}
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#EEFFF4] mb-6 leading-tight"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-[#F7F3ED] mb-6 leading-tight"
             >
               Ready to Build a Stronger
               <br />
-              <span className="text-[#BFFF00]">Visual Presence?</span>
+              <span className="text-[#F28B2C]">Visual Presence?</span>
             </motion.h2>
 
             <motion.p
@@ -1064,7 +1064,7 @@ const Proposal = () => {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#BFFF00] text-black font-bold px-8 py-4 rounded-2xl hover:bg-white transition-all duration-300 hover:shadow-[0_0_50px_#BFFF0070] text-sm min-w-[200px] justify-center"
+                className="inline-flex items-center gap-2 bg-[#F28B2C] text-black font-bold px-8 py-4 rounded-[12px] hover:bg-clay transition-all duration-300 hover:shadow-[0_0_50px_#F28B2C70] text-sm min-w-[200px] justify-center"
               >
                 ✓ Accept Proposal
               </a>
@@ -1073,7 +1073,7 @@ const Proposal = () => {
                 href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#071A1A] text-[#EEFFF4] font-bold px-8 py-4 rounded-2xl border border-white/15 hover:border-[#BFFF00]/40 hover:text-[#BFFF00] transition-all duration-300 text-sm min-w-[200px] justify-center"
+                className="inline-flex items-center gap-2 bg-[#071A1A] text-[#F7F3ED] font-bold px-8 py-4 rounded-[12px] border border-white/15 hover:border-[#F28B2C]/40 hover:text-[#F28B2C] transition-all duration-300 text-sm min-w-[200px] justify-center"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -1088,7 +1088,7 @@ const Proposal = () => {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-transparent text-[#AFC9C3] font-bold px-8 py-4 rounded-2xl border border-white/10 hover:border-white/25 hover:text-[#EEFFF4] transition-all duration-300 text-sm min-w-[200px] justify-center"
+                className="inline-flex items-center gap-2 bg-transparent text-[#AFC9C3] font-bold px-8 py-4 rounded-[12px] border border-white/10 hover:border-white/25 hover:text-[#F7F3ED] transition-all duration-300 text-sm min-w-[200px] justify-center"
               >
                 Request Adjustments
               </a>
@@ -1098,9 +1098,9 @@ const Proposal = () => {
               <motion.div
                 variants={fadeUp}
                 custom={0.4}
-                className="mt-12 p-6 rounded-2xl border border-white/8 bg-[#071A1A]/50 text-left max-w-2xl mx-auto"
+                className="mt-12 p-6 rounded-[12px] border border-white/8 bg-[#071A1A]/50 text-left max-w-2xl mx-auto"
               >
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#BFFF00] mb-2">Project Notes</p>
+                <p className="text-[11px] font-bold uppercase tracking-widest text-[#F28B2C] mb-2">Project Notes</p>
                 <p className="text-[#AFC9C3] text-sm leading-relaxed">{proposal.projectNotes}</p>
               </motion.div>
             )}
@@ -1109,12 +1109,12 @@ const Proposal = () => {
       </section>
 
       {/* ── Portfolio Showcase ─────────────────────────────────────────────────── */}
-      <Section className="py-24 border-t" style={{ borderColor: 'rgba(191,255,0,0.08)' }}>
+      <Section className="py-24 border-t" style={{ borderColor: 'rgba(242,139,44,0.08)' }}>
         <SectionLabel>Proven Results</SectionLabel>
         <SectionTitle className="mb-4">
           Selected Creative Work
           <br />
-          <span className="text-[#EEFFF4]/50">built for impact.</span>
+          <span className="text-[#F7F3ED]/50">built for impact.</span>
         </SectionTitle>
         <motion.p variants={fadeUp} custom={0.2} className="text-[#AFC9C3] text-lg max-w-2xl mb-14 leading-relaxed">
           A selection of brand systems, campaign designs, and cinematic motion reels from the active studio archives.
@@ -1130,7 +1130,7 @@ const Proposal = () => {
             <motion.div
               key={asset.id}
               onClick={() => setSelectedMedia({ src: asset.src, title: asset.title, type: asset.type })}
-              className="break-inside-avoid overflow-hidden rounded-2xl border border-white/8 bg-[#071A1A]/60 hover:border-[#BFFF00]/40 transition-all duration-300 group cursor-pointer relative"
+              className="break-inside-avoid overflow-hidden rounded-[12px] border border-white/8 bg-[#071A1A]/60 hover:border-[#F28B2C]/40 transition-all duration-300 group cursor-pointer relative"
               whileHover={{ y: -4 }}
             >
               {asset.type === 'video' ? (
@@ -1145,7 +1145,7 @@ const Proposal = () => {
                     className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-90 group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center group-hover:bg-[#BFFF00] group-hover:text-black group-hover:border-[#BFFF00] transition-all duration-300">
+                    <div className="w-12 h-12 rounded-full bg-black/60 border border-white/20 flex items-center justify-center group-hover:bg-[#F28B2C] group-hover:text-black group-hover:border-[#F28B2C] transition-all duration-300">
                       <i className="fas fa-play text-sm ml-0.5" />
                     </div>
                   </div>
@@ -1164,10 +1164,10 @@ const Proposal = () => {
 
               {/* Asset Info */}
               <div className="p-5 border-t border-white/5">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-[#BFFF00]/80">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#F28B2C]/80">
                   {asset.category}
                 </span>
-                <h3 className="text-[#EEFFF4] font-bold text-base mt-1 group-hover:text-white transition-colors">
+                <h3 className="text-[#F7F3ED] font-bold text-base mt-1 group-hover:text-white transition-colors">
                   {asset.title}
                 </h3>
               </div>
@@ -1183,7 +1183,7 @@ const Proposal = () => {
         >
           <Link
             to="/work"
-            className="inline-flex items-center gap-3 rounded-full border border-[#BFFF00]/40 px-8 py-4 text-xs font-black uppercase tracking-wider text-[#BFFF00] transition hover:bg-[#BFFF00] hover:text-black"
+            className="inline-flex items-center gap-3 rounded-[8px] border border-[#F28B2C]/40 px-8 py-4 text-xs font-semibold uppercase tracking-wider text-[#F28B2C] transition hover:bg-[#F28B2C] hover:text-black"
           >
             Explore Full Archive
             <i className="fas fa-arrow-right" />
@@ -1202,13 +1202,13 @@ const Proposal = () => {
       {/* ── Footer ─────────────────────────────────────────────────────────── */}
       <footer
         className="border-t px-5 md:px-10 lg:px-16 py-16"
-        style={{ borderColor: 'rgba(191,255,0,0.08)', backgroundColor: '#071A1A' }}
+        style={{ borderColor: 'rgba(242,139,44,0.08)', backgroundColor: '#071A1A' }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-12">
             {/* Brand */}
             <div>
-              <Link to="/" className="font-display text-2xl font-bold text-[#EEFFF4] hover:text-[#BFFF00] transition-colors">
+              <Link to="/" className="font-display text-2xl font-bold text-[#F7F3ED] hover:text-[#F28B2C] transition-colors">
                 SIR NEWSON
               </Link>
               <p className="text-[#AFC9C3] text-sm mt-2">Creative Direction · Design · AI Visual Systems</p>
@@ -1219,11 +1219,11 @@ const Proposal = () => {
 
             {/* Links */}
             <div className="flex flex-col gap-3">
-              <a href="https://sirnewson.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#AFC9C3] hover:text-[#BFFF00] transition-colors flex items-center gap-2">
+              <a href="https://sirnewson.com" target="_blank" rel="noopener noreferrer" className="text-sm text-[#AFC9C3] hover:text-[#F28B2C] transition-colors flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 sirnewson.com
               </a>
-              <a href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)} target="_blank" rel="noopener noreferrer" className="text-sm text-[#AFC9C3] hover:text-[#BFFF00] transition-colors flex items-center gap-2">
+              <a href={buildWhatsAppUrl(proposal.whatsappNumber, waMsg)} target="_blank" rel="noopener noreferrer" className="text-sm text-[#AFC9C3] hover:text-[#F28B2C] transition-colors flex items-center gap-2">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 WhatsApp
               </a>

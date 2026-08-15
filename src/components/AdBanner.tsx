@@ -11,7 +11,7 @@ const AdBanner = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.02 }}
-                        className="relative rounded-3xl overflow-hidden bg-primary p-12 md:p-24 text-center cursor-pointer group"
+                        className="relative rounded-[12px] overflow-hidden bg-primary p-12 md:p-24 text-center cursor-pointer group"
                     >
                         {/* Abstract Background Pattern */}
                         <div className="absolute inset-0 opacity-20">
@@ -25,12 +25,12 @@ const AdBanner = () => {
                                 Own a Piece of <br />
                                 <span className="text-white drop-shadow-lg">The Future</span>
                             </h2>
-                            <p className="text-black/70 text-lg md:text-xl max-w-2xl mx-auto font-medium">
+                            <p className="text-black/85 text-lg md:text-xl max-w-2xl mx-auto font-medium">
                                 Exclusive merch, luxury artifacts, and digital art.
                                 Curated for the visionaries.
                             </p>
                             <div className="pt-8">
-                                <span className="inline-block px-8 py-4 bg-black text-white rounded-full font-bold text-lg group-hover:bg-white group-hover:text-black transition-colors duration-300 shadow-xl">
+                                <span className="inline-block px-8 py-4 bg-espresso text-warm-white rounded-[8px] font-bold text-lg group-hover:bg-clay group-hover:text-espresso transition-colors duration-300 shadow-xl">
                                     Visit The Shop <i className="fas fa-arrow-right ml-2"></i>
                                 </span>
                             </div>

@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Pre-compression video originals — kept locally as a safety net, never deployed.
+_video_originals/

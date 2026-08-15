@@ -38,7 +38,7 @@ const ClientDetails = () => {
                         transition={{ duration: 0.8 }}
                         className="max-w-7xl mx-auto"
                     >
-                        <div className="inline-block px-4 py-1 border border-primary/50 rounded-full text-primary text-sm uppercase tracking-widest mb-6 bg-black/30 backdrop-blur-sm">
+                        <div className="inline-block px-4 py-1 border border-primary/50 rounded-[8px] text-primary text-sm uppercase tracking-widest mb-6 bg-black/30 backdrop-blur-sm">
                             {client.category}
                         </div>
                         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6">
@@ -53,7 +53,7 @@ const ClientDetails = () => {
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
                     <div className="md:col-span-2">
                         <h2 className="text-3xl font-display font-bold text-white mb-8">The Project</h2>
-                        <p className="text-white/70 text-lg leading-relaxed mb-12">
+                        <p className="text-white/78 text-lg leading-relaxed mb-12">
                             {client.description}
                         </p>
 
@@ -62,34 +62,34 @@ const ClientDetails = () => {
                                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                                     <i className="fas fa-bullseye text-primary"></i> The Challenge
                                 </h3>
-                                <p className="text-white/60 leading-relaxed">{client.challenge}</p>
+                                <p className="text-white/70 leading-relaxed">{client.challenge}</p>
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
                                     <i className="fas fa-lightbulb text-primary"></i> The Solution
                                 </h3>
-                                <p className="text-white/60 leading-relaxed">{client.solution}</p>
+                                <p className="text-white/70 leading-relaxed">{client.solution}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-neutral-dark p-8 rounded-3xl border border-white/5 h-fit">
+                    <div className="bg-neutral-dark p-8 rounded-[12px] border border-white/5 h-fit">
                         <h3 className="text-white font-bold mb-6">Project Details</h3>
                         <ul className="space-y-6">
                             <li className="flex justify-between items-center border-b border-white/10 pb-4">
-                                <span className="text-white/50">Client</span>
+                                <span className="text-white/62">Client</span>
                                 <span className="text-white font-medium">{client.name}</span>
                             </li>
                             <li className="flex justify-between items-center border-b border-white/10 pb-4">
-                                <span className="text-white/50">Services</span>
+                                <span className="text-white/62">Services</span>
                                 <span className="text-white font-medium text-right">Branding, Strategy,<br />Digital Design</span>
                             </li>
                             <li className="flex justify-between items-center border-b border-white/10 pb-4">
-                                <span className="text-white/50">Year</span>
+                                <span className="text-white/62">Year</span>
                                 <span className="text-white font-medium">2024</span>
                             </li>
                         </ul>
-                        <button className="w-full mt-8 py-4 bg-primary text-white rounded-xl font-bold hover:bg-white hover:text-black transition-all duration-300">
+                        <button className="w-full mt-8 py-4 bg-primary text-white rounded-[10px] font-bold hover:bg-clay hover:text-black transition-all duration-300">
                             Visit Live Site
                         </button>
                     </div>
@@ -108,7 +108,7 @@ const ClientDetails = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                                className="rounded-2xl overflow-hidden border border-white/5 break-inside-avoid"
+                                className="rounded-[12px] overflow-hidden border border-white/5 break-inside-avoid"
                             >
                                 <img src={img} alt={`${client.name} gallery ${index + 1}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                             </motion.div>

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { collection, query, orderBy, onSnapshot, updateDoc, doc, increment } from 'firebase/firestore';
 import { db } from '../firebase';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 import SEO from '../components/SEO';
 
 interface Thread {
@@ -20,7 +19,7 @@ const CATEGORY_STYLES: Record<string, { label: string; color: string; border: st
         color: 'text-primary',
         border: 'border-primary/20',
         bg: 'bg-primary/5',
-        glow: 'hover:shadow-[0_0_30px_rgba(191,255,0,0.12)] hover:border-primary/30 border-t-primary border-t-4'
+        glow: 'hover:shadow-[0_0_30px_rgba(242,139,44,0.12)] hover:border-primary/30 border-t-primary border-t-4'
     },
     hack: {
         label: 'SYSTEM HACK',
@@ -149,7 +148,6 @@ const DriftNotes = () => {
                 keywords="design thoughts Kenya, creative direction blog, design philosophy, creative notes Nairobi, Sir Newson drift notes"
                 path="/threads"
             />
-            <Navbar />
             <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay z-0 pointer-events-none" />
 
             {/* Toast feedback */}
@@ -159,7 +157,7 @@ const DriftNotes = () => {
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-primary text-black font-semibold text-xs shadow-2xl flex items-center gap-2"
+                        className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-[8px] bg-primary text-black font-semibold text-xs shadow-2xl flex items-center gap-2"
                     >
                         <i className="fas fa-check-circle"></i>
                         {toastMessage}
@@ -176,7 +174,7 @@ const DriftNotes = () => {
                         initial={{ scale: 0.9, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.5 }}
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8"
+                        className="flex items-center gap-2 px-4 py-2 rounded-[8px] bg-white/5 border border-white/10 mb-8"
                     >
                         <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                         <span className="text-xs font-bold uppercase tracking-widest text-primary/80">A place for my raw thoughts & nuggets</span>
@@ -186,7 +184,7 @@ const DriftNotes = () => {
                         Thoughts & Nuggets
                     </h1>
                     
-                    <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
+                    <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
                         A quiet space where I drop my quick thoughts, design ideas, system hacks, and lessons learned along the way. Think of it as a public scratchpad straight from my desk.
                     </p>
                 </div>
@@ -197,19 +195,19 @@ const DriftNotes = () => {
                 <div className="flex items-center gap-4 mb-10">
                     <h2 className="font-display text-xl font-bold uppercase tracking-wider text-white">Latest Threads</h2>
                     <div className="h-[1px] flex-grow bg-white/10" />
-                    <span className="text-xs font-mono text-white/40">SYNCED IN REAL-TIME</span>
+                    <span className="text-xs font-mono text-white/55">SYNCED IN REAL-TIME</span>
                 </div>
 
                 {loading ? (
-                    <div className="py-20 text-center text-white/40 font-mono text-sm tracking-wider flex flex-col items-center justify-center gap-4">
+                    <div className="py-20 text-center text-white/55 font-mono text-sm tracking-wider flex flex-col items-center justify-center gap-4">
                         <div className="w-6 h-6 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
                         Awaiting connection to neural feed...
                     </div>
                 ) : threads.length === 0 ? (
-                    <div className="py-20 text-center border border-white/5 rounded-3xl bg-neutral-dark/40 text-white/40 max-w-2xl mx-auto px-6">
-                        <i className="fas fa-satellite-dish text-2xl mb-4 text-white/20" />
+                    <div className="py-20 text-center border border-white/5 rounded-[12px] bg-neutral-dark/40 text-white/55 max-w-2xl mx-auto px-6">
+                        <i className="fas fa-satellite-dish text-2xl mb-4 text-white/55" />
                         <p className="font-medium mb-1">Stream is currently quiet.</p>
-                        <p className="text-xs text-white/30">Nuggets and thoughts will appear here soon.</p>
+                        <p className="text-xs text-white/50">Nuggets and thoughts will appear here soon.</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -241,7 +239,7 @@ const DriftNotes = () => {
 
                                         <div>
                                             {/* Poster card header details */}
-                                            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-white/30 mb-6">
+                                            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-white/50 mb-6">
                                                 <span>№ {String(threads.length - idx).padStart(2, '0')} // THREAD</span>
                                                 <span className={`font-bold tracking-widest px-2 py-0.5 rounded ${cat.bg} ${cat.border} ${cat.color}`}>
                                                     {cat.label}
@@ -255,7 +253,7 @@ const DriftNotes = () => {
                                         </div>
 
                                         {/* Actions Footer */}
-                                        <div className="flex items-center justify-between pt-4 border-t border-white/5 text-[11px] text-white/40 mt-auto relative z-10">
+                                        <div className="flex items-center justify-between pt-4 border-t border-white/5 text-[11px] text-white/55 mt-auto relative z-10">
                                             <span className="font-mono uppercase tracking-wider">{displayTime}</span>
                                             
                                             <div className="flex items-center gap-4">
@@ -304,10 +302,10 @@ const DriftNotes = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.05 }}
-                            className="group p-8 rounded-3xl bg-neutral-dark/40 border border-white/5 hover:border-primary/30 hover:bg-neutral-dark transition-all duration-300 hover:-translate-y-1"
+                            className="group p-8 rounded-[12px] bg-neutral-dark/40 border border-white/5 hover:border-primary/30 hover:bg-neutral-dark transition-all duration-300 hover:-translate-y-1"
                         >
                             <span className="text-primary/20 text-4xl font-serif leading-none mb-4 block">"</span>
-                            <p className="text-white/80 text-base font-light leading-relaxed group-hover:text-white transition-colors">
+                            <p className="text-white/85 text-base font-light leading-relaxed group-hover:text-white transition-colors">
                                 {thought}
                             </p>
                         </motion.div>
@@ -330,7 +328,7 @@ const DriftNotes = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-300"
+                            className="group relative aspect-[4/5] rounded-[12px] overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-300"
                         >
                             <img
                                 src={src}
@@ -349,14 +347,14 @@ const DriftNotes = () => {
                 <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
                     <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind" className="h-12 mb-8 opacity-40" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Read More. Go Deeper.</h2>
-                    <p className="text-white/60 text-base md:text-lg mb-10 max-w-2xl leading-relaxed font-light">
+                    <p className="text-white/70 text-base md:text-lg mb-10 max-w-2xl leading-relaxed font-light">
                         Don't just scroll past good thoughts. Internalize them. Wynmind is a dedicated space to explore the architecture of the mind, the digital soul, and the quiet spaces in between.
                     </p>
                     <a 
                         href="https://wynmind.com" 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="px-10 py-4 bg-primary text-black rounded-full font-bold text-base hover:scale-105 transition-transform shadow-[0_0_20px_rgba(191,255,0,0.3)] flex items-center gap-3"
+                        className="px-10 py-4 bg-primary text-black rounded-[8px] font-bold text-base hover:scale-105 transition-transform shadow-[0_0_20px_rgba(242,139,44,0.3)] flex items-center gap-3"
                     >
                         Visit Wynmind <i className="fas fa-external-link-alt text-xs"></i>
                     </a>

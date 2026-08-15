@@ -46,17 +46,11 @@ const graphicsFiles = [
     '179cm by 104cm.webp',
     '3 PART CLEAN.webp',
     '5 days.webp',
-    'A good lock doesn\'t shout. It holds.webp',
+    "A good lock doesn’t shout. It holds.webp",
     'Ywaya Tajiri.webp',
     'adidas-pink-sneaker-poster.webp',
     'baba talishaaa.webp',
-    'big-voices-fest-madaraka-poster.webp',
-    'birthday-pirate-ship-poster.webp',
-    'bitter-rivals-event-poster.webp',
     'coookinggg.webp',
-    'countrywide-delivery-music-upgrade-poster.webp',
-    'countrywide-delivery-promo.webp',
-    'cristiano-ronaldo-king-is-here-poster.webp',
     'dj-bibu-business-card.webp',
     'eid.webp',
     'erling-haaland-viking-poster.webp',
@@ -65,7 +59,6 @@ const graphicsFiles = [
     'happy-madaraka-day-poster.webp',
     'hh.jpg',
     'kenya-builds-brand-identity.webp',
-    'mapenzi-jibandaski-day-ones-poster.webp',
     'mapenzi-jibandaski-karun-poster.webp',
     'matatu-musical-event-poster.webp',
     'michael-bohemian-rhapsody-poster.webp',
@@ -175,7 +168,6 @@ export const motionAssets = sortByName(motionFiles.map((fileName) => fileToAsset
 
 const featuredIds = [
     'branding-wibo-branding-board',
-    'graphics-mapenzi-jibandaski-day-ones-poster',
     'graphics-ttnt-season-6-event-poster',
     'motion-big-screen-countdown',
     'motion-erling-haaland-viking-motion',
@@ -187,6 +179,38 @@ const featuredIds = [
     'motion-black-warrior-facing-castle-scene',
     'motion-retro-tv-intro',
 ];
+
+
+/**
+ * Clips made for a named client, as opposed to personal experiments, football
+ * edits and generic screen fillers. The homepage bento shows only these.
+ */
+const clientMotionFiles = new Set([
+    'ABE MUTUA END SCREEN 1.mp4',
+    'abel mutuaaaa.mp4',
+    'artists loop - wyre.mp4',
+    'big-voices-fest-gold-loop.mp4',
+    'big-voices-fest-good-old-days-reel.mp4',
+    'big-voices-fest-millennial-edition-reel.mp4',
+    'big-voices-fest-red-loop.mp4',
+    'big-voices-fest-season-six-loop.mp4',
+    'byd-car-motion.mp4',
+    'kenya-builds-lifestyle-heights-reel.mp4',
+    'kifaru-campfire-promo-reel.mp4',
+    'kifaru-event-promo-reel.mp4',
+    'lopha-airways-breaking-news-reel.mp4',
+    'mapenzi-jibandaski-day-ones-reel.mp4',
+    'mkurugenzi-logo-animation.mp4',
+    'phil-it-logo-motion.mp4',
+    'phoneplace-kenya-logo-motion.mp4',
+    'phoneplace-kenya-long-motion.mp4',
+    'phoneplace-kenya-product-clips.mp4',
+    'tenacity-big-f6-locks-reel.mp4',
+    'trinity-logo-motion.mp4',
+    'ttnt logo motion.mp4',
+]);
+
+export const clientMotionAssets = motionAssets.filter((a) => clientMotionFiles.has(a.fileName));
 
 export const uploadedAssets = [...brandingAssets, ...graphicsAssets, ...motionAssets];
 

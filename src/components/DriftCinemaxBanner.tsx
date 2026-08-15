@@ -39,7 +39,7 @@ const DriftCinemaxBanner = () => {
     }, []);
 
     return (
-        <div className="relative w-full h-[600px] md:h-[700px] rounded-[2.5rem] overflow-hidden group">
+        <div className="relative w-full h-[600px] md:h-[700px] rounded-[16px] overflow-hidden group">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}
@@ -77,7 +77,7 @@ const DriftCinemaxBanner = () => {
                         <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                             {slides[currentIndex].title}
                         </h2>
-                        <p className="text-white/70 text-lg md:text-xl max-w-xl leading-relaxed mb-8">
+                        <p className="text-white/78 text-lg md:text-xl max-w-xl leading-relaxed mb-8">
                             {slides[currentIndex].desc}
                         </p>
 
@@ -85,7 +85,7 @@ const DriftCinemaxBanner = () => {
                             href="https://thedriftlibrary.yxm.digital/"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-bold hover:bg-white hover:text-black transition-all duration-300 group-hover:translate-x-2"
+                            className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-[8px] text-white font-bold hover:bg-clay hover:text-black transition-all duration-300 group-hover:translate-x-2"
                         >
                             Start Reading <i className="fas fa-arrow-right"></i>
                         </a>
@@ -99,7 +99,7 @@ const DriftCinemaxBanner = () => {
                     <button
                         key={idx}
                         onClick={() => setCurrentIndex(idx)}
-                        className={`h-1 rounded-full transition-all duration-500 ${idx === currentIndex ? 'w-12 bg-primary' : 'w-4 bg-white/20 hover:bg-white/40'
+                        className={`h-1 rounded-full transition-all duration-500 ${idx === currentIndex ? 'w-12 bg-primary' : 'w-4 bg-white/20 hover:bg-clay/40'
                             }`}
                     />
                 ))}

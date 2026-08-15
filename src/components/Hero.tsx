@@ -46,59 +46,70 @@ const Hero = ({
     return (
         <section
             ref={sectionRef}
-            className="relative w-full overflow-hidden pt-36 pb-16 flex flex-col items-center justify-center font-sans border-b border-white/5"
+            className="relative w-full overflow-hidden pt-36 pb-20 flex flex-col font-sans border-b border-white/5 md:pt-44"
         >
             <motion.div
                 style={{ y: backdropY, scale: backdropScale }}
                 className="absolute inset-0 z-0 select-none pointer-events-none"
             >
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-black/80 via-neutral-black/60 to-neutral-black z-10" />
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover opacity-25"
-                >
-                    <source src="/uploads/motion%20and%20video/water-background.mp4" type="video/mp4" />
-                </video>
+                {/* Aurora — pure CSS, in place of the old background clip */}
+                <div className="absolute inset-0 bg-soft-black" />
+                <div className="aurora">
+                    <span className="aurora__band aurora__band--one" />
+                    <span className="aurora__band aurora__band--two" />
+                    <span className="aurora__band aurora__band--three" />
+                    <span className="aurora__band aurora__band--four" />
+                </div>
+                {/* Settles the ambers back toward the ground so type stays legible */}
+                <div className="absolute inset-0 z-10 bg-gradient-to-b from-soft-black/70 via-soft-black/45 to-soft-black" />
             </motion.div>
 
-            <div className="absolute inset-0 bg-hexagon-grid opacity-40 mix-blend-color-dodge pointer-events-none z-5" />
+            {/* Eclipse loop, right side, blended so only its light shows */}
             <motion.div
-                animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.85, 0.5] }}
-                transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"
-            />
-            <motion.div
-                animate={{ scale: [1.12, 1, 1.12], opacity: [0.4, 0.75, 0.4] }}
-                transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"
-            />
+                style={{ y: backdropY }}
+                aria-hidden
+                className="pointer-events-none absolute right-0 top-0 z-[6] h-[46%] w-[72%] select-none sm:h-[58%] sm:w-[60%] lg:inset-y-0 lg:h-full lg:w-[52%]"
+            >
+                <video
+                    src="/uploads/loops/nav.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="h-full w-full object-cover opacity-90 mix-blend-lighten"
+                />
+                {/* Feathers the left edge so it melts into the copy column */}
+                <div className="absolute inset-0 bg-gradient-to-r from-soft-black via-soft-black/35 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-soft-black via-soft-black/20 to-transparent lg:hidden" />
+                <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-soft-black to-transparent lg:w-40" />
+            </motion.div>
+
+            <div className="absolute inset-0 bg-hexagon-grid opacity-25 mix-blend-color-dodge pointer-events-none z-5" />
+            <div className="absolute inset-0 bg-noise opacity-[0.05] mix-blend-overlay pointer-events-none z-5" />
 
             <motion.div
                 style={{ y: contentY, opacity: contentOpacity }}
-                className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl w-full mx-auto"
+                className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-start px-5 text-left md:px-10 lg:pr-[24rem]"
             >
-                <Float y={5} rotate={1.5} duration={5} className="mb-6">
+                <Float y={5} rotate={1.5} duration={5} className="mb-7">
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                        className="relative w-28 h-28 md:w-32 md:h-32 group cursor-pointer flex items-center justify-center"
+                        className="relative w-20 h-20 md:w-24 md:h-24 group cursor-pointer flex items-center justify-center"
                     >
                         <div className="absolute inset-0 bg-primary/20 blur-xl clip-hexagon" />
                         <div className="absolute inset-0 bg-gradient-to-b from-primary/30 to-transparent p-[2px] clip-hexagon group-hover:from-primary transition-all duration-500">
                             <div className="w-full h-full bg-neutral-black clip-hexagon relative overflow-hidden">
                                 <img
-                                    src="/assets/images/new-logo_e9f3d068.webp"
-                                    alt="Sir Newson brand mark"
+                                    src="/assets/images/facee_63957c48.webp"
+                                    alt="Sir Newson portrait"
                                     className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0"
                                 />
                                 <img
-                                    src="/assets/images/facee_63957c48.webp"
-                                    alt="Sir Newson portrait"
-                                    className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out opacity-0 scale-105 group-hover:scale-100 group-hover:opacity-100"
+                                    src="/assets/images/new-logo_e9f3d068.webp"
+                                    alt="Sir Newson brand mark"
+                                    className="w-full h-full object-cover absolute inset-0 z-10 opacity-0 scale-105 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100 sepia saturate-150 hue-rotate-[330deg]"
                                 />
                             </div>
                         </div>
@@ -108,14 +119,14 @@ const Hero = ({
                 {typeof title === 'string' ? (
                     <TextReveal
                         text={title}
-                        className="font-display text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight drop-shadow-lg justify-center"
+                        className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
                     />
                 ) : (
                     <motion.h1
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.1, duration: 0.5 }}
-                        className="font-display text-4xl md:text-5xl font-extrabold text-white mb-2 tracking-tight drop-shadow-lg"
+                        className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
                     >
                         {title}
                     </motion.h1>
@@ -123,7 +134,7 @@ const Hero = ({
 
                 {subtitle && (
                     <ScrollReveal direction="up" delay={0.2} duration={0.6}>
-                        <p className="text-primary font-display font-medium tracking-[0.15em] text-xs md:text-sm uppercase mb-4 text-glow">
+                        <p className="text-golden-hour font-mono font-medium tracking-[0.22em] text-[10px] md:text-[11px] uppercase mb-5">
                             {subtitle}
                         </p>
                     </ScrollReveal>
@@ -131,20 +142,20 @@ const Hero = ({
 
                 {shortParagraph && (
                     <ScrollReveal direction="up" delay={0.35} duration={0.8}>
-                        <p className="text-white/70 text-base md:text-lg max-w-2xl mb-8 leading-relaxed font-light">
+                        <p className="text-warm-white/72 text-base md:text-lg max-w-xl mb-9 leading-relaxed font-light">
                             {shortParagraph}
                         </p>
                     </ScrollReveal>
                 )}
 
-                <ScrollReveal direction="up" delay={0.5} duration={0.8} className="flex flex-col sm:flex-row items-center gap-4">
+                <ScrollReveal direction="up" delay={0.5} duration={0.8} className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <Magnetic>
                         <Link
                             to={primaryCtaPath}
                             className={`px-6 py-3 rounded-full font-bold text-xs md:text-sm transition-all duration-300 ${
                                 location.pathname === primaryCtaPath
-                                    ? 'bg-white text-black shadow-lg shadow-white/10'
-                                    : 'bg-primary text-black hover:bg-white shadow-[0_0_20px_rgba(191,255,0,0.25)]'
+                                    ? 'bg-warm-white text-soft-black shadow-lg'
+                                    : 'bg-lime text-soft-black hover:bg-golden-hour shadow-[0_6px_28px_rgba(191,255,0,0.28)]'
                             }`}
                         >
                             {primaryCtaLabel}
@@ -155,8 +166,8 @@ const Hero = ({
                             to={secondaryCtaPath}
                             className={`px-6 py-3 rounded-full border font-bold text-xs md:text-sm transition-all duration-300 ${
                                 location.pathname === secondaryCtaPath
-                                    ? 'bg-white text-black border-white'
-                                    : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
+                                    ? 'bg-warm-white text-soft-black border-warm-white'
+                                    : 'bg-warm-white/[0.06] hover:bg-warm-white/12 border-warm-white/20 text-warm-white'
                             }`}
                         >
                             {secondaryCtaLabel}
@@ -166,7 +177,7 @@ const Hero = ({
 
                 {trustLine && (
                     <ScrollReveal direction="up" delay={0.65} duration={0.8}>
-                        <p className="mt-7 text-[11px] font-medium tracking-wide text-white/40">{trustLine}</p>
+                        <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/50">{trustLine}</p>
                     </ScrollReveal>
                 )}
             </motion.div>
@@ -179,12 +190,12 @@ const Hero = ({
                 style={{ opacity: contentOpacity }}
                 className="relative z-10 mt-14 flex flex-col items-center gap-2"
             >
-                <span className="text-[9px] font-black uppercase tracking-[0.35em] text-white/25">Scroll</span>
-                <div className="h-10 w-px overflow-hidden bg-white/10">
+                <span className="font-mono text-[9px] uppercase tracking-[0.35em] text-warm-white/45">Scroll</span>
+                <div className="h-10 w-px overflow-hidden bg-warm-white/20">
                     <motion.div
                         animate={{ y: ['-100%', '100%'] }}
                         transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                        className="h-full w-full bg-primary"
+                        className="h-full w-full bg-golden-hour"
                     />
                 </div>
             </motion.div>

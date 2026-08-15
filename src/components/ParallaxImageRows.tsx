@@ -24,7 +24,7 @@ const ParallaxImageRows = ({ topRowImages, bottomRowImages }: ParallaxImageRowsP
             {/* Top Row - Scrolls Left */}
             <motion.div style={{ x: xLeft }} className="flex gap-8 w-max">
                 {[...topRowImages, ...topRowImages].map((src, index) => (
-                    <div key={`top-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative border border-white/10 bg-black">
+                    <div key={`top-${index}`} className="w-[300px] h-[400px] rounded-[12px] overflow-hidden relative border border-white/10 bg-black">
                         <img src={src} alt="" className="w-full h-full object-cover opacity-95" />
                     </div>
                 ))}
@@ -33,7 +33,7 @@ const ParallaxImageRows = ({ topRowImages, bottomRowImages }: ParallaxImageRowsP
             {/* Bottom Row - Scrolls Right */}
             <motion.div style={{ x: xRight }} className="flex gap-8 w-max">
                 {[...bottomRowImages, ...bottomRowImages].map((src, index) => (
-                    <div key={`bottom-${index}`} className="w-[300px] h-[400px] rounded-2xl overflow-hidden relative border border-white/10 bg-black">
+                    <div key={`bottom-${index}`} className="w-[300px] h-[400px] rounded-[12px] overflow-hidden relative border border-white/10 bg-black">
                         <img src={src} alt="" className="w-full h-full object-cover opacity-95" />
                     </div>
                 ))}

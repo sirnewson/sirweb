@@ -12,7 +12,7 @@ const WorkCinemaxBanner = () => {
                         viewport={{ once: true }}
                         whileHover={{ scale: 1.01 }}
                         transition={{ duration: 0.5 }}
-                        className="relative rounded-[2.5rem] overflow-hidden h-[500px] md:h-[600px] group cursor-pointer"
+                        className="relative rounded-[16px] overflow-hidden h-[500px] md:h-[600px] group cursor-pointer"
                     >
                         {/* Video Background */}
                         <div className="absolute inset-0">
@@ -46,13 +46,13 @@ const WorkCinemaxBanner = () => {
                                     </p>
                                     <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
                                         Motion & Visuals <br />
-                                        <span className="text-white/60">Collection</span>
+                                        <span className="text-white/70">Collection</span>
                                     </h2>
-                                    <p className="text-white/70 text-lg md:text-xl max-w-xl leading-relaxed mb-8">
+                                    <p className="text-white/78 text-lg md:text-xl max-w-xl leading-relaxed mb-8">
                                         Exploring the boundaries of digital motion and storytelling.
                                     </p>
 
-                                    <span className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-bold hover:bg-white hover:text-black transition-all duration-300 group-hover:translate-x-2">
+                                    <span className="inline-flex items-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-[8px] text-white font-bold hover:bg-clay hover:text-black transition-all duration-300 group-hover:translate-x-2">
                                         View All Work <i className="fas fa-arrow-right"></i>
                                     </span>
                                 </motion.div>

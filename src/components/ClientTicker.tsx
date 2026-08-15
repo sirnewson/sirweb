@@ -45,7 +45,7 @@ const MarqueeRow = ({ logos, duration, reverse = false }: MarqueeRowProps) => (
       {[...logos, ...logos].map((img, i) => (
         <div
           key={`${img}-${i}`}
-          className="group flex h-24 w-40 shrink-0 items-center justify-center rounded-2xl border border-white/[0.07] bg-white/[0.04] px-6 transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.08] md:h-28 md:w-52"
+          className="group flex h-24 w-40 shrink-0 items-center justify-center rounded-[12px] border border-warm-white/[0.08] bg-warm-white/[0.05] px-6 transition-all duration-300 hover:border-golden-hour/45 hover:bg-warm-white/[0.09] md:h-28 md:w-52"
         >
           <img
             src={`/clients/${img}`}
@@ -61,13 +61,13 @@ const MarqueeRow = ({ logos, duration, reverse = false }: MarqueeRowProps) => (
 
 export default function ClientTicker() {
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.06] bg-neutral-dark/60 py-14">
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-16 bg-gradient-to-r from-neutral-black to-transparent md:w-32" />
-      <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-16 bg-gradient-to-l from-neutral-black to-transparent md:w-32" />
+    <section className="relative overflow-hidden border-y border-warm-white/[0.08] bg-soft-black py-14">
+      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-16 bg-gradient-to-r from-soft-black to-transparent md:w-32" />
+      <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-16 bg-gradient-to-l from-soft-black to-transparent md:w-32" />
 
       <div className="mx-auto mb-10 max-w-7xl px-6 text-center">
-        <p className="text-xs font-black uppercase tracking-[0.3em] text-primary">Trusted With the Important Stuff</p>
-        <p className="mt-3 text-sm text-white/50 md:text-base">
+        <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-golden-hour">Trusted With the Important Stuff</p>
+        <p className="mt-3 text-sm text-warm-white/60 md:text-base">
           Product launches, event campaigns, announcements, catalogues and websites — for brands that could not afford to look unfinished.
         </p>
       </div>

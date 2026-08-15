@@ -19,15 +19,14 @@ const columns = [
         links: [
             { label: 'Selected work', to: '/work' },
             { label: 'Services', to: '/services' },
-            { label: 'Pricing', to: '/rate-card' },
-            { label: 'Shop & playbooks', to: '/shop' },
-            { label: 'YXM Labs tools', to: '/tools' },
+            { label: 'Events', to: '/events' },
+            { label: 'Shop', to: '/shop' },
         ],
     },
     {
         heading: 'Read & Follow',
         links: [
-            { label: 'Drift Notes', to: '/threads' },
+            { label: 'Gallery', to: '/gallery' },
             { label: 'Start a project', to: '/contact' },
         ],
     },
@@ -44,11 +43,11 @@ const Footer = () => {
     return (
         <footer className="w-full font-sans select-none">
             {/* Conversion band */}
-            <div className="bg-primary text-black py-16 px-8 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div className="aurora-solid py-16 px-8 md:px-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
                 <div>
-                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">Let's make it ready.</h2>
-                    <p className="mt-3 text-sm md:text-base font-medium text-black/60">
-                        Usually replies the same day. Send what you have — we start from there.
+                    <h2 className="font-editorial text-5xl md:text-7xl leading-[0.98]">Let's make it ready.</h2>
+                    <p className="mt-3 text-sm md:text-base font-medium text-black/80">
+                        Send what you already have. That is usually enough to begin.
                     </p>
                 </div>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
@@ -56,14 +55,14 @@ const Footer = () => {
                         href={WHATSAPP}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-3 rounded-full bg-black px-7 py-4 text-sm md:text-base font-black text-white transition hover:bg-white hover:text-black"
+                        className="flex items-center justify-center gap-3 rounded-[8px] bg-espresso px-7 py-4 text-sm md:text-base font-semibold text-warm-white transition hover:bg-clay hover:text-espresso"
                     >
                         <i className="fab fa-whatsapp text-xl"></i>
                         WhatsApp
                     </a>
                     <Link
                         to="/contact"
-                        className="rounded-full border-2 border-black/25 px-7 py-4 text-center text-sm md:text-base font-black transition hover:bg-black hover:text-white"
+                        className="rounded-[8px] border-2 border-espresso/25 px-7 py-4 text-center text-sm md:text-base font-semibold text-espresso transition hover:bg-espresso hover:text-warm-white"
                     >
                         Send a Brief
                     </Link>
@@ -71,22 +70,22 @@ const Footer = () => {
             </div>
 
             {/* Directory */}
-            <div className="bg-[#FAF9F6] text-black pt-20 pb-8 px-8 md:px-16 relative overflow-hidden">
+            <div className="bg-neutral-dark text-white pt-20 pb-8 px-8 md:px-16 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-[1.1fr_2fr] mb-16">
                     {/* Brand + contact */}
                     <div className="space-y-8">
                         <div>
-                            <p className="font-display text-2xl font-black tracking-tight">Sir Newson</p>
-                            <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-black/45">
+                            <p className="font-display text-2xl font-semibold tracking-tight">Sir Newson</p>
+                            <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-white/45">
                                 Presentation Architect
                             </p>
-                            <p className="mt-4 max-w-sm text-sm leading-6 text-black/60">
+                            <p className="mt-4 max-w-sm text-sm leading-6 text-white/60">
                                 Helping ideas, products, stories and businesses move from unfinished to ready.
                             </p>
                         </div>
 
                         <div className="space-y-2 text-sm">
-                            <p className="text-xs font-bold uppercase tracking-wider text-black/50">Direct</p>
+                            <p className="text-xs font-bold uppercase tracking-wider text-white/50">Direct</p>
                             <p>
                                 <a href="mailto:sirnewson@gmail.com" className="font-bold hover:underline">
                                     sirnewson@gmail.com
@@ -97,7 +96,7 @@ const Footer = () => {
                                     +254 702 480 771
                                 </a>
                             </p>
-                            <p className="text-black/55">Nairobi, Kenya — remote worldwide</p>
+                            <p className="text-white/55">Nairobi, Kenya — remote worldwide</p>
                         </div>
 
                         <div className="flex gap-5 text-lg">
@@ -108,7 +107,7 @@ const Footer = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label={social.label}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 transition hover:bg-black hover:text-white"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 transition hover:bg-sunset hover:text-black"
                                 >
                                     <i className={social.icon}></i>
                                 </a>
@@ -120,7 +119,7 @@ const Footer = () => {
                     <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
                         {columns.map((column) => (
                             <div key={column.heading} className="space-y-4">
-                                <h4 className="text-xs font-black uppercase tracking-[0.18em] text-black/45">
+                                <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/45 font-mono">
                                     {column.heading}
                                 </h4>
                                 <ul className="space-y-3">
@@ -128,7 +127,7 @@ const Footer = () => {
                                         <li key={link.label}>
                                             <Link
                                                 to={link.to}
-                                                className="text-sm font-medium text-black/70 transition hover:text-black hover:underline"
+                                                className="text-sm font-medium text-white/70 transition hover:text-sunset hover:underline"
                                             >
                                                 {link.label}
                                             </Link>
@@ -140,9 +139,9 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto flex flex-col gap-3 border-t border-black/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-xs font-medium text-black/45">©{new Date().getFullYear()} Sir Newson. All rights reserved.</p>
-                    <p className="text-xs font-medium text-black/45">Presentation is how an idea meets the world.</p>
+                <div className="max-w-7xl mx-auto flex flex-col gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs font-medium text-white/45">©{new Date().getFullYear()} Sir Newson. All rights reserved.</p>
+                    <p className="text-xs font-medium text-white/45">Presentation is how an idea meets the world.</p>
                 </div>
 
                 {/* Scrolling wordmark */}
@@ -155,10 +154,10 @@ const Footer = () => {
                         {Array.from({ length: 6 }).map((_, i) => (
                             <span
                                 key={i}
-                                className="whitespace-nowrap font-display text-[13vw] font-black leading-none tracking-tighter text-black/[0.06]"
+                                className="whitespace-nowrap bg-gradient-to-r from-lime via-sunset to-deep-amber bg-clip-text font-editorial text-[13vw] leading-none tracking-tight text-transparent opacity-40"
                             >
                                 SIR NEWSON
-                                <span className="mx-8 text-black/[0.04]">•</span>
+                                <span className="mx-8">•</span>
                             </span>
                         ))}
                     </motion.div>
