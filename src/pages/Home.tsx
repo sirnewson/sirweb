@@ -115,6 +115,7 @@ const Home = () => {
             </AnimatePresence>
 
             <Hero
+                rotating
                 trustLine="Creative direction since 2020 · Nairobi, Kenya"
                 primaryCtaLabel="See the Work"
                 primaryCtaPath="/work"

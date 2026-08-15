@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Float, ScrollReveal, Magnetic, TextReveal } from './Animated';
+import RotatingHeadline from './RotatingHeadline';
 
 interface HeroProps {
     title?: React.ReactNode;
@@ -13,6 +14,8 @@ interface HeroProps {
     secondaryCtaPath?: string;
     /** Understated credibility line under the CTAs. Landing hero only. */
     trustLine?: string;
+    /** Cycles the headline through the studio's positioning. Landing hero only. */
+    rotating?: boolean;
 }
 
 const Hero = ({
@@ -23,7 +26,8 @@ const Hero = ({
     primaryCtaPath = "/work",
     secondaryCtaLabel = "Start a Project",
     secondaryCtaPath = "/contact",
-    trustLine
+    trustLine,
+    rotating = false
 }: HeroProps) => {
     const location = useLocation();
     const sectionRef = useRef<HTMLElement>(null);
@@ -116,39 +120,49 @@ const Hero = ({
                     </motion.div>
                 </Float>
 
-                {typeof title === 'string' ? (
-                    <TextReveal
-                        text={title}
-                        className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
+                {rotating ? (
+                    <RotatingHeadline
+                        tagClassName="text-golden-hour font-mono font-medium tracking-[0.22em] text-[10px] md:text-[11px] uppercase"
+                        titleClassName="mt-4 font-editorial text-[2.9rem] leading-[0.96] md:text-6xl lg:text-7xl font-bold text-warm-white"
+                        lineClassName="mt-6 text-warm-white/72 text-base md:text-lg max-w-xl leading-relaxed font-light"
                     />
                 ) : (
-                    <motion.h1
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.1, duration: 0.5 }}
-                        className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
-                    >
-                        {title}
-                    </motion.h1>
+                    <>
+                        {typeof title === 'string' ? (
+                            <TextReveal
+                                text={title}
+                                className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
+                            />
+                        ) : (
+                            <motion.h1
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.1, duration: 0.5 }}
+                                className="font-editorial text-[3.2rem] leading-[0.95] md:text-7xl lg:text-8xl font-bold text-warm-white mb-4"
+                            >
+                                {title}
+                            </motion.h1>
+                        )}
+
+                        {subtitle && (
+                            <ScrollReveal direction="up" delay={0.2} duration={0.6}>
+                                <p className="text-golden-hour font-mono font-medium tracking-[0.22em] text-[10px] md:text-[11px] uppercase mb-5">
+                                    {subtitle}
+                                </p>
+                            </ScrollReveal>
+                        )}
+
+                        {shortParagraph && (
+                            <ScrollReveal direction="up" delay={0.35} duration={0.8}>
+                                <p className="text-warm-white/72 text-base md:text-lg max-w-xl mb-9 leading-relaxed font-light">
+                                    {shortParagraph}
+                                </p>
+                            </ScrollReveal>
+                        )}
+                    </>
                 )}
 
-                {subtitle && (
-                    <ScrollReveal direction="up" delay={0.2} duration={0.6}>
-                        <p className="text-golden-hour font-mono font-medium tracking-[0.22em] text-[10px] md:text-[11px] uppercase mb-5">
-                            {subtitle}
-                        </p>
-                    </ScrollReveal>
-                )}
-
-                {shortParagraph && (
-                    <ScrollReveal direction="up" delay={0.35} duration={0.8}>
-                        <p className="text-warm-white/72 text-base md:text-lg max-w-xl mb-9 leading-relaxed font-light">
-                            {shortParagraph}
-                        </p>
-                    </ScrollReveal>
-                )}
-
-                <ScrollReveal direction="up" delay={0.5} duration={0.8} className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <ScrollReveal direction="up" delay={0.5} duration={0.8} className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <Magnetic>
                         <Link
                             to={primaryCtaPath}
