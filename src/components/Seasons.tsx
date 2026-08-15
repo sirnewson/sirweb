@@ -92,6 +92,9 @@ interface Particle {
     vy: number;
     life: number;
     seed: number;
+    r?: number;     // droplet radius
+    hold?: number;  // frames a droplet clings before it runs
+    trail?: number; // length of the streak it leaves behind
 }
 
 /**
@@ -107,6 +110,12 @@ const Seasons = ({ season }: { season: Season }) => {
     useEffect(() => {
         setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     }, []);
+
+    // Lets CSS respond to the season without threading props through the tree.
+    useEffect(() => {
+        document.documentElement.classList.toggle('season-water', season === 'water');
+        return () => document.documentElement.classList.remove('season-water');
+    }, [season]);
 
     useEffect(() => {
         if (season === 'clear' || reduced) {
@@ -141,7 +150,7 @@ const Seasons = ({ season }: { season: Season }) => {
             rain: 220,
             snow: 130,
             wind: 90,
-            water: 60,
+            water: 90,
         };
         const count = counts[season as Exclude<Season, 'clear'>];
 
@@ -154,8 +163,19 @@ const Seasons = ({ season }: { season: Season }) => {
                     return { x: Math.random() * w, y: first ? Math.random() * h : -12, z, vx: 0, vy: 0.5 + z * 1.2, life: 1, seed: Math.random() * 6.28 };
                 case 'wind':
                     return { x: first ? Math.random() * w : -30, y: Math.random() * h, z, vx: 1.6 + z * 3.4, vy: 0, life: 1, seed: Math.random() * 6.28 };
-                default: // water
-                    return { x: Math.random() * w, y: first ? Math.random() * h : h + 20, z, vx: 0, vy: -(0.25 + z * 0.7), life: Math.random(), seed: Math.random() * 6.28 };
+                default: { // water — droplets clinging to the glass
+                    const r = 2 + z * 9;
+                    return {
+                        x: Math.random() * w,
+                        y: first ? Math.random() * h : -r * 2,
+                        z, vx: 0, vy: 0,
+                        life: 1,
+                        seed: Math.random() * 6.28,
+                        r,
+                        hold: 40 + Math.random() * 320,
+                        trail: 0,
+                    };
+                }
             }
         };
 
@@ -203,20 +223,56 @@ const Seasons = ({ season }: { season: Season }) => {
                     ctx.stroke();
                     if (p.x > w + 60) partsRef.current[i] = spawn();
                 } else {
-                    // water — slow rising caustics
-                    p.y += p.vy;
-                    p.x += Math.sin(t * 0.4 + p.seed) * 0.35;
-                    p.life += 0.004;
-                    const r = 22 + p.z * 70;
-                    const a = (0.05 + p.z * 0.09) * (0.6 + Math.sin(p.life * 2) * 0.4);
-                    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
-                    g.addColorStop(0, `rgba(242, 139, 44, ${a})`);
-                    g.addColorStop(1, 'rgba(242, 139, 44, 0)');
-                    ctx.fillStyle = g;
+                    // water — condensation. A droplet clings, swells, then breaks
+                    // loose and runs, leaving a thinning trail behind it.
+                    const r = p.r ?? 4;
+                    if ((p.hold ?? 0) > 0) {
+                        p.hold = (p.hold ?? 0) - 1;
+                        p.vy = 0;
+                    } else {
+                        p.vy = Math.min((p.vy || 0) + 0.06 * (0.4 + p.z), 3.4 + p.z * 3);
+                        p.y += p.vy;
+                        p.x += Math.sin(p.y * 0.05 + p.seed) * 0.25;
+                        p.trail = Math.min((p.trail ?? 0) + p.vy, 90 + p.z * 130);
+                    }
+
+                    // Trail
+                    if ((p.trail ?? 0) > 2) {
+                        const g = ctx.createLinearGradient(p.x, p.y - (p.trail ?? 0), p.x, p.y);
+                        g.addColorStop(0, 'rgba(190, 220, 245, 0)');
+                        g.addColorStop(1, `rgba(190, 220, 245, ${0.05 + p.z * 0.10})`);
+                        ctx.strokeStyle = g;
+                        ctx.lineWidth = r * 0.5;
+                        ctx.lineCap = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y - (p.trail ?? 0));
+                        ctx.lineTo(p.x, p.y);
+                        ctx.stroke();
+                    }
+
+                    // Bead: dark rim, bright lens, specular highlight top-left
+                    const bead = ctx.createRadialGradient(
+                        p.x - r * 0.34, p.y - r * 0.34, r * 0.1,
+                        p.x, p.y, r
+                    );
+                    bead.addColorStop(0, `rgba(255, 255, 255, ${0.42 + p.z * 0.3})`);
+                    bead.addColorStop(0.45, `rgba(186, 214, 240, ${0.16 + p.z * 0.16})`);
+                    bead.addColorStop(1, 'rgba(120, 160, 200, 0.02)');
+                    ctx.fillStyle = bead;
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, r, 0, 6.28);
                     ctx.fill();
-                    if (p.y < -80) partsRef.current[i] = spawn();
+
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.10 + p.z * 0.16})`;
+                    ctx.lineWidth = 0.7;
+                    ctx.stroke();
+
+                    ctx.fillStyle = `rgba(255, 255, 255, ${0.5 + p.z * 0.4})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x - r * 0.36, p.y - r * 0.4, r * 0.2, 0, 6.28);
+                    ctx.fill();
+
+                    if (p.y - (p.trail ?? 0) > h + 40) partsRef.current[i] = spawn();
                 }
             }
 
@@ -241,7 +297,7 @@ const Seasons = ({ season }: { season: Season }) => {
                     transition={{ duration: 0.8 }}
                     aria-hidden
                     className="pointer-events-none fixed inset-0 z-[88]"
-                    style={{ mixBlendMode: season === 'water' ? 'screen' : 'normal' }}
+                    style={{ mixBlendMode: 'normal' }}
                 />
             )}
         </AnimatePresence>

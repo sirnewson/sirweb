@@ -410,6 +410,29 @@ body * {
 /* The aurora underlay is redundant when the section is already a solid wash. */
 .aurora-solid.aurora-section::before { display: none; }
 
+
+/* Submerged — applied to <html> while the water season is active. */
+.season-water body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 87;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(70, 130, 170, 0.16) 0%, rgba(20, 60, 90, 0.10) 55%, rgba(10, 30, 50, 0.20) 100%);
+  mix-blend-mode: soft-light;
+  animation: submerge-drift 11s ease-in-out infinite alternate;
+}
+
+@keyframes submerge-drift {
+  from { transform: translate3d(0, -1.2%, 0) scale(1.02); }
+  to   { transform: translate3d(0, 1.2%, 0) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .season-water body::after { animation: none; }
+}
+
 /* Base */
 body {
   @apply bg-neutral-black text-white font-sans antialiased overflow-x-hidden;

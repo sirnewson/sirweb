@@ -144,20 +144,32 @@ const Footer = () => {
                     <p className="text-xs font-medium text-white/45">Presentation is how an idea meets the world.</p>
                 </div>
 
-                {/* Scrolling wordmark */}
-                <div className="mt-12 w-full overflow-hidden translate-y-6 pointer-events-none">
+                {/* Scrolling wordmark — sans, tracked, each character breathing
+                    on its own offset so the line ripples as it travels. */}
+                <div className="mt-12 w-full translate-y-6 overflow-hidden pointer-events-none">
                     <motion.div
-                        className="flex w-max items-center"
+                        className="flex w-max items-end"
                         animate={{ x: ['0%', '-50%'] }}
-                        transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+                        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
                     >
-                        {Array.from({ length: 6 }).map((_, i) => (
-                            <span
-                                key={i}
-                                className="whitespace-nowrap bg-gradient-to-r from-lime via-sunset to-deep-amber bg-clip-text font-editorial text-[13vw] leading-none tracking-tight text-transparent opacity-40"
-                            >
-                                SIR NEWSON
-                                <span className="mx-8">•</span>
+                        {Array.from({ length: 6 }).map((_, block) => (
+                            <span key={block} className="flex items-end whitespace-nowrap">
+                                {'SIR NEWSON'.split('').map((ch, i) => (
+                                    <motion.span
+                                        key={`${block}-${i}`}
+                                        animate={{ y: [0, -10, 0, 6, 0] }}
+                                        transition={{
+                                            duration: 5.5,
+                                            repeat: Infinity,
+                                            ease: 'easeInOut',
+                                            delay: (i % 10) * 0.12,
+                                        }}
+                                        className="inline-block bg-gradient-to-b from-lime via-sunset to-deep-amber bg-clip-text font-sans text-[13vw] font-semibold leading-[0.85] tracking-[0.06em] text-transparent"
+                                    >
+                                        {ch === ' ' ? ' ' : ch}
+                                    </motion.span>
+                                ))}
+                                <span className="mx-10 inline-block h-[2vw] w-[2vw] shrink-0 self-center rounded-full bg-gradient-to-br from-lime to-deep-amber" />
                             </span>
                         ))}
                     </motion.div>
