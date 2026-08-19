@@ -15,16 +15,14 @@ export interface QuickRate {
 
 /**
  * Entry prices mirror the published rate card (see pages/RateCard.tsx).
- * Events are quoted per campaign rather than from a fixed slot, so they carry
- * no invented starting figure.
  */
 export const quickRates: Record<Docket, QuickRate> = {
     events: {
-        label: 'Event campaign',
-        from: null,
-        rateCardTab: 'social',
-        turnaround: 'Countdown-ready in days, not weeks',
-        includes: ['Campaign key art', 'Countdown series', 'Lineup & schedule posts', 'Tickets & gate assets', 'Recap edit'],
+        label: 'Event marketing',
+        from: 'KSh 75,000 / campaign',
+        rateCardTab: 'events',
+        turnaround: '15–20 posts + 3 marketing reels per starter campaign',
+        includes: ['Social media posts', 'Marketing reels', 'Print work', 'Screen motions', 'Countdown & event updates'],
     },
     graphics: {
         label: 'Social & graphics',

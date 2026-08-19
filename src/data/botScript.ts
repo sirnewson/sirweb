@@ -64,7 +64,7 @@ export const botScript: Record<string, BotNode> = {
         say: [
             "Events are a big part of the work — Lastcall, Big Voice Fest, Matatu, TTNT 6.",
             "A campaign usually runs in four beats: announce, build (countdowns and lineup drops), doors (gate assets, tags, signage), then the recap that sells the next one.",
-            "Event work is quoted per campaign — a one-night show and a six-city tour aren't the same job.",
+            "Event marketing starts at KSh 75,000 per campaign for 15–20 social media posts, 3 marketing reels, print work and screen motions. Bigger rollouts go to KSh 127,500 or KSh 180,000 depending on volume.",
         ],
         link: { label: 'See the events docket', to: '/events' },
         options: [
@@ -120,7 +120,7 @@ export const botScript: Record<string, BotNode> = {
 
     pricing: {
         say: [
-            "Roughly: brand identity from KSh 22,500. Websites from 37,500. Social from 75,000 a month. Events are quoted per campaign.",
+            "Roughly: brand identity from KSh 22,500. Websites from 37,500. Social from 75,000 a month. Event marketing from KSh 75,000 per campaign.",
             "Those are entry points — the real number depends on scope. Newson will give you a firm one.",
         ],
         options: [

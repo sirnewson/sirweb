@@ -54,7 +54,7 @@ const PricingCard = ({ pkg, onSelect }: { pkg: any, onSelect: () => void }) => {
 };
 
 const RateCard = () => {
-    const [activeTab, setActiveTab] = useState<'branding' | 'website' | 'social'>('social');
+    const [activeTab, setActiveTab] = useState<'branding' | 'website' | 'social' | 'events'>('social');
     const [isEcommerce, setIsEcommerce] = useState(false);
 
     const handleWhatsAppClick = (message: string) => {
@@ -171,12 +171,43 @@ const RateCard = () => {
         }
     ];
 
+    const eventMarketingPackages = [
+        {
+            slot: "Slot 1",
+            title: "Event Starter Push",
+            price: "75,000",
+            period: "/campaign",
+            description: "A clean event push for announcements, countdowns, and essential audience reminders.",
+            highlight: false,
+            features: ["15-20 Social Media Posts", "3 Marketing Reels", "Print Work layouts", "Screen Motions", "Countdown & event updates"]
+        },
+        {
+            slot: "Slot 2",
+            title: "Event Campaign Flow",
+            price: "127,500",
+            period: "/campaign",
+            description: "Built for stronger momentum across posts, reels, printed material, and event screens.",
+            highlight: false,
+            features: ["25 to 35 Social Media Posts", "4 Marketing Reels", "Print Work variants", "Screen Motions for stage or LED", "Lineup, ticket & sponsor highlights"]
+        },
+        {
+            slot: "Slot 3",
+            title: "Full Event Rollout",
+            price: "180,000",
+            period: "/campaign",
+            description: "Full creative support for events that need heavy visibility before, during, and after the day.",
+            highlight: true,
+            badge: "Event Ready",
+            features: ["40 to 60 Social Media Posts", "6 Marketing Reels", "Full Print Work support", "Screen Motions & event loops", "Recap, gate, signage & campaign assets"]
+        }
+    ];
+
     return (
         <div className="bg-neutral-black min-h-screen">
             <SEO
                 title="Pricing & Rate Card | Branding, Websites & Social Media | Sir Newson"
-                description="Transparent pricing for brand identity, website design and social media creative packages in Kenya. Clear slots, clear deliverables, clear timelines."
-                keywords="branding prices Kenya, website design cost Kenya, social media management pricing Nairobi, logo design price Kenya, creative rate card Kenya"
+                description="Transparent pricing for brand identity, website design, social media and event marketing creative packages in Kenya. Clear slots, clear deliverables, clear timelines."
+                keywords="branding prices Kenya, website design cost Kenya, social media management pricing Nairobi, event marketing rates Kenya, logo design price Kenya, creative rate card Kenya"
                 path="/rate-card"
             />
             <PageTransition>
@@ -235,7 +266,8 @@ const RateCard = () => {
                         {[
                             { id: 'branding', label: 'Brand Identity', icon: 'fas fa-palette' },
                             { id: 'website', label: 'Web Packages', icon: 'fas fa-globe' },
-                            { id: 'social', label: 'Social Media', icon: 'fas fa-share-alt' }
+                            { id: 'social', label: 'Social Media', icon: 'fas fa-share-alt' },
+                            { id: 'events', label: 'Event Marketing', icon: 'fas fa-bullhorn' }
                         ].map((tab) => (
                             <button
                                 key={tab.id}
@@ -281,7 +313,7 @@ const RateCard = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
-                            className={`grid grid-cols-1 ${activeTab === 'social' ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-4'} gap-6`}
+                            className={`grid grid-cols-1 ${activeTab === 'social' || activeTab === 'events' ? 'md:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-4'} gap-6`}
                         >
                             {activeTab === 'branding' && brandingPackages.map((pkg, index) => (
                                 <PricingCard key={index} pkg={pkg} onSelect={() => handleWhatsAppClick(`Hi, I'm interested in the ${pkg.title} package.`)} />
@@ -289,6 +321,10 @@ const RateCard = () => {
 
                             {activeTab === 'social' && socialMediaPackages.map((pkg, index) => (
                                 <PricingCard key={index} pkg={pkg} onSelect={() => handleWhatsAppClick(`Hi, I'm interested in the ${pkg.title} Social Media plan.`)} />
+                            ))}
+
+                            {activeTab === 'events' && eventMarketingPackages.map((pkg, index) => (
+                                <PricingCard key={index} pkg={pkg} onSelect={() => handleWhatsAppClick(`Hi, I'm interested in the ${pkg.title} Event Marketing package.`)} />
                             ))}
 
                             {activeTab === 'website' && websitePackages.map((pkg, index) => {

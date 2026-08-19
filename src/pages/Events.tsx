@@ -145,10 +145,10 @@ const Events = () => {
                 <div className="mx-auto max-w-3xl rounded-[16px] border border-sunset/25 bg-sunset/[0.06] p-8 md:p-12">
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-sunset">Quick rate · {rate.label}</p>
                     <h2 className="mt-4 font-display text-3xl md:text-5xl">
-                        Every event is scoped on its own.
+                        Event campaigns start at {rate.from}.
                     </h2>
                     <p className="mt-4 text-sm leading-7 text-white/65">
-                        {`Scope drives the number — a one-night event and a six-city tour are not the same job. ${rate.turnaround}.`}
+                        {`The starter slot covers ${rate.turnaround}. Bigger events scale into heavier rollout packages when the campaign needs more volume.`}
                     </p>
                     <ul className="mt-6 flex flex-wrap gap-2">
                         {rate.includes.map((inc) => (
@@ -167,10 +167,10 @@ const Events = () => {
                             <i className="fab fa-whatsapp text-base" /> Get a number today
                         </a>
                         <Link
-                            to="/services"
+                            to="/rate-card"
                             className="inline-flex items-center gap-2 rounded-[8px] border border-white/15 px-6 py-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/75 transition hover:border-sunset/50 hover:text-sunset"
                         >
-                            What I do
+                            See the rate card
                         </Link>
                     </div>
                 </div>
