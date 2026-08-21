@@ -444,7 +444,11 @@ body * {
 
 /* Ink. Utilities inside these sections resolve against a bright ground, so the
    warm-white tokens they normally use would vanish. */
-.aurora-solid :is(h1, h2, h3, h4, p, span, li, a, strong, em) {
+/* Elements painting their own background set their own ink deliberately — a
+   dark button on the bright wash, for instance. Excluding them stops this
+   unlayered rule (which outranks Tailwind's layered utilities) from forcing
+   espresso text onto an espresso fill. */
+.aurora-solid :is(h1, h2, h3, h4, p, span, li, a, strong, em):not([class*="bg-"]) {
   color: inherit;
 }
 
