@@ -24,7 +24,7 @@ const offers = [
 
 const ConversionStrip = () => {
   return (
-    <section className="relative z-10 px-6 py-16 md:py-20 border-y border-white/5 bg-neutral-dark/70 backdrop-blur">
+    <section className="sketch-section relative z-10 px-6 py-20 md:py-28 bg-neutral-dark/70 backdrop-blur">
       <div className="max-w-7xl mx-auto">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end mb-12">
           <div>

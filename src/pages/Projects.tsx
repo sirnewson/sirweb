@@ -18,9 +18,8 @@ const Projects = () => {
                 shortParagraph="Some projects begin as client work. Others begin as curiosity, culture, storytelling, or a need to create something useful. This space brings together the systems, platforms, and visual ideas I am building over time."
             />
 
-            <section className="py-32 px-6 relative">
+            <section className="py-20 md:py-28 px-6 relative">
                 {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     {projectsData.map((project, index) => (
@@ -66,7 +65,7 @@ const Projects = () => {
 
 
             {/* Website Showcase Grid */}
-            <section className="py-32 px-6 bg-neutral-dark border-t border-white/5">
+            <section className="py-20 md:py-28 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <p className="text-primary tracking-[0.2em] uppercase text-sm mb-2">Live Projects</p>

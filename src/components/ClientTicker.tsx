@@ -61,13 +61,13 @@ const MarqueeRow = ({ logos, duration, reverse = false }: MarqueeRowProps) => (
 
 export default function ClientTicker() {
   return (
-    <section className="relative overflow-hidden border-y border-warm-white/[0.08] bg-soft-black py-14">
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-16 bg-gradient-to-r from-soft-black to-transparent md:w-32" />
-      <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-16 bg-gradient-to-l from-soft-black to-transparent md:w-32" />
+    <section className="relative overflow-hidden bg-pure-black py-20 md:py-28">
+      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-16 bg-gradient-to-r from-pure-black to-transparent md:w-32" />
+      <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-16 bg-gradient-to-l from-pure-black to-transparent md:w-32" />
 
       <div className="mx-auto mb-10 max-w-7xl px-6 text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-golden-hour">Trusted With the Important Stuff</p>
-        <p className="mt-3 text-sm text-warm-white/60 md:text-base">
+        <p className="mt-3 font-hand text-lg text-warm-white/55 md:text-xl">
           Product launches, event campaigns, announcements, catalogues and websites — for brands that could not afford to look unfinished.
         </p>
       </div>

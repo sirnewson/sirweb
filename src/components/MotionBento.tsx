@@ -83,7 +83,7 @@ const MotionBento = ({ onOpen }: MotionBentoProps) => {
     const rate = quickRates.graphics;
 
     return (
-        <section className="border-t border-white/5 px-4 py-16 md:px-6 md:py-24">
+        <section className=" px-4 py-20 md:px-6 md:py-28">
             <div className="mx-auto max-w-7xl">
                 <div className="mb-8 flex flex-col gap-5 md:mb-12 md:flex-row md:items-end md:justify-between">
                     <div>

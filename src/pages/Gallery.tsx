@@ -116,7 +116,7 @@ const Gallery = () => {
             </div>
 
             {/* Masonry */}
-            <section className="px-3 py-8 md:px-4 md:py-10">
+            <section className="px-3 py-20 md:px-4 md:py-28">
                 {items.length === 0 ? (
                     <div className="mx-auto max-w-md py-24 text-center">
                         <p className="font-display text-2xl text-white/70">Nothing saved yet.</p>

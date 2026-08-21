@@ -226,7 +226,7 @@ const HangingGallery = ({ assets, onOpen }: HangingGalleryProps) => {
     };
 
     return (
-        <section className="relative overflow-hidden border-y border-white/5 bg-neutral-black py-16 md:py-20">
+        <section className="relative overflow-hidden py-20 md:py-28">
             {/* Light from the top left */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_0%,rgba(242,139,44,0.13)_0%,rgba(0,0,0,0)_62%)]" />
             <motion.div style={{ x: dustX }} className="pointer-events-none absolute inset-0 overflow-hidden">

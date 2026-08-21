@@ -25,7 +25,7 @@ const PricingCard = ({ pkg, onSelect }: { pkg: any, onSelect: () => void }) => {
                 <h3 className="text-2xl font-bold text-white mt-2">{pkg.title}</h3>
             </div>
 
-            <div className="mb-8 pb-8 border-b border-white/5">
+            <div className="mb-8 pb-8">
                 <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold text-primary">{display.kes}</span>
                     <span className="text-sm text-white/55">KES {pkg.period}</span>
@@ -227,7 +227,7 @@ const RateCard = () => {
                 </div>
 
                 {/* Services Grid */}
-                <section className="py-24 px-6 bg-neutral-black">
+                <section className="py-20 md:py-28 px-6">
                     <div className="max-w-7xl mx-auto">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {[
@@ -340,7 +340,7 @@ const RateCard = () => {
                                             {isEcommerce && <span className="text-green-400 text-sm font-bold">with E-Commerce</span>}
                                         </div>
 
-                                        <div className="mb-8 pb-8 border-b border-white/5">
+                                        <div className="mb-8 pb-8">
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-4xl font-bold text-primary">{display.kes}</span>
                                                 <span className="text-sm text-white/55">KES</span>

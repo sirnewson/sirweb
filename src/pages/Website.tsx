@@ -73,7 +73,7 @@ const websiteSamples = [
 
 const Website = () => {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#1A0D06] text-[#F7F3ED] pt-32">
+    <main className="bg-dots relative min-h-screen overflow-hidden bg-[#1A0D06] text-[#F7F3ED] pt-32">
       <SEO
         title="Website Design in Kenya | Get Your Business Ready for the Internet | Sir Newson"
         description="Premium website design in Nairobi, Kenya. Landing pages, business websites and digital presence systems from KSh 22,000 — built to make your brand look trusted and ready to sell."
@@ -81,8 +81,6 @@ const Website = () => {
         path="/website"
       />
       <section className="relative mx-auto max-w-7xl px-6 pb-20 pt-10 sm:px-8 lg:px-12">
-        <div className="absolute left-[-10%] top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute bottom-10 right-[-8%] h-96 w-96 rounded-full bg-[#F7F3ED]/10 blur-3xl" />
 
         <div className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.div
@@ -153,7 +151,7 @@ const Website = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 sm:px-8 lg:px-12">
         <div className="grid gap-5 md:grid-cols-4">
           {proofPoints.map((point, index) => (
             <ScrollReveal
@@ -173,7 +171,7 @@ const Website = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 sm:px-8 lg:px-12">
         <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary font-mono">Websites Done</p>
@@ -225,7 +223,7 @@ const Website = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 sm:px-8 lg:px-12">
         <div className="mb-12 max-w-3xl">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary font-mono">Packages</p>
           <h2 className="mt-4 font-display text-4xl font-semibold sm:text-5xl">Pick the level of seriousness your brand needs.</h2>
@@ -272,7 +270,7 @@ const Website = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 sm:px-8 lg:px-12">
         <ScrollReveal direction="up" duration={0.75}>
           <div className="rounded-[16px] border border-primary/20 bg-primary p-8 text-black sm:p-12 lg:p-16">
             <p className="font-bold uppercase tracking-[0.25em] font-mono">Best for</p>
@@ -286,7 +284,7 @@ const Website = () => {
         </ScrollReveal>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 py-20 text-center sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-5xl px-6 py-20 md:py-28 text-center sm:px-8 lg:px-12">
         <ScrollReveal direction="up" duration={0.6}>
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-primary font-mono">Process</p>
           <h2 className="mt-4 font-display text-4xl font-semibold sm:text-5xl">Strategy first. Design second. Confusion last.</h2>
@@ -315,7 +313,7 @@ const Website = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 py-24 text-center sm:px-8 lg:px-12">
+      <section className="mx-auto max-w-5xl px-6 py-20 md:py-28 text-center sm:px-8 lg:px-12">
         <ScrollReveal direction="up" duration={0.75}>
           <h2 className="font-display text-4xl font-semibold sm:text-6xl">Your website should quietly do the selling before you enter the room.</h2>
           <p className="mx-auto mt-6 max-w-2xl text-[#F7F3ED]/65">Send your current site, idea, or business name. I’ll help you shape the right level of website for where your brand is going.</p>

@@ -49,7 +49,7 @@ const ClientDetails = () => {
             </section>
 
             {/* Project Info */}
-            <section className="py-24 px-6">
+            <section className="py-20 md:py-28 px-6">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
                     <div className="md:col-span-2">
                         <h2 className="text-3xl font-display font-bold text-white mb-8">The Project</h2>
@@ -97,7 +97,7 @@ const ClientDetails = () => {
             </section>
 
             {/* Gallery */}
-            <section className="py-24 px-6 bg-neutral-dark border-t border-white/10">
+            <section className="py-20 md:py-28 px-6 bg-neutral-dark border-t border-white/10">
                 <div className="max-w-7xl mx-auto">
                     <h2 className="text-3xl font-display font-bold text-white mb-16 text-center">Visual Identity</h2>
                     <div className="columns-1 md:columns-3 gap-8 space-y-8">
@@ -118,7 +118,7 @@ const ClientDetails = () => {
             </section>
 
             {/* Next Project Navigation */}
-            <section className="py-24 px-6 text-center">
+            <section className="py-20 md:py-28 px-6 text-center">
                 <Link to="/clients" className="inline-flex items-center gap-4 text-white hover:text-primary transition-colors group">
                     <span className="text-lg">View All Projects</span>
                     <i className="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>

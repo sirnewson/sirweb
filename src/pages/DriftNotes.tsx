@@ -167,7 +167,6 @@ const DriftNotes = () => {
 
             {/* Hero Header */}
             <section className="relative pt-40 pb-16 md:pt-52 md:pb-24 px-6 flex flex-col items-center justify-center text-center overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
                 
                 <div className="relative z-10 flex flex-col items-center max-w-3xl">
                     <motion.div
@@ -191,7 +190,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Live Feed Section */}
-            <section className="px-6 py-12 max-w-7xl mx-auto relative z-10">
+            <section className="px-6 py-20 md:py-28 max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-4 mb-10">
                     <h2 className="font-display text-xl font-bold uppercase tracking-wider text-white">Latest Threads</h2>
                     <div className="h-[1px] flex-grow bg-white/10" />
@@ -234,8 +233,8 @@ const DriftNotes = () => {
                                         className={`p-8 rounded-[28px] bg-neutral-dark/80 backdrop-blur-md border border-white/5 ${cat.glow} transition-all duration-500 relative flex flex-col justify-between overflow-hidden min-h-[280px] group`}
                                     >
                                         {/* Corner technical grid overlay */}
-                                        <div className="absolute top-0 right-0 w-16 h-16 border-r border-t border-white/5 opacity-50 group-hover:border-primary/20 transition-colors pointer-events-none" />
-                                        <div className="absolute bottom-0 left-0 w-16 h-16 border-l border-b border-white/5 opacity-50 group-hover:border-primary/20 transition-colors pointer-events-none" />
+                                        <div className="absolute top-0 right-0 w-16 h-16 border-r opacity-50 group-hover:border-primary/20 transition-colors pointer-events-none" />
+                                        <div className="absolute bottom-0 left-0 w-16 h-16 border-l opacity-50 group-hover:border-primary/20 transition-colors pointer-events-none" />
 
                                         <div>
                                             {/* Poster card header details */}
@@ -253,7 +252,7 @@ const DriftNotes = () => {
                                         </div>
 
                                         {/* Actions Footer */}
-                                        <div className="flex items-center justify-between pt-4 border-t border-white/5 text-[11px] text-white/55 mt-auto relative z-10">
+                                        <div className="flex items-center justify-between pt-4 text-[11px] text-white/55 mt-auto relative z-10">
                                             <span className="font-mono uppercase tracking-wider">{displayTime}</span>
                                             
                                             <div className="flex items-center gap-4">
@@ -288,7 +287,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Static Insights / Quotes */}
-            <section className="px-6 py-16 md:py-24 max-w-7xl mx-auto relative z-10">
+            <section className="px-6 py-20 md:py-28 max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-4 mb-12">
                     <h2 className="font-display text-xl font-bold uppercase tracking-wider text-white">Thoughts & Patterns</h2>
                     <div className="h-[1px] flex-grow bg-white/10" />
@@ -314,7 +313,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Gallery Grid */}
-            <section className="px-6 py-12 max-w-7xl mx-auto relative z-10">
+            <section className="px-6 py-20 md:py-28 max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-4 mb-12">
                     <h2 className="font-display text-xl font-bold uppercase tracking-wider text-white">Visual Drift</h2>
                     <div className="h-[1px] flex-grow bg-white/10" />
@@ -343,7 +342,7 @@ const DriftNotes = () => {
             </section>
 
             {/* Wynmind Gateway Section */}
-            <section className="py-20 md:py-28 px-6 bg-neutral-dark/80 border-y border-white/5 relative overflow-hidden z-10">
+            <section className="py-20 md:py-28 px-6 relative overflow-hidden z-10">
                 <div className="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
                     <img src="https://i.ibb.co/BHzH7zP8/normal-logo.png" alt="Wynmind" className="h-12 mb-8 opacity-40" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">Read More. Go Deeper.</h2>

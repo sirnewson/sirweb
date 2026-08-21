@@ -56,7 +56,7 @@ const Motion = () => {
                 subtitle="A Collection of Cinematic Moments"
             />
 
-            <section className="py-24 px-6">
+            <section className="py-20 md:py-28 px-6">
                 <div className="columns-1 md:columns-2 lg:columns-4 gap-6 space-y-6 max-w-[1920px] mx-auto">
                     {videos.map((item, index) => (
                         <ScrollReveal

@@ -51,7 +51,7 @@ const pillars = [
 
 const PresentationPillars = () => {
     return (
-        <section className="border-t border-white/5 px-6 py-24">
+        <section className=" px-6 py-20 md:py-28">
             <div className="mx-auto max-w-7xl">
                 <div className="mb-14 max-w-3xl">
                     <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary font-mono">What I Help You Present</p>

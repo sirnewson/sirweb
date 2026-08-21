@@ -61,7 +61,7 @@ const Work = () => {
                 secondaryCtaPath="/website"
             />
 
-            <section className="px-6 py-14">
+            <section className="px-6 py-20 md:py-28">
                 <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
                     {[
                         ['Brand Identity', 'Logos, systems, boards, and mockups'],
@@ -115,7 +115,7 @@ const Work = () => {
                 dark
             />
 
-            <section className="border-t border-white/5 px-6 py-20">
+            <section className=" px-6 py-20 md:py-28">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
@@ -192,7 +192,7 @@ interface PortfolioSectionProps {
 }
 
 const PortfolioSection = ({ eyebrow, title, description, assets, layout, dark = false, onOpen }: PortfolioSectionProps) => (
-    <section className={`border-t border-white/5 px-6 py-20 ${dark ? 'bg-neutral-dark' : 'bg-neutral-black'}`}>
+    <section className={` px-6 py-20 ${dark ? 'bg-neutral-dark' : 'bg-neutral-black'}`}>
         <div className="mx-auto max-w-7xl">
             <ScrollReveal direction="up" duration={0.6}>
                 <div className="mb-10 max-w-3xl">

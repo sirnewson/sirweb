@@ -50,7 +50,7 @@ const Hero = ({
     return (
         <section
             ref={sectionRef}
-            className="relative w-full overflow-hidden pt-36 pb-20 flex flex-col font-sans border-b border-white/5 md:pt-44"
+            className="relative w-full overflow-hidden pt-36 pb-20 flex flex-col font-sans md:pt-44"
         >
             <motion.div
                 style={{ y: backdropY, scale: backdropScale }}
@@ -191,7 +191,7 @@ const Hero = ({
 
                 {trustLine && (
                     <ScrollReveal direction="up" delay={0.65} duration={0.8}>
-                        <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.16em] text-warm-white/50">{trustLine}</p>
+                        <p className="mt-7 font-hand text-[15px] tracking-normal text-warm-white/60">{trustLine}</p>
                     </ScrollReveal>
                 )}
             </motion.div>

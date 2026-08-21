@@ -14,7 +14,7 @@ interface WorkWallProps {
  */
 const WorkWall = ({ assets, onOpen }: WorkWallProps) => {
     return (
-        <section className="relative border-t border-white/5 py-16 md:py-24">
+        <section className="relative py-20 md:py-28">
             <div className="mb-10 flex flex-col gap-5 px-6 md:mb-14 md:flex-row md:items-end md:justify-between md:px-10">
                 <div>
                     <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">Selected Work</p>

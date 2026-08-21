@@ -22,7 +22,7 @@ const ProjectDetails = () => {
                 subtitle={project.category}
             />
 
-            <section className="py-24 px-6">
+            <section className="py-20 md:py-28 px-6">
                 <div className="max-w-4xl mx-auto text-center">
                     <p className="text-2xl md:text-3xl text-white/85 leading-relaxed font-display">
                         {project.details}
@@ -30,7 +30,7 @@ const ProjectDetails = () => {
                 </div>
             </section>
 
-            <section className="py-12 px-6">
+            <section className="py-20 md:py-28 px-6">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                     {project.gallery.map((img, index) => (
                         <motion.div

@@ -2,9 +2,8 @@ import { ScrollReveal, Magnetic } from './Animated';
 
 const ContactSection = () => {
     return (
-        <section id="contact" className="py-24 px-6 bg-neutral-black relative overflow-hidden">
+        <section id="contact" className="py-20 md:py-28 px-6 relative overflow-hidden">
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="max-w-4xl mx-auto relative z-10">
                 <ScrollReveal direction="up" duration={0.6} className="text-center mb-16">

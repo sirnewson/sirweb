@@ -24,7 +24,7 @@ const FeaturedProject = () => {
     if (!hero) return null;
 
     return (
-        <section className="relative overflow-hidden border-t border-white/5 py-16 md:py-24">
+        <section className="relative overflow-hidden py-20 md:py-28">
             <video
                 src="/uploads/loops/feature.mp4"
                 autoPlay
@@ -34,7 +34,6 @@ const FeaturedProject = () => {
                 className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.18]"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-neutral-black via-neutral-black/85 to-neutral-black" />
-            <div className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-sunset/[0.08] blur-[140px]" />
 
             <div className="relative mx-auto max-w-7xl px-4 md:px-6">
                 <div className="mb-8 flex flex-wrap items-center gap-3">

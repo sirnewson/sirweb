@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'MBJ Handwriting';
+  src: url('/fonts/mbj-handwriting.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MBJ Doodles';
+  src: url('/fonts/mbj-doodles.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+
 @theme {
   /* ---------------------------------------------------------------
      Sir Newson — warm editorial identity, dark canvas
@@ -49,9 +64,9 @@
   --color-warning: #C35A1A;
 
   /* The canvas scale. */
-  --color-neutral-black: #16120F;
-  --color-neutral-dark: #1A0D06;
-  --color-neutral-medium: #2A1C14;
+  --color-neutral-black: #000000;
+  --color-neutral-dark: #0A0806;
+  --color-neutral-medium: #16110C;
 
   /* Foreground.
      `white` is the warm ink and `black` the ground beneath the ambers, so the
@@ -72,9 +87,18 @@
   --font-display: 'Inter', sans-serif;
   --font-editorial: 'EB Garamond', Georgia, serif;
   --font-mono: 'SUSE Mono', ui-monospace, monospace;
+  --font-hand: 'MBJ Handwriting', 'Segoe Script', cursive;
+  --font-doodle: 'MBJ Doodles', 'MBJ Handwriting', cursive;
 
   --radius-card: 12px;
   --radius-control: 8px;
+
+  --site-dot-texture:
+    radial-gradient(circle, rgba(247, 243, 237, 0.085) 1px, transparent 1.25px);
+  --site-dot-size: 12px 12px;
+  --site-sketch-hatch: url("data:image/svg+xml,%3Csvg width='220' height='150' viewBox='0 0 220 150' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 24C35 18 51 27 68 21M124 18C140 24 156 17 174 23M38 92C56 86 73 96 92 89M132 118C151 111 169 122 191 114M9 132C22 128 33 134 48 130' stroke='%23F7F3ED' stroke-opacity='.10' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M92 42C107 36 120 46 137 40M162 77C176 72 190 80 207 74M62 126C76 121 88 128 102 124' stroke='%23F28B2C' stroke-opacity='.09' stroke-width='.9' stroke-linecap='round'/%3E%3C/svg%3E");
+  --site-sketch-edge: rgba(247, 243, 237, 0.07);
+  --site-sketch-edge-hover: rgba(242, 139, 44, 0.34);
 
   --animate-gradient-x: gradient-x 3s ease infinite;
   --animate-float: float 6s ease-in-out infinite;
@@ -131,6 +155,11 @@
   --color-neutral-black: #F7F3ED;
   --color-neutral-dark: #FBF4EA;
   --color-neutral-medium: #F1E4D2;
+  --site-dot-texture:
+    radial-gradient(circle, rgba(22, 18, 15, 0.06) 1px, transparent 1.2px);
+  --site-sketch-hatch: url("data:image/svg+xml,%3Csvg width='220' height='150' viewBox='0 0 220 150' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 24C35 18 51 27 68 21M124 18C140 24 156 17 174 23M38 92C56 86 73 96 92 89M132 118C151 111 169 122 191 114M9 132C22 128 33 134 48 130' stroke='%2316120F' stroke-opacity='.09' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M92 42C107 36 120 46 137 40M162 77C176 72 190 80 207 74M62 126C76 121 88 128 102 124' stroke='%23C35A1A' stroke-opacity='.10' stroke-width='.9' stroke-linecap='round'/%3E%3C/svg%3E");
+  --site-sketch-edge: rgba(22, 18, 15, 0.08);
+  --site-sketch-edge-hover: rgba(195, 90, 26, 0.36);
 
   --color-white: #16120F;
 
@@ -148,15 +177,12 @@
 }
 
 :root[data-theme="light"] body {
-  background-image:
-    radial-gradient(circle at 15% 45%, rgba(242, 139, 44, 0.10), transparent 32%),
-    radial-gradient(circle at 85% 25%, rgba(255, 180, 92, 0.14), transparent 34%);
+  background-image: var(--site-dot-texture);
+  background-size: var(--site-dot-size);
 }
 
 /* Structural rules invert with the ground. */
-:root[data-theme="light"] .bg-hexagon-grid {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%2316120F' stroke-width='0.75' stroke-opacity='0.06'/%3E%3C/svg%3E");
-}
+
 
 :root[data-theme="light"] .rule-hairline {
   border-top: 1px solid rgba(22, 18, 15, 0.14);
@@ -344,19 +370,14 @@ body * {
   isolation: isolate;
 }
 
+.aurora-section,
+.aurora-solid,
+.sketch-section {
+  position: relative;
+}
+
 .aurora-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  background:
-    radial-gradient(60% 55% at 12% 18%, rgba(191, 255, 0, 0.10), transparent 68%),
-    radial-gradient(55% 60% at 88% 22%, rgba(242, 139, 44, 0.14), transparent 70%),
-    radial-gradient(70% 60% at 50% 96%, rgba(122, 46, 11, 0.30), transparent 72%);
-  filter: blur(38px);
-  animation: aurora-breathe 24s ease-in-out infinite alternate;
-  pointer-events: none;
+  content: none;
 }
 
 @keyframes aurora-breathe {
@@ -365,7 +386,44 @@ body * {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-section::before { animation: none; }
+  .aurora-section::before {
+    content: none;
+  }
+}
+
+:where(.aurora-section, .aurora-solid, .sketch-section)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.42;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg width='760' height='260' viewBox='0 0 760 260' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 46C83 30 142 55 209 39C284 21 342 46 410 34C508 17 593 39 742 24' stroke='%23F7F3ED' stroke-opacity='.16' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M22 213C111 190 188 225 282 205C367 187 443 216 525 196C607 176 674 197 744 184' stroke='%23F28B2C' stroke-opacity='.20' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M588 53C625 69 656 65 692 46M604 76C642 90 684 84 720 62M630 102C657 111 689 105 712 91' stroke='%23FFD9A3' stroke-opacity='.14' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: min(760px, 92vw) auto;
+  background-position: top 18px right -110px;
+}
+
+:where(.aurora-section, .aurora-solid, .sketch-section) > * {
+  position: relative;
+  z-index: 1;
+}
+
+:where(.aurora-section, .aurora-solid, .sketch-section) :is(h1.font-display, h2.font-display)::after {
+  content: '';
+  display: block;
+  width: clamp(8rem, 22vw, 18rem);
+  height: 10px;
+  margin-top: 0.35em;
+  background-image: url("data:image/svg+xml,%3Csvg width='320' height='18' viewBox='0 0 320 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 10C48 4 95 12 140 7C188 2 235 13 317 6' stroke='%23F28B2C' stroke-opacity='.72' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M11 14C68 9 122 16 177 11C225 7 270 14 309 10' stroke='%23FFD9A3' stroke-opacity='.35' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.aurora-solid::after {
+  mix-blend-mode: multiply;
+  opacity: 0.28;
 }
 
 
@@ -408,20 +466,8 @@ body * {
 }
 
 /* The aurora underlay is redundant when the section is already a solid wash. */
-.aurora-solid.aurora-section::before { display: none; }
-
-
-/* Submerged — applied to <html> while the water season is active. */
-.season-water body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 87;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(70, 130, 170, 0.16) 0%, rgba(20, 60, 90, 0.10) 55%, rgba(10, 30, 50, 0.20) 100%);
-  mix-blend-mode: soft-light;
-  animation: submerge-drift 11s ease-in-out infinite alternate;
+.aurora-solid.aurora-section::before {
+  content: none;
 }
 
 @keyframes submerge-drift {
@@ -433,12 +479,81 @@ body * {
   .season-water body::after { animation: none; }
 }
 
+
+/* ---------------------------------------------------------------
+   Hand-drawn layer
+   The dot field reads like sketch paper, so the annotations on top of it are
+   handwritten. Reserved for margin notes and small labels — never body copy,
+   which these faces are not built to carry.
+   --------------------------------------------------------------- */
+.font-hand {
+  font-family: var(--font-hand);
+  letter-spacing: 0.01em;
+}
+
+.font-doodle {
+  font-family: var(--font-doodle);
+}
+
+/* A pencil note in the margin: slightly off-axis, like it was added later. */
+.hand-note {
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: color-mix(in oklab, var(--color-sunset) 78%, var(--color-warm-white));
+  transform: rotate(-1.6deg);
+  display: inline-block;
+}
+
+/* Underline that looks drawn rather than ruled. */
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hand-underline::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.32em;
+  height: 0.42em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='14' viewBox='0 0 200 14' fill='none'%3E%3Cpath d='M3 8.5C38 4 74 10.5 110 6.5C140 3.2 168 9 197 5' stroke='%23F28B2C' stroke-opacity='.75' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
 /* Base */
 body {
   @apply bg-neutral-black text-white font-sans antialiased overflow-x-hidden;
-  background-image:
-    radial-gradient(circle at 15% 45%, rgba(242, 139, 44, 0.10), transparent 32%),
-    radial-gradient(circle at 85% 25%, rgba(122, 46, 11, 0.22), transparent 34%);
+  background-image: var(--site-dot-texture);
+  background-size: var(--site-dot-size);
+  background-attachment: fixed;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+/* Any surface painted with the canvas tokens picks up the dot field. Pages that
+   set a literal hex instead can opt in with .bg-dots. */
+:where([class*="bg-neutral-black"], [class*="bg-neutral-dark"]),
+.bg-dots {
+  background-image: var(--site-dot-texture);
+  background-size: var(--site-dot-size);
+  background-attachment: fixed;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+/* `fixed` attachment forces a full repaint on every scroll frame and is simply
+   ignored by iOS Safari. Small screens scroll the field with the page instead. */
+@media (max-width: 767px) {
+  :where([class*="bg-neutral-black"], [class*="bg-neutral-dark"]),
+  .bg-dots,
+  body {
+    background-attachment: scroll;
+  }
 }
 
 /* Editorial serif — quotes, essays, Drift Notes, campaign titles.
@@ -484,6 +599,47 @@ h2.font-display,
   @apply border-accent/40;
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
   transform: translateY(-5px);
+}
+
+/* Human-made element finish.
+   The site uses many Tailwind one-off rounded/bordered surfaces; this gently
+   pencils them in without requiring every component to learn a new class. */
+:is(
+  .fluid-card,
+  [class*="rounded-[10px]"][class*="border"],
+  [class*="rounded-[12px]"][class*="border"],
+  [class*="rounded-[14px]"][class*="border"],
+  [class*="rounded-[16px]"][class*="border"]
+):not(.aurora-section):not(.aurora-solid):not([class*="bg-gradient"]) {
+  outline: 1px solid var(--site-sketch-edge);
+  outline-offset: -3px;
+  background-image: var(--site-sketch-hatch);
+  background-size: 220px 150px;
+  background-position: 18px 14px;
+  background-blend-mode: screen;
+}
+
+:is(
+  .fluid-card,
+  [class*="rounded-[10px]"][class*="border"],
+  [class*="rounded-[12px]"][class*="border"],
+  [class*="rounded-[14px]"][class*="border"],
+  [class*="rounded-[16px]"][class*="border"]
+):not(.aurora-section):not(.aurora-solid):not([class*="bg-gradient"]):hover {
+  outline-color: var(--site-sketch-edge-hover);
+}
+
+:is(a, button)[class*="rounded-"] {
+  outline: 1px solid color-mix(in oklab, currentColor 12%, transparent);
+  outline-offset: -3px;
+}
+
+:is(a, button)[class*="rounded-"]:hover {
+  outline-color: color-mix(in oklab, var(--color-sunset) 42%, transparent);
+}
+
+:is(img, video)[class*="rounded-"] {
+  filter: saturate(0.96) contrast(1.02);
 }
 
 /* Retired neon glow. Kept as a no-op so existing markup stays valid while the
@@ -542,13 +698,19 @@ h2.font-display,
 
 /* Structural grid — now an architectural rule pattern rather than a tech grid */
 .bg-hexagon-grid {
-  background-size: 56px 97px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0 L56 16.16 L56 48.5 L28 64.66 L0 48.5 L0 16.16 Z M28 97 L56 80.84 L56 48.5 L28 32.34 L0 48.5 L0 80.84 Z' fill='none' stroke='%23F7F3ED' stroke-width='0.75' stroke-opacity='0.05'/%3E%3C/svg%3E");
+  background-image: var(--site-dot-texture);
+  background-size: var(--site-dot-size);
+  background-attachment: fixed;
+  background-position: 0 0;
+  background-repeat: repeat;
 }
 
 .bg-hexagon-grid-dense {
-  background-size: 28px 48.5px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='48.5' viewBox='0 0 28 48.5'%3E%3Cpath d='M14 0 L28 8.08 L28 24.25 L14 32.33 L0 24.25 L0 8.08 Z M14 48.5 L28 40.42 L28 24.25 L14 16.17 L0 24.25 L0 40.42 Z' fill='none' stroke='%23F7F3ED' stroke-width='0.5' stroke-opacity='0.06'/%3E%3C/svg%3E");
+  background-image: var(--site-dot-texture);
+  background-size: var(--site-dot-size);
+  background-attachment: fixed;
+  background-position: 0 0;
+  background-repeat: repeat;
 }
 
 .clip-hexagon {

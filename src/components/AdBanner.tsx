@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AdBanner = () => {
     return (
-        <section className="py-24 px-6">
+        <section className="py-20 md:py-28 px-6">
             <div className="max-w-7xl mx-auto">
                 <Link to="/shop">
                     <motion.div

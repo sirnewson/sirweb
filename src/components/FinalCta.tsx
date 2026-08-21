@@ -21,7 +21,7 @@ const wa = (text: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponen
  */
 const FinalCta = () => {
     return (
-        <section className="aurora-section relative overflow-hidden border-y border-white/5 px-4 py-20 md:px-6 md:py-28">
+        <section className="aurora-section relative overflow-hidden px-4 py-20 md:px-6 md:py-28">
             <div className="relative mx-auto max-w-6xl">
                 <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
                     {/* The ask */}
@@ -71,9 +71,9 @@ const FinalCta = () => {
                         </ScrollReveal>
 
                         <ScrollReveal direction="up" delay={0.4} duration={0.6}>
-                            <p className="mt-7 flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-white/35">
+                            <p className="mt-7 flex items-center gap-2.5 text-white/45">
                                 <span className="h-px w-6 bg-white/20" />
-                                Usually replies the same day
+                                <span className="hand-note">usually replies the same day</span>
                             </p>
                         </ScrollReveal>
                     </div>

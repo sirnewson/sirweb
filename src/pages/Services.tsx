@@ -44,7 +44,7 @@ const Services = () => {
 
             <PresentationPillars />
 
-            <section className="px-6 py-20 md:py-28 border-b border-white/5 bg-neutral-dark/70">
+            <section className="px-6 py-20 md:py-28">
                 <div className="max-w-7xl mx-auto grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
                     <ScrollReveal direction="left" duration={0.7}>
                         <div>
@@ -73,7 +73,7 @@ const Services = () => {
                 </div>
             </section>
 
-            <section className="px-6 py-20 md:py-28 border-b border-white/5">
+            <section className="px-6 py-20 md:py-28">
                 <div className="max-w-6xl mx-auto text-center">
                     <ScrollReveal direction="up" duration={0.7}>
                         <p className="text-primary text-xs font-semibold uppercase tracking-[0.25em] mb-4 font-mono">The Sir Newson Readiness Framework</p>
@@ -105,7 +105,7 @@ const Services = () => {
                 </div>
             </section>
 
-            <section className="px-6 py-24 text-center">
+            <section className="px-6 py-20 md:py-28 text-center">
                 <ScrollReveal direction="up" duration={0.8}>
                     <div className="max-w-4xl mx-auto rounded-[16px] border border-primary/20 bg-primary p-10 md:p-16 text-black">
                         <h2 className="font-display text-4xl md:text-6xl font-semibold leading-tight">Let's make your brand ready to trust, buy from, and remember.</h2>

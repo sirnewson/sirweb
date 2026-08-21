@@ -4,7 +4,7 @@ import shopBannerBg from '../assets/shop_banner_bg.webp';
 
 const GlobalShopBanner = () => {
     return (
-        <section className="py-12 px-6 bg-neutral-black">
+        <section className="py-20 md:py-28 px-6 bg-neutral-black">
             <div className="max-w-7xl mx-auto">
                 <Link to="/shop">
                     <motion.div

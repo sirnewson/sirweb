@@ -136,30 +136,25 @@ const Home = () => {
 
             <WorkWall assets={wallAssets} onOpen={setSelectedMedia} />
 
-            {/* The whole positioning, in one line instead of five sections. */}
-            <section className="aurora-solid relative overflow-hidden border-y border-white/5 px-6 py-28 md:py-40">
-                <div className="pointer-events-none absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime/25 blur-[150px]" />
+            {/* Direct project handoff. */}
+            <section className="aurora-solid sketch-section relative overflow-hidden px-6 py-20 md:py-28">
                 <ScrollReveal direction="up" duration={0.8}>
-                    <p className="relative mx-auto max-w-5xl text-center font-editorial text-4xl leading-[1.08] md:text-7xl">
-                        <WordRise text="Clients rarely arrive with a brief." className="justify-center" />
-                        <span className="mt-2 block" />
-                        <WordRise text="They arrive with raw material" className="justify-center" delay={0.12} />
-                        <span className="mt-2 block" />
-                        <WordRise text="and a date it has to be ready." className="justify-center" delay={0.24} />
-                    </p>
+                    <h2 className="relative mx-auto max-w-4xl text-center font-editorial text-3xl leading-[1.02] md:text-5xl lg:text-6xl">
+                        <WordRise text="I’m ready to work on your project." className="justify-center" />
+                    </h2>
                 </ScrollReveal>
                 <ScrollReveal direction="up" delay={0.2} duration={0.7}>
-                    <p className="relative mx-auto mt-10 max-w-xl text-center text-sm leading-7 text-white/55 md:text-base">
-                        Photographs, footage, a product, a half-formed idea. My work is to give it the shape, clarity and finish it needs to stand in front of an audience.
+                    <p className="relative mx-auto mt-6 max-w-xl text-center text-sm leading-7 text-white/62 md:text-base">
+                        Send what you have: photos, footage, product notes, a rough idea, or a simple brief. I’ll help shape it into something clear, finished, and ready to go out.
                     </p>
                 </ScrollReveal>
                 <ScrollReveal direction="up" delay={0.3} duration={0.7}>
-                    <div className="relative mt-10 flex justify-center">
+                    <div className="relative mt-8 flex justify-center">
                         <Link
-                            to="/services"
+                            to="/contact"
                             className="group inline-flex items-center gap-3 border-b border-espresso/30 pb-2 font-mono text-xs uppercase tracking-[0.2em] transition hover:border-espresso"
                         >
-                            How it works
+                            Start a project
                             <i className="fas fa-arrow-right transition-transform group-hover:translate-x-1" />
                         </Link>
                     </div>
@@ -167,7 +162,7 @@ const Home = () => {
             </section>
 
             {/* What else I'm building */}
-            <section className="px-3 py-16 md:px-4 md:py-24">
+            <section className="px-3 py-20 md:px-4 md:py-28">
                 <div className="mb-10 px-3 md:px-6">
                     <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">The Brands</p>
                     <RuleDraw className="mt-4 max-w-xs" />
@@ -213,7 +208,7 @@ const Home = () => {
             </section>
 
             {/* The mind — three short notes, no essay */}
-            <section className="border-t border-white/5 px-6 py-16 md:px-10 md:py-24">
+            <section className=" px-6 py-20 md:px-10 md:py-28">
                 <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                     <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">From the Studio</p>
                     <Link

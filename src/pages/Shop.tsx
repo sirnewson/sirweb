@@ -89,7 +89,7 @@ const Shop = () => {
                 </div>
             </div>
 
-            <section id="playbooks" className="aurora-section relative overflow-hidden px-6 py-16 md:py-24">
+            <section id="playbooks" className="aurora-section relative overflow-hidden px-6 py-20 md:py-28">
                 <div className="mx-auto max-w-7xl">
                     <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                         <div>
@@ -145,7 +145,7 @@ const Shop = () => {
                 </div>
             </section>
 
-            <section className="border-t border-white/5 bg-neutral-dark px-6 py-16 md:py-24">
+            <section className=" px-6 py-20 md:py-28">
                 <div className="mx-auto max-w-5xl">
                     <div className="glow-stroke glow-stroke--hover group relative overflow-hidden rounded-[14px] border border-white/[0.08] bg-neutral-black/60 p-8 md:p-12">
                         <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-sunset">Apparel</p>

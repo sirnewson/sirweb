@@ -53,8 +53,7 @@ const Events = () => {
             />
 
             {/* Docket header */}
-            <section className="aurora-section relative overflow-hidden border-b border-white/5 px-6 pb-16 pt-36 md:px-10 md:pb-24 md:pt-44">
-                <div className="pointer-events-none absolute left-1/3 top-0 h-[460px] w-[460px] rounded-full bg-sunset/[0.09] blur-[150px]" />
+            <section className="aurora-section relative overflow-hidden px-6 pb-16 pt-36 md:px-10 md:pb-24 md:pt-44">
                 <div className="relative mx-auto max-w-7xl">
                     <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">Docket · Events</p>
                     <h1 className="mt-5 max-w-4xl font-display text-5xl leading-[0.98] md:text-8xl">
@@ -93,7 +92,7 @@ const Events = () => {
             </section>
 
             {/* The campaign beats */}
-            <section className="border-b border-white/5 px-6 py-16 md:px-10 md:py-20">
+            <section className=" px-6 py-20 md:px-10 md:py-28">
                 <div className="mx-auto max-w-7xl">
                     <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">How a campaign runs</p>
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 md:gap-4">
@@ -114,7 +113,7 @@ const Events = () => {
             {clients.map((c) => {
                 const items = byClient(c.clientKey);
                 return (
-                    <section key={c.clientKey} className="border-b border-white/5 px-6 py-14 md:px-10 md:py-20">
+                    <section key={c.clientKey} className=" px-6 py-20 md:px-10 md:py-28">
                         <div className="mx-auto max-w-7xl">
                             <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
                                 <div>
@@ -141,7 +140,7 @@ const Events = () => {
             })}
 
             {/* Quick rate */}
-            <section className="px-6 py-16 md:px-10 md:py-24">
+            <section className="px-6 py-20 md:px-10 md:py-28">
                 <div className="mx-auto max-w-3xl rounded-[16px] border border-sunset/25 bg-sunset/[0.06] p-8 md:p-12">
                     <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-sunset">Quick rate · {rate.label}</p>
                     <h2 className="mt-4 font-display text-3xl md:text-5xl">

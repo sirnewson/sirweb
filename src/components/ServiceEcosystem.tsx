@@ -30,9 +30,7 @@ const services = [
 
 const ServiceEcosystem = () => {
   return (
-    <section className="relative px-6 py-20 md:py-28 bg-neutral-black border-y border-white/5 overflow-hidden">
-      <div className="absolute inset-0 bg-hexagon-grid opacity-20 pointer-events-none" />
-      <div className="absolute -top-40 right-0 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
+    <section className="sketch-section relative px-6 py-20 md:py-28 overflow-hidden">
       <div className="relative max-w-7xl mx-auto">
         <div className="max-w-3xl mb-14">
           <ScrollReveal direction="up" duration={0.6}>
