@@ -15,6 +15,7 @@ import ClientTicker from '../components/ClientTicker';
 import FinalCta from '../components/FinalCta';
 import MotionBento from '../components/MotionBento';
 import FeaturedProject from '../components/FeaturedProject';
+import BrandMatrix from '../components/BrandMatrix';
 
 interface ThreadPreview {
     id: string;
@@ -160,6 +161,8 @@ const Home = () => {
                     </div>
                 </ScrollReveal>
             </section>
+
+            <BrandMatrix />
 
             {/* What else I'm building */}
             <section className="px-3 py-20 md:px-4 md:py-28">
