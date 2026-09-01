@@ -730,3 +730,207 @@ h2.font-display,
 .rule-hairline {
   border-top: 1px solid rgba(247, 243, 237, 0.14);
 }
+
+/* ---------------------------------------------------------------
+   THE PUBLICATION SURFACE
+   Everything under /stories, /drift, /sport, /originals, /visuals,
+   /desk, /about, /search and /watch renders inside `.pub`.
+
+   It carries its own palette on purpose. Instagram is the loud,
+   additive discovery layer — lime, ink, mint. The publication is the
+   quiet, permanent one: black, warm white, cream, warm brown, with
+   all the strong colour arriving through photography and individual
+   stories rather than through page chrome.
+
+   These are fixed values, not aliases of the studio tokens, so the
+   theme toggle cannot flip a reading surface out from under a reader
+   mid-article.
+   --------------------------------------------------------------- */
+.pub {
+  --ink: #16120F;
+  --ink-soft: rgba(22, 18, 15, 0.62);
+  --ink-faint: rgba(22, 18, 15, 0.40);
+  --paper: #F7F3ED;
+  --cream: #EDE4D6;
+  --brown: #7A2E0B;
+  --brown-lift: #C35A1A;
+  --rule: rgba(22, 18, 15, 0.16);
+  --rule-soft: rgba(22, 18, 15, 0.09);
+
+  background-color: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+/* Dark bands inside the publication invert the same four values, so a
+   cover plate or a black section needs no separate palette. */
+.pub-dark {
+  --ink: #F7F3ED;
+  --ink-soft: rgba(247, 243, 237, 0.66);
+  --ink-faint: rgba(247, 243, 237, 0.42);
+  --paper: #0C0A08;
+  --cream: #1A1512;
+  --brown: #FFB45C;
+  --brown-lift: #FFD9A3;
+  --rule: rgba(247, 243, 237, 0.18);
+  --rule-soft: rgba(247, 243, 237, 0.10);
+
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.pub-paper { background-color: var(--paper); }
+.pub-cream-bg { background-color: var(--cream); }
+.pub-ink { color: var(--ink); }
+.pub-soft { color: var(--ink-soft); }
+.pub-faint { color: var(--ink-faint); }
+.pub-brown { color: var(--brown); }
+.pub-brown-bg { background-color: var(--brown); }
+.pub-rule { border-color: var(--rule); }
+.pub-rule-soft { border-color: var(--rule-soft); }
+
+/* The label voice — categories, dates, metadata, section headers.
+   Mono, tracked out, small. Never used for reading. */
+.pub-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* The editorial voice. Garamond, tight leading, optical sizing on so
+   large settings do not read like enlarged body copy. */
+.pub-display {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.pub-headline {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Reading typography. Slightly larger than UI default, generous
+   leading, measure capped by the article column rather than here. */
+.pub-body p {
+  font-family: var(--font-editorial);
+  font-size: 1.3125rem;
+  line-height: 1.62;
+  letter-spacing: 0.002em;
+}
+
+@media (min-width: 768px) {
+  .pub-body p { font-size: 1.4375rem; }
+}
+
+/* The opening paragraph carries a drop cap. One per article. */
+.pub-body > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-editorial);
+  font-size: 4.4em;
+  line-height: 0.78;
+  font-weight: 500;
+  padding-right: 0.08em;
+  padding-top: 0.06em;
+  color: var(--brown);
+}
+
+/* Underline that draws on hover instead of appearing. Used on every
+   headline link so the whole site shares one interaction. */
+.pub-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: 0.04em;
+}
+
+.pub-underline:hover,
+a:hover .pub-underline,
+.group:hover .pub-underline {
+  background-size: 100% 1px;
+}
+
+/* Story hover — imagery shifts gently rather than jumping. */
+.pub-frame {
+  overflow: hidden;
+  background-color: var(--cream);
+}
+
+.pub-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.group:hover .pub-frame img {
+  transform: scale(1.04);
+}
+
+/* Typographic cover, for pieces that carry no photograph. Cheaper and
+   more honest than borrowing an unrelated image. */
+.pub-plate {
+  background-color: var(--ink);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.pub-plate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(247, 243, 237, 0.05) 0 1px,
+      transparent 1px 14px
+    );
+  pointer-events: none;
+}
+
+/* Newsprint column rules between grid items. */
+.pub-col-rule > * + * {
+  border-top: 1px solid var(--rule-soft);
+}
+
+@media (min-width: 768px) {
+  .pub-col-rule > * + * {
+    border-top: 0;
+    border-left: 1px solid var(--rule-soft);
+  }
+}
+
+.pub ::selection {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.pub-dark ::selection {
+  background-color: var(--brown);
+  color: #0C0A08;
+}
+
+/* Nav bar sits flat on the paper and only gains a rule once the page
+   has moved, so the opening frame stays clean. */
+.pub-nav {
+  transition: background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pub-frame img,
+  .pub-underline {
+    transition: none;
+  }
+}

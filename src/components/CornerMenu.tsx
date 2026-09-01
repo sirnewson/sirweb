@@ -160,7 +160,7 @@ const CornerMenu = () => {
             >
                 <Link to="/" aria-label="Sir Newson — home" className="group block w-fit">
                     <img
-                        src={theme === 'light' ? '/uploads/logo/logo-ink.png' : '/uploads/logo/logo-cream.png'}
+                        src={theme === 'light' ? '/uploads/logo/sn-lockup-light.png' : '/uploads/logo/sn-lockup-dark.png'}
                         alt="Sir Newson"
                         className="h-7 w-auto transition-transform duration-500 group-hover:scale-[1.04] md:h-8"
                     />

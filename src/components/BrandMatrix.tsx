@@ -66,11 +66,19 @@ interface Node {
     x: number; y: number; angle: number; seed: number; r: number;
 }
 
-const BrandMatrix = () => {
+interface CanvasProps {
+    /** Skips the intersection gate for surfaces that are visible by definition,
+     *  such as the splash screen. */
+    alwaysOn?: boolean;
+    className?: string;
+}
+
+/** The engine. Fills whatever box it is given. */
+export const BrandMatrixCanvas = ({ alwaysOn = false, className = '' }: CanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const wrapRef = useRef<HTMLDivElement>(null);
     const rafRef = useRef(0);
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(alwaysOn);
     const [reduced, setReduced] = useState(false);
 
     useEffect(() => {
@@ -79,6 +87,7 @@ const BrandMatrix = () => {
 
     // The loop is expensive, so it is only alive while the section is on screen.
     useEffect(() => {
+        if (alwaysOn) return;
         const el = wrapRef.current;
         if (!el) return;
         const io = new IntersectionObserver(
@@ -87,7 +96,7 @@ const BrandMatrix = () => {
         );
         io.observe(el);
         return () => io.disconnect();
-    }, []);
+    }, [alwaysOn]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -98,15 +107,25 @@ const BrandMatrix = () => {
         const ctx = canvas.getContext('2d', { alpha: false });
         if (!ctx) return;
 
-        // Capped tighter than the page default: this loop is fill-rate bound and
-        // every extra device pixel costs a whole halftone pass.
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        // Backing-store resolution. Capped tighter than the page default: this
+        // loop is fill-rate bound and every extra device pixel costs a whole
+        // halftone pass.
+        const res = Math.min(window.devicePixelRatio || 1, 1.5);
+
+        // Every radius below is expressed in units of `dpr`, so folding a fit
+        // factor into it scales the whole composition to the frame. Without
+        // this the orb ring is a fixed pixel size and overflows a wide 16:9
+        // band, whose height is the constraint.
+        const REF_HEIGHT = 620;
+        let dpr = res;
         let width = 0, height = 0, baseCX = 0, baseCY = 0, centerX = 0, centerY = 0;
 
         const resize = () => {
             const r = wrap.getBoundingClientRect();
-            width = canvas.width = Math.max(1, Math.floor(r.width * dpr));
-            height = canvas.height = Math.max(1, Math.floor(r.height * dpr));
+            const fit = Math.min(1.6, Math.max(0.5, r.height / REF_HEIGHT));
+            dpr = res * fit;
+            width = canvas.width = Math.max(1, Math.floor(r.width * res));
+            height = canvas.height = Math.max(1, Math.floor(r.height * res));
             canvas.style.width = r.width + 'px';
             canvas.style.height = r.height + 'px';
             baseCX = width / 2;
@@ -239,7 +258,7 @@ const BrandMatrix = () => {
         const drawHalftone = (nodes: Node[], wBlob: number, fg: number[], tPhase: number) => {
             // 22px rather than the original 15: this double loop is the single
             // biggest cost in the frame and scales with area.
-            const spacing = 22 * dpr;
+            const spacing = Math.max(16 * res, 22 * dpr);
             const maxDist = Math.hypot(baseCX, baseCY);
             const gravity = Math.sin(tPhase * Math.PI);
 
@@ -528,22 +547,30 @@ const BrandMatrix = () => {
     }, [visible, reduced]);
 
     return (
-        <section className="relative w-full overflow-hidden py-20 md:py-28">
-            <div className="mx-auto mb-8 max-w-7xl px-6 md:mb-10 md:px-10">
-                <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">The Matrix</p>
-                <h2 className="mt-4 font-editorial text-4xl leading-[1.02] md:text-6xl">
-                    One system, <span className="italic text-white/55">many faces.</span>
-                </h2>
-                <p className="mt-4 max-w-lg font-hand text-lg text-white/55">
-                    every brand I build is the same thinking wearing a different skin
-                </p>
-            </div>
-
-            <div ref={wrapRef} className="relative h-[62vh] min-h-[420px] w-full overflow-hidden md:h-[74vh]">
-                <canvas ref={canvasRef} className="block h-full w-full" />
-            </div>
-        </section>
+        <div ref={wrapRef} className={`relative h-full w-full overflow-hidden ${className}`}>
+            <canvas ref={canvasRef} className="block h-full w-full" />
+        </div>
     );
 };
+
+/** The homepage section: heading plus the engine in a true 16:9 frame. */
+const BrandMatrix = () => (
+    <section className="relative w-full overflow-hidden py-20 md:py-28">
+        <div className="mx-auto mb-8 max-w-7xl px-6 md:mb-10 md:px-10">
+            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-sunset">The Matrix</p>
+            <h2 className="mt-4 font-editorial text-4xl leading-[1.02] md:text-6xl">
+                One system, <span className="italic text-white/55">many faces.</span>
+            </h2>
+            <p className="mt-4 max-w-lg font-hand text-lg text-white/55">
+                every brand I build is the same thinking wearing a different skin
+            </p>
+        </div>
+
+        {/* Full-bleed 16:9 band — edge to edge, no frame */}
+        <div className="aspect-video w-full overflow-hidden">
+            <BrandMatrixCanvas />
+        </div>
+    </section>
+);
 
 export default BrandMatrix;

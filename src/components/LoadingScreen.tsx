@@ -1,3 +1,4 @@
+import { BrandMatrixCanvas } from './BrandMatrix';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
@@ -68,16 +69,11 @@ const LoadingScreen = () => {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-soft-black overflow-hidden"
         >
-            {/* Splash loop behind the counter */}
-            <video
-                src="/uploads/loops/splash.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-45"
-            />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-soft-black/70 via-soft-black/55 to-soft-black" />
+            {/* Brand Matrix behind the counter — the same engine as the homepage */}
+            <div className="pointer-events-none absolute inset-0">
+                <BrandMatrixCanvas alwaysOn />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/80" />
 
             <SpiralVortex />
 

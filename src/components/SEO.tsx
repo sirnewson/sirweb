@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 const SITE_URL = 'https://www.sirnewson.com';
-const DEFAULT_IMAGE = `${SITE_URL}/assets/images/new-logo_e9f3d068.webp`;
+const DEFAULT_IMAGE = `${SITE_URL}/og-card.png`;
 
 type SEOProps = {
   title: string;

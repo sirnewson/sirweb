@@ -111,9 +111,9 @@ const Hero = ({
                                     className="w-full h-full object-cover absolute inset-0 z-10 transition-all duration-700 ease-out group-hover:scale-110 group-hover:opacity-0"
                                 />
                                 <img
-                                    src="/assets/images/new-logo_e9f3d068.webp"
+                                    src="/uploads/logo/sn-mark-sunset.png"
                                     alt="Sir Newson brand mark"
-                                    className="w-full h-full object-cover absolute inset-0 z-10 opacity-0 scale-105 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100 sepia saturate-150 hue-rotate-[330deg]"
+                                    className="w-full h-full object-contain p-3 absolute inset-0 z-10 opacity-0 scale-105 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100"
                                 />
                             </div>
                         </div>

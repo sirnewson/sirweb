@@ -124,6 +124,8 @@ const Home = () => {
                 secondaryCtaPath="/contact"
             />
 
+            <BrandMatrix />
+
             <ClientTicker />
 
             <FinalCta />
@@ -161,8 +163,6 @@ const Home = () => {
                     </div>
                 </ScrollReveal>
             </section>
-
-            <BrandMatrix />
 
             {/* What else I'm building */}
             <section className="px-3 py-20 md:px-4 md:py-28">
