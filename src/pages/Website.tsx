@@ -61,7 +61,7 @@ const websiteSamples = [
   },
   {
     name: 'YXM Digital',
-    url: 'https://yxm.digital/',
+    url: 'https://yxmdigital.com/',
     note: 'A digital studio and product ecosystem presence for tools and services.'
   },
   {

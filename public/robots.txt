@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.sirnewson.com/sitemap.xml
+Sitemap: https://drift.sirnewson.com/sitemap-drift.xml

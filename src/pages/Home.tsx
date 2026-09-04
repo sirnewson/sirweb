@@ -53,7 +53,7 @@ const worlds = [
         label: 'Creative tech',
         title: 'YXM Digital',
         note: 'Tools, AI systems and product experiments.',
-        path: 'https://yxm.digital/',
+        path: 'https://yxmdigital.com/',
         external: true,
     },
     {
@@ -99,7 +99,7 @@ const Home = () => {
                 title="Sir Newson | Creative Director & Presentation Architect in Kenya"
                 description="Sir Newson helps ideas, products, stories and businesses move from unfinished to ready. Product visuals, video editing, catalogues, brand identity, websites and creative direction in Nairobi, Kenya."
                 keywords="Sir Newson, presentation architect Kenya, creative director Kenya, brand identity Kenya, website design Kenya, product visuals Kenya, catalogue design Kenya, video editing Kenya, motion graphics Nairobi, creative agency Nairobi"
-                path="/"
+                path="/studio"
             />
 
             <AnimatePresence>

@@ -22,7 +22,7 @@ const Meta = ({ article, showSection }: { article: Article; showSection: boolean
     return (
         <div className="pub-kicker pub-faint flex flex-wrap items-center gap-x-3 gap-y-1">
             {showSection && (
-                <span className="pub-brown">
+                <span className="pub-accent">
                     {section.kicker}
                     {article.number ? ` / ${article.number}` : ''}
                 </span>

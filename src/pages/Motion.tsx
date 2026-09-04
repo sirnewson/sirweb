@@ -30,7 +30,7 @@ const Motion = () => {
         { url: V('kifaru-campfire-promo-reel.mp4'),            isLandscape: false },
         { url: V('kifaru-event-promo-reel.mp4'),               isLandscape: false },
         { url: V('lopha-airways-breaking-news-reel.mp4'),      isLandscape: false },
-        { url: V('mapenzi-jibandaski-day-ones-reel.mp4'),      isLandscape: false },
+        { url: V('mapenzi-vibandaski-day-ones-reel.mp4'),      isLandscape: false },
         { url: V('mkurugenzi-logo-animation.mp4'),             isLandscape: true  },
         { url: V('phil-it-logo-motion.mp4'),                   isLandscape: true  },
         { url: V('phoneplace-kenya-logo-motion.mp4'),          isLandscape: false },

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import ThemeToggle, { useTheme } from './ThemeToggle';
+import { publicationUrl } from '../lib/site';
 import { SeasonPicker, useSeason } from './Seasons';
 
 const primary = [
@@ -15,9 +16,10 @@ const primary = [
 
 /** The four brands, plus the studio's own writing. */
 const secondary = [
+    { name: 'Drift — the publication', path: publicationUrl('/'), external: true },
     { name: 'Jinwear', path: 'https://www.jinwear.co.ke/', external: true },
     { name: 'Wynmind', path: 'https://wynmind.com', external: true },
-    { name: 'YXM Digital', path: 'https://yxm.digital/', external: true },
+    { name: 'YXM Digital', path: 'https://yxmdigital.com/', external: true },
     { name: 'TAK Network', path: 'https://taknetwork.co.ke', external: true },
     { name: 'Drift Notes', path: '/threads', external: false },
 ];

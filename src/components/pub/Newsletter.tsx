@@ -42,9 +42,9 @@ const Newsletter = ({ variant = 'band' }: { variant?: 'band' | 'inline' }) => {
     const large = variant === 'band';
 
     return (
-        <div className={large ? 'pub-cream-bg px-6 py-20 md:px-12 md:py-28' : ''}>
+        <div className={large ? 'pub-panel px-6 py-20 md:px-12 md:py-28' : ''}>
             <div className={large ? 'mx-auto max-w-6xl' : ''}>
-                <p className="pub-kicker pub-brown">The Drift — newsletter</p>
+                <p className="pub-kicker pub-accent">The Drift — newsletter</p>
                 <h2
                     className={`pub-display mt-5 ${large ? 'text-5xl md:text-8xl' : 'text-3xl md:text-5xl'}`}
                 >
@@ -69,19 +69,19 @@ const Newsletter = ({ variant = 'band' }: { variant?: 'band' | 'inline' }) => {
                                 if (status === 'error') setStatus('idle');
                             }}
                             placeholder="email address"
-                            className="pub-ink w-full border-b border-current/25 bg-transparent px-0 py-3 text-lg outline-none placeholder:opacity-40 focus:border-current"
+                            className="pub-ink w-full border-b border-[color:var(--rule)] bg-transparent px-0 py-3 text-lg outline-none placeholder:opacity-40 focus:border-[color:var(--ink)]"
                         />
                         <button
                             type="submit"
                             disabled={status === 'sending'}
-                            className="pub-kicker shrink-0 border border-current px-7 py-4 transition hover:bg-[color:var(--ink)] hover:text-[color:var(--paper)] disabled:opacity-50"
+                            className="pub-kicker shrink-0 border border-current px-7 py-4 transition hover:bg-[color:var(--ink)] hover:text-[color:var(--ground)] disabled:opacity-50"
                         >
                             {status === 'sending' ? 'Joining…' : 'Join →'}
                         </button>
                     </div>
 
                     <div className="pub-kicker pub-faint mt-4 h-4">
-                        {status === 'done' && <span className="pub-brown">You’re in. See you on the next one.</span>}
+                        {status === 'done' && <span className="pub-accent">You’re in. See you on the next one.</span>}
                         {status === 'error' && <span>That address didn’t look right — try again.</span>}
                     </div>
                 </form>

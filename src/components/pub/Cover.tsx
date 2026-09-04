@@ -30,6 +30,14 @@ interface CoverProps {
     reveal?: boolean;
 }
 
+/** Section decides the plate's ground. See the note on `.pub-plate`. */
+const plateTone: Record<string, string> = {
+    stories: '',
+    drift: '',
+    sport: 'pub-plate--orange',
+    originals: 'pub-plate--lime',
+};
+
 const plateType: Record<'sm' | 'md' | 'lg', string> = {
     sm: 'text-xl md:text-2xl',
     md: 'text-2xl md:text-4xl',
@@ -38,17 +46,27 @@ const plateType: Record<'sm' | 'md' | 'lg', string> = {
 
 const Cover = ({ article, ratio = 'wide', plateSize = 'md', className = '', reveal = true }: CoverProps) => {
     const section = sectionById(article.section);
-    const frame = `pub-frame ${ratioClass[ratio]} ${className}`;
+    // A photograph earns a 16:9 field. A plate carrying three words of type does
+    // not — at feature width that reads as a hole in the page — so a coverless
+    // wide slot runs as a band instead.
+    const shape = !article.image && ratio === 'wide' ? 'aspect-[21/8]' : ratioClass[ratio];
+    const frame = `pub-frame ${shape} ${className}`;
 
     const inner = article.image ? (
         <img src={article.image} alt={article.imageAlt ?? article.title} loading="lazy" />
     ) : (
-        <div className={`pub-plate flex h-full w-full flex-col justify-between p-5 md:p-7`}>
+        <div
+            className={`pub-plate ${plateTone[article.section]} flex h-full w-full flex-col justify-between p-5 md:p-7`}
+        >
             <div className="pub-kicker flex items-center justify-between opacity-70">
                 <span>{section.kicker}</span>
                 {article.number && <span>/ {article.number}</span>}
             </div>
-            <div className={`pub-display ${plateType[plateSize]} pr-4`}>{article.title}</div>
+            {/* The topic, not the headline — every card prints its headline
+                directly beneath the cover, and a plate that repeats it just
+                sets the same words twice. The date is left off for the same
+                reason: the meta line below already carries it. */}
+            <span className={`pub-display ${plateType[plateSize]}`}>{article.topic}</span>
         </div>
     );
 

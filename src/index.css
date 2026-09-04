@@ -732,138 +732,204 @@ h2.font-display,
 }
 
 /* ---------------------------------------------------------------
-   THE PUBLICATION SURFACE
-   Everything under /stories, /drift, /sport, /originals, /visuals,
-   /desk, /about, /search and /watch renders inside `.pub`.
+   DRIFT — the publication.
 
-   It carries its own palette on purpose. Instagram is the loud,
-   additive discovery layer — lime, ink, mint. The publication is the
-   quiet, permanent one: black, warm white, cream, warm brown, with
-   all the strong colour arriving through photography and individual
-   stories rather than through page chrome.
+   A sub-brand of Sir Newson, published at drift.sirnewson.com. It runs
+   its own identity end to end, taken from the DRIFT logo system rather
+   than from the studio's page chrome:
+
+     Ground   #011111  near-black with a green cast
+     Lime     #BFFF00  the wordmark colour — accents, rules, numerals
+     Orange   #F28B2C  the gradient bleed and the franchise voice
+     Type     white, and a warm off-white for reading
+
+   Two signatures carry across every surface: a fine halftone dot field
+   over the ground, and an orange bleed that enters from the corners.
+   Both are sampled straight off the identity artwork.
 
    These are fixed values, not aliases of the studio tokens, so the
-   theme toggle cannot flip a reading surface out from under a reader
-   mid-article.
+   studio's light/dark toggle cannot flip a reading surface out from
+   under a reader mid-article.
    --------------------------------------------------------------- */
 .pub {
-  --ink: #16120F;
-  --ink-soft: rgba(22, 18, 15, 0.62);
-  --ink-faint: rgba(22, 18, 15, 0.40);
-  --paper: #F7F3ED;
-  --cream: #EDE4D6;
-  --brown: #7A2E0B;
-  --brown-lift: #C35A1A;
-  --rule: rgba(22, 18, 15, 0.16);
-  --rule-soft: rgba(22, 18, 15, 0.09);
+  --ground: #011111;
+  --panel: #0A1B1A;
+  --lime: #BFFF00;
+  --orange: #F28B2C;
 
-  background-color: var(--paper);
+  --ink: #FFFFFF;
+  --ink-read: #DFE6E2;
+  --ink-soft: rgba(223, 230, 226, 0.66);
+  --ink-faint: rgba(223, 230, 226, 0.42);
+  --rule: rgba(223, 230, 226, 0.20);
+  --rule-soft: rgba(223, 230, 226, 0.10);
+
+  /* The halftone. 6px grid, barely there — it should read as texture at
+     arm's length and as nothing at all up close. */
+  --halftone: radial-gradient(circle, rgba(223, 230, 226, 0.055) 0.75px, transparent 0.9px);
+  --halftone-size: 6px 6px;
+
+  background-color: var(--ground);
+  background-image: var(--halftone);
+  background-size: var(--halftone-size);
   color: var(--ink);
   min-height: 100vh;
   font-family: var(--font-sans);
 }
 
-/* Dark bands inside the publication invert the same four values, so a
-   cover plate or a black section needs no separate palette. */
-.pub-dark {
-  --ink: #F7F3ED;
-  --ink-soft: rgba(247, 243, 237, 0.66);
-  --ink-faint: rgba(247, 243, 237, 0.42);
-  --paper: #0C0A08;
-  --cream: #1A1512;
-  --brown: #FFB45C;
-  --brown-lift: #FFD9A3;
-  --rule: rgba(247, 243, 237, 0.18);
-  --rule-soft: rgba(247, 243, 237, 0.10);
-
-  background-color: var(--paper);
-  color: var(--ink);
-}
-
-.pub-paper { background-color: var(--paper); }
-.pub-cream-bg { background-color: var(--cream); }
+/* Colour roles ---------------------------------------------------- */
 .pub-ink { color: var(--ink); }
+.pub-read { color: var(--ink-read); }
 .pub-soft { color: var(--ink-soft); }
 .pub-faint { color: var(--ink-faint); }
-.pub-brown { color: var(--brown); }
-.pub-brown-bg { background-color: var(--brown); }
+.pub-accent { color: var(--lime); }
+.pub-accent-bg { background-color: var(--lime); }
+.pub-hot { color: var(--orange); }
 .pub-rule { border-color: var(--rule); }
 .pub-rule-soft { border-color: var(--rule-soft); }
 
+/* Grounds --------------------------------------------------------- */
+
+/* A lifted panel. Used for data blocks, observation lists and the
+   sections that need to sit forward of the page. */
+.pub-panel {
+  background-color: var(--panel);
+  background-image: var(--halftone);
+  background-size: var(--halftone-size);
+}
+
+/* The signature: halftone ground with the orange entering from two
+   opposite corners, exactly as the identity artwork does it. */
+.pub-glow {
+  position: relative;
+  background-color: var(--ground);
+  isolation: isolate;
+}
+
+.pub-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(120% 90% at 0% 0%, rgba(242, 139, 44, 0.55), transparent 55%),
+    radial-gradient(120% 90% at 100% 100%, rgba(242, 139, 44, 0.45), transparent 55%);
+}
+
+.pub-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--halftone);
+  background-size: var(--halftone-size);
+}
+
+/* One band per page may go full lime. It is the loudest move the system
+   has, so it is reserved for a single statement. */
+.pub-lime {
+  --ink: #011111;
+  --ink-read: #011111;
+  --ink-soft: rgba(1, 17, 17, 0.72);
+  --ink-faint: rgba(1, 17, 17, 0.50);
+  --rule: rgba(1, 17, 17, 0.28);
+  --rule-soft: rgba(1, 17, 17, 0.16);
+  --lime: #011111;
+  --orange: #011111;
+
+  background-color: #BFFF00;
+  color: var(--ink);
+}
+
+/* Typography ------------------------------------------------------ */
+
 /* The label voice — categories, dates, metadata, section headers.
-   Mono, tracked out, small. Never used for reading. */
+   Sans, tracked wide, uppercase. Taken from the tagline lockup:
+   STORIES. IDEAS. PLACES. CULTURE. */
 .pub-kicker {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   line-height: 1;
 }
 
-/* The editorial voice. Garamond, tight leading, optical sizing on so
-   large settings do not read like enlarged body copy. */
-.pub-display {
+/* The franchise voice — "Did You Know", "Kenya Builds", pull numerals.
+   Orange italic serif against everything else being sans. */
+.pub-franchise {
   font-family: var(--font-editorial);
-  font-weight: 500;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: var(--orange);
+  text-transform: none;
+}
+
+/* Headlines. Tight, heavy, geometric — the covers set them large and
+   let them run to two or three lines. */
+.pub-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
   line-height: 0.94;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.028em;
   text-wrap: balance;
 }
 
 .pub-headline {
-  font-family: var(--font-editorial);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.018em;
   text-wrap: balance;
 }
 
-/* Reading typography. Slightly larger than UI default, generous
-   leading, measure capped by the article column rather than here. */
+/* Reading typography. */
 .pub-body p {
-  font-family: var(--font-editorial);
-  font-size: 1.3125rem;
-  line-height: 1.62;
-  letter-spacing: 0.002em;
+  color: var(--ink-read);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  letter-spacing: 0.003em;
 }
 
 @media (min-width: 768px) {
-  .pub-body p { font-size: 1.4375rem; }
+  .pub-body p { font-size: 1.1875rem; }
 }
 
-/* The opening paragraph carries a drop cap. One per article. */
+/* One drop cap per article, in the wordmark colour. */
 .pub-body > p:first-of-type::first-letter {
   float: left;
-  font-family: var(--font-editorial);
-  font-size: 4.4em;
-  line-height: 0.78;
-  font-weight: 500;
-  padding-right: 0.08em;
-  padding-top: 0.06em;
-  color: var(--brown);
+  font-family: var(--font-sans);
+  font-size: 3.6em;
+  font-weight: 700;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  padding-top: 0.04em;
+  color: var(--lime);
 }
 
-/* Underline that draws on hover instead of appearing. Used on every
-   headline link so the whole site shares one interaction. */
+/* Interaction ----------------------------------------------------- */
+
+/* Underline that draws on hover, in lime. One interaction, everywhere. */
 .pub-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
+  background-image: linear-gradient(var(--lime), var(--lime));
+  background-size: 0% 1.5px;
   background-position: 0 100%;
   background-repeat: no-repeat;
   transition: background-size 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-bottom: 0.04em;
+  padding-bottom: 0.06em;
 }
 
 .pub-underline:hover,
 a:hover .pub-underline,
 .group:hover .pub-underline {
-  background-size: 100% 1px;
+  background-size: 100% 1.5px;
 }
 
 /* Story hover — imagery shifts gently rather than jumping. */
 .pub-frame {
   overflow: hidden;
-  background-color: var(--cream);
+  background-color: var(--panel);
 }
 
 .pub-frame img {
@@ -871,7 +937,7 @@ a:hover .pub-underline,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .group:hover .pub-frame img {
@@ -879,53 +945,68 @@ a:hover .pub-underline,
 }
 
 /* Typographic cover, for pieces that carry no photograph. Cheaper and
-   more honest than borrowing an unrelated image. */
+   more honest than borrowing an unrelated image.
+
+   The tone is fixed per section rather than inherited: a plate has to
+   read the same on any ground, and a page where every coverless piece
+   renders identically turns into a wall of the same rectangle. */
 .pub-plate {
-  background-color: var(--ink);
-  color: var(--paper);
   position: relative;
   overflow: hidden;
+  background-color: #0A1B1A;
+  color: #FFFFFF;
+  /* On a dark ground an unbordered dark plate reads as a hole in the page
+     rather than as a cover, so the default variant is drawn. */
+  box-shadow: inset 0 0 0 1px rgba(223, 230, 226, 0.14);
+}
+
+/* The dark plate sets its topic in the wordmark colour — it is the only
+   thing on the plate, and it should look deliberate. */
+.pub-plate:not(.pub-plate--lime):not(.pub-plate--orange) .pub-display {
+  color: #BFFF00;
+}
+
+.pub-plate--lime {
+  background-color: #BFFF00;
+  color: #011111;
+}
+
+.pub-plate--orange {
+  background-color: #F28B2C;
+  color: #011111;
 }
 
 .pub-plate::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(247, 243, 237, 0.05) 0 1px,
-      transparent 1px 14px
-    );
+  background-image: radial-gradient(circle, currentColor 0.8px, transparent 1px);
+  background-size: 7px 7px;
+  opacity: 0.10;
   pointer-events: none;
 }
 
-/* Newsprint column rules between grid items. */
-.pub-col-rule > * + * {
-  border-top: 1px solid var(--rule-soft);
+.pub ::selection {
+  background-color: var(--lime);
+  color: #011111;
+}
+
+/* The masthead sits flat on the ground and only takes a ground and a
+   rule once the page has moved. Solid, not glass — this is a printed
+   surface, and glass chrome belongs to a different kind of site. */
+.pub-nav {
+  transition: background-color 0.35s ease, border-color 0.35s ease;
+}
+
+/* The wordmark is artwork, not type. */
+.pub-wordmark {
+  display: block;
+  height: 1.15rem;
+  width: auto;
 }
 
 @media (min-width: 768px) {
-  .pub-col-rule > * + * {
-    border-top: 0;
-    border-left: 1px solid var(--rule-soft);
-  }
-}
-
-.pub ::selection {
-  background-color: var(--ink);
-  color: var(--paper);
-}
-
-.pub-dark ::selection {
-  background-color: var(--brown);
-  color: #0C0A08;
-}
-
-/* Nav bar sits flat on the paper and only gains a rule once the page
-   has moved, so the opening frame stays clean. */
-.pub-nav {
-  transition: background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+  .pub-wordmark { height: 1.35rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

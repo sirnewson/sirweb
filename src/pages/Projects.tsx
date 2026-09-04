@@ -84,7 +84,7 @@ const Projects = () => {
                             { title: 'Wak Two', url: 'https://wak-two.vercel.app/', image: '/assets/images/screenshots/wak_two.webp' },
                             { title: 'Driftpad', url: 'https://driftpad.yxm.digital/', image: '/assets/images/screenshots/driftpad.webp' },
                             { title: 'TAK Network', url: 'https://taknetwork.online/', image: '/assets/images/screenshots/tak_network.webp' },
-                            { title: 'YXM Digital', url: 'https://yxm.digital/', image: '/assets/images/screenshots/yxm_digital.webp' },
+                            { title: 'YXM Digital', url: 'https://yxmdigital.com/', image: '/assets/images/screenshots/yxm_digital.webp' },
                             { title: 'PataKazi', url: 'https://www.patakazi.co.ke/', image: '/assets/images/screenshots/patakazi.webp' },
                             { title: 'WallTV', url: 'https://walltv.vercel.app/', image: '/assets/images/screenshots/walltv.webp' },
                             { title: 'OrdaFasta', url: 'https://www.ordafasta.co.ke/', image: '/assets/images/screenshots/ordafasta.webp' },

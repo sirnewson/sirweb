@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
-const SITE_URL = 'https://www.sirnewson.com';
+import { PUBLICATION_ORIGIN, STUDIO_ORIGIN, isPublicationPath } from '../lib/site';
+
+const SITE_URL = STUDIO_ORIGIN;
 const DEFAULT_IMAGE = `${SITE_URL}/og-card.png`;
 
 type SEOProps = {
@@ -14,6 +16,12 @@ type SEOProps = {
   index?: boolean;
   /** Optional JSON-LD injected for this page. */
   jsonLd?: Record<string, unknown>;
+  /**
+   * Forces the origin a canonical is built against. Only the publication's
+   * front page needs it: its path is "/", which belongs to the studio on one
+   * host and to the publication on the other.
+   */
+  origin?: string;
 };
 
 const upsertMeta = (attr: 'name' | 'property', key: string, content: string) => {
@@ -48,9 +56,14 @@ const SEO = ({
   path,
   index = true,
   jsonLd,
+  origin,
 }: SEOProps) => {
   useEffect(() => {
-    const url = path ? `${SITE_URL}${path === '/' ? '/' : path}` : window.location.href;
+    // A publication page lives on drift.sirnewson.com even when it is being
+    // served from the studio host, so its canonical has to say so.
+    const isPublication = origin === PUBLICATION_ORIGIN || (!!path && isPublicationPath(path));
+    const base = origin ?? (isPublication ? PUBLICATION_ORIGIN : SITE_URL);
+    const url = path ? `${base}${path === '/' ? '/' : path}` : window.location.href;
     const absoluteImage = toAbsolute(image);
 
     document.title = title;
@@ -64,7 +77,7 @@ const SEO = ({
     upsertMeta('property', 'og:image', absoluteImage);
     upsertMeta('property', 'og:url', url);
     upsertMeta('property', 'og:type', 'website');
-    upsertMeta('property', 'og:site_name', 'Sir Newson');
+    upsertMeta('property', 'og:site_name', isPublication ? 'Drift — Sir Newson' : 'Sir Newson');
     upsertMeta('property', 'og:locale', 'en_KE');
 
     upsertMeta('name', 'twitter:card', 'summary_large_image');
@@ -73,7 +86,7 @@ const SEO = ({
     upsertMeta('name', 'twitter:image', absoluteImage);
 
     upsertLink('canonical', url);
-  }, [title, description, keywords, image, path, index]);
+  }, [title, description, keywords, image, path, index, origin]);
 
   useEffect(() => {
     if (!jsonLd) return;

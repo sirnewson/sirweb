@@ -30,7 +30,7 @@ const websiteSamples = [
     },
     {
         title: 'YXM Digital',
-        url: 'https://yxm.digital/',
+        url: 'https://yxmdigital.com/',
         description: 'A digital studio presence with service clarity and a premium interface feel.',
     },
     {

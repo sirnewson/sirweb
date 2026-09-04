@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { publicationUrl } from '../lib/site';
 
 const WHATSAPP = 'https://wa.me/254702480771?text=Hi%20Sir%20Newson%2C%20I%20have%20something%20I%20want%20to%20make%20ready.';
 
@@ -20,12 +21,15 @@ const columns = [
             { label: 'Selected work', to: '/work' },
             { label: 'Services', to: '/services' },
             { label: 'Events', to: '/events' },
+            { label: 'How a proposal works', to: '/proposal' },
             { label: 'Shop', to: '/shop' },
         ],
     },
     {
         heading: 'Read & Follow',
         links: [
+            { label: 'Drift — the publication', to: publicationUrl('/'), external: true },
+            { label: 'Brand stories', to: publicationUrl('/stories'), external: true },
             { label: 'Gallery', to: '/gallery' },
             { label: 'Start a project', to: '/contact' },
         ],
@@ -125,12 +129,21 @@ const Footer = () => {
                                 <ul className="space-y-3">
                                     {column.links.map((link) => (
                                         <li key={link.label}>
-                                            <Link
-                                                to={link.to}
-                                                className="text-sm font-medium text-white/70 transition hover:text-sunset hover:underline"
-                                            >
-                                                {link.label}
-                                            </Link>
+                                            {'external' in link && link.external ? (
+                                                <a
+                                                    href={link.to}
+                                                    className="text-sm font-medium text-white/70 transition hover:text-sunset hover:underline"
+                                                >
+                                                    {link.label}
+                                                </a>
+                                            ) : (
+                                                <Link
+                                                    to={link.to}
+                                                    className="text-sm font-medium text-white/70 transition hover:text-sunset hover:underline"
+                                                >
+                                                    {link.label}
+                                                </Link>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>

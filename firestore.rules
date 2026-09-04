@@ -5,5 +5,12 @@ service cloud.firestore {
     match /threads/{threadId} {
       allow read, write: if true;
     }
+
+    // The Drift newsletter. Create-only: the signup form can add an address,
+    // nothing on the client can read the list back.
+    match /drift_subscribers/{subscriberId} {
+      allow create: if true;
+      allow read, update, delete: if false;
+    }
   }
 }

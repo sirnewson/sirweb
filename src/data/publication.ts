@@ -81,6 +81,8 @@ export interface Article {
     section: SectionId;
     /** Sequence inside a franchise — "BRAND STORY / 07". */
     number?: string;
+    /** The package line the front page runs above a lead headline — "THE AI WORLD". */
+    package?: string;
     title: string;
     /** The line under the headline on cards and at the top of the piece. */
     standfirst: string;
@@ -138,6 +140,7 @@ export const articles: Article[] = [
         title: 'What Happens to Capitalism When Intelligence Becomes Cheap?',
         standfirst:
             'For two hundred years the economy paid a premium for thinking. That premium is collapsing, and almost nothing downstream of it is designed for the fall.',
+        package: 'THE AI WORLD',
         topic: 'Technology',
         tags: ['AI', 'Capitalism', 'Labour', 'Future Systems'],
         date: '2026-08-28',
@@ -308,7 +311,7 @@ export const articles: Article[] = [
         date: '2026-08-07',
         readMinutes: 9,
         image: '/uploads/graphics/kenya-builds-brand-identity.webp',
-        imageAlt: 'Kenya Builds identity artwork',
+        imageAlt: 'Kenya Builds identity artwork by Sir Newson',
         featured: true,
         body: [
             {
@@ -427,8 +430,6 @@ export const articles: Article[] = [
         tags: ['Xiaomi', 'China', 'Smartphones', 'Brand Strategy'],
         date: '2026-08-25',
         readMinutes: 8,
-        image: '/uploads/branding/taikom-phones-branding-board.webp',
-        imageAlt: 'Phone brand identity board',
         featured: true,
         watch: 'xiaomi',
         body: [
@@ -561,8 +562,6 @@ export const articles: Article[] = [
         tags: ['Nike', 'Brand Strategy', 'Sport', 'Marketing'],
         date: '2026-07-28',
         readMinutes: 7,
-        image: '/uploads/graphics/adidas-pink-sneaker-poster.webp',
-        imageAlt: 'Sneaker poster artwork',
         body: [
             {
                 type: 'p',
@@ -735,7 +734,7 @@ export const articles: Article[] = [
         date: '2026-08-18',
         readMinutes: 7,
         image: '/uploads/graphics/erling-haaland-viking-poster.webp',
-        imageAlt: 'Football poster artwork',
+        imageAlt: 'Sir Newson football poster artwork',
         featured: true,
         body: [
             {
@@ -873,8 +872,6 @@ export const articles: Article[] = [
         tags: ['Nairobi', 'Cities', 'Speculative', 'Kenya'],
         date: '2026-08-01',
         readMinutes: 6,
-        image: '/uploads/branding/terraplan-branding-board.webp',
-        imageAlt: 'Urban planning identity board',
         body: [
             {
                 type: 'p',
